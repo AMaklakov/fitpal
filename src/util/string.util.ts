@@ -7,3 +7,13 @@ export const removeLeadingZeros = (v: string): string => {
 
 	return v;
 };
+
+export const getNumbersInRangeOptions = (min: number, max: number, step: number = 1): string[] => {
+	const arr = [];
+
+	for (let i = min; i <= max; i += step) {
+		arr.push(i.toString());
+	}
+
+	return arr;
+};

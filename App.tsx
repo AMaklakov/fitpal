@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
-import { ExerciseTable } from './src/components/exercise-table/exercise-table';
 import { RowModel } from './src/components/exercise-table/row/types';
+import { ExerciseTable } from './src/components/exercise-table/exercise-table';
 
 const rowList: RowModel[] = [
 	{

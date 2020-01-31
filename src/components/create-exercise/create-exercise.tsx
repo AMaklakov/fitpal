@@ -4,6 +4,7 @@ import { CreateExercisePropsModel } from './types';
 import StringInput from '../string-input/string-input';
 import { ExerciseModel, SeriesModel } from '@model/exercise.model';
 import CreateSeries from './create-series';
+import style from './style';
 
 const defaultExercise: ExerciseModel = ({ series: [] } as unknown) as ExerciseModel;
 
@@ -13,7 +14,7 @@ const CreateExercise = (props: CreateExercisePropsModel) => {
 
 	useEffect(() => {
 		setModalVisible(props?.modalVisible?.visible);
-	}, [props.modalVisible]);
+	}, [props, props.modalVisible]);
 
 	const reset = () => {
 		updateExercise(defaultExercise);
@@ -56,6 +57,12 @@ const CreateExercise = (props: CreateExercisePropsModel) => {
 				<View>
 					<Text>Название</Text>
 					<StringInput onTextChange={v => patchExercise({ name: v })} />
+
+					<View style={style.flex}>
+						<Text style={style.flex1}>№</Text>
+						<Text style={style.flex2}>Повторения</Text>
+						<Text style={style.flex3}>Вес</Text>
+					</View>
 
 					{exercise?.series?.map((s, index) => (
 						<CreateSeries
