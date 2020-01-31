@@ -2,7 +2,7 @@ export interface TextInputPropsModel {
 	maxLength?: number;
 
 	placeholder?: string;
-	initValue?: string;
 
+	value: string;
 	onTextChange: (v: string) => void;
 }

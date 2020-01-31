@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './style';
 import { TextInputPropsModel } from './types';
-import { TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
+
+const DEFAULT_MAX_LENGTH = 500;
+const DEFAULT_PLACEHOLDER = 'Enter some text here...';
 
 const StringInput = (props: TextInputPropsModel) => {
-	const [value, setValue] = useState(props?.initValue ?? '');
-	const [maxLength] = useState(props?.maxLength ?? 500);
+	const {
+		maxLength = DEFAULT_MAX_LENGTH,
+		onTextChange,
+		placeholder = DEFAULT_PLACEHOLDER,
+		value,
+	} = props;
 
-	const onTextChange = (v: string) => {
-		setValue(v);
-
-		props?.onTextChange(value);
+	const onTextChangeHandler = (v: string) => {
+		onTextChange(v);
 	};
 
 	return (
-		<TextInput
-			style={style.input}
-			maxLength={maxLength}
-			placeholder={props?.placeholder}
-			onChangeText={onTextChange}
-			value={value}
-		/>
+		<View style={style.inputWrapper}>
+			<TextInput
+				maxLength={maxLength}
+				placeholder={placeholder}
+				onChangeText={onTextChangeHandler}
+				value={value}
+			/>
+		</View>
 	);
 };
 
