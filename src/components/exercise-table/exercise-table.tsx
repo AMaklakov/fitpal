@@ -1,13 +1,16 @@
 import { ExerciseTablePropsModel } from './types';
 import React, { useState } from 'react';
 import Exercise from '../exercise/exercise';
-import { Button, ScrollView, View } from 'react-native';
+import { Button, ScrollView, Text, View } from 'react-native';
 import style from './styles';
 import CreateExercise from '../create-exercise/create-exercise';
 import { ExerciseModel } from '@model/exercise.model';
 
+const TODAY = new Date();
+const TODAY_DD_MM_YYYY = `${TODAY.getDate()}.${TODAY.getMonth() + 1}.${TODAY.getFullYear()}`;
+
 export const ExerciseTable = (props: ExerciseTablePropsModel) => {
-	const { canEdit, rowList, setRowList } = props;
+	const { rowList, setRowList, date = TODAY_DD_MM_YYYY } = props;
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const addExerciseAction = () => {
@@ -18,18 +21,19 @@ export const ExerciseTable = (props: ExerciseTablePropsModel) => {
 		setRowList([...rowList, { exercise }]);
 	};
 
+	const exerciseListEl = () =>
+		rowList.map((r, index) => <Exercise exercise={r.exercise} key={index} />);
+
+	const emptyTag = () => <Text>Пока что упражений нет</Text>;
+
 	return (
 		<ScrollView>
 			<View style={style.wrapper}>
-				{/*<View style={style.heading}>*/}
-				{/*	<Text>Название</Text>*/}
-				{/*	<Text>Подходы</Text>*/}
-				{/*	<Text>Итого</Text>*/}
-				{/*</View>*/}
+				<View>
+					<Text style={style.h1}>Тренировка {date}</Text>
+				</View>
 
-				{rowList.map((r, index) => (
-					<Exercise exercise={r.exercise} key={index} />
-				))}
+				{rowList.length > 0 ? exerciseListEl() : emptyTag()}
 			</View>
 
 			<Button title={'+ Добавить упражнение'} onPress={addExerciseAction} />
