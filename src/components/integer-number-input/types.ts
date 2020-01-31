@@ -3,7 +3,7 @@ export interface IntegerNumberInputPropsModel {
 	min?: number;
 
 	placeholder?: string;
-	initialValue?: number;
 
-	setValue: (v: number | '') => void;
+	value?: number;
+	onChange: (v: number) => void;
 }

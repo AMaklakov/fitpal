@@ -7,8 +7,8 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 	const { index, onChange, series } = props;
 
 	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
-	const [repeats, setRepeats] = useState(series?.repeats ?? '');
-	const [weight, setWeight] = useState(series?.weight ?? '');
+	const [repeats, setRepeats] = useState(series?.repeats ?? 0);
+	const [weight, setWeight] = useState(series?.weight ?? 0);
 
 	useEffect(() => {
 		onChange({
@@ -16,7 +16,7 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 			repeats: Number(repeats),
 			weight: Number(weight),
 		});
-	}, [sequenceNumber, repeats, weight]);
+	}, [sequenceNumber, repeats, weight, onChange]);
 
 	return (
 		<View>
@@ -24,10 +24,10 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 			<Text>{sequenceNumber}</Text>
 
 			<Text>Количество повторений</Text>
-			<IntegerNumberInput setValue={setRepeats} />
+			<IntegerNumberInput value={repeats} onChange={setRepeats} />
 
 			<Text>Вес</Text>
-			<IntegerNumberInput setValue={setWeight} />
+			<IntegerNumberInput value={weight} onChange={setWeight} />
 		</View>
 	);
 };

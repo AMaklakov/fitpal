@@ -8,6 +8,13 @@ const style = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: 'black',
 	},
+	errorMessageShow: {
+		color: 'red',
+		display: 'flex',
+	},
+	errorMessage: {
+		display: 'none',
+	},
 });
 
 export default style;

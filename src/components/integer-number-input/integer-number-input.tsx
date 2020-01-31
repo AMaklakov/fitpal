@@ -1,32 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput } from 'react-native';
 import { IntegerNumberInputPropsModel } from './types';
+import { isInteger, removeLeadingZeros } from '../../util/string.util';
 import style from './style';
 
-const isInteger = (v: string): boolean => /\d/g.test(v);
+const DEFAULT_MIN = 0;
+const DEFAULT_MAX = 500;
 
 const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
-	const [value, setValue] = useState(props?.initialValue ?? '');
+	const { value = 0, max = DEFAULT_MAX, min = DEFAULT_MIN, placeholder = '', onChange } = props;
+
 	const [hasError, setHasError] = useState(false);
 
-	const [min, setMin] = useState(props?.min);
-	const [max, setMax] = useState(props?.max);
-
-	useEffect(() => {
-		setMin(props?.min);
-		setMax(props?.max);
-	}, [props.min, props.max]);
-
 	const isValid = (v: string): boolean => {
-		if (v === '') {
+		if (v === '' || v === '0') {
 			return true;
 		}
 
-		const num = Number(v);
+		v = removeLeadingZeros(v);
 
 		if (!isInteger(v)) {
 			return false;
 		}
+
+		const num = Number(v);
 
 		if (isNaN(num)) {
 			return false;
@@ -48,21 +45,31 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 
 		setHasError(!valid);
 
-		const newVal: '' | number = v === '' ? v : Number(v);
-		const newValue = (valid ? newVal : value) as '' | number;
+		console.log(123, v, Number(v), value);
 
-		setValue(newValue);
-		props?.setValue(newValue);
+		if (!valid) {
+			onChange(value);
+
+			return;
+		}
+
+		onChange(Number(v));
 	};
 
 	return (
-		<TextInput
-			style={style.input}
-			keyboardType={'numeric'}
-			placeholder={props?.placeholder}
-			onChangeText={onTextChange}
-			value={value?.toString()}
-		/>
+		<>
+			<TextInput
+				style={style.input}
+				keyboardType={'numeric'}
+				placeholder={placeholder}
+				onChangeText={onTextChange}
+				value={value?.toString()}
+			/>
+
+			<Text style={hasError ? style.errorMessageShow : style.errorMessage}>
+				Значание в диапазоне от {min} до {max}
+			</Text>
+		</>
 	);
 };
 
