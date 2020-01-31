@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, SafeAreaView, Text, View } from 'react-native';
 import { CreateExercisePropsModel } from './types';
 import StringInput from '../string-input/string-input';
@@ -9,24 +9,21 @@ import style from './style';
 const defaultExercise: ExerciseModel = ({ series: [] } as unknown) as ExerciseModel;
 
 const CreateExercise = (props: CreateExercisePropsModel) => {
-	const [exercise, updateExercise] = useState(props?.exercise ?? defaultExercise);
-	const [modalVisible, setModalVisible] = useState(props?.modalVisible?.visible ?? false);
+	const { onSave, setVisible, visible } = props;
 
-	useEffect(() => {
-		setModalVisible(props?.modalVisible?.visible);
-	}, [props, props.modalVisible]);
+	const [exercise, updateExercise] = useState(props?.exercise ?? defaultExercise);
 
 	const reset = () => {
 		updateExercise(defaultExercise);
 	};
 
 	const close = () => {
-		setModalVisible(false);
+		setVisible(false);
 		reset();
 	};
 
 	const saveAndClose = () => {
-		props.onSave(exercise as ExerciseModel);
+		onSave(exercise as ExerciseModel);
 
 		close();
 	};
@@ -52,7 +49,7 @@ const CreateExercise = (props: CreateExercisePropsModel) => {
 	const updateExerciseSeries = (index: number) => (s: SeriesModel) => (exercise.series[index] = s);
 
 	return (
-		<Modal visible={modalVisible} animationType="slide" transparent={false}>
+		<Modal visible={visible} animationType="slide" transparent={false}>
 			<SafeAreaView>
 				<View>
 					<Text>Название</Text>

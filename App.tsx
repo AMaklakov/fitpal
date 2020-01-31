@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
-import { RowModel } from './src/components/exercise-table/row/types';
+import { RowModel } from './src/components/exercise/types';
 import { ExerciseTable } from './src/components/exercise-table/exercise-table';
 
-const rowList: RowModel[] = [
+const defRwList: RowModel[] = [
 	{
 		exercise: {
 			name: 'hello',
@@ -26,14 +26,18 @@ const rowList: RowModel[] = [
 	},
 ];
 
-const App = () => (
-	<>
-		<StatusBar barStyle="dark-content" />
+const App = () => {
+	const [rowList, setRowList] = useState(defRwList);
 
-		<SafeAreaView>
-			<ExerciseTable rowList={rowList} canEdit={true} />
-		</SafeAreaView>
-	</>
-);
+	return (
+		<>
+			<StatusBar barStyle="dark-content" />
+
+			<SafeAreaView>
+				<ExerciseTable rowList={rowList} setRowList={list => setRowList(list)} canEdit={true} />
+			</SafeAreaView>
+		</>
+	);
+};
 
 export default App;

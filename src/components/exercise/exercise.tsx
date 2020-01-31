@@ -4,12 +4,12 @@ import { Text, View } from 'react-native';
 import style from './styles';
 import { calcTotal } from './index';
 
-const Row = (props: RowModel) => {
+const Exercise = (props: RowModel) => {
 	const { exercise } = props;
 
 	return (
-		<View style={style.row}>
-			<Text>{exercise.name}</Text>
+		<View>
+			<Text style={style.h2}>{exercise.name}</Text>
 
 			<View style={style.table}>
 				<View style={style.tableHeading}>
@@ -27,9 +27,9 @@ const Row = (props: RowModel) => {
 				))}
 			</View>
 
-			<Text>{calcTotal(exercise)} кг</Text>
+			<Text style={style.total}>Итого: {calcTotal(exercise)} кг</Text>
 		</View>
 	);
 };
 
-export default Row;
+export default Exercise;

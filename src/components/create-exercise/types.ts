@@ -1,8 +1,10 @@
 import { ExerciseModel } from '@model/exercise.model';
 
 export interface CreateExercisePropsModel {
-	modalVisible: { visible: boolean };
 	exercise?: ExerciseModel;
 
 	onSave: (e: ExerciseModel) => void;
+
+	visible: boolean;
+	setVisible: (v: boolean) => void;
 }
