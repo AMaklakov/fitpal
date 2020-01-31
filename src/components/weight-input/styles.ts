@@ -5,21 +5,14 @@ const style = StyleSheet.create({
 		height: 40,
 		fontSize: 22,
 
-		flex: 1,
+		display: 'flex',
 		flexDirection: 'row',
-	},
-	value: {
-		height: 40,
-
-		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: 'space-around',
 	},
 	checkbox: {
 		height: 40,
 
-		flex: 1,
+		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
