@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionSheetIOS, ActionSheetIOSOptions, Text, View } from 'react-native';
+import { ActionSheetIOS, ActionSheetIOSOptions, Text, TouchableOpacity, View } from 'react-native';
 import { SelectInputProps } from './types';
 import style from './style';
 
@@ -25,11 +25,13 @@ const SelectInput = (props: SelectInputProps) => {
 	};
 
 	return (
-		<View style={style.value} onTouchEnd={openPicker}>
-			<Text>
-				{value} {valuePostfix}
-			</Text>
-		</View>
+		<TouchableOpacity activeOpacity={0.3} onPress={openPicker}>
+			<View style={style.value}>
+				<Text>
+					{value} {valuePostfix}
+				</Text>
+			</View>
+		</TouchableOpacity>
 	);
 };
 
