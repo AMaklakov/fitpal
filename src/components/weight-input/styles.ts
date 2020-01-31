@@ -5,14 +5,12 @@ const style = StyleSheet.create({
 		height: 40,
 		fontSize: 22,
 
-		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},
 	checkbox: {
 		height: 40,
 
-		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
 	},

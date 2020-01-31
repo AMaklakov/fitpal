@@ -5,7 +5,6 @@ const style = StyleSheet.create({
 		margin: 10,
 	},
 	tableHeading: {
-		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 
@@ -15,7 +14,6 @@ const style = StyleSheet.create({
 		borderRadius: 15,
 	},
 	tableBody: {
-		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 

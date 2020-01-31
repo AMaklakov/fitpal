@@ -3,11 +3,9 @@ import { StyleSheet } from 'react-native';
 const style = StyleSheet.create({
 	wrapper: {
 		paddingBottom: 10,
-		display: 'flex',
 		flexDirection: 'column',
 	},
 	flex: {
-		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},

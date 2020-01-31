@@ -10,7 +10,6 @@ const style = StyleSheet.create({
 	},
 	errorMessageShow: {
 		color: 'red',
-		display: 'flex',
 	},
 	errorMessage: {
 		display: 'none',

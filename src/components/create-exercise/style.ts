@@ -8,7 +8,6 @@ const style = StyleSheet.create({
 		backgroundColor: 'green',
 	},
 	flex: {
-		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},
