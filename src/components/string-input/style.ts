@@ -9,6 +9,9 @@ const style = StyleSheet.create({
 		borderColor: 'black',
 		borderRadius: 15,
 	},
+	input: {
+		color: 'black',
+	},
 });
 
 export default style;

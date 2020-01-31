@@ -21,8 +21,10 @@ const StringInput = (props: TextInputPropsModel) => {
 	return (
 		<View style={style.inputWrapper}>
 			<TextInput
+				style={style.input}
 				maxLength={maxLength}
 				placeholder={placeholder}
+				placeholderTextColor="darkgray"
 				onChangeText={onTextChangeHandler}
 				value={value}
 			/>
