@@ -60,7 +60,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 		<>
 			<TextInput
 				style={style.input}
-				keyboardType={'numeric'}
+				keyboardType="number-pad"
 				placeholder={placeholder}
 				onChangeText={onTextChange}
 				value={value?.toString()}
