@@ -53,7 +53,7 @@ const CreateExercise = (props: CreateExercisePropsModel) => {
 			<SafeAreaView>
 				<View>
 					<Text>Название</Text>
-					<StringInput onTextChange={v => patchExercise({ name: v })} />
+					<StringInput value={exercise.name} onTextChange={v => patchExercise({ name: v })} />
 
 					<View style={style.flex}>
 						<Text style={style.flex1}>№</Text>
