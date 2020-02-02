@@ -1,12 +1,5 @@
-export interface SeriesModel {
-	sequenceNumber: number;
-
-	repeats: number;
-	weight: number;
-}
-
 export interface ExerciseModel {
-	name: string;
+	id: string;
 
-	series: SeriesModel[];
+	name: string;
 }

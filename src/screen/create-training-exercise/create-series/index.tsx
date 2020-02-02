@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { CreateSeriesPropsModel } from './types';
 import { Text, View } from 'react-native';
-import SelectInput from '../../select-input';
+import SelectInput from '../../../components/select-input';
 import { getNumbersInRangeOptions } from '../../../util/string.util';
-import WeightInput from '../../weight-input';
+import WeightInput from '../../../components/weight-input';
 import style from './style';
 
 const DEFAULT_CANCEL_BUTTON_INDEX = 0;
@@ -22,7 +22,7 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 			repeats: Number(repeats),
 			weight: Number(weight),
 		});
-	}, [sequenceNumber, repeats, weight, onChange]);
+	}, [sequenceNumber, repeats, weight]);
 
 	return (
 		<View style={style.wrapper}>

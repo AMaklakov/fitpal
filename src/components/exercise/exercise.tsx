@@ -1,15 +1,17 @@
-import { RowModel } from './types';
+import { TrainingExerciseProps } from './types';
 import React from 'react';
 import { Text, View } from 'react-native';
 import style from './styles';
 import { calcTotal } from './index';
+import H2 from '../heading/h2';
 
-const Exercise = (props: RowModel) => {
-	const { exercise } = props;
+const TrainingExercise = (props: TrainingExerciseProps) => {
+	const { trainingExercise, exerciseList } = props;
+	const { exerciseId, seriesList } = trainingExercise;
 
 	return (
 		<View>
-			<Text style={style.h2}>{exercise.name}</Text>
+			<H2 text={exerciseList?.find(e => e.id === exerciseId)?.name || ''} />
 
 			<View style={style.table}>
 				<View style={style.tableHeading}>
@@ -18,7 +20,7 @@ const Exercise = (props: RowModel) => {
 					<Text>🏋</Text>
 				</View>
 
-				{exercise.series.map((s, index) => (
+				{seriesList.map((s, index) => (
 					<View key={index} style={style.tableBody}>
 						<Text>{s.sequenceNumber}</Text>
 						<Text>{s.repeats}</Text>
@@ -27,9 +29,9 @@ const Exercise = (props: RowModel) => {
 				))}
 			</View>
 
-			<Text style={style.total}>Итого: {calcTotal(exercise)} кг</Text>
+			<Text style={style.total}>Итого: {calcTotal(trainingExercise)} кг</Text>
 		</View>
 	);
 };
 
-export default Exercise;
+export default TrainingExercise;

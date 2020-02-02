@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
-import { RowModel } from './src/components/exercise/types';
-import { ExerciseTable } from './src/components/exercise-table/exercise-table';
-
-const defRwList: RowModel[] = [];
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import AppNavigator from './src/screen/navigator';
+import { SafeAreaView } from 'react-native';
 
 const App = () => {
-	const [rowList, setRowList] = useState(defRwList);
-
 	return (
-		<>
-			<StatusBar barStyle="dark-content" />
-
-			<SafeAreaView>
-				<ExerciseTable rowList={rowList} setRowList={list => setRowList(list)} canEdit={true} />
-			</SafeAreaView>
-		</>
+		<SafeAreaView style={{ flex: 1 }}>
+			<Provider store={store}>
+				<AppNavigator />
+			</Provider>
+		</SafeAreaView>
 	);
 };
 

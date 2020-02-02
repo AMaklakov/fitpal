@@ -1,10 +1,8 @@
+import { TrainingExerciseModel } from '@model/training.model';
 import { ExerciseModel } from '@model/exercise.model';
 
-export interface ColumnModel {
-	name: string;
-	field: keyof ExerciseModel | 'total';
-}
+export interface TrainingExerciseProps {
+	trainingExercise: TrainingExerciseModel;
 
-export interface RowModel {
-	exercise: ExerciseModel;
+	exerciseList: ExerciseModel[];
 }
