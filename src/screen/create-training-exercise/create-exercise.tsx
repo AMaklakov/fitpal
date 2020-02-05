@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Animated, Button, Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { CreateExerciseProps } from './types';
 import CreateSeries from './create-series';
 import style from './style';
@@ -13,7 +13,9 @@ const CreateExercise = (props: CreateExerciseProps) => {
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
 	const [selectExerciseList] = useState(['Отмена', ...exerciseList.map(e => e.name)]);
 
-	const [exerciseName, setExerciseName] = useState<ExerciseModel>({} as ExerciseModel);
+	const [exerciseName, setExerciseName] = useState<ExerciseModel>(
+		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? ({} as ExerciseModel)
+	);
 
 	const selectExercise = (index: number) => {
 		setExerciseName(exerciseList[index - 1]);

@@ -6,6 +6,7 @@ export interface CreateExerciseScreenProps extends NavigationPropsModel {
 	exerciseList: ExerciseModel[];
 
 	saveAction: (trainingId: string, exercise: TrainingExerciseModel) => void;
+	editAction: (trainingId: string, exercise: TrainingExerciseModel) => void;
 }
 
 export interface CreateExerciseProps {

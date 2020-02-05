@@ -1,6 +1,5 @@
 import { Action, Reducer } from 'redux';
 import { ExerciseModel } from '@model/exercise.model';
-import { generateId } from '../../../util/uuid.util';
 
 export interface ExerciseStateModel {
 	list: ExerciseModel[];
@@ -8,10 +7,10 @@ export interface ExerciseStateModel {
 
 const DFEAULT_STATE: ExerciseStateModel = {
 	list: [
-		{ id: generateId(), name: 'Жим лежа' },
-		{ id: generateId(), name: 'Бабочка' },
-		{ id: generateId(), name: 'Приседания со штангой' },
-		{ id: generateId(), name: 'Отжимания на брусьях' },
+		{ id: '1', name: 'Жим лежа' },
+		{ id: '2', name: 'Бабочка' },
+		{ id: '3', name: 'Приседания со штангой' },
+		{ id: '4', name: 'Отжимания на брусьях' },
 	],
 };
 

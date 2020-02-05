@@ -1,3 +1,6 @@
+import { PropType } from '../util/type.util';
+import { ExerciseModel } from '@model/exercise.model';
+
 export interface SeriesModel {
 	sequenceNumber: number;
 
@@ -6,7 +9,8 @@ export interface SeriesModel {
 }
 
 export interface TrainingExerciseModel {
-	exerciseId: string;
+	exerciseId: PropType<ExerciseModel, 'id'>;
+	sequenceNumber: number;
 
 	seriesList: SeriesModel[];
 }

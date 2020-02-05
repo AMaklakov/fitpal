@@ -5,19 +5,26 @@ import { connect } from 'react-redux';
 import { PropType } from '../../util/type.util';
 import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { Action, Dispatch } from 'redux';
-import { createTrainingExerciseByTrainingId } from '../../redux/action/training.action';
+import {
+	createTrainingExerciseByTrainingId,
+	editTrainingExerciseByTrainingId,
+} from '../../redux/action/training.action';
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { Routes } from '../navigator';
 
 const Screen = (props: CreateExerciseScreenProps) => {
-	const { navigation, saveAction, exerciseList } = props;
-	const id = navigation.getParam('trainingId');
+	const { navigation, saveAction, editAction, exerciseList } = props;
 
-	const [exercise, setExercise] = useState<TrainingExerciseModel>({} as TrainingExerciseModel);
+	const id = navigation.getParam('trainingId');
+	const trainingExercise = navigation.getParam('trainingExercise');
+
+	const [exercise, setExercise] = useState<TrainingExerciseModel>(
+		trainingExercise ?? ({} as TrainingExerciseModel)
+	);
 
 	const onSave = () => {
-		saveAction(id, exercise);
+		trainingExercise ? editAction(id, exercise) : saveAction(id, exercise);
 
 		goBack();
 	};
@@ -41,9 +48,13 @@ const mapStateToProps = (store: StoreModel): Pick<CreateExerciseScreenProps, 'ex
 
 const mapDispatchToProps = (
 	dispatch: Dispatch<Action>
-): Pick<CreateExerciseScreenProps, 'saveAction'> => ({
+): Pick<CreateExerciseScreenProps, 'saveAction' | 'editAction'> => ({
 	saveAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: TrainingExerciseModel) => {
 		dispatch(createTrainingExerciseByTrainingId(trainingId, exercise));
+	},
+
+	editAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: TrainingExerciseModel) => {
+		dispatch(editTrainingExerciseByTrainingId(trainingId, exercise));
 	},
 });
 

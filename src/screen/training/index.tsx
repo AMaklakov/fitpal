@@ -7,14 +7,18 @@ import { getTrainingByDate } from '../../redux/selector/training.selector';
 import { connect } from 'react-redux';
 import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
+import { TrainingExerciseModel } from '@model/training.model';
 
 const Screen = (props: TrainingScreenProps) => {
 	const { training, navigation, exercises } = props;
 
-	const addExerciseAction = () => {
+	const addExerciseAction = (trainingExercise?: TrainingExerciseModel) => {
 		navigation.navigate({
 			routeName: Routes.CreateTrainingExercise,
-			params: { trainingId: training?.id },
+			params: {
+				trainingId: training?.id,
+				trainingExercise,
+			},
 		});
 	};
 
