@@ -13,6 +13,9 @@ import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { Routes } from '../navigator';
 
+const createEmptyTrainingExercise = () =>
+	(({ seriesList: [] } as unknown) as TrainingExerciseModel);
+
 const Screen = (props: CreateExerciseScreenProps) => {
 	const { navigation, saveAction, editAction, exerciseList } = props;
 
@@ -20,7 +23,7 @@ const Screen = (props: CreateExerciseScreenProps) => {
 	const trainingExercise = navigation.getParam('trainingExercise');
 
 	const [exercise, setExercise] = useState<TrainingExerciseModel>(
-		trainingExercise ?? ({} as TrainingExerciseModel)
+		trainingExercise ?? createEmptyTrainingExercise()
 	);
 
 	const onSave = () => {
