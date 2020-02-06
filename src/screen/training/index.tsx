@@ -9,7 +9,7 @@ import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { Dispatch } from 'redux';
-import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training.action';
+import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training-exercise.action';
 import { PropType } from '../../util/type.util';
 
 const Screen = (props: TrainingScreenProps) => {

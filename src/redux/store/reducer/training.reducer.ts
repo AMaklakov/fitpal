@@ -2,10 +2,7 @@ import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
-import {
-	CreateTrainingExerciseByTrainingIdAction,
-	TrainingActions,
-} from '../../action/training.action';
+import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
 
 export interface TrainingStateModel {
 	list: TrainingModel[];
@@ -23,7 +20,7 @@ const DEFAULT_STATE: TrainingStateModel = {
 
 const createTrainingExerciseByTrainingId = (
 	state: TrainingStateModel,
-	action: CreateTrainingExerciseByTrainingIdAction
+	action: TrainingExerciseAction
 ): TrainingStateModel => {
 	const { exercise, trainingId } = action.payload;
 
@@ -49,7 +46,7 @@ const createTrainingExerciseByTrainingId = (
 
 const editTrainingExerciseByTrainingId = (
 	state: TrainingStateModel,
-	action: CreateTrainingExerciseByTrainingIdAction
+	action: TrainingExerciseAction
 ): TrainingStateModel => {
 	const { exercise, trainingId } = action.payload;
 
@@ -78,7 +75,7 @@ const editTrainingExerciseByTrainingId = (
 
 const deleteTrainingExerciseByTrainingId = (
 	state: TrainingStateModel,
-	action: CreateTrainingExerciseByTrainingIdAction
+	action: TrainingExerciseAction
 ): TrainingStateModel => {
 	const { exercise, trainingId } = action.payload;
 
@@ -107,22 +104,13 @@ const training: Reducer<TrainingStateModel> = (
 ): TrainingStateModel => {
 	switch (action.type) {
 		case TrainingActions.CreateTrainingExerciseByTrainingId:
-			return createTrainingExerciseByTrainingId(
-				state,
-				action as CreateTrainingExerciseByTrainingIdAction
-			);
+			return createTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
 
 		case TrainingActions.EditTrainingExerciseByTrainingId:
-			return editTrainingExerciseByTrainingId(
-				state,
-				action as CreateTrainingExerciseByTrainingIdAction
-			);
+			return editTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
 
 		case TrainingActions.DeleteTrainingExerciseByTrainingId:
-			return deleteTrainingExerciseByTrainingId(
-				state,
-				action as CreateTrainingExerciseByTrainingIdAction
-			);
+			return deleteTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
 
 		default:
 			return state;

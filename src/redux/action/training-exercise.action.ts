@@ -8,17 +8,19 @@ export enum TrainingActions {
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 }
 
-export type TrainingAction<T extends Object> = Action<TrainingActions> & { payload: T };
-
-export type CreateTrainingExerciseByTrainingIdAction = TrainingAction<{
+export type TrainingExerciseByTrainingId = {
 	trainingId: PropType<TrainingModel, 'id'>;
 	exercise: TrainingExerciseModel;
-}>;
+};
+
+export type TrainingExerciseAction<
+	PayloadType extends Object = TrainingExerciseByTrainingId
+> = Action<TrainingActions> & { payload: PayloadType };
 
 export const createTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
 	exercise: TrainingExerciseModel
-): CreateTrainingExerciseByTrainingIdAction => ({
+): TrainingExerciseAction => ({
 	type: TrainingActions.CreateTrainingExerciseByTrainingId,
 
 	payload: {
@@ -30,7 +32,7 @@ export const createTrainingExerciseByTrainingId = (
 export const editTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
 	exercise: TrainingExerciseModel
-): CreateTrainingExerciseByTrainingIdAction => ({
+): TrainingExerciseAction => ({
 	type: TrainingActions.EditTrainingExerciseByTrainingId,
 
 	payload: {
@@ -42,7 +44,7 @@ export const editTrainingExerciseByTrainingId = (
 export const deleteTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
 	exercise: TrainingExerciseModel
-): CreateTrainingExerciseByTrainingIdAction => ({
+): TrainingExerciseAction => ({
 	type: TrainingActions.DeleteTrainingExerciseByTrainingId,
 
 	payload: {

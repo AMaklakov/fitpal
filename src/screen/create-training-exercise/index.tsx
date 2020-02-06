@@ -8,7 +8,7 @@ import { Action, Dispatch } from 'redux';
 import {
 	createTrainingExerciseByTrainingId,
 	editTrainingExerciseByTrainingId,
-} from '../../redux/action/training.action';
+} from '../../redux/action/training-exercise.action';
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { Routes } from '../navigator';
