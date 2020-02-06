@@ -12,7 +12,7 @@ enum TrainingExerciseActions {
 }
 
 const Training = (props: TrainingProps) => {
-	const { training, addExerciseAction, exercises } = props;
+	const { training, addExerciseAction, exercises, removeExercise } = props;
 
 	if (!training) {
 		throw new Error(`No training present`);
@@ -40,6 +40,8 @@ const Training = (props: TrainingProps) => {
 
 				switch (options[buttonIndex]) {
 					case TrainingExerciseActions.DELETE:
+						removeExercise(e);
+						return;
 					case TrainingExerciseActions.EDIT:
 						editExercise(e);
 						return;

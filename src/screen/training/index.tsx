@@ -7,10 +7,13 @@ import { getTrainingByDate } from '../../redux/selector/training.selector';
 import { connect } from 'react-redux';
 import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
-import { TrainingExerciseModel } from '@model/training.model';
+import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { Dispatch } from 'redux';
+import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training.action';
+import { PropType } from '../../util/type.util';
 
 const Screen = (props: TrainingScreenProps) => {
-	const { training, navigation, exercises } = props;
+	const { training, navigation, exercises, dispatchRemoveTrainingExercise } = props;
 
 	const addExerciseAction = (trainingExercise?: TrainingExerciseModel) => {
 		navigation.navigate({
@@ -22,11 +25,20 @@ const Screen = (props: TrainingScreenProps) => {
 		});
 	};
 
+	const removeExerciseAction = (trainingExercise: TrainingExerciseModel) => {
+		if (!training) {
+			return;
+		}
+
+		dispatchRemoveTrainingExercise(trainingExercise, training.id);
+	};
+
 	return (
 		<Training
 			training={training}
 			canEdit={true}
 			addExerciseAction={addExerciseAction}
+			removeExercise={removeExerciseAction}
 			exercises={exercises}
 		/>
 	);
@@ -39,4 +51,13 @@ const mapStateToProps = (
 	exercises: getExerciseList(store),
 });
 
-export default connect(mapStateToProps)(Screen);
+const mapDispatchToProps = (
+	dispatch: Dispatch
+): Pick<TrainingScreenProps, 'dispatchRemoveTrainingExercise'> => ({
+	dispatchRemoveTrainingExercise: (
+		e: TrainingExerciseModel,
+		trainingId: PropType<TrainingModel, 'id'>
+	) => dispatch(deleteTrainingExerciseByTrainingId(trainingId, e)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Screen);

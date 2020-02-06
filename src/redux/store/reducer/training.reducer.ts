@@ -76,6 +76,31 @@ const editTrainingExerciseByTrainingId = (
 	};
 };
 
+const deleteTrainingExerciseByTrainingId = (
+	state: TrainingStateModel,
+	action: CreateTrainingExerciseByTrainingIdAction
+): TrainingStateModel => {
+	const { exercise, trainingId } = action.payload;
+
+	return {
+		...state,
+		list: state.list.map(item => {
+			if (item.id === trainingId) {
+				item = {
+					...item,
+					exerciseList: [
+						...item.exerciseList
+							.filter(x => x.sequenceNumber !== exercise.sequenceNumber)
+							.map(x => ({ ...x })),
+					],
+				};
+			}
+
+			return item;
+		}),
+	};
+};
+
 const training: Reducer<TrainingStateModel> = (
 	state: TrainingStateModel = DEFAULT_STATE,
 	action: Action<TrainingActions>
@@ -92,6 +117,13 @@ const training: Reducer<TrainingStateModel> = (
 				state,
 				action as CreateTrainingExerciseByTrainingIdAction
 			);
+
+		case TrainingActions.DeleteTrainingExerciseByTrainingId:
+			return deleteTrainingExerciseByTrainingId(
+				state,
+				action as CreateTrainingExerciseByTrainingIdAction
+			);
+
 		default:
 			return state;
 	}

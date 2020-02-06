@@ -5,6 +5,7 @@ import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 export enum TrainingActions {
 	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
+	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 }
 
 export type TrainingAction<T extends Object> = Action<TrainingActions> & { payload: T };
@@ -17,27 +18,35 @@ export type CreateTrainingExerciseByTrainingIdAction = TrainingAction<{
 export const createTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
 	exercise: TrainingExerciseModel
-): CreateTrainingExerciseByTrainingIdAction => {
-	return {
-		type: TrainingActions.CreateTrainingExerciseByTrainingId,
+): CreateTrainingExerciseByTrainingIdAction => ({
+	type: TrainingActions.CreateTrainingExerciseByTrainingId,
 
-		payload: {
-			trainingId,
-			exercise,
-		},
-	};
-};
+	payload: {
+		trainingId,
+		exercise,
+	},
+});
 
 export const editTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
 	exercise: TrainingExerciseModel
-): CreateTrainingExerciseByTrainingIdAction => {
-	return {
-		type: TrainingActions.EditTrainingExerciseByTrainingId,
+): CreateTrainingExerciseByTrainingIdAction => ({
+	type: TrainingActions.EditTrainingExerciseByTrainingId,
 
-		payload: {
-			trainingId,
-			exercise,
-		},
-	};
-};
+	payload: {
+		trainingId,
+		exercise,
+	},
+});
+
+export const deleteTrainingExerciseByTrainingId = (
+	trainingId: PropType<TrainingModel, 'id'>,
+	exercise: TrainingExerciseModel
+): CreateTrainingExerciseByTrainingIdAction => ({
+	type: TrainingActions.DeleteTrainingExerciseByTrainingId,
+
+	payload: {
+		trainingId,
+		exercise,
+	},
+});
