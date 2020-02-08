@@ -6,7 +6,7 @@
 		"android": "react-native run-android",
 		"ios": "react-native run-ios --simulator=\"iPhone 8\"",
 		"ios:MaklaPhone": "react-native run-ios --device=\"MaklaPhone\"",
-		"prestart": "cd ios && pod install",
+		"prestart": "yarn && cd ios && pod install",
 		"start": "yarn run ios",
 		"test": "jest",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx"
