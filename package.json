@@ -71,9 +71,12 @@
 		}
 	},
 	"lint-staged": {
+		"*.{json,css,html}": [
+			"prettier --write"
+		],
 		"*.{js,jsx,ts,tsx}": [
 			"eslint --fix",
-			"prettier --fix",
+			"prettier --write",
 			"jest --bail --findRelatedTests",
 			"git add"
 		]
