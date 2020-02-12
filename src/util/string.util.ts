@@ -17,3 +17,7 @@ export const getNumbersInRangeOptions = (min: number, max: number, step: number 
 
 	return arr;
 };
+
+export const removeSpaces = (str: string): string => str.replace(/ /g, '');
+
+export const removeSpacesAndLowercase = (str: string): string => removeSpaces(str).toLowerCase();

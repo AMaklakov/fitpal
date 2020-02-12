@@ -4,33 +4,30 @@ import { CreateExerciseProps } from './types';
 import CreateSeries from './create-series';
 import style from './style';
 import { SeriesModel, TrainingExerciseModel } from '@model/training.model';
-import SelectInput from '../../components/select-input';
 import { ExerciseModel } from '@model/exercise.model';
+import AutocompleteInput from '../../components/autocomplete-input';
+import ShowSelectedExercise from './show-selected-exercise';
 
 const createEmptySeriesBlock = (sequenceNumber: number) => ({ sequenceNumber } as SeriesModel);
 
 const CreateExercise = (props: CreateExerciseProps) => {
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
-	const [selectExerciseList] = useState(['Отмена', ...exerciseList.map(e => e.name)]);
 
-	const [exerciseName, setExerciseName] = useState<ExerciseModel>(
-		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? ({} as ExerciseModel)
+	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
+		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? null
 	);
 
-	const selectExercise = (index: number) => {
-		setExerciseName(exerciseList[index - 1]);
-
-		setTrainingExercise({ ...trainingExercise, exerciseId: exerciseList[index - 1].id });
+	const selectExercise = (exercise: ExerciseModel | null) => {
+		setSelectedExercise(exercise);
+		setTrainingExercise({ ...trainingExercise, exerciseId: exercise?.id } as TrainingExerciseModel);
 	};
 
 	const addSeries = () => {
-		const list = trainingExercise.seriesList;
+		const list = trainingExercise.seriesList || [];
 
 		const newTrainingEx: TrainingExerciseModel = {
 			...trainingExercise,
-			seriesList: list
-				? list.concat([createEmptySeriesBlock(list.length + 1)])
-				: [createEmptySeriesBlock(1)],
+			seriesList: list.concat([createEmptySeriesBlock(list.length + 1)]),
 		};
 
 		setTrainingExercise(newTrainingEx);
@@ -49,11 +46,12 @@ const CreateExercise = (props: CreateExerciseProps) => {
 		<View>
 			<View>
 				<Text>Название</Text>
-				<SelectInput
-					options={selectExerciseList}
-					cancelButtonIndex={0}
-					value={exerciseName?.name}
-					onChange={selectExercise}
+				<AutocompleteInput<ExerciseModel>
+					autocompleteList={exerciseList}
+					autocompleteField={'name'}
+					selectedItem={selectedExercise}
+					changeSelectedItem={selectExercise}
+					selectedItemViewComponent={ShowSelectedExercise}
 				/>
 
 				<View style={style.flex}>
