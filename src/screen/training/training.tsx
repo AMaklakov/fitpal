@@ -1,10 +1,11 @@
 import { TrainingProps } from './types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import TrainingExercise from '../../components/exercise/exercise';
 import { ActionSheetIOS, Button, ScrollView, Text, View } from 'react-native';
 import style from './styles';
 import H1 from '../../components/heading/h1';
 import { TrainingExerciseModel } from '@model/training.model';
+import { calculateTrainingTotal } from '../../components/exercise';
 
 enum TrainingExerciseActions {
 	DELETE = 'DELETE',
@@ -19,6 +20,8 @@ const Training = (props: TrainingProps) => {
 	}
 
 	const { date, exerciseList = [] } = training;
+
+	const total = useMemo(() => calculateTrainingTotal(training), [training]);
 
 	const emptyTag = () => <Text>Пока что упражений нет</Text>;
 
@@ -65,6 +68,10 @@ const Training = (props: TrainingProps) => {
 						onLongPress={longTapAction}
 					/>
 				))}
+			</View>
+
+			<View style={style.total}>
+				<Text style={style.totalText}>Итого: {total} кг </Text>
 			</View>
 
 			<Button title={'+ Добавить упражнение'} onPress={addExercise} />
