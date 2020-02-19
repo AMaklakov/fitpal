@@ -6,6 +6,7 @@ export enum TrainingActions {
 	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
+	ChangeTraining = 'ChangeTraining',
 }
 
 export type TrainingExerciseByTrainingId = {
@@ -51,4 +52,11 @@ export const deleteTrainingExerciseByTrainingId = (
 		trainingId,
 		exercise,
 	},
+});
+
+export type ChangeTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
+export const changeTraining = (training: TrainingModel): ChangeTrainingAction => ({
+	type: TrainingActions.ChangeTraining,
+
+	payload: { training },
 });

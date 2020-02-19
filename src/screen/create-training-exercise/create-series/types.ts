@@ -1,4 +1,4 @@
-import { SeriesModel } from '@model/exercise.model';
+import { SeriesModel } from '@model/training.model';
 
 export interface CreateSeriesPropsModel {
 	series?: SeriesModel;

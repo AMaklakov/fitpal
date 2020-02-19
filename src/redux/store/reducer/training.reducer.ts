@@ -2,7 +2,11 @@ import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
-import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
+import {
+	ChangeTrainingAction,
+	TrainingActions,
+	TrainingExerciseAction,
+} from '../../action/training-exercise.action';
 
 export interface TrainingStateModel {
 	list: TrainingModel[];
@@ -86,15 +90,34 @@ const deleteTrainingExerciseByTrainingId = (
 				item = {
 					...item,
 					exerciseList: [
-						...item.exerciseList
-							.filter(x => x.sequenceNumber !== exercise.sequenceNumber)
-							.map(x => ({ ...x })),
+						...item.exerciseList.filter(x => x.id !== exercise.id).map(x => ({ ...x })),
 					],
 				};
 			}
 
 			return item;
 		}),
+	};
+};
+
+const changeTraining = (
+	state: TrainingStateModel,
+	{ payload: { training } }: ChangeTrainingAction
+): TrainingStateModel => {
+	return {
+		...state,
+		list: [
+			...state.list.map(t => {
+				if (t.id === training.id) {
+					return {
+						...training,
+						exerciseList: [...training.exerciseList],
+					};
+				}
+
+				return { ...t };
+			}),
+		],
 	};
 };
 
@@ -111,6 +134,9 @@ const training: Reducer<TrainingStateModel> = (
 
 		case TrainingActions.DeleteTrainingExerciseByTrainingId:
 			return deleteTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+
+		case TrainingActions.ChangeTraining:
+			return changeTraining(state, action as ChangeTrainingAction);
 
 		default:
 			return state;

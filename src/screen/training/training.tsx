@@ -1,80 +1,55 @@
 import { TrainingProps } from './types';
-import React, { useMemo } from 'react';
-import TrainingExercise from '../../components/exercise/exercise';
-import { ActionSheetIOS, Button, ScrollView, Text, View } from 'react-native';
-import style from './styles';
+import React, { useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import H1 from '../../components/heading/h1';
-import { TrainingExerciseModel } from '@model/training.model';
-import { calculateTrainingTotal } from '../../components/exercise';
-
-enum TrainingExerciseActions {
-	DELETE = 'DELETE',
-	EDIT = 'EDIT',
-}
+import { TrainingModel } from '@model/training.model';
+import ShowTraining from './show-training';
+import ReorderTrainingExercise from './reorder-training-exercises';
+import { EditIcon } from '../../components/icons/edit.icon';
+import { SaveIcon } from '../../components/icons/save.icon';
 
 const Training = (props: TrainingProps) => {
-	const { training, addExerciseAction, exercises, removeExercise } = props;
+	const { training, addExerciseAction, exercises, removeExercise, changeTraining, canEdit } = props;
 
 	if (!training) {
 		throw new Error(`No training present`);
 	}
 
-	const { date, exerciseList = [] } = training;
+	const { date } = training;
+	const [isEdit, changeIsEdit] = useState(false);
 
-	const total = useMemo(() => calculateTrainingTotal(training), [training]);
+	const reorderExercises = (t: TrainingModel) => changeTraining(t);
 
-	const emptyTag = () => <Text>Пока что упражений нет</Text>;
-
-	const addExercise = () => addExerciseAction();
-	const editExercise = (e: TrainingExerciseModel) => addExerciseAction(e);
-
-	const longTapAction = (e: TrainingExerciseModel) => {
-		const options = ['Отмена', TrainingExerciseActions.DELETE, TrainingExerciseActions.EDIT];
-
-		ActionSheetIOS.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex: 0,
-			},
-			buttonIndex => {
-				if (buttonIndex === 0) {
-					return;
-				}
-
-				switch (options[buttonIndex]) {
-					case TrainingExerciseActions.DELETE:
-						removeExercise(e);
-						return;
-					case TrainingExerciseActions.EDIT:
-						editExercise(e);
-						return;
-				}
-			}
-		);
-	};
+	const handleEditButtonPress = () => changeIsEdit(prevState => !prevState);
 
 	return (
 		<ScrollView>
-			<View style={style.wrapper}>
+			<View
+				style={{
+					flexDirection: 'row',
+					paddingHorizontal: '5%',
+					justifyContent: 'space-around',
+				}}>
 				<H1 text={'Тренировка ' + date} />
 
-				{exerciseList.length === 0 && emptyTag()}
-
-				{exerciseList.map((e, index) => (
-					<TrainingExercise
-						trainingExercise={e}
-						key={index}
-						exerciseList={exercises}
-						onLongPress={longTapAction}
-					/>
-				))}
+				{canEdit && isEdit && <SaveIcon onPress={handleEditButtonPress} />}
+				{canEdit && !isEdit && <EditIcon onPress={handleEditButtonPress} />}
 			</View>
 
-			<View style={style.total}>
-				<Text style={style.totalText}>Итого: {total} кг </Text>
-			</View>
-
-			<Button title={'+ Добавить упражнение'} onPress={addExercise} />
+			{isEdit ? (
+				<ReorderTrainingExercise
+					exercises={exercises}
+					training={training}
+					changeTraining={reorderExercises}
+				/>
+			) : (
+				<ShowTraining
+					exercises={exercises}
+					addExerciseAction={addExerciseAction}
+					removeExercise={removeExercise}
+					training={training}
+				/>
+			)}
 		</ScrollView>
 	);
 };
