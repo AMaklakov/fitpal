@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CreateSeriesPropsModel } from './types';
 import { Text, View } from 'react-native';
 import { getNumbersInRangeOptions } from '../../../util/string.util';
-import WeightInput from '../../../components/weight-input';
 import style from './style';
+import WeightInput from '../../../components/weight-input';
 import { SelectInput } from '../../../components/select-input';
 
 const DEFAULT_REPEATS_SELECT_LIST = getNumbersInRangeOptions(1, 50).map(x => ({
