@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { IconProps } from './model/icon-props.type';
 
 export const ReorderIcon = (props: IconProps) => {
-	const { onLongPress, style, color = '000', size = 24 } = props;
+	const { onLongPress, style, color = '#000', size = 24 } = props;
 
 	return (
 		<TouchableWithoutFeedback onLongPress={onLongPress}>

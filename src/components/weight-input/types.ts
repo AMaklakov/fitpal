@@ -2,6 +2,8 @@ export interface WeightInputProps {
 	min?: number;
 	max?: number;
 
-	value?: number;
-	onChange: (v: number) => void;
+	value: number | null;
+	onChange: (v: number | null) => void;
+
+	hasAddHalfOption?: boolean;
 }
