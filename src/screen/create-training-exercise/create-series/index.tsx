@@ -24,7 +24,7 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 			repeats: Number(repeats),
 			weight: Number(weight),
 		});
-	}, [sequenceNumber, repeats, weight, onChange]);
+	}, [sequenceNumber, repeats, weight]);
 
 	return (
 		<View style={style.wrapper}>
