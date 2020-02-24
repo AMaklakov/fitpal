@@ -3,6 +3,7 @@ import { Text, TextInput } from 'react-native';
 import { IntegerNumberInputPropsModel } from './types';
 import { isPositiveInteger, removeLeadingZeros } from '../../util/string.util';
 import style from './style';
+import { placeholderTextColor } from '../../css/colors.style';
 
 const DEFAULT_MIN = 0;
 const DEFAULT_MAX = 500;
@@ -62,6 +63,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 				style={style.input}
 				keyboardType="number-pad"
 				placeholder={placeholder}
+				placeholderTextColor={placeholderTextColor}
 				onChangeText={onTextChange}
 				value={value?.toString()}
 			/>
