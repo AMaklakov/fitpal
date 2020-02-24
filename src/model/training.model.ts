@@ -9,6 +9,7 @@ export interface SeriesModel {
 }
 
 export interface TrainingExerciseModel {
+	id: string;
 	exerciseId: PropType<ExerciseModel, 'id'>;
 	sequenceNumber: number;
 

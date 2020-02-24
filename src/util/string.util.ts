@@ -8,12 +8,16 @@ export const removeLeadingZeros = (v: string): string => {
 	return v;
 };
 
-export const getNumbersInRangeOptions = (min: number, max: number, step: number = 1): string[] => {
+export const getNumbersInRangeOptions = (min: number, max: number, step: number = 1): number[] => {
 	const arr = [];
 
 	for (let i = min; i <= max; i += step) {
-		arr.push(i.toString());
+		arr.push(i);
 	}
 
 	return arr;
 };
+
+export const removeSpaces = (str: string): string => str.replace(/ /g, '');
+
+export const removeSpacesAndLowercase = (str: string): string => removeSpaces(str).toLowerCase();

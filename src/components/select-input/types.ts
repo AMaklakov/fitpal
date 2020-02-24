@@ -1,8 +1,7 @@
-export interface SelectInputProps {
-	options: string[];
-	cancelButtonIndex: number;
+import { Item } from 'react-native-picker-select';
+import { PropType } from '../../util/type.util';
 
-	value: string;
-	valuePostfix?: string;
-	onChange: (index: number) => void;
+export interface SelectInputProps<T extends Item> {
+	items: T[];
+	onChange: (value: PropType<T, 'value'> | null, index: number) => void;
 }

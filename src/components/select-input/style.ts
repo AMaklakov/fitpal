@@ -7,12 +7,9 @@ const style = StyleSheet.create({
 		borderColor: 'black',
 		borderRadius: 10,
 
-		paddingTop: 5,
-		paddingBottom: 5,
-		paddingLeft: 20,
-		paddingRight: 20,
+		paddingVertical: 5,
+		paddingHorizontal: 20,
 
-		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

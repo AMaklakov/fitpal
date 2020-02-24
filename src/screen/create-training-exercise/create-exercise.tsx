@@ -1,39 +1,47 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { CreateExerciseProps } from './types';
 import CreateSeries from './create-series';
 import style from './style';
 import { SeriesModel, TrainingExerciseModel } from '@model/training.model';
-import SelectInput from '../../components/select-input';
 import { ExerciseModel } from '@model/exercise.model';
+import AutocompleteInput from '../../components/autocomplete-input';
+import ShowSelectedExercise from './show-selected-exercise';
+import { generateId } from '../../util/uuid.util';
+import { SaveIcon } from '../../components/icons/save.icon';
+import { CancelIcon } from '../../components/icons/cancel.icon';
 
 const createEmptySeriesBlock = (sequenceNumber: number) => ({ sequenceNumber } as SeriesModel);
 
 const CreateExercise = (props: CreateExerciseProps) => {
+	const id = useMemo(() => generateId(), []);
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
-	const [selectExerciseList] = useState(['Отмена', ...exerciseList.map(e => e.name)]);
 
-	const [exerciseName, setExerciseName] = useState<ExerciseModel>(
-		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? ({} as ExerciseModel)
+	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
+		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? null
 	);
 
-	const selectExercise = (index: number) => {
-		setExerciseName(exerciseList[index - 1]);
+	const setTrainingExerciseAction = (ex: TrainingExerciseModel) => {
+		setTrainingExercise({ ...ex, id });
+	};
 
-		setTrainingExercise({ ...trainingExercise, exerciseId: exerciseList[index - 1].id });
+	const selectExercise = (exercise: ExerciseModel | null) => {
+		setSelectedExercise(exercise);
+		setTrainingExerciseAction({
+			...trainingExercise,
+			exerciseId: exercise?.id,
+		} as TrainingExerciseModel);
 	};
 
 	const addSeries = () => {
-		const list = trainingExercise.seriesList;
+		const list = trainingExercise.seriesList || [];
 
 		const newTrainingEx: TrainingExerciseModel = {
 			...trainingExercise,
-			seriesList: list
-				? list.concat([createEmptySeriesBlock(list.length + 1)])
-				: [createEmptySeriesBlock(1)],
+			seriesList: list.concat([createEmptySeriesBlock(list.length + 1)]),
 		};
 
-		setTrainingExercise(newTrainingEx);
+		setTrainingExerciseAction(newTrainingEx);
 	};
 
 	const updateExerciseSeries = (index: number) => (s: SeriesModel) => {
@@ -42,18 +50,19 @@ const CreateExercise = (props: CreateExerciseProps) => {
 			seriesList: trainingExercise.seriesList.map((x, i) => (i === index ? s : x)),
 		};
 
-		setTrainingExercise(newTrainingEx);
+		setTrainingExerciseAction(newTrainingEx);
 	};
 
 	return (
 		<View>
 			<View>
 				<Text>Название</Text>
-				<SelectInput
-					options={selectExerciseList}
-					cancelButtonIndex={0}
-					value={exerciseName?.name}
-					onChange={selectExercise}
+				<AutocompleteInput<ExerciseModel>
+					autocompleteList={exerciseList}
+					autocompleteField={'name'}
+					selectedItem={selectedExercise}
+					changeSelectedItem={selectExercise}
+					selectedItemViewComponent={ShowSelectedExercise}
 				/>
 
 				<View style={style.flex}>
@@ -75,8 +84,8 @@ const CreateExercise = (props: CreateExerciseProps) => {
 			</View>
 
 			<View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-				<Button title={'save'} onPress={onSave} />
-				<Button title={'cancel'} onPress={onCancel} />
+				<SaveIcon onPress={onSave} />
+				<CancelIcon onPress={onCancel} />
 			</View>
 		</View>
 	);
