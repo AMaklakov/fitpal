@@ -3,6 +3,7 @@ import { AutocompleteInputProps, SelectedItemViewComponentProps } from './types'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { autocomplete } from './helpers';
 import style from './style';
+import { placeholderTextColor } from '../../css/colors.style';
 
 const DEFAULT_SELECTED_ITEM_COMPONENT = ({
 	item,
@@ -59,7 +60,7 @@ const AutocompleteInput = <T extends Object>(props: AutocompleteInputProps<T>) =
 			<TextInput
 				style={style.input}
 				placeholder={placeholder}
-				placeholderTextColor="darkgray"
+				placeholderTextColor={placeholderTextColor}
 				onChangeText={onChangeTextHandler}
 				value={value}
 			/>
