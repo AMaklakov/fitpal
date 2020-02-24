@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { IntegerNumberInputPropsModel } from './types';
-import { isInteger, removeLeadingZeros } from '../../util/string.util';
+import { isPositiveInteger, removeLeadingZeros } from '../../util/string.util';
 import style from './style';
 
 const DEFAULT_MIN = 0;
@@ -19,7 +19,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 
 		v = removeLeadingZeros(v);
 
-		if (!isInteger(v)) {
+		if (!isPositiveInteger(v)) {
 			return false;
 		}
 
