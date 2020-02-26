@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const H2 = (props: { text: string }) => {
+export const H2 = (props: { text?: string }) => {
 	const { text } = props;
 
 	return (
@@ -19,5 +19,3 @@ const H2 = (props: { text: string }) => {
 		</View>
 	);
 };
-
-export default H2;

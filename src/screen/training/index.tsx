@@ -2,8 +2,7 @@ import React from 'react';
 import Training from './training';
 import { TrainingScreenProps } from './types';
 import { StoreModel } from '../../redux/store';
-import { getCurrentDate } from '../../util/date.util';
-import { getTrainingByDate } from '../../redux/selector/training.selector';
+import { getTrainingById } from '../../redux/selector/training.selector';
 import { connect } from 'react-redux';
 import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
@@ -49,9 +48,10 @@ const Screen = (props: TrainingScreenProps) => {
 };
 
 const mapStateToProps = (
-	store: StoreModel
+	store: StoreModel,
+	ownProps: TrainingScreenProps
 ): Pick<TrainingScreenProps, 'training' | 'exercises'> => ({
-	training: getTrainingByDate(store, getCurrentDate()),
+	training: getTrainingById(store, ownProps?.navigation?.state?.params?.trainingId),
 	exercises: getExerciseList(store),
 });
 
@@ -66,4 +66,4 @@ const mapDispatchToProps = (
 	changeTraining: (training: TrainingModel) => dispatch(changeTraining(training)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Screen);
+export const TrainingScreen = connect(mapStateToProps, mapDispatchToProps)(Screen);

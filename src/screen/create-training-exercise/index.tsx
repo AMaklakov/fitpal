@@ -11,7 +11,6 @@ import {
 } from '../../redux/action/training-exercise.action';
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
-import { Routes } from '../navigator';
 
 const createEmptyTrainingExercise = () =>
 	(({ seriesList: [] } as unknown) as TrainingExerciseModel);
@@ -32,7 +31,7 @@ const Screen = (props: CreateExerciseScreenProps) => {
 		goBack();
 	};
 
-	const goBack = () => navigation.navigate(Routes.Training);
+	const goBack = () => navigation.goBack();
 
 	return (
 		<CreateExercise

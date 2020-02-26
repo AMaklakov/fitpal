@@ -20,5 +20,7 @@ export interface TrainingModel {
 	id: string;
 	date: string;
 
+	name: string;
+
 	exerciseList: TrainingExerciseModel[];
 }

@@ -16,6 +16,13 @@ const DEFAULT_STATE: TrainingStateModel = {
 	list: [
 		{
 			id: generateId(),
+			name: 'Training today',
+			date: getCurrentDate(),
+			exerciseList: [],
+		},
+		{
+			id: generateId(),
+			name: 'Training today 2',
 			date: getCurrentDate(),
 			exerciseList: [],
 		},

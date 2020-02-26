@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import style from './styles';
 import { calcTotal } from './index';
-import H2 from '../heading/h2';
+import { H2 } from '../heading/h2';
 
 const TrainingExercise = (props: TrainingExerciseProps) => {
 	const { trainingExercise, exerciseList, onLongPress, onPress } = props;

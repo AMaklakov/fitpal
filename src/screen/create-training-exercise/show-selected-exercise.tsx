@@ -4,7 +4,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({
-	container: {
+	headingText: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},

@@ -8,7 +8,7 @@ const HomeScreen = (props: NavigationPropsModel) => {
 
 	return (
 		<View>
-			<Button title={'Записать тренировку'} onPress={goToPage(Routes.Training)} />
+			<Button title={'Записать тренировку'} onPress={goToPage(Routes.Calendar)} />
 			<Button title={'Список упражнений'} onPress={goToPage(Routes.ExerciseList)} />
 		</View>
 	);
