@@ -1,32 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { H2 } from '../heading/h2';
+import { Colors } from '../../css/colors.style';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		marginHorizontal: 20,
-		marginBottom: 10,
+		paddingHorizontal: 20,
+		paddingVertical: 10,
+		backgroundColor: Colors.LightBlue,
 	},
 });
 
 interface TrainingMinimalViewProps {
 	training: TrainingModel;
-	onPress?: (training: TrainingModel) => void;
+	onTrainingPress?: (training: TrainingModel) => void;
 }
 
 export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
-	const { training, onPress } = props;
+	const { training, onTrainingPress } = props;
 
 	const handleOnPress = () => {
-		onPress?.(training);
+		onTrainingPress?.(training);
 	};
 
 	return (
-		<TouchableOpacity onPress={handleOnPress}>
+		<TouchableHighlight onPress={handleOnPress}>
 			<View style={styles.container}>
 				<H2 text={training?.name} />
 
@@ -34,6 +36,6 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 					<Text>{training?.exerciseList?.length} упражнений</Text>
 				</View>
 			</View>
-		</TouchableOpacity>
+		</TouchableHighlight>
 	);
 };

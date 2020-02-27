@@ -38,11 +38,17 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 		});
 	};
 
+	const handleCopyTraining = (training: TrainingModel) => {};
+
+	const handleDeleteTraining = (training: TrainingModel) => {};
+
 	return (
 		<View>
 			<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
 
 			<TrainingListMinimalView
+				onCopy={handleCopyTraining}
+				onDelete={handleDeleteTraining}
 				trainingList={trainingList}
 				onTrainingPress={handleOnTrainingTouch}
 			/>
