@@ -11,7 +11,7 @@ import { TrainingListMinimalView } from '../../components/training-minimal-view/
 import { Routes } from '../navigator';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { PropType } from '../../util/type.util';
-import { deleteTrainingById as deleteTrainingByIdAction } from '../../redux/action/training-exercise.action';
+import { deleteTrainingById as deleteTrainingByIdAction } from '../../redux/action/training.action';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;

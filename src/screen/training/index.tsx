@@ -8,11 +8,9 @@ import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { Dispatch } from 'redux';
-import {
-	changeTraining,
-	deleteTrainingExerciseByTrainingId,
-} from '../../redux/action/training-exercise.action';
+import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training-exercise.action';
 import { PropType } from '../../util/type.util';
+import { changeTraining } from '../../redux/action/training.action';
 
 const Screen = (props: TrainingScreenProps) => {
 	const { training, navigation, exercises, dispatchRemoveTrainingExercise, changeTraining } = props;

@@ -2,12 +2,8 @@ import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
-import {
-	ChangeTrainingAction,
-	DeleteTrainingAction,
-	TrainingActions,
-	TrainingExerciseAction,
-} from '../../action/training-exercise.action';
+import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
+import { ChangeTrainingAction, DeleteTrainingAction } from '../../action/training.action';
 
 export type TrainingStateModel = TrainingModel[];
 
