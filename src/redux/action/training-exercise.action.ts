@@ -6,7 +6,9 @@ export enum TrainingActions {
 	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
+
 	ChangeTraining = 'ChangeTraining',
+	DeleteTrainingById = 'DeleteTrainingById',
 }
 
 export type TrainingExerciseByTrainingId = {
@@ -59,4 +61,15 @@ export const changeTraining = (training: TrainingModel): ChangeTrainingAction =>
 	type: TrainingActions.ChangeTraining,
 
 	payload: { training },
+});
+
+export type DeleteTrainingAction = TrainingExerciseAction<{
+	trainingId: PropType<TrainingModel, 'id'>;
+}>;
+export const deleteTrainingById = (
+	trainingId: PropType<TrainingModel, 'id'>
+): DeleteTrainingAction => ({
+	type: TrainingActions.DeleteTrainingById,
+
+	payload: { trainingId },
 });

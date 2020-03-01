@@ -10,8 +10,12 @@ import { getTrainingListByDate } from '../../redux/selector/training.selector';
 import { TrainingListMinimalView } from '../../components/training-minimal-view/training-list-minimal-view';
 import { Routes } from '../navigator';
 import { NavigationPropsModel } from '@model/navigation-props.model';
+import { PropType } from '../../util/type.util';
+import { deleteTrainingById as deleteTrainingByIdAction } from '../../redux/action/training-exercise.action';
 
-interface IDispatchToProps {}
+interface IDispatchToProps {
+	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
+}
 
 interface IStateToProps {
 	fetchTrainingListByDate: (date: string) => TrainingModel[] | undefined;
@@ -20,7 +24,7 @@ interface IStateToProps {
 interface IProps extends NavigationPropsModel {}
 
 const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
-	const { navigation, fetchTrainingListByDate } = props;
+	const { navigation, fetchTrainingListByDate, deleteTrainingById } = props;
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
 	const trainingList = useMemo(
@@ -40,7 +44,9 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 	const handleCopyTraining = (training: TrainingModel) => {};
 
-	const handleDeleteTraining = (training: TrainingModel) => {};
+	const handleDeleteTraining = (training: TrainingModel) => {
+		deleteTrainingById(training.id);
+	};
 
 	return (
 		<View>
@@ -71,7 +77,10 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (
 	dispatch,
 	ownProps
 ) => {
-	return {};
+	return {
+		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) =>
+			dispatch(deleteTrainingByIdAction(trainingId)),
+	};
 };
 
 export const CalendarScreen = connect(mapStateToProps, mapDispatchToProps)(Calendar);

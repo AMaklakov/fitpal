@@ -4,6 +4,7 @@ import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
 import {
 	ChangeTrainingAction,
+	DeleteTrainingAction,
 	TrainingActions,
 	TrainingExerciseAction,
 } from '../../action/training-exercise.action';
@@ -128,6 +129,16 @@ const changeTraining = (
 	};
 };
 
+const deleteTrainingById = (
+	state: TrainingStateModel,
+	{ payload: { trainingId } }: DeleteTrainingAction
+): TrainingStateModel => {
+	return {
+		...state,
+		list: state.list.filter(t => t.id !== trainingId),
+	};
+};
+
 const training: Reducer<TrainingStateModel> = (
 	state: TrainingStateModel = DEFAULT_STATE,
 	action: Action<TrainingActions>
@@ -144,6 +155,9 @@ const training: Reducer<TrainingStateModel> = (
 
 		case TrainingActions.ChangeTraining:
 			return changeTraining(state, action as ChangeTrainingAction);
+
+		case TrainingActions.DeleteTrainingById:
+			return deleteTrainingById(state, action as DeleteTrainingAction);
 
 		default:
 			return state;
