@@ -6,19 +6,19 @@ export const getFirstTrainingByDate = (
 	store: StoreModel,
 	date: PropType<TrainingModel, 'date'>
 ): TrainingModel | undefined => {
-	return store?.training?.list?.find((t: TrainingModel) => t.date === date);
+	return store?.training?.find((t: TrainingModel) => t.date === date);
 };
 
 export const getTrainingListByDate = (
 	store: StoreModel,
 	date: PropType<TrainingModel, 'date'>
 ): TrainingModel[] | undefined => {
-	return store?.training?.list?.filter((t: TrainingModel) => t.date === date);
+	return store?.training?.filter((t: TrainingModel) => t.date === date);
 };
 
 export const getTrainingById = (
 	store: StoreModel,
 	id: PropType<TrainingModel, 'id'>
 ): TrainingModel | undefined => {
-	return store?.training?.list?.find((t: TrainingModel) => t.id === id);
+	return store?.training?.find((t: TrainingModel) => t.id === id);
 };

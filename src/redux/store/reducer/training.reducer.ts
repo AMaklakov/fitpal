@@ -9,26 +9,22 @@ import {
 	TrainingExerciseAction,
 } from '../../action/training-exercise.action';
 
-export interface TrainingStateModel {
-	list: TrainingModel[];
-}
+export type TrainingStateModel = TrainingModel[];
 
-const DEFAULT_STATE: TrainingStateModel = {
-	list: [
-		{
-			id: generateId(),
-			name: 'Training today',
-			date: getCurrentDate(),
-			exerciseList: [],
-		},
-		{
-			id: generateId(),
-			name: 'Training today 2',
-			date: getCurrentDate(),
-			exerciseList: [],
-		},
-	],
-};
+const DEFAULT_STATE: TrainingStateModel = [
+	{
+		id: generateId(),
+		name: 'Training today',
+		date: getCurrentDate(),
+		exerciseList: [],
+	},
+	{
+		id: generateId(),
+		name: 'Training today 2',
+		date: getCurrentDate(),
+		exerciseList: [],
+	},
+];
 
 const createTrainingExerciseByTrainingId = (
 	state: TrainingStateModel,
@@ -38,22 +34,19 @@ const createTrainingExerciseByTrainingId = (
 
 	const newExercise = {
 		...exercise,
-		sequenceNumber: state.list.length + 1,
+		sequenceNumber: state.length + 1,
 	};
 
-	return {
-		...state,
-		list: state.list.map(item => {
-			if (item.id === trainingId) {
-				item = {
-					...item,
-					exerciseList: [...item.exerciseList, newExercise],
-				};
-			}
+	return state.map(item => {
+		if (item.id === trainingId) {
+			item = {
+				...item,
+				exerciseList: [...item.exerciseList, newExercise],
+			};
+		}
 
-			return item;
-		}),
-	};
+		return item;
+	});
 };
 
 const editTrainingExerciseByTrainingId = (
@@ -62,27 +55,24 @@ const editTrainingExerciseByTrainingId = (
 ): TrainingStateModel => {
 	const { exercise, trainingId } = action.payload;
 
-	return {
-		...state,
-		list: state.list.map(item => {
-			if (item.id === trainingId) {
-				item = {
-					...item,
-					exerciseList: [
-						...item.exerciseList.map(x => {
-							if (x.sequenceNumber === exercise.sequenceNumber) {
-								x = exercise;
-							}
+	return state.map(item => {
+		if (item.id === trainingId) {
+			item = {
+				...item,
+				exerciseList: [
+					...item.exerciseList.map(x => {
+						if (x.sequenceNumber === exercise.sequenceNumber) {
+							x = exercise;
+						}
 
-							return { ...x };
-						}),
-					],
-				};
-			}
+						return { ...x };
+					}),
+				],
+			};
+		}
 
-			return item;
-		}),
-	};
+		return item;
+	});
 };
 
 const deleteTrainingExerciseByTrainingId = (
@@ -91,52 +81,39 @@ const deleteTrainingExerciseByTrainingId = (
 ): TrainingStateModel => {
 	const { exercise, trainingId } = action.payload;
 
-	return {
-		...state,
-		list: state.list.map(item => {
-			if (item.id === trainingId) {
-				item = {
-					...item,
-					exerciseList: [
-						...item.exerciseList.filter(x => x.id !== exercise.id).map(x => ({ ...x })),
-					],
-				};
-			}
+	return state.map(item => {
+		if (item.id === trainingId) {
+			item = {
+				...item,
+				exerciseList: [...item.exerciseList.filter(x => x.id !== exercise.id).map(x => ({ ...x }))],
+			};
+		}
 
-			return item;
-		}),
-	};
+		return item;
+	});
 };
 
 const changeTraining = (
 	state: TrainingStateModel,
 	{ payload: { training } }: ChangeTrainingAction
 ): TrainingStateModel => {
-	return {
-		...state,
-		list: [
-			...state.list.map(t => {
-				if (t.id === training.id) {
-					return {
-						...training,
-						exerciseList: [...training.exerciseList],
-					};
-				}
+	return state.map(t => {
+		if (t.id === training.id) {
+			return {
+				...training,
+				exerciseList: [...training.exerciseList],
+			};
+		}
 
-				return { ...t };
-			}),
-		],
-	};
+		return { ...t };
+	});
 };
 
 const deleteTrainingById = (
 	state: TrainingStateModel,
 	{ payload: { trainingId } }: DeleteTrainingAction
 ): TrainingStateModel => {
-	return {
-		...state,
-		list: state.list.filter(t => t.id !== trainingId),
-	};
+	return state.filter(t => t.id !== trainingId);
 };
 
 const training: Reducer<TrainingStateModel> = (
