@@ -6,6 +6,7 @@
 		"android": "react-native run-android",
 		"ios": "react-native run-ios --simulator=\"iPhone 8\"",
 		"ios:MaklaPhone": "react-native run-ios --device=\"MaklaPhone\"",
+		"ios:Anna": "react-native run-ios --device=\"iPhone Анна Павлова\"",
 		"prestart": "yarn && cd ios && pod install",
 		"start": "yarn run ios",
 		"test": "jest",
