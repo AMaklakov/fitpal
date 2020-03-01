@@ -7,8 +7,10 @@ export enum TrainingActions {
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 
+	CreateTraining = 'CreateTraining',
 	ChangeTraining = 'ChangeTraining',
 	DeleteTrainingById = 'DeleteTrainingById',
+	CopyTrainingById = 'DeleteTrainingById',
 }
 
 export type TrainingExerciseByTrainingId = {

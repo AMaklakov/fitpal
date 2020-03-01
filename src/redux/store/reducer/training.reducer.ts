@@ -3,7 +3,11 @@ import { TrainingModel } from '@model/training.model';
 import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
 import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
-import { ChangeTrainingAction, DeleteTrainingAction } from '../../action/training.action';
+import {
+	ChangeTrainingAction,
+	CreateTrainingAction,
+	DeleteTrainingAction,
+} from '../../action/training.action';
 
 export type TrainingStateModel = TrainingModel[];
 
@@ -112,6 +116,13 @@ const deleteTrainingById = (
 	return state.filter(t => t.id !== trainingId);
 };
 
+const createTraining = (
+	state: TrainingStateModel,
+	{ payload: { training } }: CreateTrainingAction
+): TrainingStateModel => {
+	return [...state, { ...training }];
+};
+
 const training: Reducer<TrainingStateModel> = (
 	state: TrainingStateModel = DEFAULT_STATE,
 	action: Action<TrainingActions>
@@ -131,6 +142,9 @@ const training: Reducer<TrainingStateModel> = (
 
 		case TrainingActions.DeleteTrainingById:
 			return deleteTrainingById(state, action as DeleteTrainingAction);
+
+		case TrainingActions.CreateTraining:
+			return createTraining(state, action as CreateTrainingAction);
 
 		default:
 			return state;

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Alert, Button, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { CalendarStrip } from '../../components/calendar/calendar-strip';
 import { DEFAULT_DATE_FORMAT, formatDate, getToday } from '../../util/date.util';
@@ -11,10 +11,14 @@ import { TrainingListMinimalView } from '../../components/training-minimal-view/
 import { Routes } from '../navigator';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { PropType } from '../../util/type.util';
-import { deleteTrainingById as deleteTrainingByIdAction } from '../../redux/action/training.action';
+import {
+	createTrainingAction,
+	deleteTrainingById as deleteTrainingByIdAction,
+} from '../../redux/action/training.action';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
+	createTrainingByDate: (training: Partial<TrainingModel>) => void;
 }
 
 interface IStateToProps {
@@ -24,7 +28,7 @@ interface IStateToProps {
 interface IProps extends NavigationPropsModel {}
 
 const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
-	const { navigation, fetchTrainingListByDate, deleteTrainingById } = props;
+	const { navigation, fetchTrainingListByDate, deleteTrainingById, createTrainingByDate } = props;
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
 	const trainingList = useMemo(
@@ -48,6 +52,18 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 		deleteTrainingById(training.id);
 	};
 
+	const handleCreateTraining = () => {
+		Alert.prompt('Enter training name', undefined, (name: string) => {
+			const training: Partial<TrainingModel> = {
+				name,
+				exerciseList: [],
+				date: formatDate(selectedDate, DEFAULT_DATE_FORMAT),
+			};
+
+			createTrainingByDate(training);
+		});
+	};
+
 	return (
 		<View>
 			<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
@@ -59,7 +75,7 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 				onTrainingPress={handleOnTrainingTouch}
 			/>
 
-			<Button title="Add training +" onPress={() => {}} />
+			<Button title="Add training +" onPress={handleCreateTraining} />
 		</View>
 	);
 };
@@ -80,6 +96,13 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (
 	return {
 		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) =>
 			dispatch(deleteTrainingByIdAction(trainingId)),
+		createTrainingByDate: (training: Partial<TrainingModel>) => {
+			const action = createTrainingAction(training);
+
+			if (action) {
+				dispatch(action);
+			}
+		},
 	};
 };
 
