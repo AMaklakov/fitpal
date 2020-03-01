@@ -45,6 +45,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 						style={styles.button1}
 						title={'Copy'}
 						item={data.item}
+						textColor={Colors.White}
 						onTouch={onCopy}
 					/>
 
@@ -54,7 +55,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 						item={data.item}
 						onTouch={onDelete}
 						backgroundColor={Colors.LightRed}
-						textColor={Colors.DarkRed}
+						textColor={Colors.White}
 					/>
 				</View>
 			)}
