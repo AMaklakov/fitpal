@@ -9,4 +9,5 @@ export interface ExerciseListProps {
 	exerciseList: ExerciseModel[];
 
 	goToCreateExercise: () => void;
+	onExercisePress: (exercise: ExerciseModel) => void;
 }
