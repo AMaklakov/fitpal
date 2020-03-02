@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const H1 = (props: { text: string }) => {
+export const H1 = (props: { text: string }) => {
 	const { text } = props;
 
 	return (

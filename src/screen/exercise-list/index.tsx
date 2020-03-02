@@ -11,11 +11,14 @@ const Component = (props: ExerciseListScreenProps) => {
 	const { navigation, exerciseList = [] } = props;
 
 	const goToCreateExercise = () => {
-		// TODO create later
-		navigation.navigate(Routes.Home);
+		navigation.navigate(Routes.ExerciseCreate);
 	};
 
-	const handleExercisePress = (exercise: ExerciseModel) => {};
+	const handleExercisePress = (exercise: ExerciseModel) => {
+		navigation.navigate(Routes.Exercise, {
+			exerciseId: exercise.id,
+		});
+	};
 
 	return (
 		<ExerciseList

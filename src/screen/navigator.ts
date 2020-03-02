@@ -5,6 +5,8 @@ import ExerciseListScreen from './exercise-list';
 import CreateTrainingExerciseScreen from './create-training-exercise';
 import { CalendarScreen } from './calendar/calendar';
 import { TrainingScreen } from './training';
+import { ExerciseScreen } from './exercise/exercise.screen';
+import { ExerciseCreateScreen } from './exercise-create/exercise-create.screen';
 
 export enum Routes {
 	Home = 'Home',
@@ -14,6 +16,8 @@ export enum Routes {
 	CreateTrainingExercise = 'CreateTrainingExercise',
 
 	ExerciseList = 'ExerciseList',
+	Exercise = 'Exercise',
+	ExerciseCreate = 'ExerciseCreate',
 }
 
 const AppNavigator = createStackNavigator(
@@ -21,8 +25,11 @@ const AppNavigator = createStackNavigator(
 		[Routes.Home]: { screen: HomeScreen },
 		[Routes.Calendar]: { screen: CalendarScreen },
 		[Routes.Training]: { screen: TrainingScreen },
-		[Routes.ExerciseList]: { screen: ExerciseListScreen },
 		[Routes.CreateTrainingExercise]: { screen: CreateTrainingExerciseScreen },
+
+		[Routes.ExerciseList]: { screen: ExerciseListScreen },
+		[Routes.Exercise]: { screen: ExerciseScreen },
+		[Routes.ExerciseCreate]: { screen: ExerciseCreateScreen },
 	},
 	{
 		initialRouteName: Routes.Home,

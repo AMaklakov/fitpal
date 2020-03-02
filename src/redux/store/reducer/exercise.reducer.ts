@@ -1,6 +1,11 @@
 import { Action, Reducer } from 'redux';
 import { ExerciseModel } from '@model/exercise.model';
 import { generateId } from '../../../util/uuid.util';
+import {
+	CreateExerciseAction,
+	ExerciseActions,
+	UpdateExerciseAction,
+} from '../../action/exercise.action';
 
 const DEFAULT_EXERCISE_NAME_LIST = [
 	'Приседания',
@@ -41,11 +46,31 @@ const DEFAULT_STATE: ExerciseStateModel = DEFAULT_EXERCISE_NAME_LIST.map(name =>
 	name,
 }));
 
+const createExercise = (
+	state: ExerciseStateModel,
+	{ payload: { exercise } }: CreateExerciseAction
+) => {
+	return [...state, exercise];
+};
+
+const updateExercise = (
+	state: ExerciseStateModel,
+	{ payload: { exercise } }: UpdateExerciseAction
+) => {
+	return [...state.filter(ex => ex.id !== exercise.id).concat([exercise])];
+};
+
 const exercise: Reducer<ExerciseStateModel> = (
 	state: ExerciseStateModel = DEFAULT_STATE,
-	action: Action
+	action: Action<ExerciseActions>
 ) => {
 	switch (action.type) {
+		case ExerciseActions.Create:
+			return createExercise(state, action as CreateExerciseAction);
+
+		case ExerciseActions.Update:
+			return updateExercise(state, action as UpdateExerciseAction);
+
 		default:
 			return state;
 	}
