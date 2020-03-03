@@ -2,15 +2,19 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import AppNavigator from './screen/navigator';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 
 const App = () => {
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<Provider store={store}>
-				<AppNavigator />
-			</Provider>
-		</SafeAreaView>
+		<>
+			<StatusBar barStyle="dark-content" />
+
+			<SafeAreaView style={{ flex: 1 }}>
+				<Provider store={store}>
+					<AppNavigator />
+				</Provider>
+			</SafeAreaView>
+		</>
 	);
 };
 
