@@ -4,7 +4,13 @@ import { SelectInputProps } from './types';
 import style from './style';
 
 export const SelectInput = <T extends Item>(props: SelectInputProps<T>) => {
-	const { onChange, items } = props;
+	const { onChange, items, styles: propStyles = {} } = props;
 
-	return <Select onValueChange={onChange} items={items} textInputProps={{ style: style.value }} />;
+	return (
+		<Select
+			onValueChange={onChange}
+			items={items}
+			textInputProps={{ style: { ...style.value, ...propStyles } }}
+		/>
+	);
 };
