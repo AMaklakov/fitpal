@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const WINDOW = Dimensions.get('window');
 
 const style = StyleSheet.create({
 	modal: {
@@ -8,20 +10,22 @@ const style = StyleSheet.create({
 		backgroundColor: 'green',
 	},
 	flex: {
+		marginTop: 20,
+		marginBottom: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},
-	flex1: {
-		flexGrow: 1,
+	sequenceNumber: {
 		textAlign: 'center',
+		width: WINDOW.width / 8,
 	},
-	flex2: {
-		flexGrow: 3,
+	repeats: {
 		textAlign: 'center',
+		width: WINDOW.width / 3,
 	},
-	flex3: {
-		flexGrow: 4,
+	weight: {
 		textAlign: 'center',
+		width: WINDOW.width / 3,
 	},
 });
 

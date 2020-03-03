@@ -4,9 +4,6 @@ const style = StyleSheet.create({
 	container: {
 		height: 40,
 		fontSize: 22,
-
-		flexDirection: 'row',
-		justifyContent: 'space-around',
 	},
 	checkbox: {
 		height: 40,

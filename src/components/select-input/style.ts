@@ -13,6 +13,7 @@ const style = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		color: 'black',
+		textAlign: 'center',
 	},
 });
 

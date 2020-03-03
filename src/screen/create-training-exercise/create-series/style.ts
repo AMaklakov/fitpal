@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const WINDOW = Dimensions.get('window');
 
 const style = StyleSheet.create({
 	wrapper: {
@@ -8,16 +10,17 @@ const style = StyleSheet.create({
 	flex: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+		alignItems: 'center',
 	},
-	flex1: {
-		flexGrow: 2,
+	sequenceNumber: {
 		textAlign: 'center',
+		width: WINDOW.width / 8,
 	},
-	flex2: {
-		flexGrow: 3,
+	repeats: {
+		width: WINDOW.width / 3,
 	},
-	flex3: {
-		flexGrow: 4,
+	weight: {
+		width: WINDOW.width / 3,
 	},
 });
 

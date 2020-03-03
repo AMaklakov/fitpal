@@ -164,6 +164,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6F8732EC761E46F883139BC0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,14 +204,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		6F8732EC761E46F883139BC0 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 

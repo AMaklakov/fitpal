@@ -10,8 +10,7 @@ import ShowSelectedExercise from './show-selected-exercise';
 import { generateId } from '../../util/uuid.util';
 import { SaveIcon } from '../../components/icons/save.icon';
 import { CancelIcon } from '../../components/icons/cancel.icon';
-
-const createEmptySeriesBlock = (sequenceNumber: number) => ({ sequenceNumber } as SeriesModel);
+import { addEmptySeries, editSeriesBySequenceNumber, popSeries } from './helpers';
 
 const CreateExercise = (props: CreateExerciseProps) => {
 	const id = useMemo(() => generateId(), []);
@@ -25,33 +24,22 @@ const CreateExercise = (props: CreateExerciseProps) => {
 		setTrainingExercise({ ...ex, id });
 	};
 
-	const selectExercise = (exercise: ExerciseModel | null) => {
+	const handleSelectExercise = (exercise: ExerciseModel | null) => {
 		setSelectedExercise(exercise);
+
 		setTrainingExerciseAction({
 			...trainingExercise,
 			exerciseId: exercise?.id,
 		} as TrainingExerciseModel);
 	};
 
-	const addSeries = () => {
-		const list = trainingExercise.seriesList || [];
-
-		const newTrainingEx: TrainingExerciseModel = {
-			...trainingExercise,
-			seriesList: list.concat([createEmptySeriesBlock(list.length + 1)]),
-		};
-
-		setTrainingExerciseAction(newTrainingEx);
+	const handleUpdateSeries = (index: number) => (s: SeriesModel) => {
+		setTrainingExerciseAction(editSeriesBySequenceNumber(trainingExercise, s, index + 1));
 	};
 
-	const updateExerciseSeries = (index: number) => (s: SeriesModel) => {
-		const newTrainingEx: TrainingExerciseModel = {
-			...trainingExercise,
-			seriesList: trainingExercise.seriesList.map((x, i) => (i === index ? s : x)),
-		};
+	const handleAddSeries = () => setTrainingExerciseAction(addEmptySeries(trainingExercise));
 
-		setTrainingExerciseAction(newTrainingEx);
-	};
+	const handleRemoveSeries = () => setTrainingExerciseAction(popSeries(trainingExercise));
 
 	return (
 		<View>
@@ -61,29 +49,29 @@ const CreateExercise = (props: CreateExerciseProps) => {
 					autocompleteList={exerciseList}
 					autocompleteField={'name'}
 					selectedItem={selectedExercise}
-					changeSelectedItem={selectExercise}
+					changeSelectedItem={handleSelectExercise}
 					selectedItemViewComponent={ShowSelectedExercise}
 				/>
 
 				<View style={style.flex}>
-					<Text style={style.flex1}>№</Text>
-					<Text style={style.flex2}>Повторения</Text>
-					<Text style={style.flex3}>Вес</Text>
+					<Text style={style.sequenceNumber}>№</Text>
+					<Text style={style.repeats}>Повторения</Text>
+					<Text style={style.weight}>Вес</Text>
 				</View>
 
 				{trainingExercise?.seriesList?.map((s, index) => (
-					<CreateSeries
-						key={index}
-						index={index}
-						series={s}
-						onChange={updateExerciseSeries(index)}
-					/>
+					<CreateSeries key={index} index={index} series={s} onChange={handleUpdateSeries(index)} />
 				))}
 
-				<Button title={'Добавить'} onPress={addSeries} />
+				<Button title={'Добавить'} onPress={handleAddSeries} />
+				<Button
+					disabled={trainingExercise.seriesList.length === 0}
+					title={'Удалить'}
+					onPress={handleRemoveSeries}
+				/>
 			</View>
 
-			<View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
 				<SaveIcon onPress={onSave} />
 				<CancelIcon onPress={onCancel} />
 			</View>

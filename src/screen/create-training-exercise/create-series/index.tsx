@@ -29,12 +29,17 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 	return (
 		<View style={style.wrapper}>
 			<View style={style.flex}>
-				<Text style={style.flex1}>{sequenceNumber}</Text>
-				<View style={style.flex2}>
-					<SelectInput items={DEFAULT_REPEATS_SELECT_LIST} onChange={v => setRepeats(v)} />
+				<Text style={style.sequenceNumber}>{sequenceNumber}</Text>
+
+				<View style={style.repeats}>
+					<SelectInput
+						value={repeats}
+						items={DEFAULT_REPEATS_SELECT_LIST}
+						onChange={v => setRepeats(v)}
+					/>
 				</View>
 
-				<View style={style.flex3}>
+				<View style={style.weight}>
 					<WeightInput value={weight} onChange={v => setWeight(v)} />
 				</View>
 			</View>

@@ -46,7 +46,7 @@ const WeightInput = (props: WeightInputProps) => {
 
 	return (
 		<View style={style.container}>
-			<SelectInput items={options} onChange={onSelect} />
+			<SelectInput value={value} items={options} onChange={onSelect} />
 
 			{hasAddHalfOption && (
 				<View style={style.checkbox}>
