@@ -30,18 +30,14 @@ const Training = (props: TrainingProps) => {
 					paddingHorizontal: '5%',
 					justifyContent: 'space-around',
 				}}>
-				<H1 text={'Тренировка ' + date} />
+				<H1 text={training?.name + ' ' + date} />
 
 				{canEdit && isEdit && <SaveIcon onPress={handleEditButtonPress} />}
 				{canEdit && !isEdit && <EditIcon onPress={handleEditButtonPress} />}
 			</View>
 
 			{isEdit ? (
-				<ReorderTrainingExercise
-					exercises={exercises}
-					training={training}
-					changeTraining={reorderExercises}
-				/>
+				<ReorderTrainingExercise exercises={exercises} training={training} changeTraining={reorderExercises} />
 			) : (
 				<ShowTraining
 					exercises={exercises}
