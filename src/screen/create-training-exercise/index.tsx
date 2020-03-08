@@ -3,7 +3,7 @@ import { CreateExerciseScreenProps } from './types';
 import CreateExercise from './create-exercise';
 import { connect } from 'react-redux';
 import { PropType } from '../../util/type.util';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
 import { Action, Dispatch } from 'redux';
 import {
 	createTrainingExerciseByTrainingId,
@@ -12,8 +12,7 @@ import {
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 
-const createEmptyTrainingExercise = () =>
-	(({ seriesList: [] } as unknown) as TrainingExerciseModel);
+const createEmptyTrainingExercise = () => (({ seriesList: [] } as unknown) as TrainingExerciseModel);
 
 const Screen = (props: CreateExerciseScreenProps) => {
 	const { navigation, saveAction, editAction, exerciseList } = props;
@@ -21,9 +20,7 @@ const Screen = (props: CreateExerciseScreenProps) => {
 	const id = navigation.getParam('trainingId');
 	const trainingExercise = navigation.getParam('trainingExercise');
 
-	const [exercise, setExercise] = useState<TrainingExerciseModel>(
-		trainingExercise ?? createEmptyTrainingExercise()
-	);
+	const [exercise, setExercise] = useState<TrainingExerciseModel>(trainingExercise ?? createEmptyTrainingExercise());
 
 	const onSave = () => {
 		trainingExercise ? editAction(id, exercise) : saveAction(id, exercise);

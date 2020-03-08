@@ -1,8 +1,9 @@
 import { isTrainingValid, TrainingModel } from '../../model/training.model';
 import { PropType } from '../../util/type.util';
 import { TrainingActions, TrainingExerciseAction } from './training-exercise.action';
-import { Alert } from 'react-native';
+import { Dispatch } from 'redux';
 import { generateId } from '../../util/uuid.util';
+import { Alert } from 'react-native';
 
 export type ChangeTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
 export const changeTraining = (training: TrainingModel): ChangeTrainingAction => ({
@@ -14,18 +15,20 @@ export const changeTraining = (training: TrainingModel): ChangeTrainingAction =>
 export type DeleteTrainingAction = TrainingExerciseAction<{
 	trainingId: PropType<TrainingModel, 'id'>;
 }>;
-export const deleteTrainingById = (
-	trainingId: PropType<TrainingModel, 'id'>
-): DeleteTrainingAction => ({
+export const deleteTrainingByIdAction = (trainingId: PropType<TrainingModel, 'id'>): DeleteTrainingAction => ({
 	type: TrainingActions.DeleteTrainingById,
 
 	payload: { trainingId },
 });
 
 export type CreateTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
-export const createTrainingAction = (
-	training: Partial<TrainingModel>
-): CreateTrainingAction | undefined => {
+export const createTrainingAction = (training: TrainingModel): CreateTrainingAction => ({
+	type: TrainingActions.CreateTraining,
+
+	payload: { training },
+});
+
+export const checkAndCreateTraining = (dispatch: Dispatch, training: Partial<TrainingModel>) => {
 	const tempTraining: TrainingModel = { ...training, id: generateId() } as TrainingModel;
 
 	if (!isTrainingValid(tempTraining)) {
@@ -33,9 +36,5 @@ export const createTrainingAction = (
 		return;
 	}
 
-	return {
-		type: TrainingActions.CreateTraining,
-
-		payload: { training: tempTraining },
-	};
+	dispatch(createTrainingAction(training as TrainingModel));
 };

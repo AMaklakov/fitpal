@@ -32,6 +32,7 @@ export const createExerciseAction = (
 	};
 };
 
+// TODO rewrite to 2 separate functions
 export type UpdateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
 export const updateExerciseAction = (ex: ExerciseModel): UpdateExerciseAction | undefined => {
 	const exercise = { ...ex };

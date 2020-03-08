@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
-import { ExerciseModel } from '@model/exercise.model';
+import { ExerciseModel } from '../../model/exercise.model';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationPropsModel } from '@model/navigation-props.model';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
 import { StoreModel } from '../../redux/store';
 import { getExerciseById } from '../../redux/selector/exercise.selector';
 import { H1 } from '../../components/heading/h1';
@@ -60,19 +60,14 @@ const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
 	);
 };
 
-const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (
-	state,
-	ownProps
-) => {
+const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
 	return {
 		exercise: getExerciseById(state, ownProps.navigation.getParam(EXERCISE_ID_PARAM)),
 	};
 };
 
-const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (
-	dispatch,
-	ownProps
-) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (dispatch, ownProps) => {
 	return {};
 };
 

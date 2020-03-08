@@ -1,5 +1,5 @@
 import { PropType } from '../util/type.util';
-import { ExerciseModel } from '@model/exercise.model';
+import { ExerciseModel } from './exercise.model';
 
 export interface SeriesModel {
 	sequenceNumber: number;

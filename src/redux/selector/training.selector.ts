@@ -1,6 +1,6 @@
-import { TrainingModel } from '@model/training.model';
 import { StoreModel } from '../store';
 import { PropType } from '../../util/type.util';
+import { TrainingModel } from '../../model/training.model';
 
 export const getFirstTrainingByDate = (
 	store: StoreModel,
@@ -16,9 +16,6 @@ export const getTrainingListByDate = (
 	return store?.training?.filter((t: TrainingModel) => t.date === date);
 };
 
-export const getTrainingById = (
-	store: StoreModel,
-	id: PropType<TrainingModel, 'id'>
-): TrainingModel | undefined => {
+export const getTrainingById = (store: StoreModel, id: PropType<TrainingModel, 'id'>): TrainingModel | undefined => {
 	return store?.training?.find((t: TrainingModel) => t.id === id);
 };

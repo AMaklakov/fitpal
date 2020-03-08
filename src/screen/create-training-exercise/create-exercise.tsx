@@ -3,8 +3,8 @@ import { Button, Text, View } from 'react-native';
 import { CreateExerciseProps } from './types';
 import CreateSeries from './create-series';
 import style from './style';
-import { SeriesModel, TrainingExerciseModel } from '@model/training.model';
-import { ExerciseModel } from '@model/exercise.model';
+import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
+import { ExerciseModel } from '../../model/exercise.model';
 import AutocompleteInput from '../../components/autocomplete-input';
 import ShowSelectedExercise from './show-selected-exercise';
 import { generateId } from '../../util/uuid.util';
@@ -59,16 +59,12 @@ const CreateExercise = (props: CreateExerciseProps) => {
 					<Text style={style.weight}>Вес</Text>
 				</View>
 
-				{trainingExercise?.seriesList?.map((s, index) => (
+				{trainingExercise?.seriesList?.map((s: SeriesModel, index: number) => (
 					<CreateSeries key={index} index={index} series={s} onChange={handleUpdateSeries(index)} />
 				))}
 
 				<Button title={'Добавить'} onPress={handleAddSeries} />
-				<Button
-					disabled={trainingExercise.seriesList.length === 0}
-					title={'Удалить'}
-					onPress={handleRemoveSeries}
-				/>
+				<Button disabled={trainingExercise.seriesList.length === 0} title={'Удалить'} onPress={handleRemoveSeries} />
 			</View>
 
 			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>

@@ -5,7 +5,7 @@ import { ExerciseListScreenProps } from './types';
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { connect } from 'react-redux';
-import { ExerciseModel } from '@model/exercise.model';
+import { ExerciseModel } from '../../model/exercise.model';
 
 const Component = (props: ExerciseListScreenProps) => {
 	const { navigation, exerciseList = [] } = props;

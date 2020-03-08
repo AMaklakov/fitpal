@@ -1,4 +1,4 @@
-import { SeriesModel, TrainingExerciseModel } from '@model/training.model';
+import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
 
 const createEmptySeriesBlock = (sequenceNumber: number): SeriesModel => ({
 	sequenceNumber,

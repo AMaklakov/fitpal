@@ -1,5 +1,5 @@
-import { ExerciseModel } from '@model/exercise.model';
 import { SectionListData } from 'react-native';
+import { ExerciseModel } from '../../model/exercise.model';
 
 export const mapExerciseListToSectionList = (
 	exerciseList: ExerciseModel[] = []

@@ -1,4 +1,4 @@
-import { TrainingModel } from '@model/training.model';
+import { TrainingModel } from '../../model/training.model';
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { TrainingMinimalView } from './training-minimal-view';

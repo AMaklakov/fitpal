@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import AppNavigator from './screen/navigator';
 import { SafeAreaView, StatusBar } from 'react-native';
+import { CalendarTrainingModal } from './screen/calendar/calendar-training-modal';
 
 const App = () => {
 	return (
@@ -12,6 +13,8 @@ const App = () => {
 			<SafeAreaView style={{ flex: 1 }}>
 				<Provider store={store}>
 					<AppNavigator />
+
+					<CalendarTrainingModal />
 				</Provider>
 			</SafeAreaView>
 		</>

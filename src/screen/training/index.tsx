@@ -6,11 +6,11 @@ import { getTrainingById } from '../../redux/selector/training.selector';
 import { connect } from 'react-redux';
 import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { Dispatch } from 'redux';
 import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training-exercise.action';
 import { PropType } from '../../util/type.util';
 import { changeTraining } from '../../redux/action/training.action';
+import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
 
 const Screen = (props: TrainingScreenProps) => {
 	const { training, navigation, exercises, dispatchRemoveTrainingExercise, changeTraining } = props;

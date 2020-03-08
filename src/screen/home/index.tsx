@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, View } from 'react-native';
 import { Routes } from '../navigator';
-import { NavigationPropsModel } from '@model/navigation-props.model';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
 
 const HomeScreen = (props: NavigationPropsModel) => {
 	const goToPage = (page: Routes) => () => props.navigation.navigate(page);

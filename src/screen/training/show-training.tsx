@@ -4,7 +4,7 @@ import style from './styles';
 import TrainingExercise from '../../components/exercise/exercise';
 import { ShowTrainingProps } from './types';
 import { calculateTrainingTotal } from '../../components/exercise';
-import { TrainingExerciseModel } from '@model/training.model';
+import { TrainingExerciseModel } from '../../model/training.model';
 
 enum TrainingExerciseActions {
 	DELETE = 'DELETE',
@@ -52,12 +52,7 @@ const ShowTraining = (props: ShowTrainingProps) => {
 				{exerciseList.length === 0 && EmptyExercises}
 
 				{exerciseList.map(e => (
-					<TrainingExercise
-						trainingExercise={e}
-						key={e.id}
-						exerciseList={exercises}
-						onLongPress={longTapAction}
-					/>
+					<TrainingExercise trainingExercise={e} key={e.id} exerciseList={exercises} onLongPress={longTapAction} />
 				))}
 			</View>
 

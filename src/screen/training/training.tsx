@@ -2,7 +2,7 @@ import { TrainingProps } from './types';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import H1 from '../../components/heading/h1';
-import { TrainingModel } from '@model/training.model';
+import { TrainingModel } from '../../model/training.model';
 import ShowTraining from './show-training';
 import ReorderTrainingExercise from './reorder-training-exercises';
 import { EditIcon } from '../../components/icons/edit.icon';

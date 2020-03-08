@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ExerciseListProps } from './types';
-import { ExerciseModel } from '@model/exercise.model';
 import { mapExerciseListToSectionList } from './util';
+import { ExerciseModel } from '../../model/exercise.model';
 
 const styles = StyleSheet.create({
 	container: {
@@ -30,13 +30,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Item = ({
-	data,
-	onPress,
-}: {
-	data: ExerciseModel;
-	onPress: (exercise: ExerciseModel) => void;
-}) => {
+const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: ExerciseModel) => void }) => {
 	const handleOnPress = () => {
 		onPress(data);
 	};

@@ -1,5 +1,5 @@
-import { TrainingExerciseModel } from '@model/training.model';
-import { ExerciseModel } from '@model/exercise.model';
+import { ExerciseModel } from '../../model/exercise.model';
+import { TrainingExerciseModel } from '../../model/training.model';
 
 export interface TrainingExerciseProps {
 	trainingExercise: TrainingExerciseModel;

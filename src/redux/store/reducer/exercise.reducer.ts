@@ -1,11 +1,7 @@
 import { Action, Reducer } from 'redux';
-import { ExerciseModel } from '@model/exercise.model';
+import { ExerciseModel } from '../../../model/exercise.model';
 import { generateId } from '../../../util/uuid.util';
-import {
-	CreateExerciseAction,
-	ExerciseActions,
-	UpdateExerciseAction,
-} from '../../action/exercise.action';
+import { CreateExerciseAction, ExerciseActions, UpdateExerciseAction } from '../../action/exercise.action';
 
 const DEFAULT_EXERCISE_NAME_LIST = [
 	'Приседания',
@@ -46,17 +42,11 @@ const DEFAULT_STATE: ExerciseStateModel = DEFAULT_EXERCISE_NAME_LIST.map(name =>
 	name,
 }));
 
-const createExercise = (
-	state: ExerciseStateModel,
-	{ payload: { exercise } }: CreateExerciseAction
-) => {
+const createExercise = (state: ExerciseStateModel, { payload: { exercise } }: CreateExerciseAction) => {
 	return [...state, exercise];
 };
 
-const updateExercise = (
-	state: ExerciseStateModel,
-	{ payload: { exercise } }: UpdateExerciseAction
-) => {
+const updateExercise = (state: ExerciseStateModel, { payload: { exercise } }: UpdateExerciseAction) => {
 	return [...state.filter(ex => ex.id !== exercise.id).concat([exercise])];
 };
 

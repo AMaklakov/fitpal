@@ -1,6 +1,6 @@
-import { NavigationPropsModel } from '@model/navigation-props.model';
-import { TrainingExerciseModel } from '@model/training.model';
-import { ExerciseModel } from '@model/exercise.model';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
+import { ExerciseModel } from '../../model/exercise.model';
+import { TrainingExerciseModel } from '../../model/training.model';
 
 export interface CreateExerciseScreenProps extends NavigationPropsModel {
 	exerciseList: ExerciseModel[];

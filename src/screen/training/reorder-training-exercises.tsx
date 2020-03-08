@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ReorderTrainingExerciseProps } from './types';
 import DraggableFlatList, { RenderItemParams } from 'react-native-draggable-flatlist';
-import { TrainingExerciseModel } from '@model/training.model';
-import { ExerciseModel } from '@model/exercise.model';
 import { ReorderIcon } from '../../components/icons/reorder.icon';
+import { ExerciseModel } from '../../model/exercise.model';
+import { TrainingExerciseModel } from '../../model/training.model';
 
 const RenderItem = (exerciseList: ExerciseModel[]) => ({
 	item,

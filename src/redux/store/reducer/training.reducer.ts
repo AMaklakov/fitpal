@@ -1,13 +1,9 @@
 import { Action, Reducer } from 'redux';
-import { TrainingModel } from '@model/training.model';
+import { TrainingModel } from '../../../model/training.model';
 import { generateId } from '../../../util/uuid.util';
 import { getCurrentDate } from '../../../util/date.util';
 import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
-import {
-	ChangeTrainingAction,
-	CreateTrainingAction,
-	DeleteTrainingAction,
-} from '../../action/training.action';
+import { ChangeTrainingAction, CreateTrainingAction, DeleteTrainingAction } from '../../action/training.action';
 
 export type TrainingStateModel = TrainingModel[];
 
@@ -123,10 +119,7 @@ const createTraining = (
 	return [...state, { ...training }];
 };
 
-const training: Reducer<TrainingStateModel> = (
-	state: TrainingStateModel = DEFAULT_STATE,
-	action: Action<TrainingActions>
-): TrainingStateModel => {
+const training: Reducer<TrainingStateModel, Action<TrainingActions>> = (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
 		case TrainingActions.CreateTrainingExerciseByTrainingId:
 			return createTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);

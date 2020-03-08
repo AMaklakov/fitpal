@@ -84,8 +84,7 @@
 		"*.{js,jsx,ts,tsx}": [
 			"eslint --fix",
 			"prettier --write",
-			"jest --bail --findRelatedTests",
-			"git add"
+			"jest --bail --findRelatedTests"
 		]
 	},
 	"config": {

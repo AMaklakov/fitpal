@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { TrainingModel } from '@model/training.model';
+import { TrainingModel } from '../../model/training.model';
 import { H2 } from '../heading/h2';
 import { Colors } from '../../css/colors.style';
 

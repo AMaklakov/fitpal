@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { PropType } from '../../util/type.util';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
 
 export enum TrainingActions {
 	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
@@ -18,9 +18,9 @@ export type TrainingExerciseByTrainingId = {
 	exercise: TrainingExerciseModel;
 };
 
-export type TrainingExerciseAction<
-	PayloadType extends Object = TrainingExerciseByTrainingId
-> = Action<TrainingActions> & { payload: PayloadType };
+export type TrainingExerciseAction<PayloadType extends Object = TrainingExerciseByTrainingId> = Action<
+	TrainingActions
+> & { payload: PayloadType };
 
 export const createTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,

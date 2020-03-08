@@ -1,7 +1,7 @@
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
-import { NavigationPropsModel } from '@model/navigation-props.model';
-import { ExerciseModel } from '@model/exercise.model';
 import { PropType } from '../../util/type.util';
+import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
+import { ExerciseModel } from '../../model/exercise.model';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
 
 export interface ReorderTrainingExerciseProps {
 	training: TrainingModel;
