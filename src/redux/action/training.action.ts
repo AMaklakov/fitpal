@@ -36,5 +36,5 @@ export const checkAndCreateTraining = (dispatch: Dispatch, training: Partial<Tra
 		return;
 	}
 
-	dispatch(createTrainingAction(training as TrainingModel));
+	dispatch(createTrainingAction(tempTraining));
 };

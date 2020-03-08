@@ -9,9 +9,8 @@ export const getCurrentDate = (format: string = DEFAULT_DATE_FORMAT): string => 
 
 export const getToday = () => moment();
 
-export const formatDate = (
-	date: moment.MomentInput,
-	format: string = CALENDAR_DATE_FORMAT
-): string => {
+export const formatDate = (date: moment.MomentInput, format: string = CALENDAR_DATE_FORMAT): string => {
 	return moment(date).format(format);
 };
+
+export const defaultStringToDate = (dateStr: string) => moment(dateStr, DEFAULT_DATE_FORMAT).toDate();

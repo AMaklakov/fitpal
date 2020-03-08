@@ -6,7 +6,10 @@ import moment from 'moment';
 import { PropType } from '../../util/type.util';
 import { TrainingModel } from '../../model/training.model';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
-import { toggleCalendarTrainingModalAction } from '../../redux/action/calendar-training-modal.action';
+import {
+	toggleCalendarTrainingModalAction,
+	updateTrainingModalAction,
+} from '../../redux/action/calendar-training-modal.action';
 import { TrainingListMinimalView } from '../../components/training-minimal-view/training-list-minimal-view';
 import { CalendarStrip } from '../../components/calendar/calendar-strip';
 import { Routes } from '../navigator';
@@ -94,7 +97,10 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (d
 	return {
 		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => dispatch(deleteTrainingByIdAction(trainingId)),
 		createTrainingByDate: (training: Partial<TrainingModel>) => checkAndCreateTraining(dispatch, training),
-		openTrainingModal: () => dispatch(toggleCalendarTrainingModalAction(true)),
+		openTrainingModal: (training?: TrainingModel) => {
+			dispatch(updateTrainingModalAction(training ?? null));
+			dispatch(toggleCalendarTrainingModalAction(true));
+		},
 	};
 };
 

@@ -18,7 +18,7 @@ export const toggleCalendarTrainingModalAction = (isOpen: boolean): ToggleCalend
 });
 
 export type UpdateTrainingAction = CalendarTrainingModalAction<{ training: TrainingModel | null }>;
-export const updateTrainingAction = (training: TrainingModel): UpdateTrainingAction => ({
+export const updateTrainingModalAction = (training: TrainingModel | null): UpdateTrainingAction => ({
 	type: CalendarTrainingModalActions.UpdateTraining,
 	payload: { training },
 });
