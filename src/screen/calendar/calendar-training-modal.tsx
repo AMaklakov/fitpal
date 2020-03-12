@@ -14,26 +14,34 @@ import { cloneTrainingExerciseList } from '../../util/training-exercise.util';
 interface IStateProps {
 	isOpen: boolean;
 	training: TrainingModel | null;
+	storeDate: string | null;
 }
 
 interface IDispatchToProps {
 	closeModal: () => void;
 	cleanUp: () => void;
-	copyTraining: (training: Partial<TrainingModel>) => void;
+	createTraining: (training: Partial<TrainingModel>) => void;
 }
 
-const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
-	const { isOpen, training, copyTraining, cleanUp } = props;
+const DEFAULT_TRAINING_NAME = 'Новая тренировка';
 
-	const [name, changeName] = useState('Новая тренировка');
+const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
+	const { isOpen, training, createTraining, cleanUp, storeDate } = props;
+
+	const [name, changeName] = useState(DEFAULT_TRAINING_NAME);
 	const [date, changeDate] = useState<Date>(getToday().toDate());
 
 	useEffect(() => {
+		const newName = training ? `${training.name} - COPY` : DEFAULT_TRAINING_NAME;
+		let newDate = storeDate ? defaultStringToDate(storeDate) : getToday().toDate();
+
 		if (training) {
-			changeName(`${training.name} - COPY`);
-			changeDate(defaultStringToDate(training.date));
+			newDate = defaultStringToDate(training.date);
 		}
-	}, [training]);
+
+		changeName(newName);
+		changeDate(newDate);
+	}, [storeDate, training]);
 
 	const isSaveDisabled = useMemo(() => !name || !date, [name, date]);
 
@@ -48,7 +56,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 			exerciseList: cloneTrainingExerciseList(training?.exerciseList),
 		};
 
-		copyTraining(newTraining);
+		createTraining(newTraining);
 		cleanUp();
 	};
 
@@ -64,8 +72,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 				<Text>Training name</Text>
 				<StringInput value={name} onTextChange={changeName} />
 
-				<Text>Training date</Text>
-				<DatePickerIOS date={date} onDateChange={changeDate} />
+				{!!training && <Text>Training date</Text>}
+				{!!training && <DatePickerIOS date={date} onDateChange={changeDate} />}
 
 				<Button title={'Cancel'} onPress={handleCancelPress} />
 				<Button disabled={isSaveDisabled} title={'Save Training'} onPress={handleSaveTraining} />
@@ -78,13 +86,14 @@ const mapStateToProps = (state: StoreModel): IStateProps => {
 	return {
 		isOpen: state.calendarTrainingModal.isOpen,
 		training: state.calendarTrainingModal.training,
+		storeDate: state.calendarTrainingModal.date,
 	};
 };
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, {}> = dispatch => {
 	return {
 		closeModal: () => dispatch(toggleCalendarTrainingModalAction(false)),
-		copyTraining: (training: Partial<TrainingModel>) => checkAndCreateTraining(dispatch, training),
+		createTraining: (training: Partial<TrainingModel>) => checkAndCreateTraining(dispatch, training),
 		cleanUp: () => dispatch(cleanUpAction()),
 	};
 };

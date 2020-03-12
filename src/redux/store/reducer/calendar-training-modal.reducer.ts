@@ -1,19 +1,22 @@
-import { Reducer, Action } from 'redux';
+import { Action, Reducer } from 'redux';
 import { TrainingModel } from '../../../model/training.model';
 import {
 	CalendarTrainingModalActions,
 	ToggleCalendarTrainingModalAction,
+	UpdateDateInTrainingModalAction,
 	UpdateTrainingAction,
 } from '../../action/calendar-training-modal.action';
 
 interface IState {
 	isOpen: boolean;
 	training: TrainingModel | null;
+	date: string | null;
 }
 
 const DEFAULT_STATE: IState = {
 	isOpen: false,
 	training: null,
+	date: null,
 };
 
 export const calendarTrainingModal: Reducer<IState> = (
@@ -29,6 +32,10 @@ export const calendarTrainingModal: Reducer<IState> = (
 
 		case CalendarTrainingModalActions.CleanUp:
 			return { ...DEFAULT_STATE };
+
+		case CalendarTrainingModalActions.UpdateDate:
+			const date = (action as UpdateDateInTrainingModalAction).payload.date;
+			return { ...state, date };
 
 		default:
 			return state;

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Alert, Button, View } from 'react-native';
+import { Button, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { DEFAULT_DATE_FORMAT, formatDate, getToday } from '../../util/date.util';
 import moment from 'moment';
@@ -8,20 +8,19 @@ import { TrainingModel } from '../../model/training.model';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
 import {
 	toggleCalendarTrainingModalAction,
+	updateDateInTrainingModalAction,
 	updateTrainingModalAction,
 } from '../../redux/action/calendar-training-modal.action';
 import { TrainingListMinimalView } from '../../components/training-minimal-view/training-list-minimal-view';
 import { CalendarStrip } from '../../components/calendar/calendar-strip';
 import { Routes } from '../navigator';
-import { checkAndCreateTraining, deleteTrainingByIdAction } from '../../redux/action/training.action';
 import { getTrainingListByDate } from '../../redux/selector/training.selector';
 import { StoreModel } from '../../redux/store';
+import { deleteTrainingByIdAction } from '../../redux/action/training.action';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
-	createTrainingByDate: (training: Partial<TrainingModel>) => void;
-
-	openTrainingModal: (training?: TrainingModel) => void;
+	openTrainingModal: (training?: TrainingModel, date?: string) => void;
 }
 
 interface IStateToProps {
@@ -31,7 +30,7 @@ interface IStateToProps {
 interface IProps extends NavigationPropsModel {}
 
 const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
-	const { navigation, fetchTrainingListByDate, deleteTrainingById, createTrainingByDate, openTrainingModal } = props;
+	const { navigation, fetchTrainingListByDate, deleteTrainingById, openTrainingModal } = props;
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
 	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
@@ -58,15 +57,7 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	};
 
 	const handleCreateTraining = () => {
-		Alert.prompt('Enter training name', undefined, (name: string) => {
-			const training: Partial<TrainingModel> = {
-				name,
-				exerciseList: [],
-				date: formatDate(selectedDate, DEFAULT_DATE_FORMAT),
-			};
-
-			createTrainingByDate(training);
-		});
+		openTrainingModal(undefined, formatDate(selectedDate, DEFAULT_DATE_FORMAT));
 	};
 
 	return (
@@ -96,9 +87,9 @@ const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> =
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (dispatch, ownProps) => {
 	return {
 		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => dispatch(deleteTrainingByIdAction(trainingId)),
-		createTrainingByDate: (training: Partial<TrainingModel>) => checkAndCreateTraining(dispatch, training),
-		openTrainingModal: (training?: TrainingModel) => {
+		openTrainingModal: (training?: TrainingModel, date?: string) => {
 			dispatch(updateTrainingModalAction(training ?? null));
+			dispatch(updateDateInTrainingModalAction(date ?? null));
 			dispatch(toggleCalendarTrainingModalAction(true));
 		},
 	};
