@@ -1,7 +1,8 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { calendarTrainingModal } from './reducer/calendar-training-modal.reducer';
 import exercise from './reducer/exercise.reducer';
 import training from './reducer/training.reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const combinedReducers = combineReducers({
 	exercise,
@@ -10,7 +11,7 @@ const combinedReducers = combineReducers({
 	calendarTrainingModal,
 });
 
-const store = createStore(combinedReducers);
+const store = createStore(combinedReducers, composeWithDevTools(applyMiddleware()));
 
 export type StoreModel = ReturnType<typeof combinedReducers>;
 
