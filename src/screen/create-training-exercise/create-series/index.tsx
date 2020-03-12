@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { CreateSeriesPropsModel } from './types';
 import { Text, View } from 'react-native';
-import { getNumbersInRangeOptions } from '../../../util/string.util';
 import style from './style';
-import WeightInput from '../../../components/weight-input';
-import { SelectInput } from '../../../components/select-input';
-
-const DEFAULT_REPEATS_SELECT_LIST = getNumbersInRangeOptions(1, 50).map(x => ({
-	label: x.toString(),
-	value: x,
-}));
+import IntegerNumberInput from '../../../components/integer-number-input/integer-number-input';
 
 const CreateSeries = (props: CreateSeriesPropsModel) => {
 	const { index, onChange, series } = props;
 
 	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
-	const [repeats, setRepeats] = useState<number | null>(series?.repeats ?? 1);
-	const [weight, setWeight] = useState<number | null>(series?.weight ?? 0);
+	const [repeats, setRepeats] = useState<number | undefined>(series?.repeats ?? 1);
+	const [weight, setWeight] = useState<number | undefined>(series?.weight ?? 0);
 
 	useEffect(() => {
 		onChange({
@@ -24,6 +17,7 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 			repeats: Number(repeats),
 			weight: Number(weight),
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sequenceNumber, repeats, weight]);
 
 	return (
@@ -32,15 +26,11 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 				<Text style={style.sequenceNumber}>{sequenceNumber}</Text>
 
 				<View style={style.repeats}>
-					<SelectInput
-						value={repeats}
-						items={DEFAULT_REPEATS_SELECT_LIST}
-						onChange={v => setRepeats(v)}
-					/>
+					<IntegerNumberInput value={repeats} onChange={v => setRepeats(v)} />
 				</View>
 
 				<View style={style.weight}>
-					<WeightInput value={weight} onChange={v => setWeight(v)} />
+					<IntegerNumberInput value={weight} onChange={v => setWeight(v)} />
 				</View>
 			</View>
 		</View>
