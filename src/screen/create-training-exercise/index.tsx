@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CreateExercise from './create-exercise';
+import { CreateExercise } from './create-exercise';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { PropType } from '../../util/type.util';
 import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
