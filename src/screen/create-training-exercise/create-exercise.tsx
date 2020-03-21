@@ -1,16 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { Button, ScrollView, Text, View } from 'react-native';
 import { CreateSeries } from './create-series';
-import style from './style';
+import { style } from './style';
 import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
 import { ExerciseModel } from '../../model/exercise.model';
 import AutocompleteInput from '../../components/autocomplete-input';
 import ShowSelectedExercise from './show-selected-exercise';
 import { generateId } from '../../util/uuid.util';
-import { SaveIcon } from '../../components/icons/save.icon';
 import { CancelIcon } from '../../components/icons/cancel.icon';
 import { addEmptySeries, editSeriesBySequenceNumber, popSeries, repeatLastSeries } from './helpers';
 import { useTranslation } from 'react-i18next';
+import H1 from '../../components/heading/h1';
+import { Colors } from '../../css/colors.style';
+import { SaveIcon } from '../../components/icons/save.icon';
 
 interface IProps {
 	trainingExercise: TrainingExerciseModel;
@@ -55,8 +57,10 @@ export const CreateExercise = (props: IProps) => {
 	const handleRepeatSeries = () => setTrainingExerciseAction(repeatLastSeries(trainingExercise));
 
 	return (
-		<View>
+		<View style={style.wrapper}>
 			<ScrollView>
+				<H1 text={t('Exercise')} />
+
 				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>
 					autocompleteList={exerciseList}
@@ -83,13 +87,23 @@ export const CreateExercise = (props: IProps) => {
 					/>
 				))}
 
-				<Button title={t('Add')} onPress={handleAddSeries} />
-				<Button disabled={trainingExercise.seriesList.length === 0} title={t('Delete')} onPress={handleRemoveSeries} />
+				<View style={style.seriesButtonWrapper}>
+					<Button
+						disabled={trainingExercise.seriesList.length === 0}
+						title={t('Delete')}
+						color={Colors.Red}
+						onPress={handleRemoveSeries}
+					/>
+					<Button color={Colors.LightBlue} title={t('Add')} onPress={handleAddSeries} />
+				</View>
 			</ScrollView>
 
-			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
-				<CancelIcon onPress={onCancel} />
-				<SaveIcon onPress={onSave} />
+			<View style={style.buttonWrapper}>
+				<CancelIcon color={Colors.Red} onPress={onCancel} />
+				<View style={style.saveButtonWrapper}>
+					<SaveIcon color={Colors.LightBlue} onPress={onSave} />
+					<Text style={style.saveButtonText}>{t('Save')}</Text>
+				</View>
 			</View>
 		</View>
 	);
