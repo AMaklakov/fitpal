@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Text, View } from 'react-native';
-import { CreateExerciseProps } from './types';
-import CreateSeries from './create-series';
+import { Button, ScrollView, Text, View } from 'react-native';
+import { CreateSeries } from './create-series';
 import style from './style';
 import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
 import { ExerciseModel } from '../../model/exercise.model';
@@ -10,10 +9,20 @@ import ShowSelectedExercise from './show-selected-exercise';
 import { generateId } from '../../util/uuid.util';
 import { SaveIcon } from '../../components/icons/save.icon';
 import { CancelIcon } from '../../components/icons/cancel.icon';
-import { addEmptySeries, editSeriesBySequenceNumber, popSeries } from './helpers';
+import { addEmptySeries, editSeriesBySequenceNumber, popSeries, repeatLastSeries } from './helpers';
 import { useTranslation } from 'react-i18next';
 
-const CreateExercise = (props: CreateExerciseProps) => {
+interface IProps {
+	trainingExercise: TrainingExerciseModel;
+	setTrainingExercise: (exercise: TrainingExerciseModel) => void;
+
+	exerciseList: ExerciseModel[];
+
+	onSave: () => void;
+	onCancel: () => void;
+}
+
+export const CreateExercise = (props: IProps) => {
 	const id = useMemo(() => generateId(), []);
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
 	const { t } = useTranslation();
@@ -43,9 +52,11 @@ const CreateExercise = (props: CreateExerciseProps) => {
 
 	const handleRemoveSeries = () => setTrainingExerciseAction(popSeries(trainingExercise));
 
+	const handleRepeatSeries = () => setTrainingExerciseAction(repeatLastSeries(trainingExercise));
+
 	return (
 		<View>
-			<View>
+			<ScrollView>
 				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>
 					autocompleteList={exerciseList}
@@ -59,22 +70,27 @@ const CreateExercise = (props: CreateExerciseProps) => {
 					<Text style={style.sequenceNumber}>№</Text>
 					<Text style={style.repeats}>{t('Repeats')}</Text>
 					<Text style={style.weight}>{t('Weight')}</Text>
+					<Text style={style.actions} />
 				</View>
 
 				{trainingExercise?.seriesList?.map((s: SeriesModel, index: number) => (
-					<CreateSeries key={index} index={index} series={s} onChange={handleUpdateSeries(index)} />
+					<CreateSeries
+						key={index}
+						index={index}
+						series={s}
+						onChange={handleUpdateSeries(index)}
+						onRepeatIconPress={index + 1 === trainingExercise?.seriesList?.length ? handleRepeatSeries : undefined}
+					/>
 				))}
 
 				<Button title={t('Add')} onPress={handleAddSeries} />
 				<Button disabled={trainingExercise.seriesList.length === 0} title={t('Delete')} onPress={handleRemoveSeries} />
-			</View>
+			</ScrollView>
 
 			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
-				<SaveIcon onPress={onSave} />
 				<CancelIcon onPress={onCancel} />
+				<SaveIcon onPress={onSave} />
 			</View>
 		</View>
 	);
 };
-
-export default CreateExercise;

@@ -17,7 +17,7 @@ const style = StyleSheet.create({
 	},
 	sequenceNumber: {
 		textAlign: 'center',
-		width: WINDOW.width / 8,
+		width: WINDOW.width / 10,
 	},
 	repeats: {
 		textAlign: 'center',
@@ -26,6 +26,10 @@ const style = StyleSheet.create({
 	weight: {
 		textAlign: 'center',
 		width: WINDOW.width / 3,
+	},
+	actions: {
+		textAlign: 'center',
+		width: WINDOW.width / 8,
 	},
 });
 

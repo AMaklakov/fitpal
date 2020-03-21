@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CreateExerciseScreenProps } from './types';
-import CreateExercise from './create-exercise';
+import { CreateExercise } from './create-exercise';
 import { connect } from 'react-redux';
 import { PropType } from '../../util/type.util';
 import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';

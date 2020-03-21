@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { CreateSeriesPropsModel } from './types';
 import { Text, View } from 'react-native';
-import style from './style';
 import IntegerNumberInput from '../../../components/integer-number-input/integer-number-input';
+import { SeriesModel } from '../../../model/training.model';
+import { RepeatOnceIcon } from '../../../components/icons/repeat-one.icon';
+import { styles } from './styles';
 
-const CreateSeries = (props: CreateSeriesPropsModel) => {
-	const { index, onChange, series } = props;
+export interface IProps {
+	series?: SeriesModel;
+	index: number;
+
+	onChange: (s: SeriesModel) => void;
+	onRepeatIconPress?: () => void;
+}
+
+export const CreateSeries = (props: IProps) => {
+	const { index, onChange, series, onRepeatIconPress } = props;
 
 	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
 	const [repeats, setRepeats] = useState<number | undefined>(series?.repeats ?? 1);
@@ -20,21 +29,25 @@ const CreateSeries = (props: CreateSeriesPropsModel) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sequenceNumber, repeats, weight]);
 
+	const handleSetRepeats = (v: number) => setRepeats(v);
+
+	const handleSetWeight = (v: number) => setWeight(v);
+
 	return (
-		<View style={style.wrapper}>
-			<View style={style.flex}>
-				<Text style={style.sequenceNumber}>{sequenceNumber}</Text>
+		<View style={styles.wrapper}>
+			<View style={styles.flex}>
+				<Text style={styles.sequenceNumber}>{sequenceNumber}</Text>
 
-				<View style={style.repeats}>
-					<IntegerNumberInput value={repeats} onChange={v => setRepeats(v)} />
+				<View style={styles.repeats}>
+					<IntegerNumberInput value={repeats} onChange={handleSetRepeats} />
 				</View>
 
-				<View style={style.weight}>
-					<IntegerNumberInput value={weight} onChange={v => setWeight(v)} />
+				<View style={styles.weight}>
+					<IntegerNumberInput value={weight} onChange={handleSetWeight} />
 				</View>
+
+				<View style={styles.actions}>{!!onRepeatIconPress && <RepeatOnceIcon onPress={onRepeatIconPress} />}</View>
 			</View>
 		</View>
 	);
 };
-
-export default CreateSeries;

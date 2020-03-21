@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 const WINDOW = Dimensions.get('window');
 
-const style = StyleSheet.create({
+export const styles = StyleSheet.create({
 	wrapper: {
 		paddingBottom: 10,
 		flexDirection: 'column',
@@ -14,7 +14,7 @@ const style = StyleSheet.create({
 	},
 	sequenceNumber: {
 		textAlign: 'center',
-		width: WINDOW.width / 8,
+		width: WINDOW.width / 10,
 	},
 	repeats: {
 		width: WINDOW.width / 3,
@@ -22,6 +22,8 @@ const style = StyleSheet.create({
 	weight: {
 		width: WINDOW.width / 3,
 	},
+	actions: {
+		textAlign: 'center',
+		width: WINDOW.width / 8,
+	},
 });
-
-export default style;
