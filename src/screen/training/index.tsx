@@ -1,9 +1,8 @@
 import React from 'react';
 import Training from './training';
-import { TrainingScreenProps } from './types';
 import { StoreModel } from '../../redux/store';
 import { getTrainingById } from '../../redux/selector/training.selector';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Routes } from '../navigator';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
@@ -11,9 +10,23 @@ import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training-
 import { PropType } from '../../util/type.util';
 import { changeTraining } from '../../redux/action/training.action';
 import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
+import { ExerciseModel } from '../../model/exercise.model';
 
-const Screen = (props: TrainingScreenProps) => {
-	const { training, navigation, exercises, dispatchRemoveTrainingExercise, changeTraining } = props;
+interface IState {
+	training?: TrainingModel;
+	exercises: ExerciseModel[];
+}
+
+interface IDispatch {
+	onRemoveTrainingExercise: (e: TrainingExerciseModel, trainingId: PropType<TrainingModel, 'id'>) => void;
+	onChangeTraining: (training: TrainingModel) => void;
+}
+
+interface IProps extends NavigationPropsModel {}
+
+const Screen = (props: IProps & IState & IDispatch) => {
+	const { training, navigation, exercises, onRemoveTrainingExercise, onChangeTraining } = props;
 
 	const addExerciseAction = (trainingExercise?: TrainingExerciseModel) => {
 		navigation.navigate({
@@ -30,7 +43,7 @@ const Screen = (props: TrainingScreenProps) => {
 			return;
 		}
 
-		dispatchRemoveTrainingExercise(trainingExercise, training.id);
+		onRemoveTrainingExercise(trainingExercise, training.id);
 	};
 
 	return (
@@ -39,29 +52,26 @@ const Screen = (props: TrainingScreenProps) => {
 			canEdit={true}
 			addExerciseAction={addExerciseAction}
 			removeExercise={removeExerciseAction}
-			changeTraining={changeTraining}
+			changeTraining={onChangeTraining}
 			exercises={exercises}
 		/>
 	);
 };
 
-const mapStateToProps = (
-	store: StoreModel,
-	ownProps: TrainingScreenProps
-): Pick<TrainingScreenProps, 'training' | 'exercises'> => ({
+const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: StoreModel, ownProps: IProps): IState => ({
 	training: getTrainingById(store, ownProps?.navigation?.state?.params?.trainingId),
 	exercises: getExerciseList(store),
 });
 
-const mapDispatchToProps = (
-	dispatch: Dispatch
-): Pick<TrainingScreenProps, 'dispatchRemoveTrainingExercise' | 'changeTraining'> => ({
-	dispatchRemoveTrainingExercise: (
-		e: TrainingExerciseModel,
-		trainingId: PropType<TrainingModel, 'id'>
-	) => dispatch(deleteTrainingExerciseByTrainingId(trainingId, e)),
+const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch): IDispatch => ({
+	onRemoveTrainingExercise: (e: TrainingExerciseModel, trainingId: PropType<TrainingModel, 'id'>) => {
+		dispatch(deleteTrainingExerciseByTrainingId(trainingId, e));
+	},
 
-	changeTraining: (training: TrainingModel) => dispatch(changeTraining(training)),
+	onChangeTraining: (training: TrainingModel) => dispatch(changeTraining(training)),
 });
 
-export const TrainingScreen = connect(mapStateToProps, mapDispatchToProps)(Screen);
+export const TrainingScreen = connect<IState, IDispatch, IProps, StoreModel>(
+	mapStateToProps,
+	mapDispatchToProps
+)(Screen);
