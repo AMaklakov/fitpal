@@ -4,6 +4,9 @@ import store from './redux/store';
 import AppNavigator from './screen/navigator';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { CalendarTrainingModal } from './screen/calendar/calendar-training-modal';
+import { changeLanguage, Languages } from './i18n';
+
+changeLanguage(Languages.Ru);
 
 const App = () => {
 	return (

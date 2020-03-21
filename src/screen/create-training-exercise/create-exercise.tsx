@@ -11,10 +11,12 @@ import { generateId } from '../../util/uuid.util';
 import { SaveIcon } from '../../components/icons/save.icon';
 import { CancelIcon } from '../../components/icons/cancel.icon';
 import { addEmptySeries, editSeriesBySequenceNumber, popSeries } from './helpers';
+import { useTranslation } from 'react-i18next';
 
 const CreateExercise = (props: CreateExerciseProps) => {
 	const id = useMemo(() => generateId(), []);
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
+	const { t } = useTranslation();
 
 	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
 		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? null
@@ -44,7 +46,7 @@ const CreateExercise = (props: CreateExerciseProps) => {
 	return (
 		<View>
 			<View>
-				<Text>Название</Text>
+				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>
 					autocompleteList={exerciseList}
 					autocompleteField={'name'}
@@ -55,16 +57,16 @@ const CreateExercise = (props: CreateExerciseProps) => {
 
 				<View style={style.flex}>
 					<Text style={style.sequenceNumber}>№</Text>
-					<Text style={style.repeats}>Повторения</Text>
-					<Text style={style.weight}>Вес</Text>
+					<Text style={style.repeats}>{t('Repeats')}</Text>
+					<Text style={style.weight}>{t('Weight')}</Text>
 				</View>
 
 				{trainingExercise?.seriesList?.map((s: SeriesModel, index: number) => (
 					<CreateSeries key={index} index={index} series={s} onChange={handleUpdateSeries(index)} />
 				))}
 
-				<Button title={'Добавить'} onPress={handleAddSeries} />
-				<Button disabled={trainingExercise.seriesList.length === 0} title={'Удалить'} onPress={handleRemoveSeries} />
+				<Button title={t('Add')} onPress={handleAddSeries} />
+				<Button disabled={trainingExercise.seriesList.length === 0} title={t('Delete')} onPress={handleRemoveSeries} />
 			</View>
 
 			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>

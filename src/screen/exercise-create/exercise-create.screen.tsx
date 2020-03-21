@@ -9,6 +9,7 @@ import H1 from '../../components/heading/h1';
 import StringInput from '../../components/string-input/string-input';
 import { WithOptional } from '../../util/type.util';
 import { createExerciseAction, updateExerciseAction } from '../../redux/action/exercise.action';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
 	buttonContainer: {
@@ -30,6 +31,7 @@ interface IStateToProps {
 
 const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { exercise, onCreateExercise, onUpdateExercise, navigation } = props;
+	const { t } = useTranslation();
 
 	const [name, changeName] = useState(exercise?.name ?? '');
 
@@ -47,15 +49,15 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 	return (
 		<View>
-			<H1 text={exercise ? 'Редактировать упражнение' : 'Создать упражнение'} />
+			<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} />
 
 			<View>
-				<StringInput value={name} onTextChange={changeName} maxLength={100} placeholder={'Наименование упражнения'} />
+				<StringInput value={name} onTextChange={changeName} maxLength={100} placeholder={t('Exercise name')} />
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button disabled={name === '' || name === exercise?.name} title={'Сохранить'} onPress={handleSavePress} />
-				<Button title={'Отменить'} onPress={handleGoBack} />
+				<Button disabled={name === '' || name === exercise?.name} title={t('Save')} onPress={handleSavePress} />
+				<Button title={t('Cancel')} onPress={handleGoBack} />
 			</View>
 		</View>
 	);

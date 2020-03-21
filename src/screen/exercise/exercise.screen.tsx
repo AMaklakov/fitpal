@@ -8,20 +8,7 @@ import { getExerciseById } from '../../redux/selector/exercise.selector';
 import { H1 } from '../../components/heading/h1';
 import { H2 } from '../../components/heading/h2';
 import { Routes } from '../navigator';
-
-const EXERCISE_ID_PARAM = 'exerciseId';
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
-	description: {
-		flex: 1,
-	},
-	buttonContainer: {
-		height: 70,
-	},
-});
+import { useTranslation } from 'react-i18next';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -33,6 +20,7 @@ interface IState {
 
 const Exercise = (props: IProps & IDispatch & IState) => {
 	const { navigation, exercise } = props;
+	const { t } = useTranslation();
 
 	if (!exercise) {
 		throw new Error(`Exercise does not exist!`);
@@ -49,24 +37,36 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 			<H1 text={exercise.name} />
 
 			<View style={styles.description}>
-				<H2 text={'Описание'} />
+				<H2 text={t('Description')} />
 				<Text>
-					{Array(~~(Math.random() * 20))
+					{Array(parseInt((Math.random() * 20).toFixed(), 10))
 						.fill(exercise.name)
 						.join(', ')}
 				</Text>
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button title={'Edit'} onPress={handleEdit} />
+				<Button title={t('Edit')} onPress={handleEdit} />
 			</View>
 		</View>
 	);
 };
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	description: {
+		flex: 1,
+	},
+	buttonContainer: {
+		height: 70,
+	},
+});
+
 const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (state: StoreModel, ownProps: IProps): IState => {
 	return {
-		exercise: getExerciseById(state, ownProps.navigation.getParam(EXERCISE_ID_PARAM)),
+		exercise: getExerciseById(state, ownProps.navigation.getParam('exerciseId')),
 	};
 };
 
