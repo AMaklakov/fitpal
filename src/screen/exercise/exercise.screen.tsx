@@ -8,8 +8,45 @@ import { getExerciseById } from '../../redux/selector/exercise.selector';
 import { H1 } from '../../components/heading/h1';
 import { H2 } from '../../components/heading/h2';
 import { Routes } from '../navigator';
+import { useTranslation } from 'react-i18next';
 
-const EXERCISE_ID_PARAM = 'exerciseId';
+interface IProps extends NavigationPropsModel {}
+
+interface IDispatchToProps {}
+
+interface IStateToProps {
+	exercise: ExerciseModel;
+}
+
+const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
+	const { navigation, exercise } = props;
+	const { t } = useTranslation();
+
+	const handleEdit = useCallback(() => {
+		navigation.navigate(Routes.ExerciseCreate, {
+			exerciseId: exercise.id,
+		});
+	}, [exercise, navigation]);
+
+	return (
+		<View style={styles.container}>
+			<H1 text={exercise?.name} />
+
+			<View style={styles.description}>
+				<H2 text={t('Description')} />
+				<Text>
+					{Array(parseInt((Math.random() * 20).toFixed(), 10))
+						.fill(exercise.name)
+						.join(', ')}
+				</Text>
+			</View>
+
+			<View style={styles.buttonContainer}>
+				<Button title={t('Edit')} onPress={handleEdit} />
+			</View>
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -23,46 +60,9 @@ const styles = StyleSheet.create({
 	},
 });
 
-interface IProps extends NavigationPropsModel {}
-
-interface IDispatchToProps {}
-
-interface IStateToProps {
-	exercise: ExerciseModel;
-}
-
-const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
-	const { navigation, exercise } = props;
-
-	const handleEdit = useCallback(() => {
-		navigation.navigate(Routes.ExerciseCreate, {
-			exerciseId: exercise.id,
-		});
-	}, [exercise, navigation]);
-
-	return (
-		<View style={styles.container}>
-			<H1 text={exercise?.name} />
-
-			<View style={styles.description}>
-				<H2 text={'Описание'} />
-				<Text>
-					{Array(~~(Math.random() * 20))
-						.fill(exercise.name)
-						.join(', ')}
-				</Text>
-			</View>
-
-			<View style={styles.buttonContainer}>
-				<Button title={'Edit'} onPress={handleEdit} />
-			</View>
-		</View>
-	);
-};
-
 const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
 	return {
-		exercise: getExerciseById(state, ownProps.navigation.getParam(EXERCISE_ID_PARAM)),
+		exercise: getExerciseById(state, ownProps.navigation.getParam('exerciseId')),
 	};
 };
 

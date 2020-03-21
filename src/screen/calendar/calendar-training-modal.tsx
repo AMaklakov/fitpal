@@ -10,6 +10,7 @@ import { StoreModel } from '../../redux/store';
 import { DEFAULT_DATE_FORMAT, defaultStringToDate, formatDate, getToday } from '../../util/date.util';
 import { checkAndCreateTraining } from '../../redux/action/training.action';
 import { cloneTrainingExerciseList } from '../../util/training-exercise.util';
+import { useTranslation } from 'react-i18next';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -23,10 +24,11 @@ interface IDispatchToProps {
 	createTraining: (training: Partial<TrainingModel>) => void;
 }
 
-const DEFAULT_TRAINING_NAME = 'Новая тренировка';
-
 const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	const { isOpen, training, createTraining, cleanUp, storeDate } = props;
+	const { t } = useTranslation();
+
+	const DEFAULT_TRAINING_NAME = t('New training');
 
 	const [name, changeName] = useState(DEFAULT_TRAINING_NAME);
 	const [date, changeDate] = useState<Date>(getToday().toDate());
@@ -41,7 +43,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 		changeName(newName);
 		changeDate(newDate);
-	}, [storeDate, training]);
+	}, [isOpen, storeDate, training, DEFAULT_TRAINING_NAME]);
 
 	const isSaveDisabled = useMemo(() => !name || !date, [name, date]);
 
@@ -67,16 +69,16 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	return (
 		<Modal visible={isOpen}>
 			<SafeAreaView>
-				<H1 text={'Скопировать тренировку'} />
+				<H1 text={training ? t('Copy training') : t('Create training')} />
 
-				<Text>Training name</Text>
+				<Text>{t('Training name')}</Text>
 				<StringInput value={name} onTextChange={changeName} />
 
-				{!!training && <Text>Training date</Text>}
+				{!!training && <Text>{t('Training date')}</Text>}
 				{!!training && <DatePickerIOS date={date} onDateChange={changeDate} />}
 
-				<Button title={'Cancel'} onPress={handleCancelPress} />
-				<Button disabled={isSaveDisabled} title={'Save Training'} onPress={handleSaveTraining} />
+				<Button title={t('Cancel')} onPress={handleCancelPress} />
+				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
 			</SafeAreaView>
 		</Modal>
 	);
