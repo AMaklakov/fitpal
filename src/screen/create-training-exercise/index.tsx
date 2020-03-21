@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { CreateExerciseScreenProps } from './types';
 import CreateExercise from './create-exercise';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { PropType } from '../../util/type.util';
 import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
 import { Action, Dispatch } from 'redux';
@@ -11,10 +10,23 @@ import {
 } from '../../redux/action/training-exercise.action';
 import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
+import { NavigationPropsModel } from '../../model/navigation-props.model';
+import { ExerciseModel } from '../../model/exercise.model';
+
+interface IState {
+	exerciseList: ExerciseModel[];
+}
+
+interface IDispatch {
+	saveAction: (trainingId: string, exercise: TrainingExerciseModel) => void;
+	editAction: (trainingId: string, exercise: TrainingExerciseModel) => void;
+}
+
+interface IProps extends NavigationPropsModel {}
 
 const createEmptyTrainingExercise = () => (({ seriesList: [] } as unknown) as TrainingExerciseModel);
 
-const Screen = (props: CreateExerciseScreenProps) => {
+const Screen = (props: IProps & IState & IDispatch) => {
 	const { navigation, saveAction, editAction, exerciseList } = props;
 
 	const id = navigation.getParam('trainingId');
@@ -41,13 +53,11 @@ const Screen = (props: CreateExerciseScreenProps) => {
 	);
 };
 
-const mapStateToProps = (store: StoreModel): Pick<CreateExerciseScreenProps, 'exerciseList'> => ({
+const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: StoreModel): IState => ({
 	exerciseList: getExerciseList(store),
 });
 
-const mapDispatchToProps = (
-	dispatch: Dispatch<Action>
-): Pick<CreateExerciseScreenProps, 'saveAction' | 'editAction'> => ({
+const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch<Action>): IDispatch => ({
 	saveAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: TrainingExerciseModel) => {
 		dispatch(createTrainingExerciseByTrainingId(trainingId, exercise));
 	},
@@ -57,4 +67,4 @@ const mapDispatchToProps = (
 	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Screen);
+export default connect<IState, IDispatch, IProps, StoreModel>(mapStateToProps, mapDispatchToProps)(Screen);
