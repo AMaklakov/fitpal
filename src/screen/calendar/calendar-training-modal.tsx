@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, DatePickerIOS, Modal, Text } from 'react-native';
+import { Button, Modal, Text } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
 import { H1 } from '../../components/heading/h1';
@@ -7,14 +7,16 @@ import StringInput from '../../components/string-input/string-input';
 import { TrainingModel } from '../../model/training.model';
 import { cleanUpAction, toggleCalendarTrainingModalAction } from '../../redux/action/calendar-training-modal.action';
 import { StoreModel } from '../../redux/store';
-import { DEFAULT_DATE_FORMAT, defaultStringToDate, formatDate, getToday } from '../../util/date.util';
+import { convertStringToMoment, DateFormatEnum, formatDate, getToday } from '../../util/date.util';
 import { checkAndCreateTraining } from '../../redux/action/training.action';
 import { cloneTrainingExerciseList } from '../../util/training-exercise.util';
+import { DatepickerInput } from '../../components/inputs/datepicker/datepicker';
+import moment from 'moment';
 
 interface IStateProps {
 	isOpen: boolean;
 	training: TrainingModel | null;
-	storeDate: string | null;
+	dateFromStore: string | null;
 }
 
 interface IDispatchToProps {
@@ -26,22 +28,23 @@ interface IDispatchToProps {
 const DEFAULT_TRAINING_NAME = 'Новая тренировка';
 
 const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
-	const { isOpen, training, createTraining, cleanUp, storeDate } = props;
+	const { isOpen, training, createTraining, cleanUp, dateFromStore } = props;
 
 	const [name, changeName] = useState(DEFAULT_TRAINING_NAME);
-	const [date, changeDate] = useState<Date>(getToday().toDate());
+	const [date, changeDate] = useState<moment.Moment>(getToday());
 
 	useEffect(() => {
-		const newName = training ? `${training.name} - COPY` : DEFAULT_TRAINING_NAME;
-		let newDate = storeDate ? defaultStringToDate(storeDate) : getToday().toDate();
+		let newName = DEFAULT_TRAINING_NAME;
+		let newDate = dateFromStore ? convertStringToMoment(dateFromStore) : getToday();
 
 		if (training) {
-			newDate = defaultStringToDate(training.date);
+			newName = `${training.name} - COPY`;
+			newDate = convertStringToMoment(training.date);
 		}
 
 		changeName(newName);
 		changeDate(newDate);
-	}, [storeDate, training]);
+	}, [isOpen, dateFromStore, training]);
 
 	const isSaveDisabled = useMemo(() => !name || !date, [name, date]);
 
@@ -52,7 +55,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 		const newTraining: Partial<TrainingModel> = {
 			name: name,
-			date: formatDate(date, DEFAULT_DATE_FORMAT),
+			date: formatDate(date, DateFormatEnum.Default),
 			exerciseList: cloneTrainingExerciseList(training?.exerciseList),
 		};
 
@@ -67,13 +70,13 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	return (
 		<Modal visible={isOpen}>
 			<SafeAreaView>
-				<H1 text={'Скопировать тренировку'} />
+				<H1 text={training ? 'Скопировать тренировку' : 'Создать тренировку'} />
 
 				<Text>Training name</Text>
 				<StringInput value={name} onTextChange={changeName} />
 
 				{!!training && <Text>Training date</Text>}
-				{!!training && <DatePickerIOS date={date} onDateChange={changeDate} />}
+				{!!training && <DatepickerInput date={date} onDateChange={changeDate} minDate={getToday()} />}
 
 				<Button title={'Cancel'} onPress={handleCancelPress} />
 				<Button disabled={isSaveDisabled} title={'Save Training'} onPress={handleSaveTraining} />
@@ -86,7 +89,7 @@ const mapStateToProps = (state: StoreModel): IStateProps => {
 	return {
 		isOpen: state.calendarTrainingModal.isOpen,
 		training: state.calendarTrainingModal.training,
-		storeDate: state.calendarTrainingModal.date,
+		dateFromStore: state.calendarTrainingModal.date,
 	};
 };
 
