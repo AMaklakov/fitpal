@@ -10,6 +10,10 @@ import {
 interface IState {
 	isOpen: boolean;
 	training: TrainingModel | null;
+
+	/**
+	 * for creation training on concrete date. Do not use with training copy
+	 */
 	date: string | null;
 }
 
