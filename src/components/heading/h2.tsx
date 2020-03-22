@@ -10,12 +10,14 @@ const styles = StyleSheet.create({
 	},
 });
 
-export const H2 = (props: { text?: string }) => {
-	const { text } = props;
+export const H2 = (props: { text?: string; numberOfLines?: number }) => {
+	const { text, numberOfLines } = props;
 
 	return (
 		<View>
-			<Text style={styles.h2}>{text}</Text>
+			<Text style={styles.h2} numberOfLines={numberOfLines}>
+				{text}
+			</Text>
 		</View>
 	);
 };

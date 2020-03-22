@@ -13,6 +13,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		backgroundColor: Colors.LightBlue,
 	},
+	description: {
+		maxWidth: 70 + '%',
+	},
+	exerciseWrap: {
+		maxWidth: 30 + '%',
+	},
 });
 
 interface TrainingMinimalViewProps {
@@ -30,9 +36,10 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 	return (
 		<TouchableHighlight onPress={handleOnPress}>
 			<View style={styles.container}>
-				<H2 text={training?.name} />
-
-				<View>
+				<View style={styles.description}>
+					<H2 numberOfLines={1} text={training?.name} />
+				</View>
+				<View style={styles.exerciseWrap}>
 					<Text>{training?.exerciseList?.length} упражнений</Text>
 				</View>
 			</View>
