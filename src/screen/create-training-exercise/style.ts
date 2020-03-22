@@ -1,13 +1,11 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import { Colors } from '../../css/colors.style';
 
 const WINDOW = Dimensions.get('window');
 
-const style = StyleSheet.create({
-	modal: {
-		position: 'absolute',
-		width: '80%',
-		height: '70vw',
-		backgroundColor: 'green',
+export const style = StyleSheet.create({
+	wrapper: {
+		flex: 1,
 	},
 	flex: {
 		marginTop: 20,
@@ -17,7 +15,7 @@ const style = StyleSheet.create({
 	},
 	sequenceNumber: {
 		textAlign: 'center',
-		width: WINDOW.width / 8,
+		width: WINDOW.width / 10,
 	},
 	repeats: {
 		textAlign: 'center',
@@ -27,6 +25,25 @@ const style = StyleSheet.create({
 		textAlign: 'center',
 		width: WINDOW.width / 3,
 	},
+	actions: {
+		textAlign: 'center',
+		width: WINDOW.width / 8,
+	},
+	buttonWrapper: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		paddingVertical: 20,
+	},
+	seriesButtonWrapper: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
+	saveButtonWrapper: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	saveButtonText: {
+		paddingLeft: 10,
+		color: Colors.LightBlue,
+	},
 });
-
-export default style;

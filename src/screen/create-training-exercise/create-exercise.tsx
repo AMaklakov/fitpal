@@ -1,20 +1,33 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Text, View } from 'react-native';
-import { CreateExerciseProps } from './types';
-import CreateSeries from './create-series';
-import style from './style';
+import { Button, ScrollView, Text, View } from 'react-native';
+import { CreateSeries } from './create-series';
+import { style } from './style';
 import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
 import { ExerciseModel } from '../../model/exercise.model';
 import AutocompleteInput from '../../components/autocomplete-input';
 import ShowSelectedExercise from './show-selected-exercise';
 import { generateId } from '../../util/uuid.util';
-import { SaveIcon } from '../../components/icons/save.icon';
 import { CancelIcon } from '../../components/icons/cancel.icon';
-import { addEmptySeries, editSeriesBySequenceNumber, popSeries } from './helpers';
+import { addEmptySeries, editSeriesBySequenceNumber, popSeries, repeatLastSeries } from './helpers';
+import { useTranslation } from 'react-i18next';
+import H1 from '../../components/heading/h1';
+import { Colors } from '../../css/colors.style';
+import { SaveIcon } from '../../components/icons/save.icon';
 
-const CreateExercise = (props: CreateExerciseProps) => {
+interface IProps {
+	trainingExercise: TrainingExerciseModel;
+	setTrainingExercise: (exercise: TrainingExerciseModel) => void;
+
+	exerciseList: ExerciseModel[];
+
+	onSave: () => void;
+	onCancel: () => void;
+}
+
+export const CreateExercise = (props: IProps) => {
 	const id = useMemo(() => generateId(), []);
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
+	const { t } = useTranslation();
 
 	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
 		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? null
@@ -41,10 +54,14 @@ const CreateExercise = (props: CreateExerciseProps) => {
 
 	const handleRemoveSeries = () => setTrainingExerciseAction(popSeries(trainingExercise));
 
+	const handleRepeatSeries = () => setTrainingExerciseAction(repeatLastSeries(trainingExercise));
+
 	return (
-		<View>
-			<View>
-				<Text>Название</Text>
+		<View style={style.wrapper}>
+			<ScrollView>
+				<H1 text={t('Exercise')} />
+
+				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>
 					autocompleteList={exerciseList}
 					autocompleteField={'name'}
@@ -55,24 +72,39 @@ const CreateExercise = (props: CreateExerciseProps) => {
 
 				<View style={style.flex}>
 					<Text style={style.sequenceNumber}>№</Text>
-					<Text style={style.repeats}>Повторения</Text>
-					<Text style={style.weight}>Вес</Text>
+					<Text style={style.repeats}>{t('Repeats')}</Text>
+					<Text style={style.weight}>{t('Weight')}</Text>
+					<Text style={style.actions} />
 				</View>
 
 				{trainingExercise?.seriesList?.map((s: SeriesModel, index: number) => (
-					<CreateSeries key={index} index={index} series={s} onChange={handleUpdateSeries(index)} />
+					<CreateSeries
+						key={index}
+						index={index}
+						series={s}
+						onChange={handleUpdateSeries(index)}
+						onRepeatIconPress={index + 1 === trainingExercise?.seriesList?.length ? handleRepeatSeries : undefined}
+					/>
 				))}
 
-				<Button title={'Добавить'} onPress={handleAddSeries} />
-				<Button disabled={trainingExercise.seriesList.length === 0} title={'Удалить'} onPress={handleRemoveSeries} />
-			</View>
+				<View style={style.seriesButtonWrapper}>
+					<Button
+						disabled={trainingExercise.seriesList.length === 0}
+						title={t('Delete')}
+						color={Colors.Red}
+						onPress={handleRemoveSeries}
+					/>
+					<Button color={Colors.LightBlue} title={t('Add')} onPress={handleAddSeries} />
+				</View>
+			</ScrollView>
 
-			<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
-				<SaveIcon onPress={onSave} />
-				<CancelIcon onPress={onCancel} />
+			<View style={style.buttonWrapper}>
+				<CancelIcon color={Colors.Red} onPress={onCancel} />
+				<View style={style.saveButtonWrapper}>
+					<SaveIcon color={Colors.LightBlue} onPress={onSave} />
+					<Text style={style.saveButtonText}>{t('Save')}</Text>
+				</View>
 			</View>
 		</View>
 	);
 };
-
-export default CreateExercise;

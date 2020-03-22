@@ -3,6 +3,43 @@ import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'r
 import { ExerciseListProps } from './types';
 import { mapExerciseListToSectionList } from './util';
 import { ExerciseModel } from '../../model/exercise.model';
+import { useTranslation } from 'react-i18next';
+
+const ExerciseList = (props: ExerciseListProps) => {
+	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
+	const sections = useMemo(() => mapExerciseListToSectionList(exerciseList), [exerciseList]);
+
+	const { t } = useTranslation();
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.listContainer}>
+				<SectionList<ExerciseModel>
+					sections={sections}
+					renderItem={({ item }) => <Item data={item} onPress={onExercisePress} />}
+					renderSectionHeader={({ section }) => <Text style={styles.title}>{section.title}</Text>}
+					keyExtractor={item => item.id}
+				/>
+			</View>
+
+			<View style={styles.buttons}>
+				<Button title={t('Add exercise +')} onPress={goToCreateExercise} />
+			</View>
+		</View>
+	);
+};
+
+const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: ExerciseModel) => void }) => {
+	const handleOnPress = () => {
+		onPress(data);
+	};
+
+	return (
+		<TouchableOpacity onPress={handleOnPress}>
+			<Text style={styles.item}>{data.name}</Text>
+		</TouchableOpacity>
+	);
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -29,39 +66,5 @@ const styles = StyleSheet.create({
 		height: 44,
 	},
 });
-
-const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: ExerciseModel) => void }) => {
-	const handleOnPress = () => {
-		onPress(data);
-	};
-
-	return (
-		<TouchableOpacity onPress={handleOnPress}>
-			<Text style={styles.item}>{data.name}</Text>
-		</TouchableOpacity>
-	);
-};
-
-const ExerciseList = (props: ExerciseListProps) => {
-	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
-	const sections = useMemo(() => mapExerciseListToSectionList(exerciseList), [exerciseList]);
-
-	return (
-		<View style={styles.container}>
-			<View style={styles.listContainer}>
-				<SectionList<ExerciseModel>
-					sections={sections}
-					renderItem={({ item }) => <Item data={item} onPress={onExercisePress} />}
-					renderSectionHeader={({ section }) => <Text style={styles.title}>{section.title}</Text>}
-					keyExtractor={item => item.id}
-				/>
-			</View>
-
-			<View style={styles.buttons}>
-				<Button title="+ Добавить упражнение" onPress={goToCreateExercise} />
-			</View>
-		</View>
-	);
-};
 
 export default ExerciseList;

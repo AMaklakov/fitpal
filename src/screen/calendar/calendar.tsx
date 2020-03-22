@@ -17,6 +17,7 @@ import { Routes } from '../navigator';
 import { getTrainingListByDate } from '../../redux/selector/training.selector';
 import { StoreModel } from '../../redux/store';
 import { deleteTrainingByIdAction } from '../../redux/action/training.action';
+import { useTranslation } from 'react-i18next';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
@@ -31,6 +32,7 @@ interface IProps extends NavigationPropsModel {}
 
 const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { navigation, fetchTrainingListByDate, deleteTrainingById, openTrainingModal } = props;
+	const { t } = useTranslation();
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
 	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
@@ -71,7 +73,7 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 				onTrainingPress={handleOnTrainingTouch}
 			/>
 
-			<Button title="Add training +" onPress={handleCreateTraining} />
+			<Button title={t('Add training +')} onPress={handleCreateTraining} />
 		</View>
 	);
 };

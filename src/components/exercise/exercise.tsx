@@ -4,10 +4,12 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import style from './styles';
 import { calcTotal } from './index';
 import { H2 } from '../heading/h2';
+import { useTranslation } from 'react-i18next';
 
 const TrainingExercise = (props: TrainingExerciseProps) => {
 	const { trainingExercise, exerciseList, onLongPress, onPress } = props;
 	const { exerciseId, seriesList } = trainingExercise;
+	const { t } = useTranslation();
 
 	const onLongPressAction = () => onLongPress && onLongPress(trainingExercise);
 	const onPressAction = () => onPress && onPress(trainingExercise);
@@ -28,12 +30,14 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 						<View key={index} style={style.tableBody}>
 							<Text>{s.sequenceNumber}</Text>
 							<Text>{s.repeats}</Text>
-							<Text>{s.weight} кг</Text>
+							<Text>
+								{s.weight} {t('Kg')}
+							</Text>
 						</View>
 					))}
 				</View>
 
-				<Text style={style.total}>Итого: {calcTotal(trainingExercise)} кг</Text>
+				<Text style={style.total}>{t('Total |num| kilos', { num: calcTotal(trainingExercise) })}</Text>
 			</View>
 		</TouchableOpacity>
 	);
