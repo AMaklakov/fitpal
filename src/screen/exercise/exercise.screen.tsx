@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
+import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { ExerciseModel } from '../../model/exercise.model';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
@@ -25,14 +25,18 @@ const styles = StyleSheet.create({
 
 interface IProps extends NavigationPropsModel {}
 
-interface IDispatchToProps {}
+interface IDispatch {}
 
-interface IStateToProps {
-	exercise: ExerciseModel;
+interface IState {
+	exercise?: ExerciseModel;
 }
 
-const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
+const Exercise = (props: IProps & IDispatch & IState) => {
 	const { navigation, exercise } = props;
+
+	if (!exercise) {
+		throw new Error(`Exercise does not exist!`);
+	}
 
 	const handleEdit = useCallback(() => {
 		navigation.navigate(Routes.ExerciseCreate, {
@@ -42,7 +46,7 @@ const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
 
 	return (
 		<View style={styles.container}>
-			<H1 text={exercise?.name} />
+			<H1 text={exercise.name} />
 
 			<View style={styles.description}>
 				<H2 text={'Описание'} />
@@ -60,15 +64,18 @@ const Exercise = (props: IProps & IDispatchToProps & IStateToProps) => {
 	);
 };
 
-const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
+const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (state: StoreModel, ownProps: IProps): IState => {
 	return {
 		exercise: getExerciseById(state, ownProps.navigation.getParam(EXERCISE_ID_PARAM)),
 	};
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (dispatch, ownProps) => {
+const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch, ownProps) => {
 	return {};
 };
 
-export const ExerciseScreen = connect(mapStateToProps, mapDispatchToProps)(Exercise);
+export const ExerciseScreen = connect<IState, IDispatch, IProps, StoreModel>(
+	mapStateToProps,
+	mapDispatchToProps
+)(Exercise);
