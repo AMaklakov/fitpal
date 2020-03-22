@@ -1,12 +1,11 @@
-import React, { useMemo, useState } from 'react';
-import { Button, ScrollView, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, FlatList, ScrollView, Text, View } from 'react-native';
 import { CreateSeries } from './create-series';
 import { style } from './style';
 import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
 import { ExerciseModel } from '../../model/exercise.model';
 import AutocompleteInput from '../../components/autocomplete-input';
 import ShowSelectedExercise from './show-selected-exercise';
-import { generateId } from '../../util/uuid.util';
 import { CancelIcon } from '../../components/icons/cancel.icon';
 import { addEmptySeries, editSeriesBySequenceNumber, popSeries, repeatLastSeries } from './helpers';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +24,6 @@ interface IProps {
 }
 
 export const CreateExercise = (props: IProps) => {
-	const id = useMemo(() => generateId(), []);
 	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel } = props;
 	const { t } = useTranslation();
 
@@ -34,7 +32,7 @@ export const CreateExercise = (props: IProps) => {
 	);
 
 	const setTrainingExerciseAction = (ex: TrainingExerciseModel) => {
-		setTrainingExercise({ ...ex, id });
+		setTrainingExercise({ ...ex });
 	};
 
 	const handleSelectExercise = (exercise: ExerciseModel | null) => {
@@ -77,15 +75,18 @@ export const CreateExercise = (props: IProps) => {
 					<Text style={style.actions} />
 				</View>
 
-				{trainingExercise?.seriesList?.map((s: SeriesModel, index: number) => (
-					<CreateSeries
-						key={index}
-						index={index}
-						series={s}
-						onChange={handleUpdateSeries(index)}
-						onRepeatIconPress={index + 1 === trainingExercise?.seriesList?.length ? handleRepeatSeries : undefined}
-					/>
-				))}
+				<FlatList<SeriesModel>
+					data={trainingExercise.seriesList}
+					keyExtractor={(s, index) => `series_${index}`}
+					renderItem={({ index, item }) => (
+						<CreateSeries
+							index={index}
+							series={item}
+							onChange={handleUpdateSeries(index)}
+							onRepeatIconPress={index + 1 === trainingExercise?.seriesList?.length ? handleRepeatSeries : undefined}
+						/>
+					)}
+				/>
 
 				<View style={style.seriesButtonWrapper}>
 					<Button

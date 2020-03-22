@@ -55,15 +55,13 @@ const editTrainingExerciseByTrainingId = (
 		if (item.id === trainingId) {
 			item = {
 				...item,
-				exerciseList: [
-					...item.exerciseList.map(x => {
-						if (x.sequenceNumber === exercise.sequenceNumber) {
-							x = exercise;
-						}
+				exerciseList: item.exerciseList.map(x => {
+					if (x.id === exercise.id) {
+						x = exercise;
+					}
 
-						return { ...x };
-					}),
-				],
+					return { ...x };
+				}),
 			};
 		}
 

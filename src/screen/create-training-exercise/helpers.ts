@@ -43,11 +43,11 @@ export const popSeries = (ex: TrainingExerciseModel): TrainingExerciseModel => {
 	};
 };
 
-export const repeatLastSeries = (ex: TrainingExerciseModel) => {
+export const repeatLastSeries = (ex: TrainingExerciseModel): TrainingExerciseModel => {
 	const lastRepeat = ex.seriesList[ex.seriesList.length - 1];
 
 	return {
 		...ex,
-		seriesList: [...ex.seriesList, { ...lastRepeat }],
+		seriesList: [...ex.seriesList, { ...lastRepeat, sequenceNumber: lastRepeat.sequenceNumber + 1 }],
 	};
 };
