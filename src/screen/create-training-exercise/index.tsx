@@ -12,6 +12,7 @@ import { StoreModel } from '../../redux/store';
 import { getExerciseList } from '../../redux/selector/exercise.selector';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
 import { ExerciseModel } from '../../model/exercise.model';
+import { createEmptyTrainingExercise } from '../../util/training-exercise.util';
 
 interface IState {
 	exerciseList: ExerciseModel[];
@@ -23,8 +24,6 @@ interface IDispatch {
 }
 
 interface IProps extends NavigationPropsModel {}
-
-const createEmptyTrainingExercise = () => (({ seriesList: [] } as unknown) as TrainingExerciseModel);
 
 const Screen = (props: IProps & IState & IDispatch) => {
 	const { navigation, saveAction, editAction, exerciseList } = props;
