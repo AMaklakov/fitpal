@@ -10,11 +10,12 @@ export const styles = StyleSheet.create({
 	flex: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 	},
 	sequenceNumber: {
 		textAlign: 'center',
 		width: WINDOW.width / 10,
+		paddingTop: 24,
 	},
 	repeats: {
 		width: WINDOW.width / 3,

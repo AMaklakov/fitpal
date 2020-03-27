@@ -14,6 +14,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 	const { t } = useTranslation();
 
 	const [hasError, setHasError] = useState(false);
+	const [isFocused, setFocused] = useState(false);
 
 	const isValid = (v: string): boolean => {
 		if (v === '' || v === '0') {
@@ -60,17 +61,19 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 	return (
 		<>
 			<TextInput
-				style={style.input}
+				style={isFocused ? style.inputFocused : style.input}
 				keyboardType="number-pad"
 				placeholder={placeholder}
 				placeholderTextColor={placeholderTextColor}
 				onChangeText={onTextChange}
+				onFocus={() => setFocused(() => true)}
+				onBlur={() => setFocused(() => false)}
 				value={value}
 			/>
 
-			<Text style={hasError ? style.errorMessageShow : style.errorMessage}>
-				{t('Value in range from |min| to |max|', { min: min, max: max })}
-			</Text>
+			{hasError && (
+				<Text style={style.errorMessageShow}>{t('Value in range from |min| to |max|', { min: min, max: max })}</Text>
+			)}
 		</>
 	);
 };
