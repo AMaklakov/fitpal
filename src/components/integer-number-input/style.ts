@@ -9,18 +9,17 @@ const style = StyleSheet.create({
 		borderColor: 'black',
 		paddingHorizontal: 15,
 		borderRadius: 15,
-	},
-	inputFocused: {
-		margin: 10,
-		fontSize: 18,
-		color: 'black',
-		borderWidth: 1,
-		borderColor: '#6cbbf7',
-		paddingHorizontal: 15,
-		borderRadius: 15,
+		height: 50,
 	},
 	errorMessageShow: {
 		color: 'red',
+	},
+});
+
+export const styleFocused = StyleSheet.create({
+	input: {
+		...style.input,
+		borderColor: '#6cbbf7',
 	},
 });
 

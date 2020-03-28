@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
 		width: WINDOW.width / 3,
 	},
 	actions: {
+		paddingTop: 22,
 		textAlign: 'center',
 		width: WINDOW.width / 8,
 	},

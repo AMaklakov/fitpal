@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { IntegerNumberInputPropsModel } from './types';
 import { isPositiveInteger, removeLeadingZeros } from '../../util/string.util';
-import style from './style';
+import style, { styleFocused } from './style';
 import { placeholderTextColor } from '../../css/colors.style';
 import { useTranslation } from 'react-i18next';
 
@@ -61,7 +61,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 	return (
 		<>
 			<TextInput
-				style={isFocused ? style.inputFocused : style.input}
+				style={isFocused ? styleFocused.input : style.input}
 				keyboardType="number-pad"
 				placeholder={placeholder}
 				placeholderTextColor={placeholderTextColor}
