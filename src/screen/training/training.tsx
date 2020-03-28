@@ -5,8 +5,8 @@ import H1 from '../../components/heading/h1';
 import { TrainingModel } from '../../model/training.model';
 import ShowTraining from './show-training';
 import ReorderTrainingExercise from './reorder-training-exercises';
-import { EditIcon } from '../../components/icons/edit.icon';
-import { SaveIcon } from '../../components/icons/save.icon';
+import { EditIcon } from '@icons/edit.icon';
+import { SaveIcon } from '@icons/save.icon';
 
 const Training = (props: TrainingProps) => {
 	const { training, addExerciseAction, exercises, removeExercise, changeTraining, canEdit } = props;

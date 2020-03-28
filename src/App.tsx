@@ -1,14 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
-import AppNavigator from './screen/navigator';
+import store from 'redux/store';
+import AppNavigator from 'screen/navigator';
 import { SafeAreaView, StatusBar } from 'react-native';
-import { CalendarTrainingModal } from './screen/calendar/calendar-training-modal';
-import { changeLanguage, Languages } from './i18n';
+import { changeLanguage, Languages } from 'i18n';
+import { CalendarTrainingModal } from 'screen/calendar/calendar-training-modal';
 
 changeLanguage(Languages.Ru);
 
-const App = () => {
+export const App = () => {
 	return (
 		<>
 			<StatusBar barStyle="dark-content" />
@@ -23,5 +23,3 @@ const App = () => {
 		</>
 	);
 };
-
-export default App;

@@ -9,6 +9,7 @@
 		"ios:Anna": "react-native run-ios --device=\"iPhone Анна Павлова\"",
 		"prestart": "yarn && cd ios && pod install",
 		"start": "yarn run ios",
+		"metro": "react-native start --reset-cache",
 		"test": "jest",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx"
 	},
@@ -53,6 +54,7 @@
 		"@typescript-eslint/eslint-plugin": "^2.12.0",
 		"@typescript-eslint/parser": "^2.12.0",
 		"babel-jest": "^24.9.0",
+		"babel-plugin-module-resolver": "^4.0.0",
 		"cz-conventional-changelog": "^3.1.0",
 		"eslint": "^6.5.1",
 		"eslint-config-prettier": "^6.10.0",
