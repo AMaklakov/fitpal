@@ -4,12 +4,14 @@ import { IntegerNumberInputPropsModel } from './types';
 import { isPositiveInteger, removeLeadingZeros } from '../../util/string.util';
 import style from './style';
 import { placeholderTextColor } from '../../css/colors.style';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_MIN = 0;
 const DEFAULT_MAX = 500;
 
 const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
-	const { value = 0, max = DEFAULT_MAX, min = DEFAULT_MIN, placeholder = '', onChange } = props;
+	const { value = '0', max = DEFAULT_MAX, min = DEFAULT_MIN, placeholder = '', onChange } = props;
+	const { t } = useTranslation();
 
 	const [hasError, setHasError] = useState(false);
 
@@ -46,15 +48,13 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 
 		setHasError(!valid);
 
-		console.log(123, v, Number(v), value);
-
 		if (!valid) {
 			onChange(value);
 
 			return;
 		}
 
-		onChange(Number(v));
+		onChange(v);
 	};
 
 	return (
@@ -65,11 +65,11 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 				placeholder={placeholder}
 				placeholderTextColor={placeholderTextColor}
 				onChangeText={onTextChange}
-				value={value?.toString()}
+				value={value}
 			/>
 
 			<Text style={hasError ? style.errorMessageShow : style.errorMessage}>
-				Значание в диапазоне от {min} до {max}
+				{t('Value in range from |min| to |max|', { min: min, max: max })}
 			</Text>
 		</>
 	);
