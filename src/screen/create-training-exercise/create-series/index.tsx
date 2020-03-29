@@ -17,8 +17,8 @@ export const CreateSeries = (props: IProps) => {
 	const { index, onChange, series, onRepeatIconPress } = props;
 
 	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
-	const [repeats, setRepeats] = useState<number | undefined>(series?.repeats ?? 1);
-	const [weight, setWeight] = useState<number | undefined>(series?.weight ?? 0);
+	const [repeats, setRepeats] = useState<string | undefined>(series?.repeats?.toString() ?? '1');
+	const [weight, setWeight] = useState<string | undefined>(series?.weight?.toString() ?? '0');
 
 	useEffect(() => {
 		onChange({
@@ -29,9 +29,9 @@ export const CreateSeries = (props: IProps) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sequenceNumber, repeats, weight]);
 
-	const handleSetRepeats = (v: number) => setRepeats(v);
+	const handleSetRepeats = (v: string) => setRepeats(v);
 
-	const handleSetWeight = (v: number) => setWeight(v);
+	const handleSetWeight = (v: string) => setWeight(v);
 
 	return (
 		<View style={styles.wrapper}>

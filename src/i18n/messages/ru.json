@@ -24,5 +24,6 @@
 	"Total |num| kilos": "Итого {{num}} кг",
 	"Training date": "Дата тренировки",
 	"Training name": "Название тренировки",
-	"Weight": "Вес"
+	"Weight": "Вес",
+	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}"
 }

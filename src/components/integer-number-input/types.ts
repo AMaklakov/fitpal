@@ -4,6 +4,6 @@ export interface IntegerNumberInputPropsModel {
 
 	placeholder?: string;
 
-	value?: number;
-	onChange: (v: number) => void;
+	value?: string;
+	onChange: (v: string) => void;
 }

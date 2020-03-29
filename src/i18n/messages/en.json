@@ -24,5 +24,6 @@
 	"Total |num| kilos": "Total {{num}} kg",
 	"Training date": "Training date",
 	"Training name": "Training name",
-	"Weight": "Weight"
+	"Weight": "Weight",
+	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}"
 }
