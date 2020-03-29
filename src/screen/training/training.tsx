@@ -1,6 +1,6 @@
 import { TrainingProps } from './types';
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { H1 } from '@components/heading/h1';
 import { TrainingModel } from '@model/training.model';
 import { ShowTraining } from './show-training';
@@ -23,7 +23,7 @@ const Training = (props: TrainingProps) => {
 	const handleEditButtonPress = () => changeIsEdit(prevState => !prevState);
 
 	return (
-		<ScrollView>
+		<View style={{ flex: 1 }}>
 			<View
 				style={{
 					flexDirection: 'row',
@@ -46,7 +46,7 @@ const Training = (props: TrainingProps) => {
 					training={training}
 				/>
 			)}
-		</ScrollView>
+		</View>
 	);
 };
 
