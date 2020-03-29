@@ -9,6 +9,7 @@ module.exports = {
 				alias: {
 					'*': './src',
 					'@screen': './src/screen',
+					'@i18n': './src/i18n',
 					'@css': './src/css',
 					'@redux': './src/redux',
 					'@model': './src/model',

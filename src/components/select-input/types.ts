@@ -6,6 +6,8 @@ export interface SelectInputProps<T extends Item> {
 	items: T[];
 	value?: PropType<T, 'value'> | null;
 	onChange: (value: PropType<T, 'value'> | null, index: number) => void;
+	onDonePress?: () => void;
+	placeholder?: T | {};
 
 	styles?: StyleSheet.NamedStyles<any>;
 }

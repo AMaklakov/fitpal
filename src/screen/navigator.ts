@@ -2,14 +2,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { CalendarScreen } from '@screen/calendar/calendar';
 import { TrainingScreen } from '@screen/training';
-import { HomeScreen } from '@screen/home';
 import { ExerciseListScreen } from '@screen/exercise-list';
 import { CreateTrainingExerciseScreen } from '@screen/create-training-exercise';
 import { ExerciseScreen } from '@screen/exercise/exercise.screen';
 import { ExerciseCreateScreen } from '@screen/exercise-create/exercise-create.screen';
+import { SettingsScreen } from '@screen/settings/settings';
 
 export enum Routes {
-	Home = 'Home',
+	Settings = 'Settings',
 
 	Calendar = 'Calendar',
 	Training = 'Training',
@@ -22,7 +22,7 @@ export enum Routes {
 
 const AppNavigator = createStackNavigator(
 	{
-		[Routes.Home]: { screen: HomeScreen },
+		[Routes.Settings]: { screen: SettingsScreen },
 		[Routes.Calendar]: { screen: CalendarScreen },
 		[Routes.Training]: { screen: TrainingScreen },
 		[Routes.CreateTrainingExercise]: { screen: CreateTrainingExerciseScreen },
@@ -32,7 +32,7 @@ const AppNavigator = createStackNavigator(
 		[Routes.ExerciseCreate]: { screen: ExerciseCreateScreen },
 	},
 	{
-		initialRouteName: Routes.Home,
+		initialRouteName: Routes.Calendar,
 		headerMode: 'none',
 	}
 );
