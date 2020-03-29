@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { DEFAULT_DATE_FORMAT, formatDate, getToday } from '../../util/date.util';
 import moment from 'moment';
@@ -18,6 +18,7 @@ import { getTrainingListByDate } from '../../redux/selector/training.selector';
 import { StoreModel } from '../../redux/store';
 import { deleteTrainingByIdAction } from '../../redux/action/training.action';
 import { useTranslation } from 'react-i18next';
+import Modal from 'react-native-modal';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
@@ -35,10 +36,33 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { t } = useTranslation();
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
+	const [selectedTraining, changeStateToDelete] = useState();
 	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
 		fetchTrainingListByDate,
 		selectedDate,
 	]);
+
+	const styles = StyleSheet.create({
+		h1: {
+			fontSize: 24,
+			textAlign: 'center',
+			color: 'white',
+			paddingBottom: 24,
+		},
+	});
+
+	const handleOpenGuardModal = (training: TrainingModel) => {
+		changeStateToDelete(training);
+	};
+
+	const closeModal = () => {
+		changeStateToDelete('');
+	};
+
+	const deleteTraining = () => {
+		handleDeleteTraining(selectedTraining);
+		changeStateToDelete('');
+	};
 
 	const handleChangeSelectedDate = (date: moment.Moment) => {
 		changeSelectedDate(date);
@@ -68,10 +92,20 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 			<TrainingListMinimalView
 				onCopy={handleCopyTraining}
-				onDelete={handleDeleteTraining}
+				onDelete={handleOpenGuardModal}
 				trainingList={trainingList}
 				onTrainingPress={handleOnTrainingTouch}
 			/>
+
+			<View>
+				<Modal isVisible={selectedTraining}>
+					<View style={{ flex: 1 }}>
+						<Text style={styles.h1}>Вы действительно желаете удалить {selectedTraining?.name} ?</Text>
+						<Button title="Delete" onPress={deleteTraining} />
+						<Button title="Hide modal" onPress={closeModal} />
+					</View>
+				</Modal>
+			</View>
 
 			<Button title={t('Add training +')} onPress={handleCreateTraining} />
 		</View>
