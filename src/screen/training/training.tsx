@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native';
 import H1 from '../../components/heading/h1';
 import { TrainingModel } from '../../model/training.model';
 import ShowTraining from './show-training';
-import ReorderTrainingExercise from './reorder-training-exercises';
+import { ReorderTrainingExercise } from './reorder-training-exercises';
 import { EditIcon } from '@icons/edit.icon';
 import { SaveIcon } from '@icons/save.icon';
 
