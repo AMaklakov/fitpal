@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '@css/colors.style';
 
 const style = StyleSheet.create({
 	table: {
@@ -30,6 +31,15 @@ const style = StyleSheet.create({
 		textAlign: 'right',
 		paddingRight: 25,
 		paddingTop: 10,
+	},
+	wrapper: {
+		backgroundColor: Colors.Default,
+
+		borderBottomWidth: 0.3,
+		borderBottomColor: Colors.Grey,
+	},
+	innerWrapper: {
+		paddingBottom: 10,
 	},
 });
 
