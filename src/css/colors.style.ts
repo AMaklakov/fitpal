@@ -1,6 +1,8 @@
 export const placeholderTextColor = 'darkgray';
 
 export enum Colors {
+	Default = '#F2F2F2',
+
 	LightBlue = '#83AEC8',
 	LightBlueTranslucent = 'rgba(131, 174, 200, 0.5)',
 	DarkBlue = '#29657A',

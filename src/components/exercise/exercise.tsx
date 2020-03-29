@@ -15,8 +15,8 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 	const onPressAction = () => onPress && onPress(trainingExercise);
 
 	return (
-		<TouchableOpacity activeOpacity={0.7} onLongPress={onLongPressAction} onPress={onPressAction}>
-			<View>
+		<TouchableOpacity activeOpacity={1} onLongPress={onLongPressAction} onPress={onPressAction} style={style.wrapper}>
+			<View style={style.innerWrapper}>
 				<H2 text={exerciseList?.find(e => e.id === exerciseId)?.name || ''} />
 
 				<View style={style.table}>

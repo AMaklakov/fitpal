@@ -1,42 +1,31 @@
 import React, { useMemo } from 'react';
-import { ActionSheetIOS, Button, StyleSheet, Text, View } from 'react-native';
-import TrainingExercise from '../../components/exercise/exercise';
-import { ShowTrainingProps } from './types';
-import { calculateTrainingTotal } from '../../components/exercise';
-import { TrainingExerciseModel } from '../../model/training.model';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { calculateTrainingTotal } from '@components/exercise';
+import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { useTranslation } from 'react-i18next';
+import { ExerciseModel } from '@model/exercise.model';
+import { TrainingExerciseSwipeList } from '@components/training-exercise-swipe-list/training-exercise-swipe-list';
 
-const ShowTraining = (props: ShowTrainingProps) => {
+interface IProps {
+	training: TrainingModel;
+	exercises: ExerciseModel[];
+
+	addExerciseAction: (e?: TrainingExerciseModel) => void;
+	removeExercise: (e: TrainingExerciseModel) => void;
+}
+
+export const ShowTraining = (props: IProps) => {
 	const { exercises, training, addExerciseAction, removeExercise } = props;
 	const { exerciseList = [] } = training;
 	const { t } = useTranslation();
 
 	const total = useMemo(() => calculateTrainingTotal(training), [training]);
 
-	const editExercise = (e: TrainingExerciseModel) => addExerciseAction(e);
+	const handleEditExercise = (e: TrainingExerciseModel) => addExerciseAction(e);
 
-	const longTapAction = (e: TrainingExerciseModel) => {
-		const options = [t('Cancel'), t('Delete'), t('Edit')];
+	const handleAddExercise = () => addExerciseAction();
 
-		ActionSheetIOS.showActionSheetWithOptions(
-			{
-				options,
-				cancelButtonIndex: 0,
-			},
-			buttonIndex => {
-				switch (buttonIndex) {
-					case 1:
-						removeExercise(e);
-						return;
-					case 2:
-						editExercise(e);
-						return;
-					default:
-						return;
-				}
-			}
-		);
-	};
+	const longTapAction = (e: TrainingExerciseModel) => undefined;
 
 	return (
 		<>
@@ -47,16 +36,21 @@ const ShowTraining = (props: ShowTrainingProps) => {
 					</View>
 				)}
 
-				{exerciseList.map(e => (
-					<TrainingExercise trainingExercise={e} key={e.id} exerciseList={exercises} onLongPress={longTapAction} />
-				))}
+				<TrainingExerciseSwipeList
+					canEdit={true}
+					trainingExerciseList={exerciseList}
+					exerciseList={exercises}
+					onRowDelete={removeExercise}
+					onRowEdit={handleEditExercise}
+					onRowLongPress={longTapAction}
+				/>
 			</View>
 
 			<View style={style.total}>
 				<Text style={style.totalText}>{t('Total |num| kilos', { num: total })}</Text>
 			</View>
 
-			<Button title={t('Add exercise +')} onPress={() => addExerciseAction()} />
+			<Button title={t('Add exercise +')} onPress={handleAddExercise} />
 		</>
 	);
 };
@@ -78,5 +72,3 @@ const style = StyleSheet.create({
 		textAlign: 'center',
 	},
 });
-
-export default ShowTraining;

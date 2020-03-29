@@ -12,11 +12,3 @@ export interface TrainingProps {
 
 	canEdit: boolean;
 }
-
-export interface ShowTrainingProps {
-	training: TrainingModel;
-	exercises: ExerciseModel[];
-
-	addExerciseAction: (e?: TrainingExerciseModel) => void;
-	removeExercise: (e: TrainingExerciseModel) => void;
-}
