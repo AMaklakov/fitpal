@@ -25,17 +25,12 @@ export const ShowTraining = (props: IProps) => {
 
 	const handleAddExercise = () => addExerciseAction();
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const longTapAction = (e: TrainingExerciseModel) => undefined;
 
 	return (
-		<>
+		<View style={style.wrapper}>
 			<View style={style.wrapper}>
-				{exerciseList.length === 0 && (
-					<View style={style.noExercises}>
-						<Text style={style.noExerciseText}>{t('No exercises')}</Text>
-					</View>
-				)}
-
 				<TrainingExerciseSwipeList
 					canEdit={true}
 					trainingExerciseList={exerciseList}
@@ -44,14 +39,16 @@ export const ShowTraining = (props: IProps) => {
 					onRowEdit={handleEditExercise}
 					onRowLongPress={longTapAction}
 				/>
+
+				<View style={style.total}>
+					<Text style={style.totalText}>{t('Total |num| kilos', { num: total })}</Text>
+				</View>
 			</View>
 
-			<View style={style.total}>
-				<Text style={style.totalText}>{t('Total |num| kilos', { num: total })}</Text>
+			<View style={style.button}>
+				<Button title={t('Add exercise +')} onPress={handleAddExercise} />
 			</View>
-
-			<Button title={t('Add exercise +')} onPress={handleAddExercise} />
-		</>
+		</View>
 	);
 };
 
@@ -70,5 +67,11 @@ const style = StyleSheet.create({
 	},
 	noExerciseText: {
 		textAlign: 'center',
+	},
+	button: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'baseline',
+		height: 80,
 	},
 });
