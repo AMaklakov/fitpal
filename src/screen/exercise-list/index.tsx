@@ -35,4 +35,4 @@ const mapStateToProps = (store: StoreModel) => {
 	};
 };
 
-export default connect(mapStateToProps)(Component);
+export const ExerciseListScreen = connect(mapStateToProps)(Component);

@@ -1,12 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import HomeScreen from './home';
-import ExerciseListScreen from './exercise-list';
-import CreateTrainingExerciseScreen from './create-training-exercise';
-import { CalendarScreen } from './calendar/calendar';
-import { TrainingScreen } from './training';
-import { ExerciseScreen } from './exercise/exercise.screen';
-import { ExerciseCreateScreen } from './exercise-create/exercise-create.screen';
+import { CalendarScreen } from '@screen/calendar/calendar';
+import { TrainingScreen } from '@screen/training';
+import { HomeScreen } from '@screen/home';
+import { ExerciseListScreen } from '@screen/exercise-list';
+import { CreateTrainingExerciseScreen } from '@screen/create-training-exercise';
+import { ExerciseScreen } from '@screen/exercise/exercise.screen';
+import { ExerciseCreateScreen } from '@screen/exercise-create/exercise-create.screen';
 
 export enum Routes {
 	Home = 'Home',

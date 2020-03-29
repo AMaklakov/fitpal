@@ -66,4 +66,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	},
 });
 
-export default connect<IState, IDispatch, IProps, StoreModel>(mapStateToProps, mapDispatchToProps)(Screen);
+export const CreateTrainingExerciseScreen = connect<IState, IDispatch, IProps, StoreModel>(
+	mapStateToProps,
+	mapDispatchToProps
+)(Screen);

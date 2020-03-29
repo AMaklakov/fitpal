@@ -4,7 +4,7 @@ import { Routes } from '../navigator';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
 import { useTranslation } from 'react-i18next';
 
-const HomeScreen = (props: NavigationPropsModel) => {
+export const HomeScreen = (props: NavigationPropsModel) => {
 	const { t } = useTranslation();
 	const goToPage = (page: Routes) => () => props.navigation.navigate(page);
 
@@ -15,5 +15,3 @@ const HomeScreen = (props: NavigationPropsModel) => {
 		</View>
 	);
 };
-
-export default HomeScreen;
