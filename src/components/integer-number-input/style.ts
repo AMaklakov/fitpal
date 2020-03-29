@@ -7,12 +7,19 @@ const style = StyleSheet.create({
 		color: 'black',
 		borderWidth: 1,
 		borderColor: 'black',
+		paddingHorizontal: 15,
+		borderRadius: 15,
+		height: 50,
 	},
 	errorMessageShow: {
 		color: 'red',
 	},
-	errorMessage: {
-		display: 'none',
+});
+
+export const styleFocused = StyleSheet.create({
+	input: {
+		...style.input,
+		borderColor: '#6cbbf7',
 	},
 });
 

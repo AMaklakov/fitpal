@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { IntegerNumberInputPropsModel } from './types';
 import { isPositiveInteger, removeLeadingZeros } from '../../util/string.util';
-import style from './style';
+import style, { styleFocused } from './style';
 import { placeholderTextColor } from '../../css/colors.style';
 import { useTranslation } from 'react-i18next';
 
@@ -14,6 +14,7 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 	const { t } = useTranslation();
 
 	const [hasError, setHasError] = useState(false);
+	const [isFocused, setFocused] = useState(false);
 
 	const isValid = (v: string): boolean => {
 		if (v === '' || v === '0') {
@@ -60,17 +61,19 @@ const IntegerNumberInput = (props: IntegerNumberInputPropsModel) => {
 	return (
 		<>
 			<TextInput
-				style={style.input}
+				style={isFocused ? styleFocused.input : style.input}
 				keyboardType="number-pad"
 				placeholder={placeholder}
 				placeholderTextColor={placeholderTextColor}
 				onChangeText={onTextChange}
+				onFocus={() => setFocused(() => true)}
+				onBlur={() => setFocused(() => false)}
 				value={value}
 			/>
 
-			<Text style={hasError ? style.errorMessageShow : style.errorMessage}>
-				{t('Value in range from |min| to |max|', { min: min, max: max })}
-			</Text>
+			{hasError && (
+				<Text style={style.errorMessageShow}>{t('Value in range from |min| to |max|', { min: min, max: max })}</Text>
+			)}
 		</>
 	);
 };
