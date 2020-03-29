@@ -4,6 +4,7 @@ import { ExerciseListProps } from './types';
 import { mapExerciseListToSectionList } from './util';
 import { ExerciseModel } from '../../model/exercise.model';
 import { useTranslation } from 'react-i18next';
+import { Colors } from '@css/colors.style';
 
 const ExerciseList = (props: ExerciseListProps) => {
 	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 10,
 		paddingRight: 10,
 		paddingBottom: 2,
+		backgroundColor: Colors.LightGrey,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},
