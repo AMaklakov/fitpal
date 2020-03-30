@@ -9,7 +9,7 @@ import ShowSelectedExercise from './show-selected-exercise';
 import { CancelIcon } from '../../components/icons/cancel.icon';
 import { addEmptySeries, editSeriesBySequenceNumber, popSeries, repeatLastSeries } from './helpers';
 import { useTranslation } from 'react-i18next';
-import H1 from '../../components/heading/h1';
+import { H1 } from '../../components/heading/h1';
 import { Colors } from '../../css/colors.style';
 import { SaveIcon } from '../../components/icons/save.icon';
 

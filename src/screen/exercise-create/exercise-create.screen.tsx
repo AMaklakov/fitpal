@@ -5,7 +5,7 @@ import { StoreModel } from '../../redux/store';
 import { NavigationPropsModel } from '../../model/navigation-props.model';
 import { getExerciseById } from '../../redux/selector/exercise.selector';
 import { ExerciseModel } from '../../model/exercise.model';
-import H1 from '../../components/heading/h1';
+import { H1 } from '../../components/heading/h1';
 import StringInput from '../../components/string-input/string-input';
 import { WithOptional } from '../../util/type.util';
 import { createExerciseAction, updateExerciseAction } from '../../redux/action/exercise.action';
