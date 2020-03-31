@@ -1,40 +1,27 @@
 import { TrainingProps } from './types';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { H1 } from '@components/heading/h1';
 import { TrainingModel } from '@model/training.model';
 import { ShowTraining } from './show-training';
 import { ReorderTrainingExercise } from './reorder-training-exercises';
-import { EditIcon } from '@icons/edit.icon';
-import { SaveIcon } from '@icons/save.icon';
+import { TrainingHeading } from '@screen/training/components/training-heading';
+import { TrainingStatusBar } from '@screen/training/components/training-status-bar';
 
-const Training = (props: TrainingProps) => {
-	const { training, addExerciseAction, exercises, removeExercise, changeTraining, canEdit } = props;
+export const Training = (props: TrainingProps) => {
+	const { training, addExerciseAction, exercises, removeExercise, changeTraining, canEdit = true, onUpdateTrainingName } = props;
 
 	if (!training) {
 		throw new Error(`No training present`);
 	}
 
-	const { date } = training;
 	const [isEdit, changeIsEdit] = useState(false);
 
 	const reorderExercises = (t: TrainingModel) => changeTraining(t);
 
-	const handleEditButtonPress = () => changeIsEdit(prevState => !prevState);
-
 	return (
 		<View style={{ flex: 1 }}>
-			<View
-				style={{
-					flexDirection: 'row',
-					paddingHorizontal: '5%',
-					justifyContent: 'space-around',
-				}}>
-				<H1 text={training?.name + ' ' + date} />
-
-				{canEdit && isEdit && <SaveIcon onPress={handleEditButtonPress} />}
-				{canEdit && !isEdit && <EditIcon onPress={handleEditButtonPress} />}
-			</View>
+			<TrainingStatusBar training={training} />
+			<TrainingHeading training={training} canEdit={canEdit} onUpdateTrainingName={onUpdateTrainingName} />
 
 			{isEdit ? (
 				<ReorderTrainingExercise exercises={exercises} training={training} changeTraining={reorderExercises} />
@@ -49,5 +36,3 @@ const Training = (props: TrainingProps) => {
 		</View>
 	);
 };
-
-export default Training;

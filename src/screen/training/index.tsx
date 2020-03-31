@@ -1,17 +1,17 @@
 import React from 'react';
-import Training from './training';
-import { StoreModel } from '../../redux/store';
-import { getTrainingById } from '../../redux/selector/training.selector';
+import { Training } from './training';
+import { StoreModel } from '@redux/store';
+import { getTrainingById } from '@redux/selector/training.selector';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { Routes } from '../navigator';
-import { getExerciseList } from '../../redux/selector/exercise.selector';
+import { Routes } from '@screen/navigator';
+import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
-import { deleteTrainingExerciseByTrainingId } from '../../redux/action/training-exercise.action';
-import { PropType } from '../../util/type.util';
-import { changeTraining } from '../../redux/action/training.action';
-import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
-import { NavigationPropsModel } from '../../model/navigation-props.model';
-import { ExerciseModel } from '../../model/exercise.model';
+import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
+import { PropType } from '@util/type.util';
+import { changeTraining } from '@redux/action/training.action';
+import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { NavigationPropsModel } from '@model/navigation-props.model';
+import { ExerciseModel } from '@model/exercise.model';
 
 interface IState {
 	training?: TrainingModel;
@@ -46,12 +46,20 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		onRemoveTrainingExercise(trainingExercise, training.id);
 	};
 
+	const handleUpdateTrainingName = (name: string) => {
+		onChangeTraining({
+			...(training as TrainingModel),
+			name,
+		});
+	};
+
 	return (
 		<Training
 			training={training}
 			canEdit={true}
 			addExerciseAction={addExerciseAction}
 			removeExercise={removeExerciseAction}
+			onUpdateTrainingName={handleUpdateTrainingName}
 			changeTraining={onChangeTraining}
 			exercises={exercises}
 		/>

@@ -25,5 +25,6 @@
 	"Training date": "Training date",
 	"Training name": "Training name",
 	"Weight": "Weight",
-	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}"
+	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}",
+	"Exercises number": "Exercises:"
 }

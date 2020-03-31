@@ -1,23 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { BaseHeading, IHeadingProps } from '@components/heading/base-heading';
 
-const styles = StyleSheet.create({
-	h2: {
-		fontSize: 20,
-		textAlign: 'center',
-		paddingBottom: 10,
-		paddingTop: 10,
-	},
-});
-
-export const H2 = (props: { text?: string; numberOfLines?: number }) => {
-	const { text, numberOfLines } = props;
-
-	return (
-		<View>
-			<Text style={styles.h2} numberOfLines={numberOfLines}>
-				{text}
-			</Text>
-		</View>
-	);
-};
+export const H2 = (props: IHeadingProps) => <BaseHeading fontSize={20} {...props} />;

@@ -9,6 +9,7 @@ export interface TrainingProps {
 
 	addExerciseAction: (e?: TrainingExerciseModel) => void;
 	removeExercise: (e: TrainingExerciseModel) => void;
+	onUpdateTrainingName: (name: string) => void;
 
 	canEdit: boolean;
 }

@@ -25,5 +25,6 @@
 	"Training date": "Дата тренировки",
 	"Training name": "Название тренировки",
 	"Weight": "Вес",
-	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}"
+	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}",
+	"Exercises number": "Упражнений:"
 }
