@@ -36,7 +36,7 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { t } = useTranslation();
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
-	const [selectedTraining, changeStateToDelete] = useState();
+	const [trainingToDelete, changeTrainingToDelete] = useState();
 	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
 		fetchTrainingListByDate,
 		selectedDate,
@@ -51,17 +51,17 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 		},
 	});
 
-	const handleOpenGuardModal = (training: TrainingModel) => {
-		changeStateToDelete(training);
+	const handleOpenDeleteTrainingConfirm = (training: TrainingModel) => {
+		changeTrainingToDelete(training);
 	};
 
-	const closeModal = () => {
-		changeStateToDelete('');
+	const handleCloseDeleteTrainingConfirm = () => {
+		changeTrainingToDelete('');
 	};
 
 	const deleteTraining = () => {
-		handleDeleteTraining(selectedTraining);
-		changeStateToDelete('');
+		handleDeleteTraining(trainingToDelete);
+		changeTrainingToDelete(undefined);
 	};
 
 	const handleChangeSelectedDate = (date: moment.Moment) => {
@@ -92,17 +92,17 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 			<TrainingListMinimalView
 				onCopy={handleCopyTraining}
-				onDelete={handleOpenGuardModal}
+				onDelete={handleOpenDeleteTrainingConfirm}
 				trainingList={trainingList}
 				onTrainingPress={handleOnTrainingTouch}
 			/>
 
 			<View>
-				<Modal isVisible={selectedTraining}>
+				<Modal isVisible={!!trainingToDelete}>
 					<View style={{ flex: 1 }}>
-						<Text style={styles.h1}>Вы действительно желаете удалить {selectedTraining?.name} ?</Text>
-						<Button title="Delete" onPress={deleteTraining} />
-						<Button title="Hide modal" onPress={closeModal} />
+						<Text style={styles.h1}>{t('Are you sure want to delete |item| ?', { item: trainingToDelete?.name })}</Text>
+						<Button title={t('Delete')} onPress={deleteTraining} />
+						<Button title={t('Hide modal')} onPress={handleCloseDeleteTrainingConfirm} />
 					</View>
 				</Modal>
 			</View>
