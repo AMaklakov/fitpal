@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { DEFAULT_DATE_FORMAT, formatDate, getToday } from '../../util/date.util';
 import moment from 'moment';
@@ -18,6 +18,9 @@ import { getTrainingListByDate } from '../../redux/selector/training.selector';
 import { StoreModel } from '../../redux/store';
 import { deleteTrainingByIdAction } from '../../redux/action/training.action';
 import { useTranslation } from 'react-i18next';
+import Modal from 'react-native-modal';
+import { Colors } from '@css/colors.style';
+import { H2 } from '@components/heading/h2';
 
 interface IDispatchToProps {
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
@@ -35,10 +38,27 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { t } = useTranslation();
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
+	const [trainingToDelete, changeTrainingToDelete] = useState<TrainingModel | undefined>();
 	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
 		fetchTrainingListByDate,
 		selectedDate,
 	]);
+
+	const handleOpenDeleteTrainingConfirm = (training: TrainingModel) => {
+		changeTrainingToDelete(training);
+	};
+
+	const handleCloseDeleteTrainingConfirm = () => {
+		changeTrainingToDelete(undefined);
+	};
+
+	const deleteTraining = () => {
+		if (trainingToDelete) {
+			handleDeleteTraining(trainingToDelete);
+		}
+
+		handleCloseDeleteTrainingConfirm();
+	};
 
 	const handleChangeSelectedDate = (date: moment.Moment) => {
 		changeSelectedDate(date);
@@ -68,15 +88,46 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 			<TrainingListMinimalView
 				onCopy={handleCopyTraining}
-				onDelete={handleDeleteTraining}
+				onDelete={handleOpenDeleteTrainingConfirm}
 				trainingList={trainingList}
 				onTrainingPress={handleOnTrainingTouch}
 			/>
+
+			<View>
+				<Modal isVisible={!!trainingToDelete}>
+					<View style={styles.modal}>
+						<H2
+							style={styles.h2}
+							text={t('Are you sure want to delete |item| ?', { item: trainingToDelete?.name || '' })}
+						/>
+
+						<View style={styles.buttonWrapper}>
+							<Button color={Colors.LightRed} title={t('Delete')} onPress={deleteTraining} />
+							<Button title={t('Hide modal')} onPress={handleCloseDeleteTrainingConfirm} />
+						</View>
+					</View>
+				</Modal>
+			</View>
 
 			<Button title={t('Add training +')} onPress={handleCreateTraining} />
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	modal: {
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		backgroundColor: Colors.White,
+	},
+	h2: {
+		paddingBottom: 24,
+	},
+	buttonWrapper: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
