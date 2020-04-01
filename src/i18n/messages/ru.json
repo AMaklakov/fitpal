@@ -27,6 +27,6 @@
 	"Weight": "Вес",
 	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}",
 	"Exercises number": "Упражнений:",
-	"Are you sure want to delete |item| ?": "Вы действительно желаете удалить {{item}} ?",
+	"Are you sure want to delete |item| ?": "Вы действительно желаете удалить \"{{item}}\" ?",
 	"Hide modal": "Вернуться"
 }
