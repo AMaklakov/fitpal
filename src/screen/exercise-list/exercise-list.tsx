@@ -45,7 +45,7 @@ const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: Exer
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginHorizontal: 16,
+		marginHorizontal: 1,
 	},
 	listContainer: {
 		flex: 1,
