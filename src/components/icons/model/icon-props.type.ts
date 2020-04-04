@@ -1,4 +1,4 @@
-import { ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export interface IconProps {
 	onPress?: () => void;
@@ -7,5 +7,8 @@ export interface IconProps {
 
 	size?: number;
 	color?: string;
-	style?: ViewStyle;
+
+	activeOpacity?: number;
+	style?: StyleProp<TextStyle>;
+	touchableStyle?: StyleProp<ViewStyle>;
 }

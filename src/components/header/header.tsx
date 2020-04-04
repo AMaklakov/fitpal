@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { MenuIcon } from '@icons/menu.icon';
 import { Colors } from '@css/colors.style';
 import { StoreModel } from '@redux/store';
@@ -18,9 +18,7 @@ const Component = (props: IProps & IState & IDispatch) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<TouchableOpacity activeOpacity={0.1} style={styles.menuIconHolder}>
-				<MenuIcon onPressIn={onOpenMenu} />
-			</TouchableOpacity>
+			<MenuIcon activeOpacity={0.7} touchableStyle={styles.menuIconHolder} onPress={onOpenMenu} />
 		</View>
 	);
 };
