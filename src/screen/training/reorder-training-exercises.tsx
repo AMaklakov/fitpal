@@ -3,7 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList, { RenderItemParams } from 'react-native-draggable-flatlist';
 import { ReorderIcon } from '@icons/reorder.icon';
 import { ExerciseModel } from '@model/exercise.model';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { TrainingModel } from '@model/training.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 import { Colors } from '@css/colors.style';
 
 interface IProps {
@@ -16,11 +17,11 @@ interface IProps {
 export const ReorderTrainingExercise = (props: IProps) => {
 	const { changeTraining, exercises, training } = props;
 
-	const updateTraining = (data: TrainingExerciseModel[]) => changeTraining({ ...training, exerciseList: data });
+	const updateTraining = (data: IBaseTrainingExercise[]) => changeTraining({ ...training, exerciseList: data });
 
 	return (
 		<View style={styles.wrapper}>
-			<DraggableFlatList<TrainingExerciseModel>
+			<DraggableFlatList<IBaseTrainingExercise>
 				keyExtractor={exercise => exercise.id}
 				data={training.exerciseList}
 				renderItem={RenderItem(exercises)}
@@ -34,7 +35,7 @@ const RenderItem = (exerciseList: ExerciseModel[]) => ({
 	item,
 	drag,
 	isActive,
-}: RenderItemParams<TrainingExerciseModel>) => {
+}: RenderItemParams<IBaseTrainingExercise>) => {
 	return (
 		<TouchableOpacity
 			activeOpacity={0.9}

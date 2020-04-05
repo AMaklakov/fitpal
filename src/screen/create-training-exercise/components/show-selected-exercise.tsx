@@ -1,7 +1,7 @@
 import React from 'react';
-import { SelectedItemViewComponentProps } from '../../components/autocomplete-input/types';
+import { SelectedItemViewComponentProps } from '@components/autocomplete-input/types';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { ExerciseModel } from '../../model/exercise.model';
+import { ExerciseModel } from '@model/exercise.model';
 
 const styles = StyleSheet.create({
 	container: {

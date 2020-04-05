@@ -2,9 +2,10 @@ import { TrainingExerciseProps } from './types';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import style from './styles';
-import { calcTotal } from './index';
 import { H2 } from '../heading/h2';
 import { useTranslation } from 'react-i18next';
+import { calcTotal } from '@util/training-exercise.util';
+import { ISeries } from '@model/training-exercise';
 
 const TrainingExercise = (props: TrainingExerciseProps) => {
 	const { trainingExercise, exerciseList, onLongPress, onPress } = props;
@@ -26,7 +27,7 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 						<Text>🏋</Text>
 					</View>
 
-					{seriesList.map((s, index) => (
+					{seriesList.map((s: ISeries, index: number) => (
 						<View key={index} style={style.tableBody}>
 							<Text>{s.sequenceNumber}</Text>
 							<Text>{s.repeats}</Text>

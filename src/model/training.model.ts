@@ -1,20 +1,4 @@
-import { PropType } from '../util/type.util';
-import { ExerciseModel } from './exercise.model';
-
-export interface SeriesModel {
-	sequenceNumber: number;
-
-	repeats: number;
-	weight: number;
-}
-
-export interface TrainingExerciseModel {
-	id: string;
-	exerciseId: PropType<ExerciseModel, 'id'>;
-	sequenceNumber: number;
-
-	seriesList: SeriesModel[];
-}
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export interface TrainingModel {
 	id: string;
@@ -22,7 +6,7 @@ export interface TrainingModel {
 
 	name: string;
 
-	exerciseList: TrainingExerciseModel[];
+	exerciseList: IBaseTrainingExercise[];
 }
 
 export const isTrainingValid = (training?: Partial<TrainingModel>): boolean => {

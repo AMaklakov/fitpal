@@ -1,6 +1,7 @@
 import { Action } from 'redux';
-import { PropType } from '../../util/type.util';
-import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
+import { PropType } from '@util/type.util';
+import { TrainingModel } from '@model/training.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export enum TrainingActions {
 	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
@@ -14,7 +15,7 @@ export enum TrainingActions {
 
 export type TrainingExerciseByTrainingId = {
 	trainingId: PropType<TrainingModel, 'id'>;
-	exercise: TrainingExerciseModel;
+	exercise: IBaseTrainingExercise;
 };
 
 export type TrainingExerciseAction<PayloadType extends Object = TrainingExerciseByTrainingId> = Action<
@@ -23,7 +24,7 @@ export type TrainingExerciseAction<PayloadType extends Object = TrainingExercise
 
 export const createTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: TrainingExerciseModel
+	exercise: IBaseTrainingExercise
 ): TrainingExerciseAction => ({
 	type: TrainingActions.CreateTrainingExerciseByTrainingId,
 
@@ -35,7 +36,7 @@ export const createTrainingExerciseByTrainingId = (
 
 export const editTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: TrainingExerciseModel
+	exercise: IBaseTrainingExercise
 ): TrainingExerciseAction => ({
 	type: TrainingActions.EditTrainingExerciseByTrainingId,
 
@@ -47,7 +48,7 @@ export const editTrainingExerciseByTrainingId = (
 
 export const deleteTrainingExerciseByTrainingId = (
 	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: TrainingExerciseModel
+	exercise: IBaseTrainingExercise
 ): TrainingExerciseAction => ({
 	type: TrainingActions.DeleteTrainingExerciseByTrainingId,
 

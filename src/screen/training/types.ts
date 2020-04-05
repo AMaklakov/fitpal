@@ -1,5 +1,6 @@
-import { TrainingExerciseModel, TrainingModel } from '../../model/training.model';
-import { ExerciseModel } from '../../model/exercise.model';
+import { TrainingModel } from '@model/training.model';
+import { ExerciseModel } from '@model/exercise.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export interface TrainingProps {
 	training?: TrainingModel;
@@ -7,8 +8,8 @@ export interface TrainingProps {
 
 	exercises: ExerciseModel[];
 
-	addExerciseAction: (e?: TrainingExerciseModel) => void;
-	removeExercise: (e: TrainingExerciseModel) => void;
+	addExerciseAction: (e?: IBaseTrainingExercise) => void;
+	removeExercise: (e: IBaseTrainingExercise) => void;
 	onUpdateTrainingName: (name: string) => void;
 
 	canEdit: boolean;

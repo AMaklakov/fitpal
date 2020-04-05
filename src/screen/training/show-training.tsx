@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { calculateTrainingTotal } from '@components/exercise';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
+import { TrainingModel } from '@model/training.model';
 import { useTranslation } from 'react-i18next';
 import { ExerciseModel } from '@model/exercise.model';
 import { TrainingExerciseSwipeList } from '@components/training-exercise-swipe-list/training-exercise-swipe-list';
+import { IBaseTrainingExercise } from '@model/training-exercise';
+import { calculateTrainingTotal } from '@util/training-exercise.util';
 
 interface IProps {
 	training: TrainingModel;
 	exercises: ExerciseModel[];
 
-	addExerciseAction: (e?: TrainingExerciseModel) => void;
-	removeExercise: (e: TrainingExerciseModel) => void;
+	addExerciseAction: (e?: IBaseTrainingExercise) => void;
+	removeExercise: (e: IBaseTrainingExercise) => void;
 }
 
 export const ShowTraining = (props: IProps) => {
@@ -21,12 +22,12 @@ export const ShowTraining = (props: IProps) => {
 
 	const total = useMemo(() => calculateTrainingTotal(training), [training]);
 
-	const handleEditExercise = (e: TrainingExerciseModel) => addExerciseAction(e);
+	const handleEditExercise = (e: IBaseTrainingExercise) => addExerciseAction(e);
 
 	const handleAddExercise = () => addExerciseAction();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const longTapAction = (e: TrainingExerciseModel) => undefined;
+	const longTapAction = (e: IBaseTrainingExercise) => undefined;
 
 	return (
 		<View style={style.wrapper}>
