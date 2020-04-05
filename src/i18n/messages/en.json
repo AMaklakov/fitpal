@@ -28,5 +28,10 @@
 	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}",
 	"Exercises number": "Exercises:",
 	"Are you sure want to delete |item| ?": "Are you sure want to delete \"{{item}}\" ?",
-	"Hide modal": "Hide modal"
+	"Hide modal": "Hide modal",
+	"Calendar": "Calendar",
+	"Settings": "Settings",
+	"Language": "Language",
+	"Ru": "Russian",
+	"En": "English"
 }

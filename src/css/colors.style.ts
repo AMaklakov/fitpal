@@ -8,6 +8,7 @@ export enum Colors {
 	DarkBlue = '#29657A',
 	DarkerBlue = '#123540',
 	Black = '#182736',
+	BlackTranslucent = 'rgba(24, 39, 54, 0.8)',
 
 	DarkerRed = '#7F4660',
 	DarkRed = '#A6596F',

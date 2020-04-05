@@ -50,6 +50,7 @@
 		/* Base directory to resolve non-absolute module names. */
 		"paths": {
 			"@screen/*": ["screen/*"],
+			"@i18n/*": ["i18n/*"],
 			"@css/*": ["css/*"],
 			"@redux/*": ["redux/*"],
 			"@model/*": ["model/*"],

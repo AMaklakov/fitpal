@@ -1,15 +1,15 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import HomeScreen from './home';
-import ExerciseListScreen from './exercise-list';
-import CreateTrainingExerciseScreen from './create-training-exercise';
-import { CalendarScreen } from './calendar/calendar';
-import { TrainingScreen } from './training';
-import { ExerciseScreen } from './exercise/exercise.screen';
-import { ExerciseCreateScreen } from './exercise-create/exercise-create.screen';
+import { CalendarScreen } from '@screen/calendar/calendar';
+import { TrainingScreen } from '@screen/training';
+import { ExerciseListScreen } from '@screen/exercise-list';
+import { CreateTrainingExerciseScreen } from '@screen/create-training-exercise';
+import { ExerciseScreen } from '@screen/exercise/exercise.screen';
+import { ExerciseCreateScreen } from '@screen/exercise-create/exercise-create.screen';
+import { SettingsScreen } from '@screen/settings/settings';
 
 export enum Routes {
-	Home = 'Home',
+	Settings = 'Settings',
 
 	Calendar = 'Calendar',
 	Training = 'Training',
@@ -22,7 +22,7 @@ export enum Routes {
 
 const AppNavigator = createStackNavigator(
 	{
-		[Routes.Home]: { screen: HomeScreen },
+		[Routes.Settings]: { screen: SettingsScreen },
 		[Routes.Calendar]: { screen: CalendarScreen },
 		[Routes.Training]: { screen: TrainingScreen },
 		[Routes.CreateTrainingExercise]: { screen: CreateTrainingExerciseScreen },
@@ -32,7 +32,7 @@ const AppNavigator = createStackNavigator(
 		[Routes.ExerciseCreate]: { screen: ExerciseCreateScreen },
 	},
 	{
-		initialRouteName: Routes.Home,
+		initialRouteName: Routes.Calendar,
 		headerMode: 'none',
 	}
 );
