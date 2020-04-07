@@ -1,49 +1,26 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { Colors } from '../../css/colors.style';
+import { StyleSheet } from 'react-native';
+import { Colors } from '@css/colors.style';
 
-const WINDOW = Dimensions.get('window');
-
-export const style = StyleSheet.create({
+export const commonStyles = StyleSheet.create({
 	wrapper: {
 		flex: 1,
 	},
-	flex: {
-		marginTop: 20,
-		marginBottom: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-	},
-	sequenceNumber: {
-		textAlign: 'center',
-		width: WINDOW.width / 10,
-	},
-	repeats: {
-		textAlign: 'center',
-		width: WINDOW.width / 3,
-	},
-	weight: {
-		textAlign: 'center',
-		width: WINDOW.width / 3,
-	},
-	actions: {
-		textAlign: 'center',
-		width: WINDOW.width / 8,
-	},
-	buttonWrapper: {
+	bottomActionWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		paddingVertical: 20,
+		backgroundColor: Colors.White,
 	},
-	seriesButtonWrapper: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-	},
-	saveButtonWrapper: {
+	buttonWithIconWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
 	saveButtonText: {
 		paddingLeft: 10,
 		color: Colors.LightBlue,
+	},
+	cancelButton: {
+		paddingLeft: 10,
+		color: Colors.LightRed,
 	},
 });

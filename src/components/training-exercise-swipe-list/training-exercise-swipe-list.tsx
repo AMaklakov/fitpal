@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TrainingExerciseModel } from '@model/training.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 import { ExerciseModel } from '@model/exercise.model';
 import { SwipeHiddenButton } from '@components/swipe-list/button';
 import { Colors } from '@css/colors.style';
@@ -9,13 +9,13 @@ import TrainingExercise from '@components/exercise/exercise';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-	trainingExerciseList: TrainingExerciseModel[];
+	trainingExerciseList: IBaseTrainingExercise[];
 	exerciseList: ExerciseModel[];
 	canEdit: boolean;
 
-	onRowLongPress: (e: TrainingExerciseModel) => void;
-	onRowEdit: (e: TrainingExerciseModel) => void;
-	onRowDelete: (e: TrainingExerciseModel) => void;
+	onRowLongPress: (e: IBaseTrainingExercise) => void;
+	onRowEdit: (e: IBaseTrainingExercise) => void;
+	onRowDelete: (e: IBaseTrainingExercise) => void;
 }
 
 export const TrainingExerciseSwipeList = (props: IProps) => {
@@ -23,7 +23,7 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 	const { t } = useTranslation();
 
 	return (
-		<SwipeListView<TrainingExerciseModel>
+		<SwipeListView<IBaseTrainingExercise>
 			data={trainingExerciseList}
 			renderItem={(data, rowMap) => (
 				<TrainingExercise trainingExercise={data.item} exerciseList={exerciseList} onLongPress={onRowLongPress} />

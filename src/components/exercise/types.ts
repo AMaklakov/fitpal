@@ -1,11 +1,11 @@
-import { ExerciseModel } from '../../model/exercise.model';
-import { TrainingExerciseModel } from '../../model/training.model';
+import { ExerciseModel } from '@model/exercise.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export interface TrainingExerciseProps {
-	trainingExercise: TrainingExerciseModel;
+	trainingExercise: IBaseTrainingExercise;
 
 	exerciseList: ExerciseModel[];
 
-	onPress?: (trainingExercise: TrainingExerciseModel) => void;
-	onLongPress?: (trainingExercise: TrainingExerciseModel) => void;
+	onPress?: (trainingExercise: IBaseTrainingExercise) => void;
+	onLongPress?: (trainingExercise: IBaseTrainingExercise) => void;
 }

@@ -1,32 +1,28 @@
-import { SeriesModel, TrainingExerciseModel } from '../../model/training.model';
+import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
+import { cloneSeries, cloneSeriesList, createEmptySeries } from '@util/series.util';
 
-const createEmptySeriesBlock = (sequenceNumber: number): SeriesModel => ({
-	sequenceNumber,
-	repeats: 1,
-	weight: 0,
-});
-
-export const addEmptySeries = (ex: TrainingExerciseModel): TrainingExerciseModel => {
-	const series = ex.seriesList ?? [];
+export const addEmptySeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
+	const series = cloneSeriesList(ex.seriesList);
+	series.push(createEmptySeries(series.length + 1));
 
 	return {
 		...ex,
-		seriesList: [...series, createEmptySeriesBlock(series.length + 1)],
+		seriesList: series,
 	};
 };
 
 export const editSeriesBySequenceNumber = (
-	ex: TrainingExerciseModel,
-	series: SeriesModel,
+	ex: IBaseTrainingExercise,
+	series: ISeries,
 	sequenceNumber: number
-): TrainingExerciseModel => {
-	const seriesList = ex.seriesList.reduce((buff: SeriesModel[], s: SeriesModel, i: number) => {
+): IBaseTrainingExercise => {
+	const seriesList = ex.seriesList.reduce((buff: ISeries[], s: ISeries, i: number) => {
 		if (i + 1 !== sequenceNumber) {
-			return [...buff, { ...s }];
+			return [...buff, cloneSeries(s)];
 		}
 
-		return [...buff, { ...series }];
-	}, [] as SeriesModel[]);
+		return [...buff, cloneSeries(series)];
+	}, [] as ISeries[]);
 
 	return {
 		...ex,
@@ -34,20 +30,21 @@ export const editSeriesBySequenceNumber = (
 	};
 };
 
-export const popSeries = (ex: TrainingExerciseModel): TrainingExerciseModel => {
+export const popSeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
 	ex.seriesList.pop();
 
 	return {
 		...ex,
-		seriesList: [...ex.seriesList],
+		seriesList: cloneSeriesList(ex.seriesList),
 	};
 };
 
-export const repeatLastSeries = (ex: TrainingExerciseModel): TrainingExerciseModel => {
-	const lastRepeat = ex.seriesList[ex.seriesList.length - 1];
+export const repeatLastSeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
+	const lastRepeat = cloneSeries(ex.seriesList[ex.seriesList.length - 1]);
+	lastRepeat.sequenceNumber += 1;
 
 	return {
 		...ex,
-		seriesList: [...ex.seriesList, { ...lastRepeat, sequenceNumber: lastRepeat.sequenceNumber + 1 }],
+		seriesList: [...ex.seriesList, lastRepeat],
 	};
 };

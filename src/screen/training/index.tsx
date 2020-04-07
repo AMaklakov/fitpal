@@ -9,9 +9,10 @@ import { Dispatch } from 'redux';
 import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
 import { PropType } from '@util/type.util';
 import { changeTraining } from '@redux/action/training.action';
-import { TrainingExerciseModel, TrainingModel } from '@model/training.model';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
+import { TrainingModel } from '@model/training.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 interface IState {
 	training?: TrainingModel;
@@ -19,7 +20,7 @@ interface IState {
 }
 
 interface IDispatch {
-	onRemoveTrainingExercise: (e: TrainingExerciseModel, trainingId: PropType<TrainingModel, 'id'>) => void;
+	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => void;
 	onChangeTraining: (training: TrainingModel) => void;
 }
 
@@ -28,7 +29,7 @@ interface IProps extends NavigationPropsModel {}
 const Screen = (props: IProps & IState & IDispatch) => {
 	const { training, navigation, exercises, onRemoveTrainingExercise, onChangeTraining } = props;
 
-	const addExerciseAction = (trainingExercise?: TrainingExerciseModel) => {
+	const addExerciseAction = (trainingExercise?: IBaseTrainingExercise) => {
 		navigation.navigate({
 			routeName: Routes.CreateTrainingExercise,
 			params: {
@@ -38,7 +39,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		});
 	};
 
-	const removeExerciseAction = (trainingExercise: TrainingExerciseModel) => {
+	const removeExerciseAction = (trainingExercise: IBaseTrainingExercise) => {
 		if (!training) {
 			return;
 		}
@@ -72,7 +73,7 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 });
 
 const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch): IDispatch => ({
-	onRemoveTrainingExercise: (e: TrainingExerciseModel, trainingId: PropType<TrainingModel, 'id'>) => {
+	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => {
 		dispatch(deleteTrainingExerciseByTrainingId(trainingId, e));
 	},
 
