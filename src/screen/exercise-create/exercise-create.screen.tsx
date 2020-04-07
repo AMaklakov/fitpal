@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
-import { StoreModel } from '../../redux/store';
-import { NavigationPropsModel } from '../../model/navigation-props.model';
-import { getExerciseById } from '../../redux/selector/exercise.selector';
-import { ExerciseModel } from '../../model/exercise.model';
-import { H1 } from '../../components/heading/h1';
-import StringInput from '../../components/string-input/string-input';
-import { WithOptional } from '../../util/type.util';
-import { createExerciseAction, updateExerciseAction } from '../../redux/action/exercise.action';
+import { StoreModel } from '@redux/store';
+import { NavigationPropsModel } from '@model/navigation-props.model';
+import { getExerciseById } from '@redux/selector/exercise.selector';
+import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
+import { H1 } from '@components/heading/h1';
+import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
+import { WithOptional } from '@util/type.util';
+import { createExerciseAction, updateExerciseAction } from '@redux/action/exercise.action';
 import { useTranslation } from 'react-i18next';
+import { EXERCISE_NAME_MAXLENGTH, EXERCISE_NAME_MINLENGTH } from '@const/validation-const';
+import { IErrors } from '@components/with-validation/with-validation';
 
 const styles = StyleSheet.create({
 	buttonContainer: {
@@ -34,6 +36,7 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { t } = useTranslation();
 
 	const [name, changeName] = useState(exercise?.name ?? '');
+	const [isSaveDisabled, changeIsSaveDisabled] = useState(!exercise?.name);
 
 	const handleGoBack = () => navigation.goBack();
 
@@ -42,9 +45,16 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 			return;
 		}
 
-		exercise === undefined ? onCreateExercise({ name }) : onUpdateExercise({ ...exercise, name });
+		exercise === undefined
+			? onCreateExercise({ name, type: ExerciseTypes.Default })
+			: onUpdateExercise({ ...exercise, name });
 
 		handleGoBack();
+	};
+
+	const handleChangeName = (name: string, errors?: IErrors) => {
+		changeName(name);
+		changeIsSaveDisabled(!!errors);
 	};
 
 	return (
@@ -52,11 +62,17 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 			<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} />
 
 			<View>
-				<StringInput value={name} onTextChange={changeName} maxLength={100} placeholder={t('Exercise name')} />
+				<StringInputWithValidation
+					value={name}
+					onChange={handleChangeName}
+					maxLength={[EXERCISE_NAME_MAXLENGTH, t('Max length is |len|', { len: EXERCISE_NAME_MAXLENGTH })]}
+					minLength={[EXERCISE_NAME_MINLENGTH, t('Min length is |len|', { len: EXERCISE_NAME_MINLENGTH })]}
+					placeholder={t('Exercise name')}
+				/>
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button disabled={name === '' || name === exercise?.name} title={t('Save')} onPress={handleSavePress} />
+				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
 				<Button title={t('Cancel')} onPress={handleGoBack} />
 			</View>
 		</View>

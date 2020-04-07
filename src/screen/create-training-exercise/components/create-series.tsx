@@ -37,6 +37,9 @@ export const CreateSeries = (props: IProps) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sequenceNumber, repeats, weight]);
 
+	const handleSetRepeats = (v: string) => setRepeats(v);
+	const handleSetWeight = (v: string) => setWeight(v);
+
 	return (
 		<View style={styles.wrapper}>
 			<Text style={styles.sequenceNumber}>{sequenceNumber}</Text>
@@ -46,16 +49,16 @@ export const CreateSeries = (props: IProps) => {
 					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
 					value={repeats}
-					onChange={setRepeats}
+					onChange={handleSetRepeats}
 				/>
 			</View>
 
 			<View style={styles.weight}>
 				<IntegerNumberInputWithValidation
-					value={weight}
-					onChange={setWeight}
 					min={[1, t('Min value is |min|', { min: MIN_WEIGHT })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
+					value={weight}
+					onChange={handleSetWeight}
 				/>
 			</View>
 

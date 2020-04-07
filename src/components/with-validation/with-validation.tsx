@@ -4,7 +4,7 @@ import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
 import { isPresent } from '@util/type.util';
 import { Colors } from '@css/colors.style';
 
-type IErrors = { [k: string]: any } | null;
+export type IErrors = { [k: string]: any } | null;
 
 /**
  * [0] - restriction

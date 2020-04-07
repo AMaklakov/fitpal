@@ -55,6 +55,7 @@
 			"@redux/*": ["redux/*"],
 			"@model/*": ["model/*"],
 			"@util/*": ["util/*"],
+			"@const/*": ["const/*"],
 			"@components/*": ["components/*"],
 			"@icons/*": ["components/icons/*"],
 			"@inputs/*": ["components/inputs/*"]

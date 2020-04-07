@@ -1,0 +1,5 @@
+export const TRAINING_TITLE_MAXLENGTH = 100;
+export const TRAINING_TITLE_MINLENGTH = 3;
+
+export const EXERCISE_NAME_MAXLENGTH = 100;
+export const EXERCISE_NAME_MINLENGTH = 3;

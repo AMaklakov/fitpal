@@ -14,6 +14,7 @@ module.exports = {
 					'@redux': './src/redux',
 					'@model': './src/model',
 					'@util': './src/util',
+					'@const': './src/const',
 					'@components': './src/components',
 					'@icons': './src/components/icons',
 					'@inputs': './src/components/inputs',
