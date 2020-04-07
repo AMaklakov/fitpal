@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import IntegerNumberInput from '@components/integer-number-input/integer-number-input';
+import { IntegerNumberInputWithValidation } from '@components/inputs/integer-number-input/integer-number-input';
 import { RepeatOnceIcon } from '@icons/repeat-one.icon';
 import { ISeries } from '@model/training-exercise';
+import { useTranslation } from 'react-i18next';
 
 export interface IProps {
 	series?: ISeries;
@@ -14,8 +15,14 @@ export interface IProps {
 	weightMax?: number;
 }
 
+const MIN_REPEATS = 1;
+const MAX_REPEATS = 200;
+const MIN_WEIGHT = 1;
+const MAX_WEIGHT = 500;
+
 export const CreateSeries = (props: IProps) => {
-	const { index, onChange, series, onRepeatIconPress, weightMax } = props;
+	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT } = props;
+	const { t } = useTranslation();
 
 	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
 	const [repeats, setRepeats] = useState<string | undefined>(series?.repeats?.toString() ?? '1');
@@ -35,11 +42,21 @@ export const CreateSeries = (props: IProps) => {
 			<Text style={styles.sequenceNumber}>{sequenceNumber}</Text>
 
 			<View style={styles.repeats}>
-				<IntegerNumberInput value={repeats} onChange={setRepeats} />
+				<IntegerNumberInputWithValidation
+					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
+					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
+					value={repeats}
+					onChange={setRepeats}
+				/>
 			</View>
 
 			<View style={styles.weight}>
-				<IntegerNumberInput value={weight} onChange={setWeight} max={weightMax} />
+				<IntegerNumberInputWithValidation
+					value={weight}
+					onChange={setWeight}
+					min={[1, t('Min value is |min|', { min: MIN_WEIGHT })]}
+					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
+				/>
 			</View>
 
 			<View style={styles.actions}>{!!onRepeatIconPress && <RepeatOnceIcon onPress={onRepeatIconPress} />}</View>
