@@ -37,7 +37,9 @@ const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: Exer
 
 	return (
 		<TouchableOpacity onPress={handleOnPress}>
-			<Text style={styles.item}>{data.name}</Text>
+			<Text style={styles.item} numberOfLines={1}>
+				{data.name}
+			</Text>
 		</TouchableOpacity>
 	);
 };
@@ -45,7 +47,6 @@ const Item = ({ data, onPress }: { data: ExerciseModel; onPress: (exercise: Exer
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginHorizontal: 16,
 	},
 	listContainer: {
 		flex: 1,
@@ -63,8 +64,9 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	item: {
+		marginHorizontal: 15,
 		padding: 10,
-		fontSize: 18,
+		fontSize: 16,
 		height: 44,
 	},
 });
