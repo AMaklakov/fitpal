@@ -3,6 +3,7 @@ import DatePicker from 'react-native-datepicker';
 import moment from 'moment';
 import { StyleSheet } from 'react-native';
 import { DateFormatEnum } from '../../../util/date.util';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type DatepickerType = 'date' | 'datetime' | 'time';
 
@@ -22,12 +23,16 @@ interface IProps {
 
 	confirmText?: string;
 	cancelText?: string;
+	color?: string;
+	size?: number;
 }
 
 export const DatepickerInput = (props: IProps) => {
 	const {
 		onDateChange,
 		type = 'date',
+		color = '#000',
+		size = 24,
 		date,
 		placeholder,
 		format = DateFormatEnum.Default,
@@ -48,6 +53,7 @@ export const DatepickerInput = (props: IProps) => {
 			format={format}
 			minDate={minDate ? minDate.toDate() : undefined}
 			maxDate={maxDate ? maxDate.toDate() : undefined}
+			iconComponent={<Icon style={styles.dateIcon} name="calendar" size={size} color={color} />}
 			confirmBtnText={confirmText}
 			cancelBtnText={cancelText}
 			customStyles={{
@@ -61,15 +67,22 @@ export const DatepickerInput = (props: IProps) => {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		width: 200,
+		width: 140,
+		borderWidth: 1,
+		borderColor: 'black',
+		borderRadius: 15,
+		padding: 5,
+		marginTop: 12,
+		marginBottom: 24,
 	},
 	dateIcon: {
 		position: 'absolute',
-		left: 0,
-		top: 4,
+		left: 8,
+		top: 8,
 		marginLeft: 0,
 	},
 	dateInput: {
 		marginLeft: 36,
+		borderWidth: 0,
 	},
 });
