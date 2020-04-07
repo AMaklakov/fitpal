@@ -13,6 +13,7 @@ import { cloneTrainingExerciseList } from '../../util/training-exercise.util';
 import { DatepickerInput } from '../../components/inputs/datepicker/datepicker';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import { Colors } from '@css/colors.style';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -78,7 +79,15 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 				<StringInput value={name} onTextChange={changeName} />
 
 				{!!training && <Text>{t('Training date')}</Text>}
-				{!!training && <DatepickerInput date={date} onDateChange={changeDate} minDate={getToday()} />}
+				{!!training && (
+					<DatepickerInput
+						date={date}
+						size={24}
+						color={Colors.LightBlue}
+						onDateChange={changeDate}
+						minDate={getToday()}
+					/>
+				)}
 
 				<Button title={t('Cancel')} onPress={handleCancelPress} />
 				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />

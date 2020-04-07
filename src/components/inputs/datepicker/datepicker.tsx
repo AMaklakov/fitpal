@@ -53,7 +53,7 @@ export const DatepickerInput = (props: IProps) => {
 			format={format}
 			minDate={minDate ? minDate.toDate() : undefined}
 			maxDate={maxDate ? maxDate.toDate() : undefined}
-			iconComponent={<Icon style={styles.dateIcon} name="calendar" size={size} color={color} />}
+			iconComponent={<Icon style={styles.dateIcon} color={color} size={size} name="calendar" />}
 			confirmBtnText={confirmText}
 			cancelBtnText={cancelText}
 			customStyles={{
