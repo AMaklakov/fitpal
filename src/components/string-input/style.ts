@@ -8,6 +8,7 @@ const style = StyleSheet.create({
 	},
 	input: {
 		color: 'black',
+		padding: 10,
 	},
 });
 

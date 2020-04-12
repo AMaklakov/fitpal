@@ -35,11 +35,10 @@ export const TrainingHeading: FC<IProps> = props => {
 			<View style={styles.headingWrapper}>
 				{isEdit && <StringInput value={name} onTextChange={changeName} />}
 				{!isEdit && heading}
-			</View>
-
-			<View style={styles.iconWrapper}>
-				{isEdit && <SaveIcon onPress={handleSaveButtonPress} />}
-				{!isEdit && <EditIcon onPress={handleEditButtonPress} />}
+				<View style={styles.iconWrapper}>
+					{isEdit && <SaveIcon onPress={handleSaveButtonPress} />}
+					{!isEdit && <EditIcon onPress={handleEditButtonPress} />}
+				</View>
 			</View>
 		</View>
 	);
@@ -52,6 +51,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		height: 50,
+		marginTop: 10,
+		marginBottom: 10,
 	},
 	headingWrapper: {
 		flex: 1,
@@ -60,6 +61,10 @@ const styles = StyleSheet.create({
 		textAlign: 'left',
 	},
 	iconWrapper: {
+		position: 'absolute',
+		right: 10,
+		top: 0,
+		bottom: 0,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
