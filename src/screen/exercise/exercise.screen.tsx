@@ -9,6 +9,7 @@ import { H1 } from '../../components/heading/h1';
 import { H2 } from '../../components/heading/h2';
 import { Routes } from '../navigator';
 import { useTranslation } from 'react-i18next';
+import { Colors } from '@css/colors.style';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -32,13 +33,14 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 		});
 	}, [exercise, navigation]);
 
+	// @ts-ignore
 	return (
 		<View style={styles.container}>
 			<H1 text={exercise.name} />
 
 			<View style={styles.description}>
 				<H2 text={t('Description')} />
-				<Text>
+				<Text style={styles.details}>
 					{Array(parseInt((Math.random() * 20).toFixed(), 10))
 						.fill(exercise.name)
 						.join(', ')}
@@ -47,6 +49,7 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 
 			<View style={styles.buttonContainer}>
 				<Button title={t('Edit')} onPress={handleEdit} />
+				<Button color={Colors.LightRed} title={t('Delete')} onPress={handleEdit} />
 			</View>
 		</View>
 	);
@@ -55,12 +58,22 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		paddingTop: 12,
 	},
 	description: {
 		flex: 1,
+		paddingTop: 12,
+	},
+	details: {
+		paddingTop: 12,
+		marginHorizontal: 10,
+		textAlign: 'center',
 	},
 	buttonContainer: {
-		height: 70,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'flex-start',
+		height: 50,
 	},
 });
 
