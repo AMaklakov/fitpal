@@ -49,7 +49,7 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 
 			<View style={styles.buttonContainer}>
 				<Button title={t('Edit')} onPress={handleEdit} />
-				<Button color={Colors.LightRed} title={t('Удалить')} onPress={handleEdit} />
+				<Button color={Colors.LightRed} title={t('Delete')} onPress={handleEdit} />
 			</View>
 		</View>
 	);
