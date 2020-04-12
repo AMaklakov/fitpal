@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrainingMinimalView should render properly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={null}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#83AEC8",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 20,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "maxWidth": "70%",
+        }
+      }
+    >
+      <View
+        style={Object {}}
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "fontSize": 20,
+              "textAlign": "center",
+            }
+          }
+        >
+          Long name of exercise that causes showing ellipsis
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "maxWidth": "30%",
+        }
+      }
+    >
+      <Text>
+        0
+         упражнений
+      </Text>
+    </View>
+  </View>
+</View>
+`;
