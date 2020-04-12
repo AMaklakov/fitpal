@@ -1,3 +1,5 @@
+import { StyleProp, TextStyle } from 'react-native';
+
 export interface TextInputPropsModel {
 	maxLength?: number;
 
@@ -5,4 +7,6 @@ export interface TextInputPropsModel {
 
 	value: string;
 	onTextChange: (v: string) => void;
+
+	inputStyle?: StyleProp<TextStyle>;
 }

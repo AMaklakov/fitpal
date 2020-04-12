@@ -13,6 +13,7 @@ const StringInput = (props: TextInputPropsModel) => {
 		onTextChange,
 		placeholder = DEFAULT_PLACEHOLDER,
 		value,
+		inputStyle = {},
 	} = props;
 
 	const onTextChangeHandler = (v: string) => {
@@ -22,7 +23,7 @@ const StringInput = (props: TextInputPropsModel) => {
 	return (
 		<View style={style.inputWrapper}>
 			<TextInput
-				style={style.input}
+				style={[style.input, inputStyle]}
 				maxLength={maxLength}
 				placeholder={placeholder}
 				placeholderTextColor={placeholderTextColor}
