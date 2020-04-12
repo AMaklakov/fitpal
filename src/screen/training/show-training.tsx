@@ -31,19 +31,17 @@ export const ShowTraining = (props: IProps) => {
 
 	return (
 		<View style={style.wrapper}>
-			<View style={style.wrapper}>
-				<TrainingExerciseSwipeList
-					canEdit={true}
-					trainingExerciseList={exerciseList}
-					exerciseList={exercises}
-					onRowDelete={removeExercise}
-					onRowEdit={handleEditExercise}
-					onRowLongPress={longTapAction}
-				/>
+			<TrainingExerciseSwipeList
+				canEdit={true}
+				trainingExerciseList={exerciseList}
+				exerciseList={exercises}
+				onRowDelete={removeExercise}
+				onRowEdit={handleEditExercise}
+				onRowLongPress={longTapAction}
+			/>
 
-				<View style={style.total}>
-					<Text style={style.totalText}>{t('Total |num| kilos', { num: total })}</Text>
-				</View>
+			<View style={style.total}>
+				<Text style={style.totalText}>{t('Total |num| kilos', { num: total })}</Text>
 			</View>
 
 			<View style={style.button}>
@@ -56,9 +54,8 @@ export const ShowTraining = (props: IProps) => {
 const style = StyleSheet.create({
 	wrapper: { flex: 1 },
 	total: {
-		marginVertical: 20,
-		flexDirection: 'row',
-		justifyContent: 'center',
+		paddingVertical: 10,
+		alignItems: 'center',
 	},
 	totalText: {
 		fontSize: 20,
@@ -70,9 +67,7 @@ const style = StyleSheet.create({
 		textAlign: 'center',
 	},
 	button: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		alignItems: 'baseline',
-		height: 80,
+		height: 50,
+		justifyContent: 'center',
 	},
 });

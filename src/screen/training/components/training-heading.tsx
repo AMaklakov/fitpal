@@ -4,7 +4,10 @@ import { StyleSheet, View } from 'react-native';
 import { H1 } from '@components/heading/h1';
 import { SaveIcon } from '@icons/save.icon';
 import { EditIcon } from '@icons/edit.icon';
-import StringInput from '@components/string-input/string-input';
+import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
+import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
+import { IErrors } from '@components/with-validation/with-validation';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
 	training: TrainingModel;
@@ -14,14 +17,21 @@ interface IProps {
 
 export const TrainingHeading: FC<IProps> = props => {
 	const { training, canEdit = true, onUpdateTrainingName } = props;
+	const { t } = useTranslation();
 
 	const [name, changeName] = useState(training.name);
+	const [isHeadingValid, changeIsHeadingValid] = useState(true);
 
 	const [isEdit, changeIsEdit] = useState(false);
 	const handleEditButtonPress = () => changeIsEdit(true);
 	const handleSaveButtonPress = () => {
 		onUpdateTrainingName(name);
 		changeIsEdit(false);
+	};
+
+	const handleChangeName = (name: string, errors?: IErrors) => {
+		changeName(name);
+		changeIsHeadingValid(!errors);
 	};
 
 	const heading = <H1 text={name} numberOfLinesEllipsis={1} style={[styles.heading, styles.rightPadding]} />;
@@ -33,10 +43,19 @@ export const TrainingHeading: FC<IProps> = props => {
 	return (
 		<View style={styles.wrapper}>
 			<View style={styles.headingWrapper}>
-				{isEdit && <StringInput value={name} onTextChange={changeName} inputStyle={styles.rightPadding} />}
+				{isEdit && (
+					<StringInputWithValidation
+						value={name}
+						onChange={handleChangeName}
+						inputStyle={styles.rightPadding}
+						maxLength={[TRAINING_TITLE_MAXLENGTH, t('Max length is |len|', { len: TRAINING_TITLE_MAXLENGTH })]}
+						minLength={[TRAINING_TITLE_MINLENGTH, t('Min length is |len|', { len: TRAINING_TITLE_MINLENGTH })]}
+					/>
+				)}
 				{!isEdit && heading}
+
 				<View style={styles.iconWrapper}>
-					{isEdit && <SaveIcon onPress={handleSaveButtonPress} />}
+					{isEdit && isHeadingValid && <SaveIcon onPress={handleSaveButtonPress} />}
 					{!isEdit && <EditIcon onPress={handleEditButtonPress} />}
 				</View>
 			</View>
