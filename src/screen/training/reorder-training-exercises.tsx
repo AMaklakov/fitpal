@@ -9,6 +9,7 @@ import { Colors } from '@css/colors.style';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { SaveIcon } from '@icons/save.icon';
 import { useTranslation } from 'react-i18next';
+import { toRgba } from '@util/css.util';
 
 interface IProps {
 	training: TrainingModel;
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	renderActive: {
-		backgroundColor: Colors.LightBlueTranslucent,
+		backgroundColor: toRgba(Colors.LightBlue, 0.5),
 	},
 	iconStyle: {
 		width: 80,
