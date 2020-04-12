@@ -24,7 +24,7 @@ export const TrainingHeading: FC<IProps> = props => {
 		changeIsEdit(false);
 	};
 
-	const heading = <H1 text={name} numberOfLinesEllipsis={1} style={styles.heading} />;
+	const heading = <H1 text={name} numberOfLinesEllipsis={1} style={[styles.heading, styles.rightPadding]} />;
 
 	if (!canEdit) {
 		return <View style={styles.headingWrapper}>{heading}</View>;
@@ -33,7 +33,7 @@ export const TrainingHeading: FC<IProps> = props => {
 	return (
 		<View style={styles.wrapper}>
 			<View style={styles.headingWrapper}>
-				{isEdit && <StringInput value={name} onTextChange={changeName} />}
+				{isEdit && <StringInput value={name} onTextChange={changeName} inputStyle={styles.rightPadding} />}
 				{!isEdit && heading}
 				<View style={styles.iconWrapper}>
 					{isEdit && <SaveIcon onPress={handleSaveButtonPress} />}
@@ -67,5 +67,8 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	rightPadding: {
+		paddingRight: 35,
 	},
 });
