@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AutocompleteInputProps, SelectedItemViewComponentProps } from './types';
-import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { autocomplete } from './helpers';
 import style from './style';
 import { placeholderTextColor } from '../../css/colors.style';
@@ -64,19 +64,19 @@ const AutocompleteInput = <T extends Object>(props: AutocompleteInputProps<T>) =
 			/>
 
 			{filteredAutocompleteList?.length > 0 && (
-				<ScrollView style={style.scrollArea}>
-					<FlatList
+				<View style={style.scrollArea}>
+					<FlatList<T>
 						data={filteredAutocompleteList}
-						keyExtractor={(s, index) => `series_${index}`}
+						keyExtractor={(s, index) => `autocomplete-field-${s[autocompleteField]}-${index}`}
 						renderItem={({ item }) => (
-							<TouchableOpacity key={`autocomplete-field-${item}`} onPress={selectAutocompletion(item)}>
+							<TouchableOpacity onPress={selectAutocompletion(item)}>
 								<View>
 									<Text style={style.h3}>{item[autocompleteField]}</Text>
 								</View>
 							</TouchableOpacity>
 						)}
 					/>
-				</ScrollView>
+				</View>
 			)}
 		</View>
 	);

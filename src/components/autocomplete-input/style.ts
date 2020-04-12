@@ -3,6 +3,9 @@ import { Colors } from '@css/colors.style';
 
 const style = StyleSheet.create({
 	selectedWrapper: {
+		borderWidth: 1,
+		borderColor: Colors.Black,
+		borderRadius: 15,
 		padding: 10,
 		margin: 5,
 	},
