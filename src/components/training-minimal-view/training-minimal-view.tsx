@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { TrainingModel } from '../../model/training.model';
-import { H2 } from '../heading/h2';
-import { Colors } from '../../css/colors.style';
+import { TrainingModel } from '@model/training.model';
+import { H2 } from '@components/heading/h2';
+import { Colors } from '@css/colors.style';
 
 const styles = StyleSheet.create({
 	container: {
@@ -37,7 +37,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 		<TouchableHighlight onPress={handleOnPress}>
 			<View style={styles.container}>
 				<View style={styles.description}>
-					<H2 numberOfLines={1} text={training?.name} />
+					<H2 numberOfLinesEllipsis={1} text={training?.name} />
 				</View>
 				<View style={styles.exerciseWrap}>
 					<Text>{training?.exerciseList?.length} упражнений</Text>
