@@ -1,14 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableWithoutFeedback } from 'react-native';
-import { IconProps } from './model/icon-props.type';
+import { BaseMaterialIcon } from '@icons/base-material-icon';
+import { IconProps } from '@icons/model/icon-props.type';
 
-export const RemoveIcon = (props: IconProps) => {
-	const { onLongPress, onPress, style, color = '#000', size = 24 } = props;
-
-	return (
-		<TouchableWithoutFeedback onPress={onPress} onLongPress={onLongPress}>
-			<Icon name="delete" size={size} style={style} color={color} />
-		</TouchableWithoutFeedback>
-	);
-};
+export const RemoveIcon = (props: IconProps) => <BaseMaterialIcon name="delete" {...props} />;

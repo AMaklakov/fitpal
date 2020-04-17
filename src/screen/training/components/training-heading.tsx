@@ -8,6 +8,7 @@ import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/valid
 import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
 import { IErrors } from '@components/with-validation/with-validation';
 import { useTranslation } from 'react-i18next';
+import { ButtonIcon } from '@components/button-icon/button-icon';
 
 interface IProps {
 	training: TrainingModel;
@@ -55,8 +56,8 @@ export const TrainingHeading: FC<IProps> = props => {
 				{!isEdit && heading}
 
 				<View style={styles.iconWrapper}>
-					{isEdit && isHeadingValid && <SaveIcon onPress={handleSaveButtonPress} />}
-					{!isEdit && <EditIcon onPress={handleEditButtonPress} />}
+					{isEdit && isHeadingValid && <ButtonIcon icon={<SaveIcon />} onPress={handleSaveButtonPress} />}
+					{!isEdit && <ButtonIcon icon={<EditIcon />} onPress={handleEditButtonPress} />}
 				</View>
 			</View>
 		</View>
