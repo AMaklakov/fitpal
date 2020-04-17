@@ -13,10 +13,11 @@ interface IProps {
 
 	addExerciseAction: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
+	changeOrder: () => void;
 }
 
 export const ShowTraining = (props: IProps) => {
-	const { exercises, training, addExerciseAction, removeExercise } = props;
+	const { exercises, training, addExerciseAction, removeExercise, changeOrder } = props;
 	const { exerciseList = [] } = training;
 	const { t } = useTranslation();
 
@@ -27,7 +28,7 @@ export const ShowTraining = (props: IProps) => {
 	const handleAddExercise = () => addExerciseAction();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const longTapAction = (e: IBaseTrainingExercise) => undefined;
+	const longTapAction = (e: IBaseTrainingExercise) => changeOrder();
 
 	return (
 		<View style={style.wrapper}>

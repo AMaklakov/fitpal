@@ -6,16 +6,21 @@ import { ExerciseModel } from '@model/exercise.model';
 import { TrainingModel } from '@model/training.model';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { Colors } from '@css/colors.style';
+import { commonStyles } from '@screen/create-training-exercise/style';
+import { SaveIcon } from '@icons/save.icon';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
 	training: TrainingModel;
 	changeTraining: (training: TrainingModel) => void;
+	onSave: () => void;
 
 	exercises: ExerciseModel[];
 }
 
 export const ReorderTrainingExercise = (props: IProps) => {
-	const { changeTraining, exercises, training } = props;
+	const { changeTraining, exercises, training, onSave } = props;
+	const { t } = useTranslation();
 
 	const updateTraining = (data: IBaseTrainingExercise[]) => changeTraining({ ...training, exerciseList: data });
 
@@ -27,6 +32,10 @@ export const ReorderTrainingExercise = (props: IProps) => {
 				renderItem={RenderItem(exercises)}
 				onDragEnd={({ data }) => updateTraining(data)}
 			/>
+			<TouchableOpacity onPress={onSave} style={styles.buttonWithIconWrapper}>
+				<SaveIcon color={Colors.LightBlue} />
+				<Text style={commonStyles.saveButtonText}>{t('Save')}</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -69,5 +78,11 @@ const styles = StyleSheet.create({
 		backgroundColor: `rgba(100, 100, 100, 0.1)`,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	buttonWithIconWrapper: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginVertical: 20,
 	},
 });

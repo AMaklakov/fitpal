@@ -31,9 +31,7 @@ const AutocompleteInput = <T extends Object>(props: AutocompleteInputProps<T>) =
 	const onChangeTextHandler = (v: string): void => {
 		changeValue(v);
 
-		setFilteredAutocompleteList(
-			v ? autocomplete({ value: v, autocompleteList, autocompleteField }) : []
-		);
+		setFilteredAutocompleteList(v ? autocomplete({ value: v, autocompleteList, autocompleteField }) : []);
 	};
 
 	const selectAutocompletion = (autocompleteObj: T) => () => {

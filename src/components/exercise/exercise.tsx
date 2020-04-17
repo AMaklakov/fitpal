@@ -19,7 +19,6 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 		<TouchableOpacity activeOpacity={1} onLongPress={onLongPressAction} onPress={onPressAction} style={style.wrapper}>
 			<View style={style.innerWrapper}>
 				<H2 text={exerciseList?.find(e => e.id === exerciseId)?.name || ''} />
-
 				<View style={style.table}>
 					<View style={style.tableHeading}>
 						<Text>№</Text>
@@ -37,7 +36,6 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 						</View>
 					))}
 				</View>
-
 				<Text style={style.total}>{t('Total |num| kilos', { num: calcTotal(trainingExercise) })}</Text>
 			</View>
 		</TouchableOpacity>

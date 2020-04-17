@@ -12,9 +12,7 @@ export enum ExerciseActions {
 export type ExerciseAction<T extends Object = {}> = Action<ExerciseActions> & { payload: T };
 
 export type CreateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
-export const createExerciseAction = (
-	ex: WithOptional<ExerciseModel, 'id'>
-): CreateExerciseAction | undefined => {
+export const createExerciseAction = (ex: WithOptional<ExerciseModel, 'id'>): CreateExerciseAction | undefined => {
 	const exercise = { ...ex };
 
 	if (!exercise.id) {
