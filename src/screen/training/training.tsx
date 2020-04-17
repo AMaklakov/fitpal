@@ -8,29 +8,45 @@ import { TrainingHeading } from '@screen/training/components/training-heading';
 import { TrainingStatusBar } from '@screen/training/components/training-status-bar';
 
 export const Training = (props: TrainingProps) => {
-	const { training, addExerciseAction, exercises, removeExercise, changeTraining, canEdit = true, onUpdateTrainingName } = props;
+	const {
+		training,
+		addExerciseAction,
+		exercises,
+		removeExercise,
+		changeTraining,
+		canEdit = true,
+		onUpdateTrainingName,
+	} = props;
 
 	if (!training) {
 		throw new Error(`No training present`);
 	}
 
-	const [isEdit, changeIsEdit] = useState(false);
+	const [isReorder, changeIsReorder] = useState(false);
 
 	const reorderExercises = (t: TrainingModel) => changeTraining(t);
+
+	const onChangeOrderExercises = () => changeIsReorder(!isReorder);
 
 	return (
 		<View style={{ flex: 1 }}>
 			<TrainingStatusBar training={training} />
 			<TrainingHeading training={training} canEdit={canEdit} onUpdateTrainingName={onUpdateTrainingName} />
 
-			{isEdit ? (
-				<ReorderTrainingExercise exercises={exercises} training={training} changeTraining={reorderExercises} />
+			{isReorder ? (
+				<ReorderTrainingExercise
+					exercises={exercises}
+					training={training}
+					changeTraining={reorderExercises}
+					onSave={onChangeOrderExercises}
+				/>
 			) : (
 				<ShowTraining
 					exercises={exercises}
 					addExerciseAction={addExerciseAction}
 					removeExercise={removeExercise}
 					training={training}
+					changeOrder={onChangeOrderExercises}
 				/>
 			)}
 		</View>

@@ -22,14 +22,7 @@ interface IProps<T> {
 }
 
 export const SwipeHiddenButton = <T extends any>(props: IProps<T>) => {
-	const {
-		backgroundColor = Colors.Yellow,
-		textColor = Colors.LightRed,
-		item,
-		onTouch,
-		title,
-		style = {},
-	} = props;
+	const { backgroundColor = Colors.Yellow, textColor = Colors.LightRed, item, onTouch, title, style = {} } = props;
 
 	const styles = useMemo(() => makeStyles(backgroundColor), [backgroundColor]);
 

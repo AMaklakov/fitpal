@@ -36,10 +36,8 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 	return (
 		<SwipeListView<TrainingModel>
 			data={trainingList}
-			renderItem={(data, rowMap) => (
-				<TrainingMinimalView training={data.item} onTrainingPress={onTrainingPress} />
-			)}
-			renderHiddenItem={(data, rowMap) => (
+			renderItem={data => <TrainingMinimalView training={data.item} onTrainingPress={onTrainingPress} />}
+			renderHiddenItem={data => (
 				<View style={styles.rowBack}>
 					<SwipeHiddenButton
 						style={styles.button1}
