@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { NativeModules, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@css/colors.style';
+import { toRgba } from '@util/css.util';
 
 export interface IMenuWrapperProps {
 	isOpen: boolean;
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.White,
 	},
 	backdrop: {
-		backgroundColor: Colors.BlackTranslucent,
+		backgroundColor: toRgba(Colors.Black, 0.8),
 		flex: 1,
 	},
 });

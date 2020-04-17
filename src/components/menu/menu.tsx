@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronRightIcon } from '@icons/chevron-right.icon';
 import { SettingsIcon } from '@icons/settings.icon';
 import { Colors } from '@css/colors.style';
+import { toRgba } from '@util/css.util';
 
 interface IProps extends IMenuWrapperProps {
 	navigate: (route: Routes) => void;
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
 	},
 	bottomNavigationWrapper: {
 		borderTopWidth: 0.3,
-		borderTopColor: Colors.BlackTranslucent,
+		borderTopColor: toRgba(Colors.Black, 0.8),
 		paddingTop: 10,
 	},
 });
