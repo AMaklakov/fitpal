@@ -5,6 +5,7 @@ import { RepeatOnceIcon } from '@icons/repeat-one.icon';
 import { ISeries } from '@model/training-exercise';
 import { useTranslation } from 'react-i18next';
 import { ButtonIcon } from '@components/button-icon/button-icon';
+import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
 
 export interface IProps {
 	series?: ISeries;
@@ -15,11 +16,6 @@ export interface IProps {
 
 	weightMax?: number;
 }
-
-const MIN_REPEATS = 1;
-const MAX_REPEATS = 200;
-const MIN_WEIGHT = 1;
-const MAX_WEIGHT = 500;
 
 export const CreateSeries = (props: IProps) => {
 	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT } = props;

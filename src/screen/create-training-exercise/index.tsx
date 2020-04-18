@@ -12,7 +12,7 @@ import { StoreModel } from '@redux/store';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
-import { createEmptyTrainingExercise } from '@util/training-exercise.util';
+import { createEmptyTrainingExercise, validateTrainingExercise } from '@util/training-exercise.util';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { BigSource } from 'big.js';
 
@@ -46,6 +46,12 @@ const Screen = (props: IProps & IState & IDispatch) => {
 
 	const onSave = () => {
 		if (disabledSave) {
+			return;
+		}
+
+		const isValid = validateTrainingExercise(exercise);
+		if (!isValid) {
+			changeDisabledSave(true);
 			return;
 		}
 
