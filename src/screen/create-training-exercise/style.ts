@@ -23,4 +23,7 @@ export const commonStyles = StyleSheet.create({
 		paddingLeft: 10,
 		color: Colors.LightRed,
 	},
+	disabledButton: {
+		color: Colors.Grey,
+	},
 });
