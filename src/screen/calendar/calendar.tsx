@@ -83,15 +83,17 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	};
 
 	return (
-		<View>
+		<View style={styles.wrapper}>
 			<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
 
-			<TrainingListMinimalView
-				onCopy={handleCopyTraining}
-				onDelete={handleOpenDeleteTrainingConfirm}
-				trainingList={trainingList}
-				onTrainingPress={handleOnTrainingTouch}
-			/>
+			<View style={styles.wrapper}>
+				<TrainingListMinimalView
+					onCopy={handleCopyTraining}
+					onDelete={handleOpenDeleteTrainingConfirm}
+					trainingList={trainingList}
+					onTrainingPress={handleOnTrainingTouch}
+				/>
+			</View>
 
 			<View>
 				<Modal isVisible={!!trainingToDelete}>
@@ -109,7 +111,9 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 				</Modal>
 			</View>
 
-			<Button title={t('Add training +')} onPress={handleCreateTraining} />
+			<View style={styles.buttonContainer}>
+				<Button title={t('Add training +')} onPress={handleCreateTraining} />
+			</View>
 		</View>
 	);
 };
@@ -126,6 +130,15 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+	},
+	wrapper: {
+		flex: 1,
+	},
+	buttonContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'flex-start',
+		height: 50,
 	},
 });
 
