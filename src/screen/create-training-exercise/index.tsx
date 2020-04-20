@@ -33,12 +33,22 @@ const Screen = (props: IProps & IState & IDispatch) => {
 
 	const id = navigation.getParam('trainingId');
 	const trainingExercise = navigation.getParam('trainingExercise');
+	const [disabledSave, changeDisabledSave] = useState(true);
 
 	const [exercise, setExercise] = useState<IBaseTrainingExercise>(
 		trainingExercise ?? createEmptyTrainingExercise(userWeight)
 	);
 
+	const handleSetExercise = (e: IBaseTrainingExercise) => {
+		setExercise(e);
+		changeDisabledSave(!e.exerciseId);
+	};
+
 	const onSave = () => {
+		if (disabledSave) {
+			return;
+		}
+
 		trainingExercise ? editAction(id, exercise) : saveAction(id, exercise);
 
 		goBack();
@@ -52,8 +62,9 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			exerciseList={exerciseList}
 			onCancel={goBack}
 			trainingExercise={exercise}
-			setTrainingExercise={setExercise}
+			setTrainingExercise={handleSetExercise}
 			userWeight={userWeight}
+			disabledSave={disabledSave}
 		/>
 	);
 };

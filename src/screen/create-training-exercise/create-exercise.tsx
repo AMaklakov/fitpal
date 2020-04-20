@@ -30,10 +30,12 @@ interface IProps {
 
 	onSave: () => void;
 	onCancel: () => void;
+
+	disabledSave: boolean;
 }
 
 export const CreateExercise = (props: IProps) => {
-	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel, userWeight } = props;
+	const { onSave, trainingExercise, setTrainingExercise, exerciseList, onCancel, userWeight, disabledSave } = props;
 	const { t } = useTranslation();
 
 	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
@@ -115,8 +117,8 @@ export const CreateExercise = (props: IProps) => {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={onSave} style={commonStyles.buttonWithIconWrapper}>
-					<SaveIcon color={Colors.LightBlue} />
-					<Text style={commonStyles.saveButtonText}>{t('Save')}</Text>
+					<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />
+					<Text style={[commonStyles.saveButtonText, disabledSave && commonStyles.disabledButton]}>{t('Save')}</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
