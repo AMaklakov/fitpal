@@ -1,0 +1,346 @@
+[
+	{
+		"id": "be802ff0-81bf-11ea-b3f3-2df0c04908eb",
+		"name": "Training today",
+		"date": "16.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 25 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 22 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 35 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		]
+	},
+	{
+		"id": "be805700-81bf-11ea-b3f3-2df0c04908eb",
+		"name": "Training today 2",
+		"date": "18.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 31 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 30 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 20 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 31 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 40 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		]
+	},
+	{
+		"id": "be805701-81bf-11ea-b3f3-2df0c04908eb",
+		"name": "Training today",
+		"date": "17.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 25 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 22 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 35 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		]
+	},
+	{
+		"id": "be805702-81bf-11ea-b3f3-2df0c04908eb",
+		"name": "Training today 3",
+		"date": "19.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "1244",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 6, "weight": 30 },
+					{ "sequenceNumber": 3, "repeats": 9, "weight": 30 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 9, "weight": 15 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 20 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 31 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 40 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		]
+	},
+	{
+		"name": "Training today 3 - COPY",
+		"date": "20.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "1244",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 6, "weight": 30 },
+					{ "sequenceNumber": 3, "repeats": 9, "weight": 30 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 9, "weight": 15 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 20 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 31 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 40 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		],
+		"id": "6c1152c0-81c0-11ea-b3f3-2df0c04908eb"
+	},
+	{
+		"name": "Training today - COPY",
+		"date": "24.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 25 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 22 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 35 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		],
+		"id": "62d13350-81c1-11ea-a292-336037bf51b4"
+	},
+	{
+		"name": "Training today - COPY",
+		"date": "25.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 25 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 25 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 20 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 22 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 35 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		],
+		"id": "685d07e0-81c1-11ea-a292-336037bf51b4"
+	},
+	{
+		"name": "Training today 2 - COPY",
+		"date": "26.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"sequenceNumber": 1,
+				"id": "12",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 10, "weight": 30 },
+					{ "sequenceNumber": 2, "repeats": 10, "weight": 31 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 30 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "2",
+				"sequenceNumber": 2,
+				"id": "122",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 2, "repeats": 8, "weight": 15 },
+					{ "sequenceNumber": 3, "repeats": 8, "weight": 20 }
+				],
+				"type": 0,
+				"userWeight": 70
+			},
+			{
+				"exerciseId": "3",
+				"sequenceNumber": 3,
+				"id": "123",
+				"seriesList": [
+					{ "sequenceNumber": 1, "repeats": 12, "weight": 31 },
+					{ "sequenceNumber": 2, "repeats": 12, "weight": 35 },
+					{ "sequenceNumber": 3, "repeats": 10, "weight": 40 }
+				],
+				"type": 0,
+				"userWeight": 70
+			}
+		],
+		"id": "6d385120-81c1-11ea-a292-336037bf51b4"
+	}
+]

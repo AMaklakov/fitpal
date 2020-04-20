@@ -1,0 +1,5244 @@
+[
+	{
+		"id": "fb9498a0-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "01.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb981b10-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 34
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb981b11-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 56
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb984220-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "02.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb984221-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 55
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb984222-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 18
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 31
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 31
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 36
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb984223-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 61
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb984224-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 22
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb984225-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 36
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb984226-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "04.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb984227-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 12
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb984228-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 24
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb984229-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 54
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98422a-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 39
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98422b-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 22
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98422c-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "07.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb98422d-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 60
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98422e-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98422f-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "11.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb984230-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 14,
+						"weight": 66
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb984231-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 54
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 40
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb984232-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 35
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb986930-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "16.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb986931-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb986932-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 66
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb986933-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb986934-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "22.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb986935-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb986936-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "29.03.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb986937-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 28
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb986938-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 37
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb986939-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98693a-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98693b-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "06.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb98693c-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 36
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 14
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98693d-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "15.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb989040-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 61
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb989041-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 18
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb989042-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 27
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb989043-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "25.04.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb989044-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 51
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb989045-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 11,
+						"weight": 25
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb989046-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 35
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb989047-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 36
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb989048-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 47
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb989049-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "06.05.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb98904a-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 24
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98904b-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 9,
+						"weight": 43
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98904c-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98904d-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "18.05.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb98904e-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 35
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98904f-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 32
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb989050-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "14.06.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb98b750-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 59
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98b751-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98b752-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98b753-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "29.06.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb98b754-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 23
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98b755-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 20
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98b756-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 14
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 14,
+						"weight": 45
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98b757-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 62
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98b758-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 37
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 16
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98b759-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 49
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 51
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98b75a-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "01.08.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb98b75b-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98b75c-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 50
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb98b75d-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 65
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98b75e-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "07.09.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb98b75f-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 54
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 19
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98b760-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "18.10.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb98de60-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 22
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98de61-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 40
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98de62-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 24
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 29
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb98de63-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb98de64-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 62
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb98de65-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "09.11.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb990570-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 27
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb990571-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 57
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 51
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb990572-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 45
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb990573-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "02.12.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb990574-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 12
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb990575-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "26.12.2020",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb990576-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 57
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 43
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb990577-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "20.01.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb992c80-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 49
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb992c81-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 13
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb992c82-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 23
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb992c83-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb992c84-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 14,
+						"weight": 35
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb992c85-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 47
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb992c86-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "15.02.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb995390-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 19
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb995391-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 57
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb995392-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb995393-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "14.03.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb997aa0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb997aa1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 49
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb997aa2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 14
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 49
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 11,
+						"weight": 53
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb997aa3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb997aa4-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 10
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb997aa5-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 18
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 12
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb997aa6-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "11.04.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb99a1b0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 54
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 18
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 50
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99c8c0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 31
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 57
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 25
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99c8c1-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "10.05.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb99c8c2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 48
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efd0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb99efd1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efd2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 37
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efd3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99efd4-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "09.06.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb99efd5-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 37
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efd6-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 37
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 13
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efd7-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99efd8-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "10.07.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb99efd9-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 56
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efda-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 37
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 62
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99efdb-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "11.08.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb99efdc-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 43
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efdd-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 9,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efde-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efdf-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 26
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 65
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb99efe0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efe1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 26
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 49
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 24
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99efe2-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "13.09.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb99efe3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 24
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efe4-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 19
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb99efe5-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb99efe6-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 26
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 49
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb99efe7-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb99efe8-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 12,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb99efe9-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "17.10.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9a16e0-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 11,
+						"weight": 23
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16e1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a16e2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 65
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16e3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 64
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a16e4-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 16
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16e5-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 46
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a16e6-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "21.11.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9a16e7-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 16
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16e8-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 26
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a16e9-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 11
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 36
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a16ea-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 58
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 13
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16eb-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 37
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 9,
+						"weight": 55
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a16ec-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 25
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a16ed-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "27.12.2021",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9a16ee-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 33
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16ef-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 48
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 29
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a16f0-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "02.02.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb9a16f1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16f2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 19
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16f3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 10,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a16f4-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 26
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a16f5-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "12.03.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9a16f6-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 47
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a16f7-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 10
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a16f8-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 42
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a16f9-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 42
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a3df0-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "20.04.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9a3df1-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 20
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a3df2-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a3df3-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 41
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 49
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3df4-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 16
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3df5-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 58
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 50
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a3df6-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "30.05.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9a3df7-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a3df8-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9a3df9-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 36
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 50
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3dfa-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3dfb-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a3dfc-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "21.08.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9a3dfd-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 24
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a3dfe-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 24
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a3dff-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 6,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3e00-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 51
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9a3e01-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 10,
+						"weight": 39
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9a3e02-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 50
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 54
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 10,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a3e03-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "16.11.2022",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9a6500-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 37
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 62
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9a8c10-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "15.02.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9ab320-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 18
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 53
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9ab321-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 6,
+						"weight": 24
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9ab322-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9ab323-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 31
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 61
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9ab324-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 7,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 38
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9ab325-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 8,
+						"weight": 52
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9ada30-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "03.04.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b0140-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 35
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b0141-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "21.05.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b0142-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 49
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 13,
+						"weight": 13
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 13
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b0143-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 58
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b0144-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "09.07.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9b0145-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b0146-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 36
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b0147-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 6,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 39
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b0148-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "28.08.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9b0149-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 7,
+						"weight": 58
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b014a-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 31
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 50
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b014b-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "18.10.2023",
+		"exerciseList": [
+			{
+				"exerciseId": "2",
+				"id": "fb9b2850-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 56
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 24
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 11,
+						"weight": 20
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b2851-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 58
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 45
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b2852-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "31.01.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb9b2853-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 27
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 15,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 13,
+						"weight": 28
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b2854-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 20
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b2855-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 16
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b2856-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 39
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b2857-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 7,
+						"weight": 47
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b2858-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "25.03.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b2859-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 14
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 43
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b285a-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 42
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 6,
+						"weight": 39
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 13,
+						"weight": 18
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b285b-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 22
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 33
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 5,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b285c-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 6,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 9,
+						"weight": 23
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b285d-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "19.05.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b285e-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 13,
+						"weight": 35
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 63
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 51
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b285f-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 18
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 14,
+						"weight": 55
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b4f60-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 0",
+		"date": "14.07.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f61-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 13
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f62-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 13,
+						"weight": 36
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f63-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 14
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 9,
+						"weight": 65
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b4f64-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 1",
+		"date": "09.09.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f65-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 47
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 31
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f66-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 9,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 46
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 11,
+						"weight": 59
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 10,
+						"weight": 66
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f67-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 11,
+						"weight": 66
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 21
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f68-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 28
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 43
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 14,
+						"weight": 32
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 12,
+						"weight": 30
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f69-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 20
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 44
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b4f6a-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 3",
+		"date": "06.11.2024",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f6b-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 8,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 11,
+						"weight": 64
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f6c-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 38
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 12
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 43
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f6d-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 65
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 15
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 10
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 55
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f6e-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 45
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 12,
+						"weight": 49
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f6f-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 21
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 51
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 12,
+						"weight": 16
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 29
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 8,
+						"weight": 15
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f70-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 14,
+						"weight": 49
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 60
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 14,
+						"weight": 60
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	},
+	{
+		"id": "fb9b4f71-8222-11ea-9078-83e7e1dbcb34",
+		"name": "Training 6",
+		"date": "04.01.2025",
+		"exerciseList": [
+			{
+				"exerciseId": "3",
+				"id": "fb9b4f72-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 1,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 12,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 44
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 11,
+						"weight": 37
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f73-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 2,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 61
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 9,
+						"weight": 53
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 9,
+						"weight": 25
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 5,
+						"repeats": 5,
+						"weight": 63
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "1",
+				"id": "fb9b4f74-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 3,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 5,
+						"weight": 23
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 10,
+						"weight": 62
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 10,
+						"weight": 30
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 12,
+						"weight": 24
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f75-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 4,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 10,
+						"weight": 55
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 8,
+						"weight": 34
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 5,
+						"weight": 40
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 10,
+						"weight": 41
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f76-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 5,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 15,
+						"weight": 64
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 5,
+						"weight": 19
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 8,
+						"weight": 53
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			},
+			{
+				"exerciseId": "2",
+				"id": "fb9b4f77-8222-11ea-9078-83e7e1dbcb34",
+				"sequenceNumber": 6,
+				"seriesList": [
+					{
+						"sequenceNumber": 1,
+						"repeats": 7,
+						"weight": 17
+					},
+					{
+						"sequenceNumber": 2,
+						"repeats": 15,
+						"weight": 57
+					},
+					{
+						"sequenceNumber": 3,
+						"repeats": 15,
+						"weight": 52
+					},
+					{
+						"sequenceNumber": 4,
+						"repeats": 8,
+						"weight": 33
+					}
+				],
+				"type": 0,
+				"userWeight": 60
+			}
+		]
+	}
+]

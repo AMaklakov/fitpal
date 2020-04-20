@@ -1,5 +1,5 @@
-import { assertUnreachable } from '@util/assert-unreachable';
-import { isPresent } from '@util/type.util';
+import { assertUnreachable } from '../util/assert-unreachable';
+import { isPresent } from '../util/type.util';
 
 export enum ExerciseTypes {
 	/**

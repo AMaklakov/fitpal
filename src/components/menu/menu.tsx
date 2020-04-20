@@ -56,6 +56,14 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 						}}
 						onPress={goToPage(Routes.ExerciseList)}
 					/>
+					<MenuItem
+						item={{
+							text: t('Statistics'),
+							icon: <ChevronRightIcon />,
+							isActive: activeRoute === Routes.Statistics,
+						}}
+						onPress={goToPage(Routes.Statistics)}
+					/>
 				</View>
 
 				{/* BOTTOM NAVIGATION */}

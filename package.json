@@ -10,7 +10,8 @@
 		"ios": "react-native run-ios --simulator=\"iPhone 8\"",
 		"metro": "react-native start --reset-cache",
 		"test": "jest",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+		"generate-trainings": "ts-node scripts/add-training-to-default-training-list.ts /Users/A.Maklakov/Documents/personal/fitpal/src/const/default-training-list.const.json 01.03.2020 30.04.2020"
 	},
 	"dependencies": {
 		"@react-native-community/async-storage": "^1.9.0",
@@ -34,6 +35,7 @@
 		"react-native-reanimated": "^1.7.0",
 		"react-native-safe-area-context": "^0.6.4",
 		"react-native-screens": "^2.0.0-alpha.32",
+		"react-native-svg": "^12.1.0",
 		"react-native-swipe-list-view": "^2.1.3",
 		"react-native-vector-icons": "^6.6.0",
 		"react-navigation": "^4.0.10",
@@ -42,7 +44,8 @@
 		"redux": "^4.0.5",
 		"redux-persist": "^6.0.0",
 		"redux-saga": "^1.1.3",
-		"uuid": "^3.4.0"
+		"uuid": "^3.4.0",
+		"victory-native": "^34.1.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.6.2",
@@ -51,6 +54,7 @@
 		"@types/axios": "^0.14.0",
 		"@types/big.js": "^4.0.5",
 		"@types/jest": "^24.0.24",
+		"@types/node": "^13.13.0",
 		"@types/react-native": "^0.60.25",
 		"@types/react-native-calendars": "^1.20.7",
 		"@types/react-native-datepicker": "^1.7.0",

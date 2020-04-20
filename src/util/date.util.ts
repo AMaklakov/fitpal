@@ -8,6 +8,7 @@ export const DEFAULT_DATE_FORMAT = 'DD.MM.YYYY';
 export enum DateFormatEnum {
 	Default = 'DD.MM.YYYY',
 	Calendar = 'YYYY-MM-DD',
+	DD_MMM = 'DD MMM',
 }
 
 export const getCurrentDate = (format: string = DateFormatEnum.Default): string => {
@@ -22,4 +23,8 @@ export const formatDate = (date: MomentInput, format: string = DateFormatEnum.Ca
 
 export const convertStringToMoment = (dateStr: MomentInput, format: DateFormatEnum = DateFormatEnum.Default) => {
 	return moment(dateStr, format);
+};
+
+export const diffInDays = (dateOne: moment.MomentInput, dateTwo: moment.MomentInput): number => {
+	return moment(dateOne).diff(dateTwo, 'days');
 };
