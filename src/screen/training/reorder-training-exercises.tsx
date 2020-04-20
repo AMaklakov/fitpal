@@ -28,7 +28,7 @@ export const ReorderTrainingExercise = (props: IProps) => {
 	return (
 		<View style={styles.wrapper}>
 			<DraggableFlatList<IBaseTrainingExercise>
-				keyExtractor={exercise => exercise.id}
+				keyExtractor={(exercise: IBaseTrainingExercise) => exercise.id}
 				data={training.exerciseList}
 				renderItem={RenderItem(exercises)}
 				onDragEnd={({ data }) => updateTraining(data)}
@@ -47,13 +47,11 @@ const RenderItem = (exerciseList: ExerciseModel[]) => ({
 	isActive,
 }: RenderItemParams<IBaseTrainingExercise>) => {
 	return (
-		<TouchableOpacity
-			activeOpacity={0.9}
-			style={StyleSheet.flatten([styles.renderItem, isActive && styles.renderActive])}>
+		<TouchableOpacity onPressIn={drag} activeOpacity={0.9} style={[styles.renderItem, isActive && styles.renderActive]}>
 			<Text>{exerciseList.find(e => e.id === item.exerciseId)?.name}</Text>
 
 			<View style={styles.iconStyle}>
-				<ReorderIcon onPressIn={drag} color={isActive ? Colors.Black : Colors.Grey} />
+				<ReorderIcon color={isActive ? Colors.Black : Colors.Grey} />
 			</View>
 		</TouchableOpacity>
 	);
