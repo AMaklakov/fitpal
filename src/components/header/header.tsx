@@ -4,6 +4,7 @@ import { MenuIcon } from '@icons/menu.icon';
 import { Colors } from '@css/colors.style';
 import { StoreModel } from '@redux/store';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
+import { ButtonIcon } from '@components/button-icon/button-icon';
 
 interface IDispatch {}
 
@@ -18,7 +19,7 @@ const Component = (props: IProps & IState & IDispatch) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<MenuIcon activeOpacity={0.7} touchableStyle={styles.menuIconHolder} onPress={onOpenMenu} />
+			<ButtonIcon icon={<MenuIcon />} activeOpacity={0.7} style={styles.menuIconHolder} onPress={onOpenMenu} />
 		</View>
 	);
 };
@@ -38,11 +39,11 @@ const styles = StyleSheet.create({
 	},
 });
 
-const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = (state, ownProps) => {
+const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = () => {
 	return {};
 };
 
-const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = (dispatch, ownProps) => {
+const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = () => {
 	return {};
 };
 

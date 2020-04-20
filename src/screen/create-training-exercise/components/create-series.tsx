@@ -4,6 +4,7 @@ import { IntegerNumberInputWithValidation } from '@components/inputs/integer-num
 import { RepeatOnceIcon } from '@icons/repeat-one.icon';
 import { ISeries } from '@model/training-exercise';
 import { useTranslation } from 'react-i18next';
+import { ButtonIcon } from '@components/button-icon/button-icon';
 
 export interface IProps {
 	series?: ISeries;
@@ -62,7 +63,9 @@ export const CreateSeries = (props: IProps) => {
 				/>
 			</View>
 
-			<View style={styles.actions}>{!!onRepeatIconPress && <RepeatOnceIcon onPress={onRepeatIconPress} />}</View>
+			<View style={styles.actions}>
+				{!!onRepeatIconPress && <ButtonIcon icon={<RepeatOnceIcon />} onPress={onRepeatIconPress} />}
+			</View>
 		</View>
 	);
 };
