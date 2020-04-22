@@ -3,3 +3,8 @@ export const TRAINING_TITLE_MINLENGTH = 3;
 
 export const EXERCISE_NAME_MAXLENGTH = 100;
 export const EXERCISE_NAME_MINLENGTH = 3;
+
+export const MIN_REPEATS = 1;
+export const MAX_REPEATS = 200;
+export const MIN_WEIGHT = 1;
+export const MAX_WEIGHT = 500;

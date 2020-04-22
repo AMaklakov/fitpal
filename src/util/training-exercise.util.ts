@@ -6,10 +6,12 @@ import {
 	IBaseTrainingExercise,
 	IDefaultTrainingExercise,
 	INegativeWeightTrainingExercise,
+	ISeries,
 } from '@model/training-exercise';
 import { TrainingModel } from '@model/training.model';
 import { assertUnreachable } from '@util/assert-unreachable';
 import { ExerciseTypes } from '@model/exercise.model';
+import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
 
 type ICloneTrainingExercise = {
 	(ex: IBaseTrainingExercise): IBaseTrainingExercise;
@@ -81,3 +83,47 @@ export const calcTotal = (ex: IBaseTrainingExercise): string => {
 
 export const calculateTrainingTotal = (training: TrainingModel) =>
 	training.exerciseList.reduce((buff, ex) => buff.plus(calcTotal(ex)), new Big(0));
+
+const isValidSeries = (
+	series: ISeries,
+	minWeight: BigSource,
+	maxWeight: BigSource,
+	minRepeats: BigSource,
+	maxRepeats: BigSource
+): boolean => {
+	const repeats = new Big(series.repeats);
+	const weight = new Big(series.weight);
+
+	if (!repeats.round().eq(repeats)) {
+		return false;
+	}
+
+	const isRepeatsValid = repeats.gte(minRepeats) && repeats.lte(maxRepeats);
+	const isWeightValid = weight.gte(minWeight) && weight.lte(maxWeight);
+
+	return isRepeatsValid && isWeightValid;
+};
+
+export const validateTrainingExercise = (ex: IBaseTrainingExercise, userWeight?: BigSource): boolean => {
+	switch (ex.type) {
+		case ExerciseTypes.Default:
+			return ex.seriesList.every(series => isValidSeries(series, MIN_WEIGHT, MAX_WEIGHT, MIN_REPEATS, MAX_REPEATS));
+
+		case ExerciseTypes.WithAdditionalWeight:
+			return ex.seriesList.every(series => isValidSeries(series, 0, MAX_WEIGHT, MIN_REPEATS, MAX_REPEATS));
+
+		case ExerciseTypes.WithNegativeWeight:
+			if (!userWeight) {
+				throw new Error(`User weight is not passed as argument`);
+			}
+
+			return ex.seriesList.every(series =>
+				isValidSeries(series, 0, new Big(userWeight).minus(1), MIN_REPEATS, MAX_REPEATS)
+			);
+
+		default:
+			assertUnreachable(ex.type);
+	}
+
+	throw new Error(`Not implemented exercise type`);
+};
