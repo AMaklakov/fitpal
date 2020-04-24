@@ -10,14 +10,14 @@ interface IItem {
 
 interface IProps {
 	item: IItem;
-	onPress: (item: IItem) => void;
+	onPress?: (item: IItem) => void;
 }
 
 export const MenuItem = (props: IProps) => {
 	const { item, onPress } = props;
 	const { icon, text, isActive } = item;
 
-	const handleOnPress = () => onPress(item);
+	const handleOnPress = () => onPress?.(item);
 
 	return (
 		<TouchableHighlight underlayColor={Colors.LightBlue} onPress={handleOnPress}>
