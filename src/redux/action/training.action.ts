@@ -1,9 +1,11 @@
-import { isTrainingValid, TrainingModel } from '../../model/training.model';
-import { PropType } from '../../util/type.util';
+import { isTrainingValid, TrainingModel } from '@model/training.model';
+import { PropType } from '@util/type.util';
 import { TrainingActions, TrainingExerciseAction } from './training-exercise.action';
 import { Dispatch } from 'redux';
-import { generateId } from '../../util/uuid.util';
+import { generateId } from '@util/uuid.util';
 import { Alert } from 'react-native';
+import { DataActionCreator } from '@model/data-action.model';
+import { MomentInput } from 'moment';
 
 export type ChangeTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
 export const changeTraining = (training: TrainingModel): ChangeTrainingAction => ({
@@ -38,3 +40,16 @@ export const checkAndCreateTraining = (dispatch: Dispatch, training: Partial<Tra
 
 	dispatch(createTrainingAction(tempTraining));
 };
+
+export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = (date: MomentInput) => ({
+	type: TrainingActions.FetchTrainingsByDateStart,
+	payload: date,
+});
+export const fetchTrainingsByDateSuccess: DataActionCreator<TrainingModel[]> = (trainings: TrainingModel[]) => ({
+	type: TrainingActions.FetchTrainingByDateSuccess,
+	payload: trainings,
+});
+export const fetchTrainingsByDateError: DataActionCreator<object> = (error: object) => ({
+	type: TrainingActions.FetchTrainingByDateError,
+	payload: error,
+});

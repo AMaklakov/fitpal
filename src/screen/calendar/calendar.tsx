@@ -1,48 +1,56 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
-import { DEFAULT_DATE_FORMAT, formatDate, getToday } from '../../util/date.util';
-import moment from 'moment';
-import { PropType } from '../../util/type.util';
-import { TrainingModel } from '../../model/training.model';
-import { NavigationPropsModel } from '../../model/navigation-props.model';
+import { formatDate, getToday } from '@util/date.util';
+import moment, { Moment } from 'moment';
+import { PropType } from '@util/type.util';
+import { TrainingModel } from '@model/training.model';
+import { NavigationPropsModel } from '@model/navigation-props.model';
 import {
 	toggleCalendarTrainingModalAction,
 	updateDateInTrainingModalAction,
 	updateTrainingModalAction,
-} from '../../redux/action/calendar-training-modal.action';
-import { TrainingListMinimalView } from '../../components/training-minimal-view/training-list-minimal-view';
-import { CalendarStrip } from '../../components/calendar/calendar-strip';
-import { Routes } from '../navigator';
-import { getTrainingListByDate } from '../../redux/selector/training.selector';
-import { StoreModel } from '../../redux/store';
-import { deleteTrainingByIdAction } from '../../redux/action/training.action';
+} from '@redux/action/calendar-training-modal.action';
+import { TrainingListMinimalView } from '@components/training-minimal-view/training-list-minimal-view';
+import { CalendarStrip } from '@components/calendar/calendar-strip';
+import { getTrainingListByDate } from '@redux/selector/training.selector';
+import { StoreModel } from '@redux/store';
+import { deleteTrainingByIdAction, fetchTrainingsByDateStart } from '@redux/action/training.action';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import { Colors } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
+import { Routes } from '@screen/navigator';
 
-interface IDispatchToProps {
+interface IDispatch {
+	fetchTrainingListByDate: (date: Moment) => void;
 	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
 	openTrainingModal: (training?: TrainingModel, date?: string) => void;
 }
 
-interface IStateToProps {
-	fetchTrainingListByDate: (date: string) => TrainingModel[] | undefined;
+interface IState {
+	selectTrainingListByDate: (date: Moment) => TrainingModel[] | undefined;
 }
 
 interface IProps extends NavigationPropsModel {}
 
-const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
-	const { navigation, fetchTrainingListByDate, deleteTrainingById, openTrainingModal } = props;
+const Calendar = (props: IProps & IState & IDispatch) => {
+	const {
+		navigation,
+		fetchTrainingListByDate,
+		deleteTrainingById,
+		openTrainingModal,
+		selectTrainingListByDate,
+	} = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, changeSelectedDate] = useState(getToday());
 	const [trainingToDelete, changeTrainingToDelete] = useState<TrainingModel | undefined>();
-	const trainingList = useMemo(() => fetchTrainingListByDate(formatDate(selectedDate, DEFAULT_DATE_FORMAT)), [
-		fetchTrainingListByDate,
-		selectedDate,
-	]);
+	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
+
+	useEffect(() => {
+		fetchTrainingListByDate(selectedDate);
+	}, [fetchTrainingListByDate, selectedDate]);
 
 	const handleOpenDeleteTrainingConfirm = (training: TrainingModel) => {
 		changeTrainingToDelete(training);
@@ -79,7 +87,7 @@ const Calendar = (props: IProps & IStateToProps & IDispatchToProps) => {
 	};
 
 	const handleCreateTraining = () => {
-		openTrainingModal(undefined, formatDate(selectedDate, DEFAULT_DATE_FORMAT));
+		openTrainingModal(undefined, formatDate(selectedDate));
 	};
 
 	return (
@@ -142,16 +150,15 @@ const styles = StyleSheet.create({
 	},
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
+const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state => {
 	return {
-		fetchTrainingListByDate: (date: string) => getTrainingListByDate(state, date),
+		selectTrainingListByDate: (date: Moment) => getTrainingListByDate(state, date),
 	};
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = (dispatch, ownProps) => {
+const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
+		fetchTrainingListByDate: (date: Moment) => dispatch(fetchTrainingsByDateStart(date)),
 		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => dispatch(deleteTrainingByIdAction(trainingId)),
 		openTrainingModal: (training?: TrainingModel, date?: string) => {
 			dispatch(updateTrainingModalAction(training ?? null));
