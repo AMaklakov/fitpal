@@ -13,9 +13,10 @@ import { connect } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { Dispatch } from 'redux';
 import { fetchCovidData } from '@redux/action/covid.action';
+import { getCovidConfirmed } from '@redux/selector/covid.selector';
 
 interface IState {
-	covidConfirmed: number;
+	covidConfirmed: string | number;
 	isCovidLoading: boolean;
 }
 
@@ -29,7 +30,7 @@ interface IProps extends IMenuWrapperProps {
 }
 
 export const MenuComponent = (props: IProps & IState & IDispatch) => {
-	const { isOpen, onCloseMenu, navigate, activeRoute, getCovidConfirmedCount, covidConfirmed, isCovidLoading } = props;
+	const { isOpen, onCloseMenu, navigate, activeRoute, getCovidConfirmedCount, covidConfirmed } = props;
 	const { t } = useTranslation();
 
 	const goToPage = (page: Routes) => () => navigate(page);
@@ -61,7 +62,7 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 				<View style={styles.bottomNavigationWrapper}>
 					<MenuItem
 						item={{
-							text: t('Covid |count|', { count: isCovidLoading ? '...' : covidConfirmed }),
+							text: t('Covid |count|', { value: covidConfirmed }),
 							icon: <DeadIcon />,
 						}}
 					/>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: StoreModel): IState => ({
-	covidConfirmed: state.covid.confirmed,
+	covidConfirmed: getCovidConfirmed(state),
 	isCovidLoading: state.covid.loading,
 });
 
