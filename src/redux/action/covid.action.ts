@@ -17,7 +17,7 @@ export const updateCovidData: ActionCreator<DataAction<ICovidData>> = data => ({
 	payload: data,
 });
 
-export const setErrorCovidData: ActionCreator<DataAction<string>> = data => ({
+export const setErrorCovidData: ActionCreator<DataAction<object>> = data => ({
 	type: CovidAction.FetchError,
 	payload: data,
 });

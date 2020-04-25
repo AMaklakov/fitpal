@@ -4,7 +4,7 @@ import { axios } from '@util/axios';
 
 export function* getCovidData() {
 	try {
-		const { data } = yield axios.get(`/covid-statistics/country/latest`);
+		const { data } = yield axios.get(`covid-statistics/country/latest`);
 		yield put(updateCovidData(data));
 	} catch (e) {
 		yield put(setErrorCovidData(e));
