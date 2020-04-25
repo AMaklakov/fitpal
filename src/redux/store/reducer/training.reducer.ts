@@ -49,6 +49,21 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 				loading: false,
 				error: (action as any).payload,
 			};
+
+		case TrainingActions.FetchTrainingByIdStart:
+			return {
+				...state,
+				loading: true,
+			};
+		case TrainingActions.FetchTrainingByIdSuccess:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel | undefined>).payload);
+		case TrainingActions.FetchTrainingByIdError:
+			return {
+				...state,
+				loading: false,
+				error: (action as any).payload,
+			};
+
 		default:
 			return state;
 	}
@@ -149,7 +164,7 @@ const createTraining = (state: IState, { payload: { training } }: CreateTraining
 	};
 };
 
-const addTrainingsToState = (state: IState, trainings: TrainingModel[] | undefined): IState => {
+const addTrainingsToState = (state: IState, trainings: TrainingModel[] | TrainingModel | undefined): IState => {
 	if (!isPresent(trainings)) {
 		return { ...state };
 	}

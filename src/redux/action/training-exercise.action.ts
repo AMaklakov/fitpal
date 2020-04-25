@@ -15,6 +15,10 @@ export enum TrainingActions {
 	FetchTrainingsByDateStart = 'TRAINING/FETCH_BY_DATE/START',
 	FetchTrainingByDateSuccess = 'TRAINING/FETCH_BY_DATE/SUCCESS',
 	FetchTrainingByDateError = 'TRAINING/FETCH_BY_DATE/ERROR',
+
+	FetchTrainingByIdStart = 'TRAINING/FETCH_BY_ID/START',
+	FetchTrainingByIdSuccess = 'TRAINING/FETCH_BY_ID/SUCCESS',
+	FetchTrainingByIdError = 'TRAINING/FETCH_BY_ID/ERROR',
 }
 
 export type TrainingExerciseByTrainingId = {

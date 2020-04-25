@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Training } from './training';
 import { StoreModel } from '@redux/store';
 import { getTrainingById } from '@redux/selector/training.selector';
@@ -8,7 +8,7 @@ import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
 import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
 import { PropType } from '@util/type.util';
-import { changeTraining } from '@redux/action/training.action';
+import { changeTraining, fetchTrainingByIdStart } from '@redux/action/training.action';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
 import { TrainingModel } from '@model/training.model';
@@ -26,6 +26,7 @@ interface IDispatch {
 	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => void;
 	onChangeTraining: (training: TrainingModel) => void;
 	onShowWeightModal: () => void;
+	fetchTrainingById: (id: string | undefined) => void;
 }
 
 interface IProps extends NavigationPropsModel {}
@@ -39,7 +40,12 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		onChangeTraining,
 		lastUserUpdatedWeight,
 		onShowWeightModal,
+		fetchTrainingById,
 	} = props;
+
+	useEffect(() => {
+		fetchTrainingById(navigation?.state?.params?.trainingId);
+	}, [fetchTrainingById, navigation]);
 
 	const addExerciseAction = (trainingExercise?: IBaseTrainingExercise) => {
 		navigation.navigate({
@@ -93,6 +99,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	},
 	onChangeTraining: (training: TrainingModel) => dispatch(changeTraining(training)),
 	onShowWeightModal: () => dispatch(setWeightModalVisible(true)),
+	fetchTrainingById: (id: string | undefined) => dispatch(fetchTrainingByIdStart(id)),
 });
 
 export const TrainingScreen = connect<IState, IDispatch, IProps, StoreModel>(

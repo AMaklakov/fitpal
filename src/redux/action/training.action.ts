@@ -53,3 +53,18 @@ export const fetchTrainingsByDateError: DataActionCreator<object> = (error: obje
 	type: TrainingActions.FetchTrainingByDateError,
 	payload: error,
 });
+
+export const fetchTrainingByIdStart: DataActionCreator<MomentInput> = (id: string) => ({
+	type: TrainingActions.FetchTrainingByIdStart,
+	payload: id,
+});
+export const fetchTrainingByIdSuccess: DataActionCreator<TrainingModel | undefined> = (
+	training: TrainingModel | undefined
+) => ({
+	type: TrainingActions.FetchTrainingByIdSuccess,
+	payload: training,
+});
+export const fetchTrainingByIdError: DataActionCreator<object> = (error: object) => ({
+	type: TrainingActions.FetchTrainingByIdError,
+	payload: error,
+});
