@@ -4,7 +4,7 @@ import { TrainingActions, TrainingExerciseAction } from '@redux/action/training-
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
-import { ChangeTrainingAction, DeleteTrainingAction } from '@redux/action/training.action';
+import { ChangeTrainingAction } from '@redux/action/training.action';
 
 interface IState extends IFetchState {
 	trainings: TrainingModel[];
@@ -29,9 +29,6 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 
 		case TrainingActions.ChangeTraining:
 			return changeTraining(state, action as ChangeTrainingAction);
-
-		case TrainingActions.DeleteTrainingById:
-			return deleteTrainingById(state, action as DeleteTrainingAction);
 
 		case TrainingActions.FetchTrainingsByDateStart:
 			return {
@@ -66,6 +63,17 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 		case TrainingActions.CreateTrainingSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
 		case TrainingActions.CreateTrainingError:
+			return {
+				...state,
+				loading: false,
+				error: (action as any).payload,
+			};
+
+		case TrainingActions.DeleteTrainingByIdStart:
+			return { ...state, loading: true };
+		case TrainingActions.DeleteTrainingByIdSuccess:
+			return deleteById(state, (action as DataAction<string>).payload);
+		case TrainingActions.DeleteTrainingByIdError:
 			return {
 				...state,
 				loading: false,
@@ -158,12 +166,12 @@ const changeTraining = (state: IState, { payload: { training } }: ChangeTraining
 	};
 };
 
-const deleteTrainingById = (state: IState, { payload: { trainingId } }: DeleteTrainingAction): IState => {
-	return {
-		...state,
-		trainings: state.trainings.filter(t => t.id !== trainingId),
-	};
-};
+const deleteById = (state: IState, id: string): IState => ({
+	...state,
+	loading: false,
+	error: null,
+	trainings: state.trainings.filter(t => t.id !== id),
+});
 
 const addTrainingsToState = (state: IState, trainings: TrainingModel[] | TrainingModel | undefined): IState => {
 	if (!isPresent(trainings)) {

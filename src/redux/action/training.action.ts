@@ -1,5 +1,4 @@
 import { ICreateTraining, TrainingModel } from '@model/training.model';
-import { PropType } from '@util/type.util';
 import { TrainingActions, TrainingExerciseAction } from './training-exercise.action';
 import { DataActionCreator } from '@model/data-action.model';
 import { MomentInput } from 'moment';
@@ -9,15 +8,6 @@ export const changeTraining = (training: TrainingModel): ChangeTrainingAction =>
 	type: TrainingActions.ChangeTraining,
 
 	payload: { training },
-});
-
-export type DeleteTrainingAction = TrainingExerciseAction<{
-	trainingId: PropType<TrainingModel, 'id'>;
-}>;
-export const deleteTrainingByIdAction = (trainingId: PropType<TrainingModel, 'id'>): DeleteTrainingAction => ({
-	type: TrainingActions.DeleteTrainingById,
-
-	payload: { trainingId },
 });
 
 export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = date => ({
@@ -58,5 +48,18 @@ export const createTrainingSuccess: DataActionCreator<TrainingModel> = training 
 });
 export const createTrainingError: DataActionCreator<object> = error => ({
 	type: TrainingActions.CreateTrainingError,
+	payload: error,
+});
+
+export const deleteTrainingByIdStart: DataActionCreator<string> = id => ({
+	type: TrainingActions.DeleteTrainingByIdStart,
+	payload: id,
+});
+export const deleteTrainingByIdSuccess: DataActionCreator<string> = id => ({
+	type: TrainingActions.DeleteTrainingByIdSuccess,
+	payload: id,
+});
+export const deleteTrainingByIdError: DataActionCreator<object> = error => ({
+	type: TrainingActions.DeleteTrainingByIdError,
 	payload: error,
 });

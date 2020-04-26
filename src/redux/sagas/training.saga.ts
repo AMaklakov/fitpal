@@ -4,6 +4,8 @@ import { Moment } from 'moment';
 import {
 	createTrainingError,
 	createTrainingSuccess,
+	deleteTrainingByIdError,
+	deleteTrainingByIdSuccess,
 	fetchTrainingByIdError,
 	fetchTrainingByIdSuccess,
 	fetchTrainingsByDateError,
@@ -52,12 +54,12 @@ export function* createTraining(action: DataAction<ICreateTraining>) {
 		yield put(createTrainingError(e));
 	}
 }
-//
-// export function* deleteTrainingById(id: PropType<TrainingModel, 'id'>) {
-// 	try {
-// 		const { data } = yield axios.get(`covid-statistics/country/latest`);
-// 		yield put(updateCovidData(data));
-// 	} catch (e) {
-// 		yield put(setErrorCovidData(e));
-// 	}
-// }
+
+export function* deleteTrainingById(action: DataAction<string>) {
+	try {
+		yield axios.delete(`/trainings/${action.payload}`);
+		yield put(deleteTrainingByIdSuccess(action.payload));
+	} catch (e) {
+		yield put(deleteTrainingByIdError(e));
+	}
+}

@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { getCovidData } from '@redux/sagas/covid.saga';
 import { CovidAction } from '@redux/action/covid.action';
-import { createTraining, getTrainingById, getTrainingsByDate } from '@redux/sagas/training.saga';
+import { createTraining, deleteTrainingById, getTrainingById, getTrainingsByDate } from '@redux/sagas/training.saga';
 import { TrainingActions } from '@redux/action/training-exercise.action';
 
 function* actionWatcher() {
@@ -10,6 +10,7 @@ function* actionWatcher() {
 	yield takeLatest(TrainingActions.FetchTrainingsByDateStart, getTrainingsByDate);
 	yield takeLatest(TrainingActions.FetchTrainingByIdStart, getTrainingById);
 	yield takeLatest(TrainingActions.CreateTrainingStart, createTraining);
+	yield takeLatest(TrainingActions.DeleteTrainingByIdStart, deleteTrainingById);
 }
 
 export function* rootSaga() {
