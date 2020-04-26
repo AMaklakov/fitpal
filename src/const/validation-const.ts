@@ -8,3 +8,6 @@ export const MIN_REPEATS = 1;
 export const MAX_REPEATS = 200;
 export const MIN_WEIGHT = 1;
 export const MAX_WEIGHT = 500;
+
+export const USER_MIN_WEIGHT = 30;
+export const USER_MAX_WEIGHT = 500;

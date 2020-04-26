@@ -8,6 +8,7 @@ import { CalendarTrainingModal } from '@screen/calendar/calendar-training-modal'
 import { Header } from '@components/header/header';
 import { Menu } from '@components/menu/menu';
 import { NavigationActions, NavigationContainerComponent, NavigationState } from 'react-navigation';
+import { UserWeightModal } from '@components/user-weight/user-weight.modal';
 
 changeLanguage(store.getState().settings.language);
 
@@ -34,6 +35,7 @@ export const App = () => {
 
 					<AppNavigator ref={navigatorRef} />
 
+					<UserWeightModal />
 					<CalendarTrainingModal />
 
 					<Menu
