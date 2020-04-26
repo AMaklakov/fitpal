@@ -1,9 +1,6 @@
-import { isTrainingValid, TrainingModel } from '@model/training.model';
+import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { PropType } from '@util/type.util';
 import { TrainingActions, TrainingExerciseAction } from './training-exercise.action';
-import { Dispatch } from 'redux';
-import { generateId } from '@util/uuid.util';
-import { Alert } from 'react-native';
 import { DataActionCreator } from '@model/data-action.model';
 import { MomentInput } from 'moment';
 
@@ -23,38 +20,20 @@ export const deleteTrainingByIdAction = (trainingId: PropType<TrainingModel, 'id
 	payload: { trainingId },
 });
 
-export type CreateTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
-export const createTrainingAction = (training: TrainingModel): CreateTrainingAction => ({
-	type: TrainingActions.CreateTraining,
-
-	payload: { training },
-});
-
-export const checkAndCreateTraining = (dispatch: Dispatch, training: Partial<TrainingModel>) => {
-	const tempTraining: TrainingModel = { ...training, id: generateId() } as TrainingModel;
-
-	if (!isTrainingValid(tempTraining)) {
-		Alert.alert(`Training you want to save is not valid!`);
-		return;
-	}
-
-	dispatch(createTrainingAction(tempTraining));
-};
-
-export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = (date: MomentInput) => ({
+export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = date => ({
 	type: TrainingActions.FetchTrainingsByDateStart,
 	payload: date,
 });
-export const fetchTrainingsByDateSuccess: DataActionCreator<TrainingModel[]> = (trainings: TrainingModel[]) => ({
+export const fetchTrainingsByDateSuccess: DataActionCreator<TrainingModel[]> = trainings => ({
 	type: TrainingActions.FetchTrainingByDateSuccess,
 	payload: trainings,
 });
-export const fetchTrainingsByDateError: DataActionCreator<object> = (error: object) => ({
+export const fetchTrainingsByDateError: DataActionCreator<object> = error => ({
 	type: TrainingActions.FetchTrainingByDateError,
 	payload: error,
 });
 
-export const fetchTrainingByIdStart: DataActionCreator<MomentInput> = (id: string) => ({
+export const fetchTrainingByIdStart: DataActionCreator<MomentInput> = id => ({
 	type: TrainingActions.FetchTrainingByIdStart,
 	payload: id,
 });
@@ -66,5 +45,18 @@ export const fetchTrainingByIdSuccess: DataActionCreator<TrainingModel | undefin
 });
 export const fetchTrainingByIdError: DataActionCreator<object> = (error: object) => ({
 	type: TrainingActions.FetchTrainingByIdError,
+	payload: error,
+});
+
+export const createTrainingStart: DataActionCreator<ICreateTraining> = training => ({
+	type: TrainingActions.CreateTrainingStart,
+	payload: training,
+});
+export const createTrainingSuccess: DataActionCreator<TrainingModel> = training => ({
+	type: TrainingActions.CreateTrainingSuccess,
+	payload: training,
+});
+export const createTrainingError: DataActionCreator<object> = error => ({
+	type: TrainingActions.CreateTrainingError,
 	payload: error,
 });

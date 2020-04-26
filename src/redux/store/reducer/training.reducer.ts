@@ -1,10 +1,10 @@
 import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { TrainingActions, TrainingExerciseAction } from '@redux/action/training-exercise.action';
-import { ChangeTrainingAction, CreateTrainingAction, DeleteTrainingAction } from '@redux/action/training.action';
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
+import { ChangeTrainingAction, DeleteTrainingAction } from '@redux/action/training.action';
 
 interface IState extends IFetchState {
 	trainings: TrainingModel[];
@@ -33,9 +33,6 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 		case TrainingActions.DeleteTrainingById:
 			return deleteTrainingById(state, action as DeleteTrainingAction);
 
-		case TrainingActions.CreateTraining:
-			return createTraining(state, action as CreateTrainingAction);
-
 		case TrainingActions.FetchTrainingsByDateStart:
 			return {
 				...state,
@@ -58,6 +55,17 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 		case TrainingActions.FetchTrainingByIdSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel | undefined>).payload);
 		case TrainingActions.FetchTrainingByIdError:
+			return {
+				...state,
+				loading: false,
+				error: (action as any).payload,
+			};
+
+		case TrainingActions.CreateTrainingStart:
+			return { ...state, loading: true };
+		case TrainingActions.CreateTrainingSuccess:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TrainingActions.CreateTrainingError:
 			return {
 				...state,
 				loading: false,
@@ -154,13 +162,6 @@ const deleteTrainingById = (state: IState, { payload: { trainingId } }: DeleteTr
 	return {
 		...state,
 		trainings: state.trainings.filter(t => t.id !== trainingId),
-	};
-};
-
-const createTraining = (state: IState, { payload: { training } }: CreateTrainingAction): IState => {
-	return {
-		...state,
-		trainings: state.trainings.concat(training),
 	};
 };
 
