@@ -11,21 +11,21 @@ interface IProps {
 	training: TrainingModel;
 	exercises: ExerciseModel[];
 
-	addExerciseAction: (e?: IBaseTrainingExercise) => void;
+	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
 	changeOrder: () => void;
 }
 
 export const ShowTraining = (props: IProps) => {
-	const { exercises, training, addExerciseAction, removeExercise, changeOrder } = props;
+	const { exercises, training, onAddExercise, removeExercise, changeOrder } = props;
 	const { exerciseList = [] } = training;
 	const { t } = useTranslation();
 
 	const total = useMemo(() => calculateTrainingTotal(training), [training]);
 
-	const handleEditExercise = (e: IBaseTrainingExercise) => addExerciseAction(e);
+	const handleEditExercise = (e: IBaseTrainingExercise) => onAddExercise(e);
 
-	const handleAddExercise = () => addExerciseAction();
+	const handleAddExercise = () => onAddExercise();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const longTapAction = (e: IBaseTrainingExercise) => changeOrder();

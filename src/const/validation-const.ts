@@ -11,3 +11,4 @@ export const MAX_WEIGHT = 500;
 
 export const USER_MIN_WEIGHT = 30;
 export const USER_MAX_WEIGHT = 500;
+export const USER_WEIGHT_EXPIRATION_TIME_HOURS = 30;
