@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Training } from './training';
 import { StoreModel } from '@redux/store';
 import { getTrainingById } from '@redux/selector/training.selector';
@@ -8,7 +8,7 @@ import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
 import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
 import { PropType } from '@util/type.util';
-import { changeTraining, fetchTrainingByIdStart } from '@redux/action/training.action';
+import { fetchTrainingByIdStart, updateTrainingStart } from '@redux/action/training.action';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
 import { TrainingModel } from '@model/training.model';
@@ -24,9 +24,10 @@ interface IState {
 
 interface IDispatch {
 	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => void;
-	onChangeTraining: (training: TrainingModel) => void;
 	onShowWeightModal: () => void;
+	onUpdateTraining: (training: TrainingModel) => void;
 	fetchTrainingById: (id: string | undefined) => void;
+	onGoBack: () => void;
 }
 
 interface IProps extends NavigationPropsModel {}
@@ -37,10 +38,11 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		navigation,
 		exercises,
 		onRemoveTrainingExercise,
-		onChangeTraining,
 		lastUserUpdatedWeight,
 		onShowWeightModal,
+		onUpdateTraining,
 		fetchTrainingById,
+		onGoBack,
 	} = props;
 
 	useEffect(() => {
@@ -65,12 +67,10 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		onRemoveTrainingExercise(trainingExercise, training.id);
 	};
 
-	const handleUpdateTrainingName = (name: string) => {
-		onChangeTraining({
-			...(training as TrainingModel),
-			name,
-		});
-	};
+	const handleUpdateTrainingName = useCallback(
+		(name: string) => onUpdateTraining({ ...(training as TrainingModel), name }),
+		[onUpdateTraining, training]
+	);
 
 	return (
 		<Training
@@ -79,10 +79,11 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			onAddExercise={addExerciseAction}
 			removeExercise={removeExerciseAction}
 			onUpdateTrainingName={handleUpdateTrainingName}
-			changeTraining={onChangeTraining}
+			changeTraining={onUpdateTraining}
 			exercises={exercises}
 			lastUserUpdatedWeight={lastUserUpdatedWeight}
 			onShowWeightModal={onShowWeightModal}
+			onGoBack={onGoBack}
 		/>
 	);
 };
@@ -93,12 +94,13 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 	lastUserUpdatedWeight: store.user.weightData.date,
 });
 
-const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch): IDispatch => ({
+const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch, ownProups): IDispatch => ({
 	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => {
 		dispatch(deleteTrainingExerciseByTrainingId(trainingId, e));
 	},
-	onChangeTraining: (training: TrainingModel) => dispatch(changeTraining(training)),
 	onShowWeightModal: () => dispatch(setWeightModalVisible(true)),
+	onGoBack: () => ownProups.navigation.navigate(Routes.Calendar),
+	onUpdateTraining: (training: TrainingModel) => dispatch(updateTrainingStart(training)),
 	fetchTrainingById: (id: string | undefined) => dispatch(fetchTrainingByIdStart(id)),
 });
 

@@ -4,7 +4,6 @@ import { TrainingActions, TrainingExerciseAction } from '@redux/action/training-
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
-import { ChangeTrainingAction } from '@redux/action/training.action';
 
 interface IState extends IFetchState {
 	trainings: TrainingModel[];
@@ -26,9 +25,6 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 
 		case TrainingActions.DeleteTrainingExerciseByTrainingId:
 			return deleteTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
-
-		case TrainingActions.ChangeTraining:
-			return changeTraining(state, action as ChangeTrainingAction);
 
 		case TrainingActions.FetchTrainingsByDateStart:
 			return {
@@ -77,7 +73,18 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 			return {
 				...state,
 				loading: false,
-				error: (action as any).payload,
+				error: (action as DataAction<object>).payload,
+			};
+
+		case TrainingActions.UpdateTrainingStart:
+			return { ...state, loading: true };
+		case TrainingActions.UpdateTrainingSuccess:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TrainingActions.UpdateTrainingError:
+			return {
+				...state,
+				loading: false,
+				error: (action as DataAction<object>).payload,
 			};
 
 		default:
@@ -146,22 +153,6 @@ const deleteTrainingExerciseByTrainingId = (state: IState, action: TrainingExerc
 			}
 
 			return item;
-		}),
-	};
-};
-
-const changeTraining = (state: IState, { payload: { training } }: ChangeTrainingAction): IState => {
-	return {
-		...state,
-		trainings: state.trainings.map(t => {
-			if (t.id === training.id) {
-				return {
-					...training,
-					exerciseList: [...training.exerciseList],
-				};
-			}
-
-			return { ...t };
 		}),
 	};
 };

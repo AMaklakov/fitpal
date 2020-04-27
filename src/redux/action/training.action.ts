@@ -1,14 +1,7 @@
 import { ICreateTraining, TrainingModel } from '@model/training.model';
-import { TrainingActions, TrainingExerciseAction } from './training-exercise.action';
+import { TrainingActions } from './training-exercise.action';
 import { DataActionCreator } from '@model/data-action.model';
 import { MomentInput } from 'moment';
-
-export type ChangeTrainingAction = TrainingExerciseAction<{ training: TrainingModel }>;
-export const changeTraining = (training: TrainingModel): ChangeTrainingAction => ({
-	type: TrainingActions.ChangeTraining,
-
-	payload: { training },
-});
 
 export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = date => ({
 	type: TrainingActions.FetchTrainingsByDateStart,
@@ -61,5 +54,18 @@ export const deleteTrainingByIdSuccess: DataActionCreator<string> = id => ({
 });
 export const deleteTrainingByIdError: DataActionCreator<object> = error => ({
 	type: TrainingActions.DeleteTrainingByIdError,
+	payload: error,
+});
+
+export const updateTrainingStart: DataActionCreator<TrainingModel> = training => ({
+	type: TrainingActions.UpdateTrainingStart,
+	payload: training,
+});
+export const updateTrainingSuccess: DataActionCreator<TrainingModel> = training => ({
+	type: TrainingActions.UpdateTrainingSuccess,
+	payload: training,
+});
+export const updateTrainingError: DataActionCreator<object> = error => ({
+	type: TrainingActions.UpdateTrainingError,
 	payload: error,
 });

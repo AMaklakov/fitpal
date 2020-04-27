@@ -8,8 +8,6 @@ export enum TrainingActions {
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 
-	ChangeTraining = 'ChangeTraining',
-
 	FetchTrainingsByDateStart = 'TRAINING/FETCH_BY_DATE/START',
 	FetchTrainingByDateSuccess = 'TRAINING/FETCH_BY_DATE/SUCCESS',
 	FetchTrainingByDateError = 'TRAINING/FETCH_BY_DATE/ERROR',
@@ -25,6 +23,10 @@ export enum TrainingActions {
 	DeleteTrainingByIdStart = 'TRAINING/DELETE/START',
 	DeleteTrainingByIdSuccess = 'TRAINING/DELETE/SUCCESS',
 	DeleteTrainingByIdError = 'TRAINING/DELETE/ERROR',
+
+	UpdateTrainingStart = 'TRAINING/UPDATE/START',
+	UpdateTrainingSuccess = 'TRAINING/UPDATE/SUCCESS',
+	UpdateTrainingError = 'TRAINING/UPDATE/ERROR',
 }
 
 export type TrainingExerciseByTrainingId = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList, { RenderItemParams } from 'react-native-draggable-flatlist';
 import { ReorderIcon } from '@icons/reorder.icon';
@@ -10,6 +10,7 @@ import { commonStyles } from '@screen/create-training-exercise/style';
 import { SaveIcon } from '@icons/save.icon';
 import { useTranslation } from 'react-i18next';
 import { toRgba } from '@util/css.util';
+import { ButtonIcon } from '@components/button-icon/button-icon';
 
 interface IProps {
 	training: TrainingModel;
@@ -23,7 +24,12 @@ export const ReorderTrainingExercise = (props: IProps) => {
 	const { changeTraining, exercises, training, onSave } = props;
 	const { t } = useTranslation();
 
-	const updateTraining = (data: IBaseTrainingExercise[]) => changeTraining({ ...training, exerciseList: data });
+	const [exerciseList, setExerciseList] = useState(training.exerciseList);
+
+	const handleSavePress = useCallback(() => {
+		changeTraining({ ...training, exerciseList });
+		onSave();
+	}, [training, changeTraining, exerciseList, onSave]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -31,9 +37,9 @@ export const ReorderTrainingExercise = (props: IProps) => {
 				keyExtractor={(exercise: IBaseTrainingExercise) => exercise.id}
 				data={training.exerciseList}
 				renderItem={RenderItem(exercises)}
-				onDragEnd={({ data }) => updateTraining(data)}
+				onDragEnd={({ data }) => setExerciseList(data)}
 			/>
-			<TouchableOpacity onPress={onSave} style={styles.buttonWithIconWrapper}>
+			<TouchableOpacity onPress={handleSavePress} style={styles.buttonWithIconWrapper}>
 				<SaveIcon color={Colors.LightBlue} />
 				<Text style={commonStyles.saveButtonText}>{t('Save')}</Text>
 			</TouchableOpacity>
@@ -49,9 +55,8 @@ const RenderItem = (exerciseList: ExerciseModel[]) => ({
 	return (
 		<TouchableOpacity onPressIn={drag} activeOpacity={0.9} style={[styles.renderItem, isActive && styles.renderActive]}>
 			<Text>{exerciseList.find(e => e.id === item.exerciseId)?.name}</Text>
-
 			<View style={styles.iconStyle}>
-				<ReorderIcon color={isActive ? Colors.Black : Colors.Grey} />
+				<ButtonIcon onPressIn={drag} icon={<ReorderIcon color={isActive ? Colors.Black : Colors.Grey} />} />
 			</View>
 		</TouchableOpacity>
 	);

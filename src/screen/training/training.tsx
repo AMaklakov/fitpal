@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { ShowTraining } from './show-training';
 import { ReorderTrainingExercise } from './reorder-training-exercises';
@@ -9,6 +9,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import moment, { MomentInput } from 'moment';
 import { USER_WEIGHT_EXPIRATION_TIME_HOURS } from '@const/validation-const';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
 	training?: TrainingModel;
@@ -19,6 +20,7 @@ interface IProps {
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
 	onUpdateTrainingName: (name: string) => void;
+	onGoBack: () => void;
 
 	canEdit: boolean;
 	lastUserUpdatedWeight: MomentInput;
@@ -36,12 +38,10 @@ export const Training = (props: IProps) => {
 		onUpdateTrainingName,
 		lastUserUpdatedWeight,
 		onShowWeightModal,
+		onGoBack,
 	} = props;
 
-	if (!training) {
-		throw new Error(`No training present`);
-	}
-
+	const { t } = useTranslation();
 	const [isReorder, changeIsReorder] = useState(false);
 
 	const reorderExercises = (t: TrainingModel) => changeTraining(t);
@@ -55,6 +55,18 @@ export const Training = (props: IProps) => {
 
 		onAddExercise();
 	}, [lastUserUpdatedWeight, onAddExercise, onShowWeightModal]);
+
+	if (!training) {
+		return (
+			<View>
+				{/*<Text>{'Seems like no training is present'}</Text>*/}
+
+				<TouchableOpacity onPress={onGoBack}>
+					<Text>{t('Go back to trainings')}</Text>
+				</TouchableOpacity>
+			</View>
+		);
+	}
 
 	return (
 		<View style={{ flex: 1 }}>

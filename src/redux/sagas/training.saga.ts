@@ -10,9 +10,11 @@ import {
 	fetchTrainingByIdSuccess,
 	fetchTrainingsByDateError,
 	fetchTrainingsByDateSuccess,
+	updateTrainingError,
+	updateTrainingSuccess,
 } from '@redux/action/training.action';
 import { DataAction } from '@model/data-action.model';
-import { ICreateTraining, isCreateTrainingValid, isTrainingValid } from '@model/training.model';
+import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
 
 export function* getTrainingsByDate(action: DataAction<Moment>) {
@@ -61,5 +63,27 @@ export function* deleteTrainingById(action: DataAction<string>) {
 		yield put(deleteTrainingByIdSuccess(action.payload));
 	} catch (e) {
 		yield put(deleteTrainingByIdError(e));
+	}
+}
+
+export function* updateTrainingById(action: DataAction<TrainingModel>) {
+	try {
+		if (!isTrainingValid(action.payload)) {
+			throw `Training is not valid`;
+		}
+
+		const res = yield axios.put(`/trainings/${action.payload.id}`, {
+			training: action.payload,
+		});
+
+		const trainingFromServer = res?.data?.training;
+
+		if (!isTrainingValid(trainingFromServer)) {
+			throw `Training from server is not valid`;
+		}
+
+		yield put(updateTrainingSuccess(trainingFromServer));
+	} catch (e) {
+		yield put(updateTrainingError(e));
 	}
 }
