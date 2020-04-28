@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ButtonIcon } from '@components/button-icon/button-icon';
 import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
 
-export interface IProps {
+interface IProps {
 	series?: ISeries;
 	index: number;
 
