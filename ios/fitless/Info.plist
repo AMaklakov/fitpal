@@ -57,6 +57,10 @@
 	<array>
 	    <string>MaterialCommunityIcons.ttf</string>
 	    <string>MaterialIcons.ttf</string>
+			<string>FontAwesome.ttf</string>
+			<string>FontAwesome5_Brands.ttf</string>
+			<string>FontAwesome5_Regular.ttf</string>
+			<string>FontAwesome5_Solid.ttf</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
   <string>Light</string>
