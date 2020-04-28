@@ -6,6 +6,10 @@ import { H2 } from '../heading/h2';
 import { useTranslation } from 'react-i18next';
 import { calcTotal } from '@util/training-exercise.util';
 import { ISeries } from '@model/training-exercise';
+import { Colors } from '@css/colors.style';
+import { WeightIcon } from '@icons/weight.icon';
+import { CounterIcon } from '@icons/counter.icon';
+import { HashtagIcon } from '@icons/hashtag.icon';
 
 const TrainingExercise = (props: TrainingExerciseProps) => {
 	const { trainingExercise, exerciseList, onLongPress, onPress } = props;
@@ -21,9 +25,9 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 				<H2 text={exerciseList?.find(e => e.id === exerciseId)?.name || ''} />
 				<View style={style.table}>
 					<View style={style.tableHeading}>
-						<Text>№</Text>
-						<Text>🔁</Text>
-						<Text>🏋</Text>
+						<HashtagIcon color={Colors.White} />
+						<CounterIcon color={Colors.White} />
+						<WeightIcon color={Colors.White} />
 					</View>
 
 					{seriesList.map((s: ISeries, index: number) => (
