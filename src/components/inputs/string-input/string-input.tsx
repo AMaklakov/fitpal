@@ -9,11 +9,12 @@ interface IProps {
 	value: string;
 	onChange: (v: string) => void;
 
+	isPassword?: boolean;
 	inputStyle?: StyleProp<TextStyle>;
 }
 
 export const StringInput: FC<IProps> = (props: IProps) => {
-	const { onChange, placeholder = '', value, inputStyle = {} } = props;
+	const { onChange, placeholder = '', value, inputStyle = {}, isPassword = false } = props;
 
 	const onTextChangeHandler = (v: string) => onChange(v);
 
@@ -25,6 +26,7 @@ export const StringInput: FC<IProps> = (props: IProps) => {
 				placeholderTextColor={placeholderTextColor}
 				onChangeText={onTextChangeHandler}
 				value={value}
+				secureTextEntry={isPassword}
 			/>
 		</View>
 	);
