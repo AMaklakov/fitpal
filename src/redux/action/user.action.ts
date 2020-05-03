@@ -2,6 +2,7 @@ import { BigSource } from 'big.js';
 import { IWeight } from '@redux/store/reducer/user/weight.reducer';
 import { DataActionCreator } from '@model/data-action.model';
 import { ILoginRequestBody } from '@model/login-request-body';
+import { IRegisterRequestBody } from '@model/register-request-body.model';
 
 export enum UserActions {
 	SetModalVisible = 'USER/WEIGHT/CHANGE_USER_WEIGHT/SET_MODAL_VISIBLE',
@@ -50,5 +51,18 @@ export const loginSuccess: DataActionCreator<{ token: string }> = data => ({
 });
 export const loginError: DataActionCreator<object> = error => ({
 	type: UserActions.LoginError,
+	payload: error,
+});
+
+export const registerStart: DataActionCreator<IRegisterRequestBody> = data => ({
+	type: UserActions.RegisterStart,
+	payload: data,
+});
+export const registerSuccess: DataActionCreator<{}> = data => ({
+	type: UserActions.RegisterSuccess,
+	payload: data,
+});
+export const registerError: DataActionCreator<object> = error => ({
+	type: UserActions.RegisterError,
 	payload: error,
 });

@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { StringInput } from '@inputs/string-input/string-input';
 import { useTranslation } from 'react-i18next';
@@ -7,15 +7,20 @@ import { Colors } from '@css/colors.style';
 import { IntegerNumberInput } from '@inputs/integer-number-input/integer-number-input';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { Routes } from '@screen/navigator';
+import { IRegisterRequestBody } from '@model/register-request-body.model';
+import { Dispatch } from 'redux';
+import { registerStart } from '@redux/action/user.action';
 
 interface IState {}
 
-interface IDispatch {}
+interface IDispatch {
+	onRegister: (body: IRegisterRequestBody) => void;
+}
 
 interface IProps extends NavigationPropsModel {}
 
 const Registration: FC<IProps & IState & IDispatch> = props => {
-	const { navigation } = props;
+	const { navigation, onRegister } = props;
 	const { t } = useTranslation();
 
 	const [email, setEmail] = useState('');
@@ -25,14 +30,29 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 	const [lastName, setLastName] = useState('');
 	const [middleName, setMiddleName] = useState('');
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isMale, setIsMale] = useState(true);
+	const [isMale] = useState(true);
 	const [age, setAge] = useState('18');
 	const [weight, setWeight] = useState('60');
 
 	const handleLogin = useCallback(() => navigation.navigate(Routes.Login), [navigation]);
 
-	const handleRegister = useCallback(() => {}, []);
+	const handleRegister = useCallback(() => {
+		if (!email || !password || !weight) {
+			Alert.alert('Enter email, password and weight');
+			return;
+		}
+
+		onRegister({
+			email,
+			password,
+			age,
+			firstName,
+			isMale,
+			lastName,
+			middleName,
+			weight,
+		});
+	}, [age, email, firstName, isMale, lastName, middleName, onRegister, password, weight]);
 
 	return (
 		<ScrollView>
@@ -129,6 +149,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (): IState => ({});
 
-const mapDispatchToProps = (): IDispatch => ({});
+const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
+	onRegister: (body: IRegisterRequestBody) => dispatch(registerStart(body)),
+});
 
 export const RegistrationScreen = connect(mapStateToProps, mapDispatchToProps)(Registration);

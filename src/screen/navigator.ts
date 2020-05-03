@@ -9,7 +9,7 @@ import { ExerciseCreateScreen } from '@screen/exercise-create/exercise-create.sc
 import { SettingsScreen } from '@screen/settings/settings';
 import { AuthLoadingScreen } from '@screen/auth/auth-loading/auth-loading.screen';
 import { LoginScreen } from '@screen/auth/login/login.screen';
-import { RegistrationScreen } from '@screen/auth/registration/registraition.screen';
+import { RegistrationScreen } from '@screen/auth/registration/registration.screen';
 
 export enum Routes {
 	// ----- ZONES

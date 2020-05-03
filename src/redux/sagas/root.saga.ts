@@ -10,10 +10,11 @@ import {
 } from '@redux/sagas/training.saga';
 import { TrainingActions } from '@redux/action/training-exercise.action';
 import { UserActions } from '@redux/action/user.action';
-import { login } from '@redux/sagas/user.saga';
+import { login, register } from '@redux/sagas/user.saga';
 
 function* actionWatcher() {
 	yield takeLatest(UserActions.LoginStart, login);
+	yield takeLatest(UserActions.RegisterStart, register);
 
 	yield takeLatest(CovidAction.FetchStart, getCovidData);
 
