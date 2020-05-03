@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { CalendarScreen } from '@screen/calendar/calendar';
 import { TrainingScreen } from '@screen/training';
 import { ExerciseListScreen } from '@screen/exercise-list';
@@ -7,8 +7,24 @@ import { CreateTrainingExerciseScreen } from '@screen/create-training-exercise';
 import { ExerciseScreen } from '@screen/exercise/exercise.screen';
 import { ExerciseCreateScreen } from '@screen/exercise-create/exercise-create.screen';
 import { SettingsScreen } from '@screen/settings/settings';
+import { AuthLoadingScreen } from '@screen/auth/auth-loading/auth-loading.screen';
+import { LoginScreen } from '@screen/auth/login/login.screen';
+import { RegistrationScreen } from '@screen/auth/registration/registraition.screen';
 
 export enum Routes {
+	// ----- ZONES
+
+	AppZone = 'App',
+	AuthZone = 'Auth',
+	LoadingAuthZone = 'LoadingAuth',
+
+	// ----- AUTH
+
+	Login = 'Login',
+	Registration = 'Registration',
+
+	// ----- APP
+
 	Settings = 'Settings',
 
 	Calendar = 'Calendar',
@@ -20,7 +36,7 @@ export enum Routes {
 	ExerciseCreate = 'ExerciseCreate',
 }
 
-const AppNavigator = createStackNavigator(
+const AppStack = createStackNavigator(
 	{
 		[Routes.Settings]: { screen: SettingsScreen },
 		[Routes.Calendar]: { screen: CalendarScreen },
@@ -37,4 +53,26 @@ const AppNavigator = createStackNavigator(
 	}
 );
 
-export default createAppContainer(AppNavigator);
+const AuthStack = createStackNavigator(
+	{
+		[Routes.Login]: { screen: LoginScreen },
+		[Routes.Registration]: { screen: RegistrationScreen },
+	},
+	{
+		initialRouteName: Routes.Login,
+		headerMode: 'none',
+	}
+);
+
+const SwitchNavigator = createSwitchNavigator(
+	{
+		[Routes.AuthZone]: AuthStack,
+		[Routes.AppZone]: AppStack,
+		[Routes.LoadingAuthZone]: AuthLoadingScreen,
+	},
+	{
+		initialRouteName: Routes.LoadingAuthZone,
+	}
+);
+
+export const Navigator = createAppContainer(SwitchNavigator);
