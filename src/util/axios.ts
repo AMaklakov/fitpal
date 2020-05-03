@@ -13,6 +13,11 @@ axios.interceptors.request.use(
 			request.headers.Authorization = `Bearer ${token}`;
 		}
 
+		const userId = await getUserId();
+		if (userId) {
+			request.headers.user = userId;
+		}
+
 		return request;
 	},
 	error => Promise.reject(error)
@@ -21,3 +26,7 @@ axios.interceptors.request.use(
 export const setToken = async (token: string) => await AsyncStorage.setItem('token', token);
 export const getToken = async () => await AsyncStorage.getItem('token');
 export const removeToken = async () => await AsyncStorage.removeItem('token');
+
+export const setUserId = async (id: string) => await AsyncStorage.setItem('userId', id);
+export const getUserId = async () => await AsyncStorage.getItem('userId');
+export const removeUserId = async () => await AsyncStorage.removeItem('userId');

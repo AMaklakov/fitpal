@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { axios, getToken, removeToken, setToken } from '@util/axios';
+import { axios, getToken, removeToken, setToken, setUserId } from '@util/axios';
 import {
 	loginError,
 	loginSuccess,
@@ -22,6 +22,9 @@ export function* login(action: DataAction<ILoginRequestBody>) {
 
 		const token = data.token;
 		yield setToken(token);
+
+		const userId = data.user._id;
+		yield setUserId(userId);
 
 		navigate(Routes.AppZone);
 		yield put(loginSuccess(data));
