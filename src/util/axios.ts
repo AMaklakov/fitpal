@@ -20,3 +20,4 @@ axios.interceptors.request.use(
 
 export const setToken = async (token: string) => await AsyncStorage.setItem('token', token);
 export const getToken = async () => await AsyncStorage.getItem('token');
+export const removeToken = async () => await AsyncStorage.removeItem('token');
