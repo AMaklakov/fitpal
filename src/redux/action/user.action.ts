@@ -66,3 +66,16 @@ export const registerError: DataActionCreator<object> = error => ({
 	type: UserActions.RegisterError,
 	payload: error,
 });
+
+export const logoutStart: DataActionCreator<null> = (data = null) => ({
+	type: UserActions.LogoutStart,
+	payload: data,
+});
+export const logoutSuccess: DataActionCreator<null> = data => ({
+	type: UserActions.LogoutSuccess,
+	payload: data,
+});
+export const logoutError: DataActionCreator<object> = data => ({
+	type: UserActions.LogoutError,
+	payload: data,
+});

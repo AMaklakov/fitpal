@@ -1,6 +1,13 @@
 import { put } from 'redux-saga/effects';
-import { axios, setToken } from '@util/axios';
-import { loginError, loginSuccess, registerError, registerSuccess } from '@redux/action/user.action';
+import { axios, getToken, removeToken, setToken } from '@util/axios';
+import {
+	loginError,
+	loginSuccess,
+	logoutError,
+	logoutSuccess,
+	registerError,
+	registerSuccess,
+} from '@redux/action/user.action';
 import { DataAction } from '@model/data-action.model';
 import { ILoginRequestBody } from '@model/login-request-body';
 import { navigate } from '@util/navigation.util';
@@ -39,5 +46,19 @@ export function* register(action: DataAction<IRegisterRequestBody>) {
 		yield put(registerSuccess(data));
 	} catch (e) {
 		yield put(registerError(e));
+	}
+}
+
+export function* logout() {
+	try {
+		const token = yield getToken();
+
+		const { data } = yield axios.post(`logout`, { token });
+		yield removeToken();
+		navigate(Routes.Login);
+
+		yield put(logoutSuccess(data));
+	} catch (e) {
+		yield put(logoutError(e));
 	}
 }
