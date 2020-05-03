@@ -1,13 +1,19 @@
 import React from 'react';
-import ExerciseList from './exercise-list';
-import { Routes } from '../navigator';
-import { ExerciseListScreenProps } from './types';
-import { StoreModel } from '../../redux/store';
-import { getExerciseList } from '../../redux/selector/exercise.selector';
+import { Routes } from '@screen/navigator';
+import { StoreModel } from '@redux/store';
+import { getExerciseList } from '@redux/selector/exercise.selector';
 import { connect } from 'react-redux';
-import { ExerciseModel } from '../../model/exercise.model';
+import { ExerciseModel } from '@model/exercise.model';
+import { NavigationPropsModel } from '@model/navigation-props.model';
+import ExerciseList from '@screen/exercise-list/exercise-list';
 
-const Component = (props: ExerciseListScreenProps) => {
+interface IState {
+	exerciseList: ExerciseModel[];
+}
+
+interface IProps extends NavigationPropsModel {}
+
+const Component = (props: IProps & IState) => {
 	const { navigation, exerciseList = [] } = props;
 
 	const goToCreateExercise = () => {
@@ -29,7 +35,7 @@ const Component = (props: ExerciseListScreenProps) => {
 	);
 };
 
-const mapStateToProps = (store: StoreModel) => {
+const mapStateToProps = (store: StoreModel): IState => {
 	return {
 		exerciseList: getExerciseList(store),
 	};

@@ -1,12 +1,18 @@
 import React, { useMemo } from 'react';
 import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ExerciseListProps } from './types';
-import { mapExerciseListToSectionList } from './util';
-import { ExerciseModel } from '../../model/exercise.model';
+import { mapExerciseListToSectionList } from '@screen/exercise-list/util';
+import { ExerciseModel } from '@model/exercise.model';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 
-const ExerciseList = (props: ExerciseListProps) => {
+interface IProps {
+	exerciseList: ExerciseModel[];
+
+	goToCreateExercise: () => void;
+	onExercisePress: (exercise: ExerciseModel) => void;
+}
+
+const ExerciseList = (props: IProps) => {
 	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
 	const sections = useMemo(() => mapExerciseListToSectionList(exerciseList), [exerciseList]);
 
