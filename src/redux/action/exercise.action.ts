@@ -1,35 +1,24 @@
-import { WithOptional } from '../../util/type.util';
-import { ExerciseModel, isExerciseValid } from '../../model/exercise.model';
+import { ExerciseModel, ICreateExercise, isExerciseValid } from '@model/exercise.model';
 import { Action } from 'redux';
 import { Alert } from 'react-native';
-import { generateId } from '../../util/uuid.util';
+import { createFetchActions } from '@model/data-action.model';
 
 export enum ExerciseActions {
-	Create = 'Exercise/Create',
+	CreateStart = 'EXERCISE/CREATE/START',
+	CreateSuccess = 'EXERCISE/CREATE/SUCCESS',
+	CreateError = 'EXERCISE/CREATE/ERROR',
+
 	Update = 'Exercise/Update',
 }
 
+export const [createExerciseStart, createExerciseSuccess, createExerciseError] = createFetchActions<
+	ICreateExercise,
+	ExerciseModel,
+	object,
+	ExerciseActions
+>([ExerciseActions.CreateStart, ExerciseActions.CreateSuccess, ExerciseActions.CreateError]);
+
 export type ExerciseAction<T extends Object = {}> = Action<ExerciseActions> & { payload: T };
-
-export type CreateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
-export const createExerciseAction = (ex: WithOptional<ExerciseModel, 'id'>): CreateExerciseAction | undefined => {
-	const exercise = { ...ex };
-
-	if (!exercise.id) {
-		exercise.id = generateId();
-	}
-
-	if (!isExerciseValid(exercise)) {
-		Alert.alert('Exercise is not valid!');
-		return;
-	}
-
-	return {
-		type: ExerciseActions.Create,
-		payload: { exercise: exercise as ExerciseModel },
-	};
-};
-
 // TODO rewrite to 2 separate functions
 export type UpdateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
 export const updateExerciseAction = (ex: ExerciseModel): UpdateExerciseAction | undefined => {

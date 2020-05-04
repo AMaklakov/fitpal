@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { getExerciseById } from '@redux/selector/exercise.selector';
-import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
+import { ExerciseModel, ExerciseTypes, ICreateExercise } from '@model/exercise.model';
 import { H1 } from '@components/heading/h1';
 import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
-import { WithOptional } from '@util/type.util';
-import { createExerciseAction, updateExerciseAction } from '@redux/action/exercise.action';
+import { createExerciseStart, updateExerciseAction } from '@redux/action/exercise.action';
 import { useTranslation } from 'react-i18next';
 import { EXERCISE_NAME_MAXLENGTH, EXERCISE_NAME_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
 interface IProps extends NavigationPropsModel {}
 
 interface IDispatchToProps {
-	onCreateExercise: (exercise: WithOptional<ExerciseModel, 'id'>) => void;
+	onCreateExercise: (exercise: ICreateExercise) => void;
 	onUpdateExercise: (exercise: ExerciseModel) => void;
 }
 
@@ -36,26 +35,25 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 	const { t } = useTranslation();
 
 	const [name, changeName] = useState(exercise?.name ?? '');
+	const [type] = useState<ExerciseTypes>(ExerciseTypes.Default);
 	const [isSaveDisabled, changeIsSaveDisabled] = useState(!exercise?.name);
 
-	const handleGoBack = () => navigation.goBack();
+	const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
 
-	const handleSavePress = () => {
+	const handleSavePress = useCallback(() => {
 		if (!name) {
 			return;
 		}
 
-		exercise === undefined
-			? onCreateExercise({ name, type: ExerciseTypes.Default })
-			: onUpdateExercise({ ...exercise, name });
+		exercise === undefined ? onCreateExercise({ name, type }) : onUpdateExercise({ ...exercise, name });
 
 		handleGoBack();
-	};
+	}, [exercise, handleGoBack, name, onCreateExercise, onUpdateExercise, type]);
 
-	const handleChangeName = (name: string, errors?: IErrors) => {
+	const handleChangeName = useCallback((name: string, errors?: IErrors) => {
 		changeName(name);
 		changeIsSaveDisabled(!!errors);
-	};
+	}, []);
 
 	return (
 		<View>
@@ -89,13 +87,7 @@ const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> =
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = dispatch => {
 	return {
-		onCreateExercise: (exercise: WithOptional<ExerciseModel, 'id'>) => {
-			const action = createExerciseAction(exercise);
-
-			if (action) {
-				dispatch(action);
-			}
-		},
+		onCreateExercise: (exercise: ICreateExercise) => dispatch(createExerciseStart(exercise)),
 		onUpdateExercise: (exercise: ExerciseModel) => {
 			const action = updateExerciseAction(exercise);
 
