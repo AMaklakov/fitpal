@@ -53,10 +53,18 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: StoreModel): IState => ({
-	isLoading: Object.keys(state)
-		// @ts-ignore
-		.map(key => state[key] as { [k: string]: any })
-		.some(s => !!s.loading),
+	isLoading: isStateLoading(state),
 });
 
 export const SpinnerModal = connect(mapStateToProps)(SpinnerComponent);
+
+const isStateLoading = (state: StoreModel): boolean => {
+	const {
+		exercise,
+		user: { weightData, auth },
+		training,
+		covid,
+	} = state;
+
+	return [exercise, weightData, auth, training, covid].some(s => s.loading);
+};
