@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateExercise } from './create-exercise';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { PropType } from '@util/type.util';
@@ -15,6 +15,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import { createEmptyTrainingExercise, validateTrainingExercise } from '@util/training-exercise.util';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { BigSource } from 'big.js';
+import { fetchExercisesStart } from '@redux/action/exercise.action';
 
 interface IState {
 	exerciseList: ExerciseModel[];
@@ -24,16 +25,23 @@ interface IState {
 interface IDispatch {
 	saveAction: (trainingId: string, exercise: IBaseTrainingExercise) => void;
 	editAction: (trainingId: string, exercise: IBaseTrainingExercise) => void;
+	onFetchExercises: () => void;
 }
 
 interface IProps extends NavigationPropsModel {}
 
 const Screen = (props: IProps & IState & IDispatch) => {
-	const { navigation, saveAction, editAction, exerciseList, userWeight } = props;
+	const { navigation, saveAction, editAction, exerciseList, userWeight, onFetchExercises } = props;
 
 	const id = navigation.getParam('trainingId');
 	const trainingExercise = navigation.getParam('trainingExercise');
 	const [disabledSave, changeDisabledSave] = useState(true);
+
+	useEffect(() => {
+		if (exerciseList.length === 0) {
+			onFetchExercises();
+		}
+	}, [onFetchExercises, exerciseList]);
 
 	const [exercise, setExercise] = useState<IBaseTrainingExercise>(
 		trainingExercise ?? createEmptyTrainingExercise(userWeight)
@@ -88,6 +96,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	editAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: IBaseTrainingExercise) => {
 		dispatch(editTrainingExerciseByTrainingId(trainingId, exercise));
 	},
+	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 });
 
 export const CreateTrainingExerciseScreen = connect<IState, IDispatch, IProps, StoreModel>(

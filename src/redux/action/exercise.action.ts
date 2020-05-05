@@ -4,6 +4,10 @@ import { Alert } from 'react-native';
 import { createFetchActions } from '@model/data-action.model';
 
 export enum ExerciseActions {
+	FetchStart = 'EXERCISE/FETCH/START',
+	FetchSuccess = 'EXERCISE/FETCH/SUCCESS',
+	FetchError = 'EXERCISE/FETCH/ERROR',
+
 	CreateStart = 'EXERCISE/CREATE/START',
 	CreateSuccess = 'EXERCISE/CREATE/SUCCESS',
 	CreateError = 'EXERCISE/CREATE/ERROR',
@@ -17,6 +21,13 @@ export const [createExerciseStart, createExerciseSuccess, createExerciseError] =
 	object,
 	ExerciseActions
 >([ExerciseActions.CreateStart, ExerciseActions.CreateSuccess, ExerciseActions.CreateError]);
+
+export const [fetchExercisesStart, fetchExercisesSuccess, fetchExercisesError] = createFetchActions<
+	null,
+	ExerciseModel[],
+	object,
+	ExerciseActions
+>([ExerciseActions.FetchStart, ExerciseActions.FetchSuccess, ExerciseActions.FetchError]);
 
 export type ExerciseAction<T extends Object = {}> = Action<ExerciseActions> & { payload: T };
 // TODO rewrite to 2 separate functions

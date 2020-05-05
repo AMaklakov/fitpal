@@ -54,7 +54,7 @@ const RenderItem = (exerciseList: ExerciseModel[]) => ({
 }: RenderItemParams<IBaseTrainingExercise>) => {
 	return (
 		<TouchableOpacity onPressIn={drag} activeOpacity={0.9} style={[styles.renderItem, isActive && styles.renderActive]}>
-			<Text>{exerciseList.find(e => e.id === item.exerciseId)?.name}</Text>
+			<Text>{exerciseList.find(e => e._id === item.exerciseId)?.name}</Text>
 			<View style={styles.iconStyle}>
 				<ButtonIcon onPressIn={drag} icon={<ReorderIcon color={isActive ? Colors.Black : Colors.Grey} />} />
 			</View>

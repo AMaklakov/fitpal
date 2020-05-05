@@ -21,14 +21,13 @@ export enum ExerciseTypes {
 }
 
 export interface ExerciseModel {
-	// TODO rename to `_id`
-	id: string;
+	_id: string;
 
 	type: ExerciseTypes;
 	name: string;
 }
 
-export type ICreateExercise = Omit<ExerciseModel, 'id'>;
+export type ICreateExercise = Omit<ExerciseModel, '_id'>;
 
 const isTypeValid = (type?: ExerciseTypes): boolean => {
 	if (!isPresent(type)) {

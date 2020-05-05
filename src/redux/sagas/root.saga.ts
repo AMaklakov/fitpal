@@ -12,7 +12,7 @@ import { TrainingActions } from '@redux/action/training-exercise.action';
 import { UserActions } from '@redux/action/user.action';
 import { login, logout, register } from '@redux/sagas/user.saga';
 import { ExerciseActions } from '@redux/action/exercise.action';
-import { createExercise } from '@redux/sagas/exercise.saga';
+import { createExercise, fetchExercises } from '@redux/sagas/exercise.saga';
 
 function* actionWatcher() {
 	yield takeLatest(UserActions.LoginStart, login);
@@ -28,6 +28,7 @@ function* actionWatcher() {
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);
 
 	yield takeLatest(ExerciseActions.CreateStart, createExercise);
+	yield takeLatest(ExerciseActions.FetchStart, fetchExercises);
 }
 
 export function* rootSaga() {

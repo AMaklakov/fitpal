@@ -11,7 +11,7 @@ export interface ISeries {
 
 export interface IBaseTrainingExercise {
 	id: string;
-	exerciseId: PropType<ExerciseModel, 'id'>;
+	exerciseId: PropType<ExerciseModel, '_id'>;
 	type: ExerciseTypes;
 	sequenceNumber: number;
 	userWeight: BigSource;

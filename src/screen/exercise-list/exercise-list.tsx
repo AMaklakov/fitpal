@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { mapExerciseListToSectionList } from '@screen/exercise-list/util';
 import { ExerciseModel } from '@model/exercise.model';
@@ -12,7 +12,7 @@ interface IProps {
 	onExercisePress: (exercise: ExerciseModel) => void;
 }
 
-const ExerciseList = (props: IProps) => {
+const ExerciseList: FC<IProps> = props => {
 	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
 	const sections = useMemo(() => mapExerciseListToSectionList(exerciseList), [exerciseList]);
 
@@ -25,7 +25,7 @@ const ExerciseList = (props: IProps) => {
 					sections={sections}
 					renderItem={({ item }) => <Item data={item} onPress={onExercisePress} />}
 					renderSectionHeader={({ section }) => <Text style={styles.title}>{section.title}</Text>}
-					keyExtractor={item => item.id}
+					keyExtractor={item => item._id}
 				/>
 			</View>
 

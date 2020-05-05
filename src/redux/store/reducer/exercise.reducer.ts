@@ -26,6 +26,13 @@ export const exercise: Reducer<IState, DataAction> = (state = DEFAULT_STATE, act
 		case ExerciseActions.CreateError:
 			return { ...state, loading: false, error: action.payload };
 
+		case ExerciseActions.FetchStart:
+			return { ...state, loading: true };
+		case ExerciseActions.FetchSuccess:
+			return { ...state, loading: false, error: null, exercises: action.payload };
+		case ExerciseActions.FetchError:
+			return { ...state, loading: false, error: action.payload };
+
 		case ExerciseActions.Update:
 			return updateExercise(state, action as UpdateExerciseAction);
 

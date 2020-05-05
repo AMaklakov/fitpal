@@ -39,7 +39,7 @@ export const CreateExercise = (props: IProps) => {
 	const { t } = useTranslation();
 
 	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(
-		exerciseList?.find(x => x?.id === trainingExercise?.exerciseId) ?? null
+		exerciseList?.find(x => x?._id === trainingExercise?.exerciseId) ?? null
 	);
 
 	const handleSetTrainingExercise = (ex: IBaseTrainingExercise) => setTrainingExercise({ ...ex });
@@ -49,7 +49,7 @@ export const CreateExercise = (props: IProps) => {
 
 		handleSetTrainingExercise({
 			...trainingExercise,
-			exerciseId: exercise?.id,
+			exerciseId: exercise?._id,
 			type: exercise?.type,
 			// when a user changes an exercise, series should be empty
 			seriesList: [],

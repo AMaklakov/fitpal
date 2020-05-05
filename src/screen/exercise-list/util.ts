@@ -1,20 +1,22 @@
 import { SectionListData } from 'react-native';
-import { ExerciseModel } from '../../model/exercise.model';
+import { ExerciseModel } from '@model/exercise.model';
 
+// TODO may be optimized, now O(n^2)
 export const mapExerciseListToSectionList = (
 	exerciseList: ExerciseModel[] = []
 ): ReadonlyArray<SectionListData<ExerciseModel>> => {
-	const titleList = exerciseList.map(exercise => exercise.name[0].toUpperCase()).sort();
-	const titleSet = new Set<string>(titleList);
+	if (exerciseList.length === 0) {
+		return [];
+	}
 
-	const data: Array<SectionListData<ExerciseModel>> = [];
+	const uniqueTitles = unique(exerciseList.map(e => getFirstCharOfName(e))?.sort());
 
-	titleSet.forEach(title => {
-		data.push({
-			title,
-			data: exerciseList.filter(exercise => exercise.name[0].toUpperCase() === title),
-		});
-	});
-
-	return data;
+	return uniqueTitles.map(title => ({
+		title,
+		data: exerciseList.filter(e => getFirstCharOfName(e) === title),
+	}));
 };
+
+const unique = <T>(arr: T[]) => Array.from(new Set<T>(arr));
+
+const getFirstCharOfName = (e: ExerciseModel) => e?.name?.charAt(0)?.toUpperCase();
