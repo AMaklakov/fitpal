@@ -1,9 +1,10 @@
 import React, { FC, useMemo } from 'react';
-import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { mapExerciseListToSectionList } from '@screen/exercise-list/util';
 import { ExerciseModel } from '@model/exercise.model';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
+import { Button } from '@components/button/button';
 
 interface IProps {
 	exerciseList: ExerciseModel[];
@@ -30,7 +31,7 @@ const ExerciseList: FC<IProps> = props => {
 			</View>
 
 			<View style={styles.buttons}>
-				<Button title={t('Add exercise +')} onPress={goToCreateExercise} />
+				<Button type="clear" title={t('Add exercise +')} onPress={goToCreateExercise} />
 			</View>
 		</View>
 	);

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { formatDate, getToday } from '@util/date.util';
 import moment, { Moment } from 'moment';
@@ -21,6 +21,7 @@ import Modal from 'react-native-modal';
 import { Colors } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
+import { Button } from '@components/button/button';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
@@ -112,7 +113,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 						/>
 
 						<View style={styles.buttonWrapper}>
-							<Button color={Colors.LightRed} title={t('Delete')} onPress={deleteTraining} />
+							<Button type="clear" title={t('Delete')} onPress={deleteTraining} titleStyle={styles.redText} />
 							<Button title={t('Hide modal')} onPress={handleCloseDeleteTrainingConfirm} />
 						</View>
 					</View>
@@ -120,7 +121,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button title={t('Add training +')} onPress={handleCreateTraining} />
+				<Button type="outline" title={t('Add training +')} onPress={handleCreateTraining} />
 			</View>
 		</View>
 	);
@@ -147,6 +148,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'flex-start',
 		height: 50,
+	},
+	redText: {
+		color: Colors.LightRed,
 	},
 });
 

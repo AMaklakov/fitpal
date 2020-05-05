@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
 import { CreateSeries } from '@screen/create-training-exercise/components/create-series';
-import { Colors } from '@css/colors.style';
 import { useTranslation } from 'react-i18next';
 import { IBaseTrainingExercise, INegativeWeightTrainingExercise, ISeries } from '@model/training-exercise';
 import {
@@ -12,6 +11,7 @@ import {
 } from '@screen/create-training-exercise/helpers';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { BigSource } from 'big.js';
+import { Button } from '@components/button/button';
 
 interface IProps {
 	userWeight: BigSource;
@@ -55,8 +55,15 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 			/>
 
 			<View style={styles.seriesButtonWrapper}>
-				<Button disabled={seriesList.length === 0} title={t('Delete')} color={Colors.Red} onPress={handleDeleteLast} />
-				<Button color={Colors.LightBlue} title={t('Add')} onPress={handleAdd} />
+				<Button
+					type="clear"
+					title={t('Delete')}
+					titleStyle={commonStyles.cancelButtonText}
+					disabled={seriesList.length === 0}
+					onPress={handleDeleteLast}
+				/>
+
+				<Button type="clear" title={t('Add')} onPress={handleAdd} />
 			</View>
 		</View>
 	);

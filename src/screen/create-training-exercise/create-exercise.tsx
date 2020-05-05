@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
 import AutocompleteInput from '@components/autocomplete-input';
 import ShowSelectedExercise from './components/show-selected-exercise';
@@ -20,6 +20,7 @@ import { WithAdditionalWeightSeries } from '@screen/create-training-exercise/com
 import { WithNegativeWeightSeries } from '@screen/create-training-exercise/components/with-negative-weight';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { BigSource } from 'big.js';
+import { Button } from '@components/button/button';
 
 interface IProps {
 	trainingExercise: IBaseTrainingExercise;
@@ -111,15 +112,24 @@ export const CreateExercise = (props: IProps) => {
 			</View>
 
 			<View style={commonStyles.bottomActionWrapper}>
-				<TouchableOpacity onPress={onCancel} style={commonStyles.buttonWithIconWrapper}>
-					<CancelIcon color={Colors.Red} />
-					<Text style={commonStyles.cancelButton}>{t('Cancel')}</Text>
-				</TouchableOpacity>
+				<Button
+					type="clear"
+					title={t('Cancel')}
+					titleStyle={commonStyles.cancelButton}
+					icon={<CancelIcon color={Colors.Red} />}
+					onPress={onCancel}
+					style={commonStyles.buttonWithIconWrapper}
+				/>
 
-				<TouchableOpacity onPress={onSave} style={commonStyles.buttonWithIconWrapper}>
-					<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />
-					<Text style={[commonStyles.saveButtonText, disabledSave && commonStyles.disabledButton]}>{t('Save')}</Text>
-				</TouchableOpacity>
+				<Button
+					type="clear"
+					title={t('Save')}
+					disabled={disabledSave}
+					titleStyle={commonStyles.saveButtonText}
+					icon={<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />}
+					onPress={onSave}
+					style={commonStyles.buttonWithIconWrapper}
+				/>
 			</View>
 		</View>
 	);

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { NavigationPropsModel } from '@model/navigation-props.model';
@@ -11,13 +11,8 @@ import { createExerciseStart, updateExerciseAction } from '@redux/action/exercis
 import { useTranslation } from 'react-i18next';
 import { EXERCISE_NAME_MAXLENGTH, EXERCISE_NAME_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
-
-const styles = StyleSheet.create({
-	buttonContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-	},
-});
+import { Button } from '@components/button/button';
+import { Colors } from '@css/colors.style';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -56,10 +51,10 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 	}, []);
 
 	return (
-		<View>
+		<View style={styles.wrapper}>
 			<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} />
 
-			<View>
+			<View style={styles.mainContent}>
 				<StringInputWithValidation
 					value={name}
 					onChange={handleChangeName}
@@ -70,12 +65,29 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
-				<Button title={t('Cancel')} onPress={handleGoBack} />
+				<Button type="clear" disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
+				<Button type="clear" title={t('Cancel')} onPress={handleGoBack} titleStyle={styles.redText} />
 			</View>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	wrapper: {
+		flex: 1,
+	},
+	buttonContainer: {
+		height: 50,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
+	mainContent: {
+		flex: 1,
+	},
+	redText: {
+		color: Colors.LightRed,
+	},
+});
 
 const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> = (state, ownProps) => {
 	const exerciseId = ownProps.navigation.getParam('exerciseId');

@@ -1,12 +1,16 @@
 import React from 'react';
 import { SelectedItemViewComponentProps } from '@components/autocomplete-input/types';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { ExerciseModel } from '@model/exercise.model';
+import { ButtonIcon } from '@components/button-icon/button-icon';
+import { Colors } from '@css/colors.style';
+import { CancelIcon } from '@icons/cancel.icon';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 });
 
@@ -17,9 +21,7 @@ const ShowSelectedExercise = (props: SelectedItemViewComponentProps<ExerciseMode
 		<View style={styles.container}>
 			<Text>{item.name}</Text>
 
-			<TouchableWithoutFeedback onPress={onCancel}>
-				<Text>ⓧ</Text>
-			</TouchableWithoutFeedback>
+			<ButtonIcon icon={<CancelIcon color={Colors.Black} />} onPress={onCancel} />
 		</View>
 	);
 };

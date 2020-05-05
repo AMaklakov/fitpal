@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { IntegerNumberInputWithValidation } from '@inputs/integer-number-input/integer-number-input';
 import { Big, BigSource } from 'big.js';
@@ -13,6 +13,7 @@ import { Colors } from '@css/colors.style';
 import { SaveIcon } from '@icons/save.icon';
 import { IErrors } from '@components/with-validation/with-validation';
 import { USER_MAX_WEIGHT, USER_MIN_WEIGHT } from '@const/validation-const';
+import { Button } from '@components/button/button';
 
 interface IState {
 	userWeight: BigSource;
@@ -65,10 +66,14 @@ const UserWeightModalComponent: FC<IProps & IState & IDispatch> = props => {
 					{/*	<Text style={styles.cancelButton}>{t('Cancel')}</Text>*/}
 					{/*</TouchableOpacity>*/}
 
-					<TouchableOpacity onPress={handleSave} style={styles.buttonWithIconWrapper}>
-						<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />
-						<Text style={[styles.saveButtonText, disabledSave && styles.disabledButton]}>{t('Save')}</Text>
-					</TouchableOpacity>
+					<Button
+						type="clear"
+						icon={<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />}
+						titleStyle={styles.saveButtonText}
+						disabled={disabledSave}
+						onPress={handleSave}
+						title={t('Save')}
+					/>
 				</View>
 			</View>
 		</Modal>
@@ -84,12 +89,7 @@ const styles = StyleSheet.create({
 	bottomActionWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		paddingVertical: 20,
-		backgroundColor: Colors.White,
-	},
-	buttonWithIconWrapper: {
-		flexDirection: 'row',
-		alignItems: 'center',
+		paddingTop: 10,
 	},
 	saveButtonText: {
 		paddingLeft: 10,
@@ -98,9 +98,6 @@ const styles = StyleSheet.create({
 	cancelButton: {
 		paddingLeft: 10,
 		color: Colors.LightRed,
-	},
-	disabledButton: {
-		color: Colors.Grey,
 	},
 });
 

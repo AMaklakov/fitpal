@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Modal, StyleSheet, Text, View } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
 import { H1 } from '@components/heading/h1';
@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
+import { Button } from '@components/button/button';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -102,8 +103,10 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 					</View>
 				)}
 
-				<Button title={t('Cancel')} onPress={handleCancelPress} />
-				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
+				<View style={styles.buttonsWrapper}>
+					<Button type="clear" title={t('Cancel')} onPress={handleCancelPress} />
+					<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
+				</View>
 			</SafeAreaView>
 		</Modal>
 	);
@@ -113,6 +116,11 @@ const styles = StyleSheet.create({
 	errorText: {
 		color: Colors.LightRed,
 		fontSize: 12,
+	},
+	buttonsWrapper: {
+		paddingTop: 20,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
 	},
 });
 

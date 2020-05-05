@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { StringInput } from '@inputs/string-input/string-input';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ import { Routes } from '@screen/navigator';
 import { IRegisterRequestBody } from '@model/register-request-body.model';
 import { Dispatch } from 'redux';
 import { registerStart } from '@redux/action/user.action';
+import { Button } from '@components/button/button';
 
 interface IState {}
 
@@ -97,14 +98,23 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 				<View style={styles.buttonsWrapper}>
 					<View>
 						<Text>{t('Already have account?')} </Text>
-						<Text onPress={handleLogin} style={styles.link}>
-							{t('Go to Login')}
-						</Text>
+						<Button
+							type="clear"
+							onPress={handleLogin}
+							titleStyle={styles.link}
+							title={t('Go to Login')}
+							buttonStyle={styles.loginButton}
+							containerStyle={styles.loginContainer}
+						/>
 					</View>
 
-					<TouchableOpacity onPress={handleRegister} style={[styles.buttonWrapper, styles.registerWrapper]}>
-						<Text style={styles.registerText}>{t('Register')}</Text>
-					</TouchableOpacity>
+					<Button
+						onPress={handleRegister}
+						buttonStyle={[styles.buttonWrapper, styles.registerWrapper]}
+						titleStyle={styles.registerText}
+						title={t('Register')}
+						disabled={!email || !password || !weight}
+					/>
 				</View>
 			</View>
 		</ScrollView>
@@ -114,10 +124,11 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 const styles = StyleSheet.create({
 	wrapper: {
 		alignItems: 'center',
+		paddingBottom: 15,
 	},
 	inputWrapper: {
 		width: '80%',
-		paddingTop: 15,
+		marginTop: 15,
 	},
 	buttonsWrapper: {
 		width: '80%',
@@ -142,9 +153,12 @@ const styles = StyleSheet.create({
 		color: Colors.White,
 	},
 	link: {
+		fontSize: 15,
 		color: Colors.DarkBlue,
 		textDecorationLine: 'underline',
 	},
+	loginButton: { padding: 0 },
+	loginContainer: { alignItems: 'baseline' },
 });
 
 const mapStateToProps = (): IState => ({});

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '@css/colors.style';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@components/button/button';
 
 interface IProps {
 	onOpenModal: () => void;
@@ -12,9 +12,7 @@ export const Weight: FC<IProps> = ({ onOpenModal }) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<TouchableOpacity onPress={onOpenModal} style={styles.buttonWrapper}>
-				<Text>{t('Change my weight')}</Text>
-			</TouchableOpacity>
+			<Button type="outline" title={t('Change my weight')} onPress={onOpenModal} />
 		</View>
 	);
 };
@@ -24,13 +22,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		marginTop: 10,
-	},
-	buttonWrapper: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		padding: 10,
-		borderColor: Colors.Black,
-		borderRadius: 10,
-		borderWidth: 1,
 	},
 });

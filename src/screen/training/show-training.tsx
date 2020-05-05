@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { useTranslation } from 'react-i18next';
 import { ExerciseModel } from '@model/exercise.model';
 import { TrainingExerciseSwipeList } from '@components/training-exercise-swipe-list/training-exercise-swipe-list';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { calculateTrainingTotal } from '@util/training-exercise.util';
+import { Button } from '@components/button/button';
 
 interface IProps {
 	training: TrainingModel;
@@ -46,7 +47,7 @@ export const ShowTraining = (props: IProps) => {
 			</View>
 
 			<View style={style.button}>
-				<Button title={t('Add exercise +')} onPress={handleAddExercise} />
+				<Button type="clear" title={t('Add exercise +')} onPress={handleAddExercise} />
 			</View>
 		</View>
 	);

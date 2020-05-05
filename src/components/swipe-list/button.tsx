@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import { Colors } from '../../css/colors.style';
+import { StyleSheet, View } from 'react-native';
+import { Colors } from '@css/colors.style';
+import { Button } from '@components/button/button';
 
-const makeStyles = (color: Colors) => {
+const makeStyles = (color: Colors, textColor: Colors) => {
 	return StyleSheet.create({
 		button: {
 			backgroundColor: color,
 			justifyContent: 'space-around',
+		},
+		redText: {
+			color: textColor,
 		},
 	});
 };
@@ -24,13 +28,13 @@ interface IProps<T> {
 export const SwipeHiddenButton = <T extends any>(props: IProps<T>) => {
 	const { backgroundColor = Colors.Yellow, textColor = Colors.LightRed, item, onTouch, title, style = {} } = props;
 
-	const styles = useMemo(() => makeStyles(backgroundColor), [backgroundColor]);
+	const styles = useMemo(() => makeStyles(backgroundColor, textColor), [backgroundColor, textColor]);
 
 	const handleOnTouch = () => onTouch(item);
 
 	return (
 		<View style={{ ...styles.button, ...style }}>
-			<Button color={textColor} title={title} onPress={handleOnTouch} />
+			<Button type="clear" title={title} onPress={handleOnTouch} titleStyle={styles.redText} />
 		</View>
 	);
 };

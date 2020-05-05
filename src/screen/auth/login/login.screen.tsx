@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { StringInput } from '@inputs/string-input/string-input';
@@ -9,6 +9,7 @@ import { Colors } from '@css/colors.style';
 import { ILoginRequestBody } from '@model/login-request-body';
 import { Dispatch } from 'redux';
 import { loginStart } from '@redux/action/user.action';
+import { Button } from '@components/button/button';
 
 interface IState {}
 
@@ -44,16 +45,16 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 			<View style={[styles.inputWrapper, styles.buttonWrapper]}>
 				<View style={styles.registrationWrapper}>
 					<Text>{t('Have no account?')} </Text>
-					<Text onPress={handleRegister} style={styles.link}>
-						{t('Register')}
-					</Text>
+					<Button type="clear" onPress={handleRegister} titleStyle={styles.link} title={t('Register')} />
 				</View>
 
-				<View>
-					<TouchableOpacity onPress={handleLogin} style={styles.buttonWithIconWrapper}>
-						<Text style={[styles.loginButtonText]}>{t('Login')}</Text>
-					</TouchableOpacity>
-				</View>
+				<Button
+					onPress={handleLogin}
+					buttonStyle={styles.buttonWithIconWrapper}
+					titleStyle={styles.loginButtonText}
+					title={t('Login')}
+					disabled={!email || !password}
+				/>
 			</View>
 		</View>
 	);
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	inputWrapper: {
-		width: '80%',
+		width: '85%',
 		paddingTop: 15,
 	},
 	buttonWrapper: {
@@ -73,21 +74,19 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	link: {
+		fontSize: 15,
 		color: Colors.DarkBlue,
 		textDecorationLine: 'underline',
 	},
 	registrationWrapper: {
 		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	buttonWithIconWrapper: {
-		alignItems: 'center',
-		justifyContent: 'center',
 		backgroundColor: Colors.LightBlue,
-		height: 40,
 		width: 100,
 	},
 	loginButtonText: {
-		color: Colors.White,
 		fontSize: 18,
 	},
 });
