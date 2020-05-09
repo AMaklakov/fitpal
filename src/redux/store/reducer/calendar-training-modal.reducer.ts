@@ -6,6 +6,7 @@ import {
 	UpdateDateInTrainingModalAction,
 	UpdateTrainingAction,
 } from '../../action/calendar-training-modal.action';
+import { MomentInput } from 'moment';
 
 interface IState {
 	isOpen: boolean;
@@ -14,7 +15,7 @@ interface IState {
 	/**
 	 * for creation training on concrete date. Do not use with training copy
 	 */
-	date: string | null;
+	date: MomentInput | null;
 }
 
 const DEFAULT_STATE: IState = {

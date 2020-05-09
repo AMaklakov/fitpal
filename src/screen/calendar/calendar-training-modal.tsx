@@ -11,7 +11,7 @@ import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util
 import { createTrainingStart } from '@redux/action/training.action';
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import { Moment } from 'moment';
+import { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
@@ -21,7 +21,7 @@ import { Button } from '@components/button/button';
 interface IStateProps {
 	isOpen: boolean;
 	training: TrainingModel | null;
-	dateFromStore: string | null;
+	dateFromStore: MomentInput | null;
 	createTrainingError: null | string | object;
 }
 

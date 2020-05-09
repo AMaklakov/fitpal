@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { TrainingModel } from '@model/training.model';
+import { MomentInput } from 'moment';
 
 export enum CalendarTrainingModalActions {
 	Toggle = 'CALENDAR/TRAINING_MODAL/IS_OPEN',
@@ -24,8 +25,8 @@ export const updateTrainingModalAction = (training: TrainingModel | null): Updat
 	payload: { training },
 });
 
-export type UpdateDateInTrainingModalAction = CalendarTrainingModalAction<{ date: string | null }>;
-export const updateDateInTrainingModalAction = (date: string | null): UpdateDateInTrainingModalAction => ({
+export type UpdateDateInTrainingModalAction = CalendarTrainingModalAction<{ date: MomentInput | null }>;
+export const updateDateInTrainingModalAction = (date: MomentInput | null): UpdateDateInTrainingModalAction => ({
 	type: CalendarTrainingModalActions.UpdateDate,
 	payload: { date },
 });
