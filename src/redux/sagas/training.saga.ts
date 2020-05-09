@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { axios } from '@util/axios';
 import { Moment } from 'moment';
 import {
@@ -16,6 +16,12 @@ import {
 import { DataAction } from '@model/data-action.model';
 import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
+import { IAddExerciseStart, TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import { validateTrainingExercise } from '@util/training-exercise.util';
+import { getTrainingById as getTrainingByIdSlector } from '@redux/selector/training.selector';
+import { StoreModel } from '@redux/store';
+import { navigate } from '@util/navigation.util';
+import { Routes } from '@screen/navigator';
 
 export function* getTrainingsByDate(action: DataAction<Moment>) {
 	try {
@@ -85,5 +91,39 @@ export function* updateTrainingById(action: DataAction<TrainingModel>) {
 		yield put(updateTrainingSuccess(trainingFromServer));
 	} catch (e) {
 		yield put(updateTrainingError(e));
+	}
+}
+
+// ======================== Training Exercises
+
+export function* addTrainingExercise(action: DataAction<IAddExerciseStart>) {
+	try {
+		const trainingId = action.payload.trainingId;
+		const newExercise = action.payload.exercise;
+
+		if (!trainingId || !validateTrainingExercise(newExercise)) {
+			throw `Not valid action payload`;
+		}
+
+		const training: TrainingModel = yield select((state: StoreModel) => getTrainingByIdSlector(state, trainingId));
+
+		if (!training) {
+			throw `Not existing trainingId`;
+		}
+
+		training.exerciseList = [...training.exerciseList, newExercise];
+
+		const res = yield axios.put(`/trainings/${trainingId}`, { training });
+
+		const trainingFromServer = res?.data?.training;
+
+		if (!isTrainingValid(trainingFromServer)) {
+			throw `Training from server is not valid`;
+		}
+
+		yield put(TRAINING_ACTION_CREATORS.EXERCISE.ADD.SUCCESS(trainingFromServer));
+		yield navigate(Routes.Training, { trainingId: training._id });
+	} catch (e) {
+		yield put(TRAINING_ACTION_CREATORS.EXERCISE.ADD.ERROR(e));
 	}
 }

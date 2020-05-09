@@ -1,8 +1,12 @@
 import { Action } from 'redux';
 import { IBaseTrainingExercise } from '@model/training-exercise';
+import { progressActions, progressTypes } from '@util/redux.util';
+import { TrainingModel } from '@model/training.model';
 
+/**
+ * @deprecated use TRAINING_ACTIONS instead
+ */
 export enum TrainingActions {
-	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
 	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 
@@ -27,26 +31,30 @@ export enum TrainingActions {
 	UpdateTrainingError = 'TRAINING/UPDATE/ERROR',
 }
 
+// TODO replace TrainingActions with TRAINING_ACTIONS
+export const TRAINING_ACTIONS = {
+	EXERCISE: {
+		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
+	},
+};
+
+export type IAddExerciseStart = { trainingId: string; exercise: IBaseTrainingExercise };
+export const TRAINING_ACTION_CREATORS = {
+	EXERCISE: {
+		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
+	},
+};
+
 export type TrainingExerciseByTrainingId = {
 	trainingId: string;
 	exercise: IBaseTrainingExercise;
 };
 
+// TODO remove everything below
+
 export type TrainingExerciseAction<PayloadType extends Object = TrainingExerciseByTrainingId> = Action<
 	TrainingActions
 > & { payload: PayloadType };
-
-export const createTrainingExerciseByTrainingId = (
-	trainingId: string,
-	exercise: IBaseTrainingExercise
-): TrainingExerciseAction => ({
-	type: TrainingActions.CreateTrainingExerciseByTrainingId,
-
-	payload: {
-		trainingId,
-		exercise,
-	},
-});
 
 export const editTrainingExerciseByTrainingId = (
 	trainingId: string,

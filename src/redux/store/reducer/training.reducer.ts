@@ -1,9 +1,10 @@
 import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
-import { TrainingActions, TrainingExerciseAction } from '@redux/action/training-exercise.action';
+import { TRAINING_ACTIONS, TrainingActions, TrainingExerciseAction } from '@redux/action/training-exercise.action';
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
+import { setError, startLoading } from '@util/state.util';
 
 interface IState extends IFetchState {
 	trainings: TrainingModel[];
@@ -15,10 +16,14 @@ const DEFAULT_STATE: IState = {
 	error: null,
 };
 
-export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAULT_STATE, action) => {
+export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
-		case TrainingActions.CreateTrainingExerciseByTrainingId:
-			return createTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+		case TRAINING_ACTIONS.EXERCISE.ADD.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.EXERCISE.ADD.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.EXERCISE.ADD.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
 		case TrainingActions.EditTrainingExerciseByTrainingId:
 			return editTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
@@ -27,94 +32,43 @@ export const training: Reducer<IState, Action<TrainingActions>> = (state = DEFAU
 			return deleteTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
 
 		case TrainingActions.FetchTrainingsByDateStart:
-			return {
-				...state,
-				loading: true,
-			};
+			return startLoading(state);
 		case TrainingActions.FetchTrainingByDateSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel[] | undefined>).payload);
 		case TrainingActions.FetchTrainingByDateError:
-			return {
-				...state,
-				loading: false,
-				error: (action as any).payload,
-			};
+			return setError(state, (action as any).payload);
 
 		case TrainingActions.FetchTrainingByIdStart:
-			return {
-				...state,
-				loading: true,
-			};
+			return startLoading(state);
 		case TrainingActions.FetchTrainingByIdSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel | undefined>).payload);
 		case TrainingActions.FetchTrainingByIdError:
-			return {
-				...state,
-				loading: false,
-				error: (action as any).payload,
-			};
+			return setError(state, (action as any).payload);
 
 		case TrainingActions.CreateTrainingStart:
-			return { ...state, loading: true };
+			return startLoading(state);
 		case TrainingActions.CreateTrainingSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
 		case TrainingActions.CreateTrainingError:
-			return {
-				...state,
-				loading: false,
-				error: (action as any).payload,
-			};
+			return setError(state, (action as any).payload);
 
 		case TrainingActions.DeleteTrainingByIdStart:
-			return { ...state, loading: true };
+			return startLoading(state);
 		case TrainingActions.DeleteTrainingByIdSuccess:
 			return deleteById(state, (action as DataAction<string>).payload);
 		case TrainingActions.DeleteTrainingByIdError:
-			return {
-				...state,
-				loading: false,
-				error: (action as DataAction<object>).payload,
-			};
+			return setError(state, (action as DataAction<object>).payload);
 
 		case TrainingActions.UpdateTrainingStart:
-			return { ...state, loading: true };
+			return startLoading(state);
 		case TrainingActions.UpdateTrainingSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
 		case TrainingActions.UpdateTrainingError:
-			return {
-				...state,
-				loading: false,
-				error: (action as DataAction<object>).payload,
-			};
+			return setError(state, (action as DataAction<object>).payload);
 
 		default:
 			return state;
 	}
-};
-
-const createTrainingExerciseByTrainingId = (state: IState, action: TrainingExerciseAction): IState => {
-	const { exercise, trainingId } = action.payload;
-
-	const newExercise = {
-		...exercise,
-		sequenceNumber: state.trainings.length + 1,
-	};
-
-	const newTrainings = state.trainings.map(item => {
-		if (item._id === trainingId) {
-			item = {
-				...item,
-				exerciseList: [...item.exerciseList, newExercise],
-			};
-		}
-
-		return item;
-	});
-
-	return {
-		...state,
-		trainings: newTrainings,
-	};
 };
 
 const editTrainingExerciseByTrainingId = (state: IState, action: TrainingExerciseAction): IState => {

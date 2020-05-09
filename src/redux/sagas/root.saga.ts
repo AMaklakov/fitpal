@@ -2,13 +2,14 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { getCovidData } from '@redux/sagas/covid.saga';
 import { CovidAction } from '@redux/action/covid.action';
 import {
+	addTrainingExercise,
 	createTraining,
 	deleteTrainingById,
 	getTrainingById,
 	getTrainingsByDate,
 	updateTrainingById,
 } from '@redux/sagas/training.saga';
-import { TrainingActions } from '@redux/action/training-exercise.action';
+import { TRAINING_ACTIONS, TrainingActions } from '@redux/action/training-exercise.action';
 import { UserActions } from '@redux/action/user.action';
 import { login, logout, register } from '@redux/sagas/user.saga';
 import { ExerciseActions } from '@redux/action/exercise.action';
@@ -26,6 +27,8 @@ function* actionWatcher() {
 	yield takeLatest(TrainingActions.CreateTrainingStart, createTraining);
 	yield takeLatest(TrainingActions.DeleteTrainingByIdStart, deleteTrainingById);
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);
+
+	yield takeLatest(TRAINING_ACTIONS.EXERCISE.ADD.START, addTrainingExercise);
 
 	yield takeLatest(ExerciseActions.CreateStart, createExercise);
 	yield takeLatest(ExerciseActions.FetchStart, fetchExercises);
