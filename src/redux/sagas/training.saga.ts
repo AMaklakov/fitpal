@@ -2,8 +2,6 @@ import { put, select } from 'redux-saga/effects';
 import { axios } from '@util/axios';
 import { Moment } from 'moment';
 import {
-	createTrainingError,
-	createTrainingSuccess,
 	deleteTrainingByIdError,
 	deleteTrainingByIdSuccess,
 	updateTrainingError,
@@ -57,10 +55,10 @@ export function* createTraining(action: DataAction<ICreateTraining>) {
 			throw new Error(`Training from backend is not valid`);
 		}
 
-		yield put(createTrainingSuccess(training));
+		yield put(TRAINING_ACTION_CREATORS.CREATE.SUCCESS(training));
 		yield put(cleanUpAction());
 	} catch (e) {
-		yield put(createTrainingError(e));
+		yield put(TRAINING_ACTION_CREATORS.CREATE.ERROR(e));
 	}
 }
 

@@ -8,7 +8,6 @@ import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { cleanUpAction, toggleCalendarTrainingModalAction } from '@redux/action/calendar-training-modal.action';
 import { StoreModel } from '@redux/store';
 import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util';
-import { createTrainingStart } from '@redux/action/training.action';
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
 import { Moment, MomentInput } from 'moment';
@@ -17,6 +16,7 @@ import { Colors } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -136,7 +136,7 @@ const mapStateToProps = (state: StoreModel): IStateProps => {
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, {}> = dispatch => {
 	return {
 		closeModal: () => dispatch(toggleCalendarTrainingModalAction(false)),
-		createTraining: (training: ICreateTraining) => dispatch(createTrainingStart(training)),
+		createTraining: (training: ICreateTraining) => dispatch(TRAINING_ACTION_CREATORS.CREATE.START(training)),
 		cleanUp: () => dispatch(cleanUpAction()),
 	};
 };

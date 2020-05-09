@@ -1,19 +1,6 @@
-import { ICreateTraining, TrainingModel } from '@model/training.model';
+import { TrainingModel } from '@model/training.model';
 import { TrainingActions } from './training-exercise.action';
 import { DataActionCreator } from '@model/data-action.model';
-
-export const createTrainingStart: DataActionCreator<ICreateTraining> = training => ({
-	type: TrainingActions.CreateTrainingStart,
-	payload: training,
-});
-export const createTrainingSuccess: DataActionCreator<TrainingModel> = training => ({
-	type: TrainingActions.CreateTrainingSuccess,
-	payload: training,
-});
-export const createTrainingError: DataActionCreator<object> = error => ({
-	type: TrainingActions.CreateTrainingError,
-	payload: error,
-});
 
 export const deleteTrainingByIdStart: DataActionCreator<string> = id => ({
 	type: TrainingActions.DeleteTrainingByIdStart,
