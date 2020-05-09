@@ -8,8 +8,6 @@ import {
 	deleteTrainingByIdSuccess,
 	fetchTrainingByIdError,
 	fetchTrainingByIdSuccess,
-	fetchTrainingsByDateError,
-	fetchTrainingsByDateSuccess,
 	updateTrainingError,
 	updateTrainingSuccess,
 } from '@redux/action/training.action';
@@ -31,9 +29,9 @@ import { Routes } from '@screen/navigator';
 export function* getTrainingsByDate(action: DataAction<Moment>) {
 	try {
 		const { data } = yield axios.get(`trainings?date=${action.payload.toISOString()}`);
-		yield put(fetchTrainingsByDateSuccess(data));
+		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.SUCCESS(data));
 	} catch (e) {
-		yield put(fetchTrainingsByDateError(e));
+		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.ERROR(e));
 	}
 }
 

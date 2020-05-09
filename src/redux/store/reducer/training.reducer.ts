@@ -39,19 +39,19 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		case TRAINING_ACTIONS.EXERCISE.EDIT.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.FetchTrainingsByDateStart:
+		case TRAINING_ACTIONS.FETCH_BY_DATE.START:
 			return startLoading(state);
-		case TrainingActions.FetchTrainingByDateSuccess:
+		case TRAINING_ACTIONS.FETCH_BY_DATE.SUCCESS:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel[] | undefined>).payload);
-		case TrainingActions.FetchTrainingByDateError:
-			return setError(state, (action as any).payload);
+		case TRAINING_ACTIONS.FETCH_BY_DATE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
 		case TrainingActions.FetchTrainingByIdStart:
 			return startLoading(state);
 		case TrainingActions.FetchTrainingByIdSuccess:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel | undefined>).payload);
 		case TrainingActions.FetchTrainingByIdError:
-			return setError(state, (action as any).payload);
+			return setError(state, (action as DataAction<object>).payload);
 
 		case TrainingActions.CreateTrainingStart:
 			return startLoading(state);

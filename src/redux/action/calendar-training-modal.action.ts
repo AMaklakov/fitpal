@@ -4,7 +4,7 @@ import { MomentInput } from 'moment';
 
 export enum CalendarTrainingModalActions {
 	Toggle = 'CALENDAR/TRAINING_MODAL/IS_OPEN',
-	UpdateTraining = 'CALENDAR/TRAINING_MODAL/TRAINING',
+	UpdateTraining = 'CALENDAR/TRAINING_MODAL/SET_CURRENT_TRAINING',
 	UpdateDate = 'CALENDAR/TRAINING_MODAL/UPDATE_DATE',
 
 	CleanUp = 'CALENDAR/TRAINING_MODAL/CLEAN_UP',

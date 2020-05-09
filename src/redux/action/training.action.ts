@@ -3,19 +3,6 @@ import { TrainingActions } from './training-exercise.action';
 import { DataActionCreator } from '@model/data-action.model';
 import { MomentInput } from 'moment';
 
-export const fetchTrainingsByDateStart: DataActionCreator<MomentInput> = date => ({
-	type: TrainingActions.FetchTrainingsByDateStart,
-	payload: date,
-});
-export const fetchTrainingsByDateSuccess: DataActionCreator<TrainingModel[]> = trainings => ({
-	type: TrainingActions.FetchTrainingByDateSuccess,
-	payload: trainings,
-});
-export const fetchTrainingsByDateError: DataActionCreator<object> = error => ({
-	type: TrainingActions.FetchTrainingByDateError,
-	payload: error,
-});
-
 export const fetchTrainingByIdStart: DataActionCreator<MomentInput> = id => ({
 	type: TrainingActions.FetchTrainingByIdStart,
 	payload: id,

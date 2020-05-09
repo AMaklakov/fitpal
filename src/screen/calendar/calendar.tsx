@@ -14,13 +14,14 @@ import { TrainingListMinimalView } from '@components/training-minimal-view/train
 import { CalendarStrip } from '@components/calendar/calendar-strip';
 import { getTrainingListByDate } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
-import { deleteTrainingByIdStart, fetchTrainingsByDateStart } from '@redux/action/training.action';
+import { deleteTrainingByIdStart } from '@redux/action/training.action';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import { Colors } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
 import { Button } from '@components/button/button';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
@@ -153,7 +154,7 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
-		fetchTrainingListByDate: (date: Moment) => dispatch(fetchTrainingsByDateStart(date)),
+		fetchTrainingListByDate: (date: Moment) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.START(date)),
 		deleteTrainingById: (trainingId: string) => dispatch(deleteTrainingByIdStart(trainingId)),
 		openTrainingModal: (training?: TrainingModel, date?: MomentInput) => {
 			dispatch(updateTrainingModalAction(training ?? null));

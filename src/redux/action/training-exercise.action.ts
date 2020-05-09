@@ -1,15 +1,12 @@
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { progressActions, progressTypes } from '@util/redux.util';
 import { TrainingModel } from '@model/training.model';
+import { MomentInput } from 'moment';
 
 /**
  * @deprecated use TRAINING_ACTIONS instead
  */
 export enum TrainingActions {
-	FetchTrainingsByDateStart = 'TRAINING/FETCH_BY_DATE/START',
-	FetchTrainingByDateSuccess = 'TRAINING/FETCH_BY_DATE/SUCCESS',
-	FetchTrainingByDateError = 'TRAINING/FETCH_BY_DATE/ERROR',
-
 	FetchTrainingByIdStart = 'TRAINING/FETCH_BY_ID/START',
 	FetchTrainingByIdSuccess = 'TRAINING/FETCH_BY_ID/SUCCESS',
 	FetchTrainingByIdError = 'TRAINING/FETCH_BY_ID/ERROR',
@@ -29,6 +26,7 @@ export enum TrainingActions {
 
 // TODO replace TrainingActions with TRAINING_ACTIONS
 export const TRAINING_ACTIONS = {
+	FETCH_BY_DATE: progressTypes('TRAINING', 'FETCH_BY_DATE'),
 	EXERCISE: {
 		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
 		EDIT: progressTypes('TRAINING/EXERCISE', 'EDIT'),
@@ -40,6 +38,7 @@ export type IAddExerciseStart = { trainingId: string; exercise: IBaseTrainingExe
 export type IEditExerciseStart = IAddExerciseStart;
 export type IRemoveExerciseStart = { trainingId: string; exerciseId: string };
 export const TRAINING_ACTION_CREATORS = {
+	FETCH_BY_DATE: progressActions<MomentInput, TrainingModel[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
 	EXERCISE: {
 		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
 		EDIT: progressActions<IEditExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.EDIT),
