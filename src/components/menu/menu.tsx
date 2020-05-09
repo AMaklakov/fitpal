@@ -12,7 +12,7 @@ import { DeadIcon } from '@icons/dead.icon';
 import { connect } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { Dispatch } from 'redux';
-import { fetchCovidData } from '@redux/action/covid.action';
+import { COVID_ACTION_CREATORS } from '@redux/action/covid.action';
 import { getCovidConfirmed } from '@redux/selector/covid.selector';
 
 interface IState {
@@ -21,7 +21,7 @@ interface IState {
 }
 
 interface IDispatch {
-	getCovidConfirmedCount: () => void;
+	onFetchCovidConfirmed: () => void;
 }
 
 interface IProps extends IMenuWrapperProps {
@@ -30,14 +30,14 @@ interface IProps extends IMenuWrapperProps {
 }
 
 export const MenuComponent = (props: IProps & IState & IDispatch) => {
-	const { isOpen, onCloseMenu, navigate, activeRoute, getCovidConfirmedCount, covidConfirmed } = props;
+	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed } = props;
 	const { t } = useTranslation();
 
 	const goToPage = (page: Routes) => () => navigate(page);
 
 	useEffect(() => {
-		getCovidConfirmedCount();
-	}, [getCovidConfirmedCount]);
+		onFetchCovidConfirmed();
+	}, [onFetchCovidConfirmed]);
 
 	return (
 		<MenuWrapper isOpen={isOpen} onCloseMenu={onCloseMenu}>
@@ -95,7 +95,7 @@ const mapStateToProps = (state: StoreModel): IState => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
-	getCovidConfirmedCount: () => dispatch(fetchCovidData()),
+	onFetchCovidConfirmed: () => dispatch(COVID_ACTION_CREATORS.FETCH.START(undefined)),
 });
 
 export const Menu = connect(mapStateToProps, mapDispatchToProps)(MenuComponent);

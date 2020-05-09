@@ -1,6 +1,6 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { getCovidData } from '@redux/sagas/covid.saga';
-import { CovidAction } from '@redux/action/covid.action';
+import { COVID_ACTIONS } from '@redux/action/covid.action';
 import {
 	addTrainingExercise,
 	createTraining,
@@ -22,7 +22,7 @@ function* actionWatcher() {
 	yield takeLatest(UserActions.RegisterStart, register);
 	yield takeLatest(UserActions.LogoutStart, logout);
 
-	yield takeLatest(CovidAction.FetchStart, getCovidData);
+	yield takeLatest(COVID_ACTIONS.FETCH.START, getCovidData);
 
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_DATE.START, getTrainingsByDate);
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_ID.START, getTrainingById);

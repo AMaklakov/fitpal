@@ -1,23 +1,10 @@
-import { Action, ActionCreator } from 'redux';
-import { DataAction } from '@model/data-action.model';
 import { ICovidData } from '@model/covid-data.model';
+import { progressActions, progressTypes } from '@util/redux.util';
 
-export enum CovidAction {
-	FetchStart = 'COVID/FETCH/START',
-	FetchSuccess = 'COVID/FETCH/SUCCESS',
-	FetchError = 'COVID/FETCH/ERROR',
-}
+export const COVID_ACTIONS = {
+	FETCH: progressTypes('COVID'),
+};
 
-export const fetchCovidData: ActionCreator<Action> = () => ({
-	type: CovidAction.FetchStart,
-});
-
-export const updateCovidData: ActionCreator<DataAction<ICovidData>> = data => ({
-	type: CovidAction.FetchSuccess,
-	payload: data,
-});
-
-export const setErrorCovidData: ActionCreator<DataAction<object>> = data => ({
-	type: CovidAction.FetchError,
-	payload: data,
-});
+export const COVID_ACTION_CREATORS = {
+	FETCH: progressActions<undefined, ICovidData, object>(COVID_ACTIONS.FETCH),
+};

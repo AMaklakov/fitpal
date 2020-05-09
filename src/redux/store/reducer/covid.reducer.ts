@@ -1,10 +1,10 @@
 import { Action, Reducer } from 'redux';
 import moment from 'moment';
-import { CovidAction } from '@redux/action/covid.action';
 import { IFetchState } from '@model/fetch-state.model';
 import { ICovidData } from '@model/covid-data.model';
 import { DataAction } from '@model/data-action.model';
-import { PropType } from '@util/type.util';
+import { COVID_ACTIONS } from '@redux/action/covid.action';
+import { setError, startLoading } from '@util/state.util';
 
 const DEFAULT_STATE: ICovidData & IFetchState = {
 	date: moment(),
@@ -18,24 +18,17 @@ const DEFAULT_STATE: ICovidData & IFetchState = {
 
 export const covid: Reducer<ICovidData & IFetchState> = (state = DEFAULT_STATE, action: Action) => {
 	switch (action.type) {
-		case CovidAction.FetchStart:
+		case COVID_ACTIONS.FETCH.START:
+			return startLoading(state);
+		case COVID_ACTIONS.FETCH.SUCCESS:
 			return {
 				...state,
+				loading: false,
 				error: null,
-				loading: true,
-			};
-		case CovidAction.FetchSuccess:
-			return {
-				...state,
 				...(action as DataAction<ICovidData>).payload,
-				loading: false,
 			};
-		case CovidAction.FetchError:
-			return {
-				...state,
-				error: (action as DataAction<PropType<IFetchState, 'error'>>).payload,
-				loading: false,
-			};
+		case COVID_ACTIONS.FETCH.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 		default:
 			return state;
 	}
