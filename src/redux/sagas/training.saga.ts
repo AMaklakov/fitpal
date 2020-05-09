@@ -16,7 +16,11 @@ import {
 import { DataAction } from '@model/data-action.model';
 import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
-import { IAddExerciseStart, TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import {
+	IAddExerciseStart,
+	IRemoveExerciseStart,
+	TRAINING_ACTION_CREATORS,
+} from '@redux/action/training-exercise.action';
 import { validateTrainingExercise } from '@util/training-exercise.util';
 import { getTrainingById as getTrainingByIdSlector } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
@@ -125,5 +129,35 @@ export function* addTrainingExercise(action: DataAction<IAddExerciseStart>) {
 		yield navigate(Routes.Training, { trainingId: training._id });
 	} catch (e) {
 		yield put(TRAINING_ACTION_CREATORS.EXERCISE.ADD.ERROR(e));
+	}
+}
+
+export function* removeTrainingExercise(action: DataAction<IRemoveExerciseStart>) {
+	try {
+		const trainingId = action.payload.trainingId;
+		const exerciseId = action.payload.exerciseId;
+
+		if (!trainingId || !exerciseId) {
+			throw `Not valid action payload`;
+		}
+
+		const training: TrainingModel = yield select((state: StoreModel) => getTrainingByIdSlector(state, trainingId));
+
+		if (!training) {
+			throw `Not existing trainingId`;
+		}
+
+		training.exerciseList = training.exerciseList.filter(e => e._id !== exerciseId);
+
+		const res = yield axios.put(`/trainings/${trainingId}`, { training });
+		const trainingFromServer = res?.data?.training;
+
+		if (!isTrainingValid(trainingFromServer)) {
+			throw `Training from server is not valid`;
+		}
+
+		yield put(TRAINING_ACTION_CREATORS.EXERCISE.REMOVE.SUCCESS(trainingFromServer));
+	} catch (e) {
+		yield put(TRAINING_ACTION_CREATORS.EXERCISE.REMOVE.ERROR(e));
 	}
 }

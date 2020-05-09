@@ -6,7 +6,6 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Routes } from '@screen/navigator';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
-import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
 import { fetchTrainingByIdStart, updateTrainingStart } from '@redux/action/training.action';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
@@ -15,6 +14,7 @@ import { IBaseTrainingExercise } from '@model/training-exercise';
 import { MomentInput } from 'moment';
 import { setWeightModalVisible } from '@redux/action/user.action';
 import { fetchExercisesStart } from '@redux/action/exercise.action';
+import { IRemoveExerciseStart, TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 
 interface IState {
 	training?: TrainingModel;
@@ -23,7 +23,7 @@ interface IState {
 }
 
 interface IDispatch {
-	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: string) => void;
+	onRemoveTrainingExercise: (data: IRemoveExerciseStart) => void;
 	onShowWeightModal: () => void;
 	onUpdateTraining: (training: TrainingModel) => void;
 	fetchTrainingById: (id: string | undefined) => void;
@@ -67,13 +67,16 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		});
 	};
 
-	const removeExerciseAction = (trainingExercise: IBaseTrainingExercise) => {
-		if (!training) {
-			return;
-		}
+	const removeExerciseAction = useCallback(
+		(ex: IBaseTrainingExercise) => {
+			if (!training) {
+				return;
+			}
 
-		onRemoveTrainingExercise(trainingExercise, training._id);
-	};
+			onRemoveTrainingExercise({ trainingId: training._id, exerciseId: ex._id });
+		},
+		[onRemoveTrainingExercise, training]
+	);
 
 	const handleUpdateTrainingName = useCallback(
 		(name: string) => onUpdateTraining({ ...(training as TrainingModel), name }),
@@ -103,9 +106,7 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 });
 
 const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch, ownProups): IDispatch => ({
-	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: string) => {
-		dispatch(deleteTrainingExerciseByTrainingId(trainingId, e));
-	},
+	onRemoveTrainingExercise: data => dispatch(TRAINING_ACTION_CREATORS.EXERCISE.REMOVE.START(data)),
 	onShowWeightModal: () => dispatch(setWeightModalVisible(true)),
 	onGoBack: () => ownProups.navigation.navigate(Routes.Calendar),
 	onUpdateTraining: (training: TrainingModel) => dispatch(updateTrainingStart(training)),

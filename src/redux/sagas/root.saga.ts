@@ -7,6 +7,7 @@ import {
 	deleteTrainingById,
 	getTrainingById,
 	getTrainingsByDate,
+	removeTrainingExercise,
 	updateTrainingById,
 } from '@redux/sagas/training.saga';
 import { TRAINING_ACTIONS, TrainingActions } from '@redux/action/training-exercise.action';
@@ -29,6 +30,7 @@ function* actionWatcher() {
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);
 
 	yield takeLatest(TRAINING_ACTIONS.EXERCISE.ADD.START, addTrainingExercise);
+	yield takeLatest(TRAINING_ACTIONS.EXERCISE.REMOVE.START, removeTrainingExercise);
 
 	yield takeLatest(ExerciseActions.CreateStart, createExercise);
 	yield takeLatest(ExerciseActions.FetchStart, fetchExercises);

@@ -8,7 +8,6 @@ import { TrainingModel } from '@model/training.model';
  */
 export enum TrainingActions {
 	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
-	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
 
 	FetchTrainingsByDateStart = 'TRAINING/FETCH_BY_DATE/START',
 	FetchTrainingByDateSuccess = 'TRAINING/FETCH_BY_DATE/SUCCESS',
@@ -35,22 +34,25 @@ export enum TrainingActions {
 export const TRAINING_ACTIONS = {
 	EXERCISE: {
 		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
+		REMOVE: progressTypes('TRAINING/EXERCISE', 'REMOVE'),
 	},
 };
 
 export type IAddExerciseStart = { trainingId: string; exercise: IBaseTrainingExercise };
+export type IRemoveExerciseStart = { trainingId: string; exerciseId: string };
 export const TRAINING_ACTION_CREATORS = {
 	EXERCISE: {
 		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
+		REMOVE: progressActions<IRemoveExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.REMOVE),
 	},
 };
+
+// TODO remove everything below
 
 export type TrainingExerciseByTrainingId = {
 	trainingId: string;
 	exercise: IBaseTrainingExercise;
 };
-
-// TODO remove everything below
 
 export type TrainingExerciseAction<PayloadType extends Object = TrainingExerciseByTrainingId> = Action<
 	TrainingActions
@@ -61,18 +63,6 @@ export const editTrainingExerciseByTrainingId = (
 	exercise: IBaseTrainingExercise
 ): TrainingExerciseAction => ({
 	type: TrainingActions.EditTrainingExerciseByTrainingId,
-
-	payload: {
-		trainingId,
-		exercise,
-	},
-});
-
-export const deleteTrainingExerciseByTrainingId = (
-	trainingId: string,
-	exercise: IBaseTrainingExercise
-): TrainingExerciseAction => ({
-	type: TrainingActions.DeleteTrainingExerciseByTrainingId,
 
 	payload: {
 		trainingId,
