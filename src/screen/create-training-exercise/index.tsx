@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CreateExercise } from './create-exercise';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Action, Dispatch } from 'redux';
-import { editTrainingExerciseByTrainingId, TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { StoreModel } from '@redux/store';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { NavigationPropsModel } from '@model/navigation-props.model';
@@ -19,14 +19,14 @@ interface IState {
 
 interface IDispatch {
 	onSave: (trainingId: string, exercise: IBaseTrainingExercise) => void;
-	editAction: (trainingId: string, exercise: IBaseTrainingExercise) => void;
+	onEdit: (trainingId: string, exercise: IBaseTrainingExercise) => void;
 	onFetchExercises: () => void;
 }
 
 interface IProps extends NavigationPropsModel {}
 
 const Screen = (props: IProps & IState & IDispatch) => {
-	const { navigation, onSave, editAction, exerciseList, userWeight, onFetchExercises } = props;
+	const { navigation, onSave, onEdit, exerciseList, userWeight, onFetchExercises } = props;
 
 	const id: string = useMemo(() => navigation.getParam('trainingId'), [navigation]);
 	const trainingExercise = useMemo(() => navigation.getParam('trainingExercise'), [navigation]);
@@ -60,8 +60,8 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			return;
 		}
 
-		trainingExercise ? editAction(id, exercise) : onSave(id, exercise);
-	}, [disabledSave, editAction, exercise, id, onSave, trainingExercise]);
+		trainingExercise ? onEdit(id, exercise) : onSave(id, exercise);
+	}, [disabledSave, onEdit, exercise, id, onSave, trainingExercise]);
 
 	return (
 		<CreateExercise
@@ -85,9 +85,8 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	onSave: (trainingId: string, exercise: IBaseTrainingExercise) => {
 		dispatch(TRAINING_ACTION_CREATORS.EXERCISE.ADD.START({ trainingId, exercise }));
 	},
-
-	editAction: (trainingId: string, exercise: IBaseTrainingExercise) => {
-		dispatch(editTrainingExerciseByTrainingId(trainingId, exercise));
+	onEdit: (trainingId: string, exercise: IBaseTrainingExercise) => {
+		dispatch(TRAINING_ACTION_CREATORS.EXERCISE.EDIT.START({ trainingId, exercise }));
 	},
 	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 });

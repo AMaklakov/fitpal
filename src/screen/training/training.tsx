@@ -48,13 +48,16 @@ export const Training = (props: IProps) => {
 
 	const onChangeOrderExercises = () => changeIsReorder(!isReorder);
 
-	const handleAddExercise = useCallback(() => {
-		if (moment().diff(lastUserUpdatedWeight, 'hours') > USER_WEIGHT_EXPIRATION_TIME_HOURS) {
-			onShowWeightModal();
-		}
+	const handleAddOrEditExercise = useCallback(
+		(e?: IBaseTrainingExercise) => {
+			if (moment().diff(lastUserUpdatedWeight, 'hours') > USER_WEIGHT_EXPIRATION_TIME_HOURS) {
+				onShowWeightModal();
+			}
 
-		onAddExercise();
-	}, [lastUserUpdatedWeight, onAddExercise, onShowWeightModal]);
+			onAddExercise(e);
+		},
+		[lastUserUpdatedWeight, onAddExercise, onShowWeightModal]
+	);
 
 	if (!training) {
 		return (
@@ -83,7 +86,7 @@ export const Training = (props: IProps) => {
 			) : (
 				<ShowTraining
 					exercises={exercises}
-					onAddExercise={handleAddExercise}
+					onAddExercise={handleAddOrEditExercise}
 					removeExercise={removeExercise}
 					training={training}
 					changeOrder={onChangeOrderExercises}

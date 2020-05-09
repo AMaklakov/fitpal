@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
-import { TRAINING_ACTIONS, TrainingActions, TrainingExerciseAction } from '@redux/action/training-exercise.action';
+import { TRAINING_ACTIONS, TrainingActions } from '@redux/action/training-exercise.action';
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
@@ -32,8 +32,12 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		case TRAINING_ACTIONS.EXERCISE.REMOVE.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.EditTrainingExerciseByTrainingId:
-			return editTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
 		case TrainingActions.FetchTrainingsByDateStart:
 			return startLoading(state);
@@ -73,28 +77,6 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		default:
 			return state;
 	}
-};
-
-const editTrainingExerciseByTrainingId = (state: IState, action: TrainingExerciseAction): IState => {
-	const { exercise, trainingId } = action.payload;
-	const newTrainings = state.trainings.map(item => {
-		if (item._id === trainingId) {
-			item = {
-				...item,
-				exerciseList: item.exerciseList.map(x => {
-					if (x._id === exercise._id) {
-						x = exercise;
-					}
-
-					return { ...x };
-				}),
-			};
-		}
-
-		return item;
-	});
-
-	return { ...state, trainings: newTrainings };
 };
 
 const deleteById = (state: IState, id: string): IState => ({

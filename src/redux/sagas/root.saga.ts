@@ -5,6 +5,7 @@ import {
 	addTrainingExercise,
 	createTraining,
 	deleteTrainingById,
+	editTrainingExercise,
 	getTrainingById,
 	getTrainingsByDate,
 	removeTrainingExercise,
@@ -30,6 +31,7 @@ function* actionWatcher() {
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);
 
 	yield takeLatest(TRAINING_ACTIONS.EXERCISE.ADD.START, addTrainingExercise);
+	yield takeLatest(TRAINING_ACTIONS.EXERCISE.EDIT.START, editTrainingExercise);
 	yield takeLatest(TRAINING_ACTIONS.EXERCISE.REMOVE.START, removeTrainingExercise);
 
 	yield takeLatest(ExerciseActions.CreateStart, createExercise);
