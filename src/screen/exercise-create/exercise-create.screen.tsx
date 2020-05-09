@@ -7,7 +7,7 @@ import { getExerciseById } from '@redux/selector/exercise.selector';
 import { ExerciseModel, ExerciseTypes, ICreateExercise } from '@model/exercise.model';
 import { H1 } from '@components/heading/h1';
 import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
-import { createExerciseStart, updateExerciseAction } from '@redux/action/exercise.action';
+import { createExerciseStart, EXERCISE_ACTION_CREATORS } from '@redux/action/exercise.action';
 import { useTranslation } from 'react-i18next';
 import { EXERCISE_NAME_MAXLENGTH, EXERCISE_NAME_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
@@ -100,13 +100,7 @@ const mapStateToProps: MapStateToPropsParam<IStateToProps, IProps, StoreModel> =
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, IProps> = dispatch => {
 	return {
 		onCreateExercise: (exercise: ICreateExercise) => dispatch(createExerciseStart(exercise)),
-		onUpdateExercise: (exercise: ExerciseModel) => {
-			const action = updateExerciseAction(exercise);
-
-			if (action) {
-				dispatch(action);
-			}
-		},
+		onUpdateExercise: (exercise: ExerciseModel) => dispatch(EXERCISE_ACTION_CREATORS.UPDATE.START(exercise)),
 	};
 };
 
