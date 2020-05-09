@@ -19,7 +19,7 @@ export function* createExercise(action: DataAction<ICreateExercise>) {
 
 		const { data } = yield axios.post(`exercises`, { exercise: action.payload });
 
-		yield put(createExerciseSuccess(data));
+		yield put(createExerciseSuccess(data?.exercise));
 	} catch (e) {
 		yield put(createExerciseError(e));
 	}
