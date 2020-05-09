@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { TrainingModel } from '../../model/training.model';
+import { TrainingModel } from '@model/training.model';
 
 export enum CalendarTrainingModalActions {
 	Toggle = 'CALENDAR/TRAINING_MODAL/IS_OPEN',

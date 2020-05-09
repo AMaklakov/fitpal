@@ -72,7 +72,7 @@ export function* updateTrainingById(action: DataAction<TrainingModel>) {
 			throw `Training is not valid`;
 		}
 
-		const res = yield axios.put(`/trainings/${action.payload.id}`, {
+		const res = yield axios.put(`/trainings/${action.payload._id}`, {
 			training: action.payload,
 		});
 

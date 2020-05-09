@@ -16,6 +16,6 @@ export const getTrainingListByDate = (store: StoreModel, date: Moment): Training
 	return store.training.trainings.filter((t: TrainingModel) => formatDate(t.date) === selectedDate);
 };
 
-export const getTrainingById = (store: StoreModel, id: PropType<TrainingModel, 'id'>): TrainingModel | undefined => {
-	return store.training.trainings.find((t: TrainingModel) => t.id === id);
+export const getTrainingById = (store: StoreModel, id: string): TrainingModel | undefined => {
+	return store.training.trainings.find((t: TrainingModel) => t._id === id);
 };

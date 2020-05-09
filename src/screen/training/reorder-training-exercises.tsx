@@ -34,7 +34,7 @@ export const ReorderTrainingExercise = (props: IProps) => {
 	return (
 		<View style={styles.wrapper}>
 			<DraggableFlatList<IBaseTrainingExercise>
-				keyExtractor={(exercise: IBaseTrainingExercise) => exercise.id}
+				keyExtractor={(exercise: IBaseTrainingExercise) => exercise._id}
 				data={training.exerciseList}
 				renderItem={RenderItem(exercises)}
 				onDragEnd={({ data }) => setExerciseList(data)}

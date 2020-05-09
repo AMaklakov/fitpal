@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { formatDate, getToday } from '@util/date.util';
 import moment, { Moment } from 'moment';
-import { PropType } from '@util/type.util';
 import { TrainingModel } from '@model/training.model';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import {
@@ -25,7 +24,7 @@ import { Button } from '@components/button/button';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
-	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
+	deleteTrainingById: (trainingId: string) => void;
 	openTrainingModal: (training?: TrainingModel, date?: string) => void;
 }
 
@@ -75,7 +74,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 
 	const handleOnTrainingTouch = (training: TrainingModel) => {
 		navigation.navigate(Routes.Training, {
-			trainingId: training?.id,
+			trainingId: training?._id,
 		});
 	};
 
@@ -84,7 +83,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	};
 
 	const handleDeleteTraining = (training: TrainingModel) => {
-		deleteTrainingById(training.id);
+		deleteTrainingById(training._id);
 	};
 
 	const handleCreateTraining = () => {
@@ -163,7 +162,7 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
 		fetchTrainingListByDate: (date: Moment) => dispatch(fetchTrainingsByDateStart(date)),
-		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => dispatch(deleteTrainingByIdStart(trainingId)),
+		deleteTrainingById: (trainingId: string) => dispatch(deleteTrainingByIdStart(trainingId)),
 		openTrainingModal: (training?: TrainingModel, date?: string) => {
 			dispatch(updateTrainingModalAction(training ?? null));
 			dispatch(updateDateInTrainingModalAction(date ?? null));

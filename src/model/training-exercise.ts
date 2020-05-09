@@ -3,14 +3,14 @@ import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
 import { BigSource } from 'big.js';
 
 export interface ISeries {
-	sequenceNumber: number;
+	_id: string;
 
 	repeats: BigSource;
 	weight: BigSource;
 }
 
 export interface IBaseTrainingExercise {
-	id: string;
+	_id: string;
 	exerciseId: PropType<ExerciseModel, '_id'>;
 	type: ExerciseTypes;
 	sequenceNumber: number;

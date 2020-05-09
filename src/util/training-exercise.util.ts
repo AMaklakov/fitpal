@@ -30,7 +30,7 @@ export const cloneTrainingExerciseList = (list?: IBaseTrainingExercise[]): IBase
 };
 
 export const createEmptyTrainingExercise = (userWeight?: BigSource): Partial<IBaseTrainingExercise> => ({
-	id: generateId(),
+	_id: generateId(),
 	seriesList: [],
 	userWeight,
 });

@@ -101,7 +101,7 @@ const createTrainingExerciseByTrainingId = (state: IState, action: TrainingExerc
 	};
 
 	const newTrainings = state.trainings.map(item => {
-		if (item.id === trainingId) {
+		if (item._id === trainingId) {
 			item = {
 				...item,
 				exerciseList: [...item.exerciseList, newExercise],
@@ -120,11 +120,11 @@ const createTrainingExerciseByTrainingId = (state: IState, action: TrainingExerc
 const editTrainingExerciseByTrainingId = (state: IState, action: TrainingExerciseAction): IState => {
 	const { exercise, trainingId } = action.payload;
 	const newTrainings = state.trainings.map(item => {
-		if (item.id === trainingId) {
+		if (item._id === trainingId) {
 			item = {
 				...item,
 				exerciseList: item.exerciseList.map(x => {
-					if (x.id === exercise.id) {
+					if (x._id === exercise._id) {
 						x = exercise;
 					}
 
@@ -145,10 +145,10 @@ const deleteTrainingExerciseByTrainingId = (state: IState, action: TrainingExerc
 	return {
 		...state,
 		trainings: state.trainings.map(item => {
-			if (item.id === trainingId) {
+			if (item._id === trainingId) {
 				item = {
 					...item,
-					exerciseList: [...item.exerciseList.filter(x => x.id !== exercise.id).map(x => ({ ...x }))],
+					exerciseList: [...item.exerciseList.filter(x => x._id !== exercise._id).map(x => ({ ...x }))],
 				};
 			}
 
@@ -161,7 +161,7 @@ const deleteById = (state: IState, id: string): IState => ({
 	...state,
 	loading: false,
 	error: null,
-	trainings: state.trainings.filter(t => t.id !== id),
+	trainings: state.trainings.filter(t => t._id !== id),
 });
 
 const addTrainingsToState = (state: IState, trainings: TrainingModel[] | TrainingModel | undefined): IState => {
@@ -170,8 +170,8 @@ const addTrainingsToState = (state: IState, trainings: TrainingModel[] | Trainin
 	}
 
 	const concatedList = state.trainings.concat(trainings);
-	const idList = concatedList.map(x => x.id);
-	const newTrainings = concatedList.filter((x, index) => idList.lastIndexOf(x.id) === index);
+	const idList = concatedList.map(x => x._id);
+	const newTrainings = concatedList.filter((x, index) => idList.lastIndexOf(x._id) === index);
 
 	return {
 		...state,

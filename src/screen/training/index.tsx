@@ -7,7 +7,6 @@ import { Routes } from '@screen/navigator';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
 import { deleteTrainingExerciseByTrainingId } from '@redux/action/training-exercise.action';
-import { PropType } from '@util/type.util';
 import { fetchTrainingByIdStart, updateTrainingStart } from '@redux/action/training.action';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
@@ -23,7 +22,7 @@ interface IState {
 }
 
 interface IDispatch {
-	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => void;
+	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: string) => void;
 	onShowWeightModal: () => void;
 	onUpdateTraining: (training: TrainingModel) => void;
 	fetchTrainingById: (id: string | undefined) => void;
@@ -53,7 +52,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		navigation.navigate({
 			routeName: Routes.CreateTrainingExercise,
 			params: {
-				trainingId: training?.id,
+				trainingId: training?._id,
 				trainingExercise,
 			},
 		});
@@ -64,7 +63,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			return;
 		}
 
-		onRemoveTrainingExercise(trainingExercise, training.id);
+		onRemoveTrainingExercise(trainingExercise, training._id);
 	};
 
 	const handleUpdateTrainingName = useCallback(
@@ -95,7 +94,7 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 });
 
 const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch, ownProups): IDispatch => ({
-	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: PropType<TrainingModel, 'id'>) => {
+	onRemoveTrainingExercise: (e: IBaseTrainingExercise, trainingId: string) => {
 		dispatch(deleteTrainingExerciseByTrainingId(trainingId, e));
 	},
 	onShowWeightModal: () => dispatch(setWeightModalVisible(true)),

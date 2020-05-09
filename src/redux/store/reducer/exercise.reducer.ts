@@ -44,6 +44,6 @@ export const exercise: Reducer<IState, DataAction> = (state = DEFAULT_STATE, act
 const updateExercise = (state: IState, { payload: { exercise } }: UpdateExerciseAction) => {
 	return {
 		...state,
-		exercises: state.exercises.filter(ex => ex.id !== exercise.id).concat([exercise]),
+		exercises: state.exercises.filter(ex => ex._id !== exercise._id).concat([exercise]),
 	};
 };

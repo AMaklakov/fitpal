@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CreateExercise } from './create-exercise';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { PropType } from '@util/type.util';
-import { TrainingModel } from '@model/training.model';
 import { Action, Dispatch } from 'redux';
 import {
 	createTrainingExerciseByTrainingId,
@@ -89,11 +87,11 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 });
 
 const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch<Action>): IDispatch => ({
-	saveAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: IBaseTrainingExercise) => {
+	saveAction: (trainingId: string, exercise: IBaseTrainingExercise) => {
 		dispatch(createTrainingExerciseByTrainingId(trainingId, exercise));
 	},
 
-	editAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: IBaseTrainingExercise) => {
+	editAction: (trainingId: string, exercise: IBaseTrainingExercise) => {
 		dispatch(editTrainingExerciseByTrainingId(trainingId, exercise));
 	},
 	onFetchExercises: () => dispatch(fetchExercisesStart(null)),

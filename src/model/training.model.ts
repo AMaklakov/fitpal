@@ -2,24 +2,27 @@ import { IBaseTrainingExercise } from '@model/training-exercise';
 import { MomentInput } from 'moment';
 
 export interface TrainingModel {
-	id: string;
-	date: MomentInput;
+	_id: string;
+	userId?: string;
 
 	name: string;
-
+	date: MomentInput;
 	exerciseList: IBaseTrainingExercise[];
+
+	createdAt?: MomentInput;
+	updatedAt?: MomentInput;
 }
 
-export type ICreateTraining = Omit<TrainingModel, 'id'>;
+export type ICreateTraining = Omit<TrainingModel, '_id' | 'createdAt' | 'updatedAt' | 'userId'>;
 
 export const isTrainingValid = (training?: Partial<TrainingModel>): boolean => {
 	if (!training) {
 		return false;
 	}
 
-	const { date, exerciseList, id, name } = training;
+	const { date, exerciseList, _id, name } = training;
 
-	if (!date || !exerciseList || !id || !name) {
+	if (!date || !exerciseList || !_id || !name) {
 		return false;
 	}
 
