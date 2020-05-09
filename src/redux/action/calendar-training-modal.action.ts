@@ -1,37 +1,28 @@
-import { Action } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { MomentInput } from 'moment';
+import { DataActionCreator } from '@model/data-action.model';
+import { Action } from 'redux';
 
 export enum CalendarTrainingModalActions {
-	Toggle = 'CALENDAR/TRAINING_MODAL/IS_OPEN',
+	Toggle = 'CALENDAR/TRAINING_MODAL/TOGGLE_OPEN',
 	UpdateTraining = 'CALENDAR/TRAINING_MODAL/SET_CURRENT_TRAINING',
 	UpdateDate = 'CALENDAR/TRAINING_MODAL/UPDATE_DATE',
-
 	CleanUp = 'CALENDAR/TRAINING_MODAL/CLEAN_UP',
 }
 
-export type CalendarTrainingModalAction<T extends Object = {}> = Action<CalendarTrainingModalActions> & { payload: T };
-
-export type ToggleCalendarTrainingModalAction = CalendarTrainingModalAction<{ isOpen: boolean }>;
-export const toggleCalendarTrainingModalAction = (isOpen: boolean): ToggleCalendarTrainingModalAction => ({
+export const toggleCalendarTrainingModalAction: DataActionCreator<boolean> = isOpen => ({
 	type: CalendarTrainingModalActions.Toggle,
-
-	payload: { isOpen },
+	payload: isOpen,
 });
 
-export type UpdateTrainingAction = CalendarTrainingModalAction<{ training: TrainingModel | null }>;
-export const updateTrainingModalAction = (training: TrainingModel | null): UpdateTrainingAction => ({
+export const updateTrainingModalAction: DataActionCreator<TrainingModel | null> = training => ({
 	type: CalendarTrainingModalActions.UpdateTraining,
-	payload: { training },
+	payload: training,
 });
 
-export type UpdateDateInTrainingModalAction = CalendarTrainingModalAction<{ date: MomentInput | null }>;
-export const updateDateInTrainingModalAction = (date: MomentInput | null): UpdateDateInTrainingModalAction => ({
+export const updateDateInTrainingModalAction: DataActionCreator<MomentInput | null> = date => ({
 	type: CalendarTrainingModalActions.UpdateDate,
-	payload: { date },
+	payload: date,
 });
 
-export const cleanUpAction = (): CalendarTrainingModalAction => ({
-	type: CalendarTrainingModalActions.CleanUp,
-	payload: {},
-});
+export const cleanUpAction = (): Action => ({ type: CalendarTrainingModalActions.CleanUp });

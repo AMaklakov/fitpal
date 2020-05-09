@@ -1,12 +1,8 @@
 import { Action, Reducer } from 'redux';
-import { TrainingModel } from '../../../model/training.model';
-import {
-	CalendarTrainingModalActions,
-	ToggleCalendarTrainingModalAction,
-	UpdateDateInTrainingModalAction,
-	UpdateTrainingAction,
-} from '../../action/calendar-training-modal.action';
+import { TrainingModel } from '@model/training.model';
+import { CalendarTrainingModalActions } from '@redux/action/calendar-training-modal.action';
 import { MomentInput } from 'moment';
+import { DataAction } from '@model/data-action.model';
 
 interface IState {
 	isOpen: boolean;
@@ -30,29 +26,18 @@ export const calendarTrainingModal: Reducer<IState> = (
 ) => {
 	switch (action.type) {
 		case CalendarTrainingModalActions.Toggle:
-			return toggleOpen(state, action as ToggleCalendarTrainingModalAction);
+			return { ...state, isOpen: (action as DataAction<boolean>).payload };
 
 		case CalendarTrainingModalActions.UpdateTraining:
-			return updateTraining(state, action as UpdateTrainingAction);
+			return { ...state, training: (action as DataAction<TrainingModel | null>).payload };
 
 		case CalendarTrainingModalActions.CleanUp:
 			return { ...DEFAULT_STATE };
 
 		case CalendarTrainingModalActions.UpdateDate:
-			const date = (action as UpdateDateInTrainingModalAction).payload.date;
-			return { ...state, date };
+			return { ...state, date: (action as DataAction<MomentInput | null>).payload };
 
 		default:
 			return state;
 	}
 };
-
-const toggleOpen = (state: IState, action: ToggleCalendarTrainingModalAction): IState => ({
-	...state,
-	isOpen: action.payload.isOpen,
-});
-
-const updateTraining = (state: IState, action: UpdateTrainingAction): IState => ({
-	...state,
-	training: action.payload.training,
-});
