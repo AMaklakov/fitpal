@@ -14,7 +14,6 @@ import { TrainingListMinimalView } from '@components/training-minimal-view/train
 import { CalendarStrip } from '@components/calendar/calendar-strip';
 import { getTrainingListByDate } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
-import { deleteTrainingByIdStart } from '@redux/action/training.action';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import { Colors } from '@css/colors.style';
@@ -155,7 +154,7 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
 		fetchTrainingListByDate: (date: Moment) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.START(date)),
-		deleteTrainingById: (trainingId: string) => dispatch(deleteTrainingByIdStart(trainingId)),
+		deleteTrainingById: (trainingId: string) => dispatch(TRAINING_ACTION_CREATORS.DELETE.START(trainingId)),
 		openTrainingModal: (training?: TrainingModel, date?: MomentInput) => {
 			dispatch(updateTrainingModalAction(training ?? null));
 			dispatch(updateDateInTrainingModalAction(date ?? null));

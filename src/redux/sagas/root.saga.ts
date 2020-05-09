@@ -27,7 +27,7 @@ function* actionWatcher() {
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_DATE.START, getTrainingsByDate);
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_ID.START, getTrainingById);
 	yield takeLatest(TRAINING_ACTIONS.CREATE.START, createTraining);
-	yield takeLatest(TrainingActions.DeleteTrainingByIdStart, deleteTrainingById);
+	yield takeLatest(TRAINING_ACTIONS.DELETE.START, deleteTrainingById);
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);
 
 	yield takeLatest(TRAINING_ACTIONS.EXERCISE.ADD.START, addTrainingExercise);

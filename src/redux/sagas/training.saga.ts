@@ -1,12 +1,7 @@
 import { put, select } from 'redux-saga/effects';
 import { axios } from '@util/axios';
 import { Moment } from 'moment';
-import {
-	deleteTrainingByIdError,
-	deleteTrainingByIdSuccess,
-	updateTrainingError,
-	updateTrainingSuccess,
-} from '@redux/action/training.action';
+import { updateTrainingError, updateTrainingSuccess } from '@redux/action/training.action';
 import { DataAction } from '@model/data-action.model';
 import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
@@ -65,9 +60,9 @@ export function* createTraining(action: DataAction<ICreateTraining>) {
 export function* deleteTrainingById(action: DataAction<string>) {
 	try {
 		yield axios.delete(`/trainings/${action.payload}`);
-		yield put(deleteTrainingByIdSuccess(action.payload));
+		yield put(TRAINING_ACTION_CREATORS.DELETE.SUCCESS(action.payload));
 	} catch (e) {
-		yield put(deleteTrainingByIdError(e));
+		yield put(TRAINING_ACTION_CREATORS.DELETE.ERROR(e));
 	}
 }
 
