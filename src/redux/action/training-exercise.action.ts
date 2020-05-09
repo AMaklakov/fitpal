@@ -7,10 +7,6 @@ import { MomentInput } from 'moment';
  * @deprecated use TRAINING_ACTIONS instead
  */
 export enum TrainingActions {
-	FetchTrainingByIdStart = 'TRAINING/FETCH_BY_ID/START',
-	FetchTrainingByIdSuccess = 'TRAINING/FETCH_BY_ID/SUCCESS',
-	FetchTrainingByIdError = 'TRAINING/FETCH_BY_ID/ERROR',
-
 	CreateTrainingStart = 'TRAINING/CREATE/START',
 	CreateTrainingSuccess = 'TRAINING/CREATE/SUCCESS',
 	CreateTrainingError = 'TRAINING/CREATE/ERROR',
@@ -27,6 +23,7 @@ export enum TrainingActions {
 // TODO replace TrainingActions with TRAINING_ACTIONS
 export const TRAINING_ACTIONS = {
 	FETCH_BY_DATE: progressTypes('TRAINING', 'FETCH_BY_DATE'),
+	FETCH_BY_ID: progressTypes('TRAINING', 'FETCH_BY_ID'),
 	EXERCISE: {
 		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
 		EDIT: progressTypes('TRAINING/EXERCISE', 'EDIT'),
@@ -39,6 +36,7 @@ export type IEditExerciseStart = IAddExerciseStart;
 export type IRemoveExerciseStart = { trainingId: string; exerciseId: string };
 export const TRAINING_ACTION_CREATORS = {
 	FETCH_BY_DATE: progressActions<MomentInput, TrainingModel[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
+	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
 	EXERCISE: {
 		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
 		EDIT: progressActions<IEditExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.EDIT),

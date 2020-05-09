@@ -1,22 +1,6 @@
 import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { TrainingActions } from './training-exercise.action';
 import { DataActionCreator } from '@model/data-action.model';
-import { MomentInput } from 'moment';
-
-export const fetchTrainingByIdStart: DataActionCreator<MomentInput> = id => ({
-	type: TrainingActions.FetchTrainingByIdStart,
-	payload: id,
-});
-export const fetchTrainingByIdSuccess: DataActionCreator<TrainingModel | undefined> = (
-	training: TrainingModel | undefined
-) => ({
-	type: TrainingActions.FetchTrainingByIdSuccess,
-	payload: training,
-});
-export const fetchTrainingByIdError: DataActionCreator<object> = (error: object) => ({
-	type: TrainingActions.FetchTrainingByIdError,
-	payload: error,
-});
 
 export const createTrainingStart: DataActionCreator<ICreateTraining> = training => ({
 	type: TrainingActions.CreateTrainingStart,

@@ -25,7 +25,7 @@ function* actionWatcher() {
 	yield takeLatest(CovidAction.FetchStart, getCovidData);
 
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_DATE.START, getTrainingsByDate);
-	yield takeLatest(TrainingActions.FetchTrainingByIdStart, getTrainingById);
+	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_ID.START, getTrainingById);
 	yield takeLatest(TrainingActions.CreateTrainingStart, createTraining);
 	yield takeLatest(TrainingActions.DeleteTrainingByIdStart, deleteTrainingById);
 	yield takeLatest(TrainingActions.UpdateTrainingStart, updateTrainingById);

@@ -6,7 +6,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Routes } from '@screen/navigator';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
-import { fetchTrainingByIdStart, updateTrainingStart } from '@redux/action/training.action';
+import { updateTrainingStart } from '@redux/action/training.action';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { ExerciseModel } from '@model/exercise.model';
 import { TrainingModel } from '@model/training.model';
@@ -110,7 +110,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	onShowWeightModal: () => dispatch(setWeightModalVisible(true)),
 	onGoBack: () => ownProups.navigation.navigate(Routes.Calendar),
 	onUpdateTraining: (training: TrainingModel) => dispatch(updateTrainingStart(training)),
-	fetchTrainingById: (id: string | undefined) => dispatch(fetchTrainingByIdStart(id)),
+	fetchTrainingById: (id: string | undefined) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_ID.START(id)),
 	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 });
 
