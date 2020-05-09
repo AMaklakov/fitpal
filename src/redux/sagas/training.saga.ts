@@ -1,7 +1,6 @@
 import { put, select } from 'redux-saga/effects';
 import { axios } from '@util/axios';
 import { Moment } from 'moment';
-import { updateTrainingError, updateTrainingSuccess } from '@redux/action/training.action';
 import { DataAction } from '@model/data-action.model';
 import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
@@ -82,9 +81,9 @@ export function* updateTrainingById(action: DataAction<TrainingModel>) {
 			throw `Training from server is not valid`;
 		}
 
-		yield put(updateTrainingSuccess(trainingFromServer));
+		yield put(TRAINING_ACTION_CREATORS.UPDATE.SUCCESS(trainingFromServer));
 	} catch (e) {
-		yield put(updateTrainingError(e));
+		yield put(TRAINING_ACTION_CREATORS.UPDATE.ERROR(e));
 	}
 }
 

@@ -3,21 +3,13 @@ import { progressActions, progressTypes } from '@util/redux.util';
 import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { MomentInput } from 'moment';
 
-/**
- * @deprecated use TRAINING_ACTIONS instead
- */
-export enum TrainingActions {
-	UpdateTrainingStart = 'TRAINING/UPDATE/START',
-	UpdateTrainingSuccess = 'TRAINING/UPDATE/SUCCESS',
-	UpdateTrainingError = 'TRAINING/UPDATE/ERROR',
-}
-
-// TODO replace TrainingActions with TRAINING_ACTIONS
 export const TRAINING_ACTIONS = {
 	FETCH_BY_DATE: progressTypes('TRAINING', 'FETCH_BY_DATE'),
 	FETCH_BY_ID: progressTypes('TRAINING', 'FETCH_BY_ID'),
 	CREATE: progressTypes('TRAINING', 'CREATE'),
 	DELETE: progressTypes('TRAINING', 'DELETE'),
+	UPDATE: progressTypes('TRAINING', 'UPDATE'),
+
 	EXERCISE: {
 		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
 		EDIT: progressTypes('TRAINING/EXERCISE', 'EDIT'),
@@ -33,6 +25,8 @@ export const TRAINING_ACTION_CREATORS = {
 	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
 	CREATE: progressActions<ICreateTraining, TrainingModel | undefined, object>(TRAINING_ACTIONS.CREATE),
 	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.CREATE),
+	UPDATE: progressActions<TrainingModel, TrainingModel, object>(TRAINING_ACTIONS.UPDATE),
+
 	EXERCISE: {
 		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
 		EDIT: progressActions<IEditExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.EDIT),

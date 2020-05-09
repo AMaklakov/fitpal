@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
-import { TRAINING_ACTIONS, TrainingActions } from '@redux/action/training-exercise.action';
+import { TRAINING_ACTIONS } from '@redux/action/training-exercise.action';
 import { IFetchState } from '@model/fetch-state.model';
 import { isPresent } from '@util/type.util';
 import { DataAction } from '@model/data-action.model';
@@ -67,11 +67,11 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		case TRAINING_ACTIONS.DELETE.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.UpdateTrainingStart:
+		case TRAINING_ACTIONS.UPDATE.START:
 			return startLoading(state);
-		case TrainingActions.UpdateTrainingSuccess:
+		case TRAINING_ACTIONS.UPDATE.SUCCESS:
 			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
-		case TrainingActions.UpdateTrainingError:
+		case TRAINING_ACTIONS.UPDATE.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
 		default:
