@@ -14,6 +14,7 @@ import { TrainingModel } from '@model/training.model';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { MomentInput } from 'moment';
 import { setWeightModalVisible } from '@redux/action/user.action';
+import { fetchExercisesStart } from '@redux/action/exercise.action';
 
 interface IState {
 	training?: TrainingModel;
@@ -27,6 +28,7 @@ interface IDispatch {
 	onUpdateTraining: (training: TrainingModel) => void;
 	fetchTrainingById: (id: string | undefined) => void;
 	onGoBack: () => void;
+	onFetchExercises: () => void;
 }
 
 interface IProps extends NavigationPropsModel {}
@@ -42,11 +44,18 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		onUpdateTraining,
 		fetchTrainingById,
 		onGoBack,
+		onFetchExercises,
 	} = props;
 
 	useEffect(() => {
 		fetchTrainingById(navigation?.state?.params?.trainingId);
 	}, [fetchTrainingById, navigation]);
+
+	useEffect(() => {
+		if (!exercises.length) {
+			onFetchExercises();
+		}
+	}, [exercises, onFetchExercises]);
 
 	const addExerciseAction = (trainingExercise?: IBaseTrainingExercise) => {
 		navigation.navigate({
@@ -101,6 +110,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	onGoBack: () => ownProups.navigation.navigate(Routes.Calendar),
 	onUpdateTraining: (training: TrainingModel) => dispatch(updateTrainingStart(training)),
 	fetchTrainingById: (id: string | undefined) => dispatch(fetchTrainingByIdStart(id)),
+	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 });
 
 export const TrainingScreen = connect<IState, IDispatch, IProps, StoreModel>(
