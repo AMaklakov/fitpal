@@ -10,7 +10,7 @@ import { StoreModel } from '@redux/store';
 import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util';
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import { Moment, MomentInput } from 'moment';
+import moment, { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
@@ -47,7 +47,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 		if (training) {
 			newName = `${training.name} - COPY`;
-			newDate = convertStringToMoment(training.date);
+			newDate = moment(training.date);
 		}
 
 		setName(newName);
