@@ -8,6 +8,7 @@ import {
 	editTrainingExercise,
 	getTrainingById,
 	getTrainingsByDate,
+	getTrainingsByDateRange,
 	removeTrainingExercise,
 	updateTrainingById,
 } from '@redux/sagas/training.saga';
@@ -24,6 +25,7 @@ function* actionWatcher() {
 
 	yield takeLatest(COVID_ACTIONS.FETCH.START, getCovidData);
 
+	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_DATE_RANGE.START, getTrainingsByDateRange);
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_DATE.START, getTrainingsByDate);
 	yield takeLatest(TRAINING_ACTIONS.FETCH_BY_ID.START, getTrainingById);
 	yield takeLatest(TRAINING_ACTIONS.CREATE.START, createTraining);

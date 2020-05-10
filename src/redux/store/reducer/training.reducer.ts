@@ -46,6 +46,13 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		case TRAINING_ACTIONS.FETCH_BY_DATE.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
+		case TRAINING_ACTIONS.FETCH_BY_DATE_RANGE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.FETCH_BY_DATE_RANGE.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel[]>).payload);
+		case TRAINING_ACTIONS.FETCH_BY_DATE_RANGE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
+
 		case TRAINING_ACTIONS.FETCH_BY_ID.START:
 			return startLoading(state);
 		case TRAINING_ACTIONS.FETCH_BY_ID.SUCCESS:

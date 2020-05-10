@@ -7,6 +7,7 @@ import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
 import {
 	IAddExerciseStart,
 	IEditExerciseStart,
+	IFetchByDateRange,
 	IRemoveExerciseStart,
 	TRAINING_ACTION_CREATORS,
 } from '@redux/action/training-exercise.action';
@@ -15,10 +16,23 @@ import { getTrainingById as getTrainingByIdSlector } from '@redux/selector/train
 import { StoreModel } from '@redux/store';
 import { navigate } from '@util/navigation.util';
 import { Routes } from '@screen/navigator';
+import { toIsoString } from '@util/date.util';
 
 export function* getTrainingsByDate(action: DataAction<Moment>) {
 	try {
 		const { data } = yield axios.get(`trainings?date=${action.payload.toISOString()}`);
+		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.SUCCESS(data));
+	} catch (e) {
+		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.ERROR(e));
+	}
+}
+
+export function* getTrainingsByDateRange(action: DataAction<IFetchByDateRange>) {
+	try {
+		const startDate = toIsoString(action.payload.startDate);
+		const endDate = toIsoString(action.payload.endDate);
+
+		const { data } = yield axios.get(`trainings`, { params: { startDate, endDate } });
 		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.SUCCESS(data));
 	} catch (e) {
 		yield put(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.ERROR(e));
