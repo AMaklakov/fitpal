@@ -28,3 +28,5 @@ export const convertStringToMoment = (dateStr: MomentInput, format: DateFormatEn
 export const diffInDays = (dateOne: moment.MomentInput, dateTwo: moment.MomentInput): number => {
 	return moment(dateOne).diff(dateTwo, 'days');
 };
+
+export const toIsoString = (date: MomentInput): string => moment(date).toISOString();
