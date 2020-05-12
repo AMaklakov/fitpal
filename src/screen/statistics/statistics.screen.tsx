@@ -1,83 +1,40 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryZoomContainer } from 'victory-native';
-import { TrainingModel } from '@model/training.model';
-import { calculateTrainingTotal } from '@util/training-exercise.util';
-import { DateFormatEnum, formatDate } from '@util/date.util';
-import moment from 'moment';
+import { ICreateTraining, TrainingModel } from '@model/training.model';
+import { IFetchByDateRange, TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import { ExerciseModel } from '@model/exercise.model';
+import { selectLastDays } from '@redux/selector/training.selector';
+import { H1 } from '@components/heading/h1';
+import { useTranslation } from 'react-i18next';
+import { LastDaysStatistics } from '@screen/statistics/components/last-days';
 
-interface IDispatch {}
+interface IDispatch {
+	onFetch: (data: IFetchByDateRange) => void;
+	onCreateTraining: (training: ICreateTraining) => void;
+}
 
 interface IState {
 	trainings: TrainingModel[];
+	exercises: ExerciseModel[];
 }
 
 interface IProps {}
 
-const domain: { x: [Date, Date] } = {
-	x: [
-		moment()
-			.startOf('week')
-			.subtract(6, 'hours')
-			.toDate(),
-		moment()
-			.endOf('week')
-			.add(6, 'hours')
-			.toDate(),
-	],
-};
+type ModeType = 'lastDays' | 'week';
 
 const Statistics = (props: IProps & IState & IDispatch) => {
-	const { trainings } = props;
+	const { trainings, onFetch } = props;
+	const { t } = useTranslation();
 
-	const dataList = useMemo(() => {
-		return trainings.map(t => ({
-			x: moment(t.date).toDate(),
-			y: +calculateTrainingTotal(t).toFixed(),
-			name: t._id,
-			color:
-				'#' +
-				calculateTrainingTotal(t)
-					.toString()
-					.substr(-3, 3),
-		}));
-	}, [trainings]);
+	const [mode] = useState<ModeType>('lastDays');
 
 	return (
 		<View style={styles.wrapper}>
-			<VictoryChart
-				scale={{ x: 'time' }}
-				containerComponent={<VictoryZoomContainer allowZoom={false} zoomDomain={domain} />}
-				domainPadding={40}>
-				<VictoryBar
-					style={{
-						data: {
-							fill: ({ datum }) => datum.color,
-							fillOpacity: 0.7,
-						},
-					}}
-					barWidth={15}
-					cornerRadius={3}
-					events={[
-						{
-							target: 'data',
-							eventHandlers: {
-								onPressIn: () => [
-									{
-										target: 'data',
-										mutation: props => ({ style: { ...props.style, fillOpacity: 1 } }),
-									},
-								],
-							},
-						},
-					]}
-					labels={({ datum }) => datum.y}
-					data={dataList}
-				/>
-				<VictoryAxis tickFormat={date => formatDate(date, DateFormatEnum.DD_MMM)} />
-			</VictoryChart>
+			<H1 text={t('Statistics')} />
+
+			{mode === 'lastDays' && <LastDaysStatistics trainings={trainings} daysCount={10} onFetch={onFetch} />}
 		</View>
 	);
 };
@@ -90,12 +47,16 @@ const styles = StyleSheet.create({
 
 const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state => {
 	return {
-		trainings: state.training.trainings,
+		trainings: selectLastDays(state, 10),
+		exercises: state.exercise.exercises,
 	};
 };
 
-const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = () => {
-	return {};
+const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
+	return {
+		onFetch: data => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE_RANGE.START(data)),
+		onCreateTraining: training => dispatch(TRAINING_ACTION_CREATORS.CREATE.START(training)),
+	};
 };
 
 export const StatisticsScreen = connect(mapStateToProps, mapDispatchToProps)(Statistics);

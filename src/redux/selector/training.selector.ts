@@ -1,7 +1,7 @@
 import { StoreModel } from '@redux/store';
 import { PropType } from '@util/type.util';
 import { TrainingModel } from '@model/training.model';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { formatDate } from '@util/date.util';
 
 export const getFirstTrainingByDate = (
@@ -18,4 +18,17 @@ export const getTrainingListByDate = (store: StoreModel, date: Moment): Training
 
 export const getTrainingById = (store: StoreModel, id: string): TrainingModel | undefined => {
 	return store.training.trainings.find((t: TrainingModel) => t._id === id);
+};
+
+export const selectLast = (store: StoreModel, n: number): TrainingModel[] => {
+	return store.training.trainings.sort((a, b) => +moment(a.date).isAfter(b.date)).slice(0, n);
+};
+
+export const selectLastDays = (store: StoreModel, numberOfDays: number): TrainingModel[] => {
+	const startDate = moment()
+		.subtract(numberOfDays, 'days')
+		.startOf('day');
+	const endDate = moment().endOf('day');
+
+	return store.training.trainings.filter(x => moment(x.date).isBetween(startDate, endDate));
 };
