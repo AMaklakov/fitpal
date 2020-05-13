@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { LastDaysStatistics } from '@screen/statistics/components/last-days';
 import { CompactTrainingView } from '@screen/statistics/components/compact-training-view';
 import { EXERCISE_ACTION_CREATORS } from '@redux/action/exercise.action';
+import { WeeklyChart } from '@screen/statistics/components/weekly-chart';
 
 interface IDispatch {
 	onFetch: (data: IFetchByDateRange) => void;
@@ -26,13 +27,13 @@ interface IState {
 
 interface IProps {}
 
-type ModeType = 'lastDays' | 'week';
+type ModeType = 'lastDays' | 'weekly';
 
 const Statistics = (props: IProps & IState & IDispatch) => {
 	const { trainings, exercises, onFetch, onFetchExercises, isFetchingExercises } = props;
 	const { t } = useTranslation();
 
-	const [mode] = useState<ModeType>('lastDays');
+	const [mode] = useState<ModeType>('weekly');
 	const [currentTraining, setCurrentTraining] = useState<TrainingModel | null>(null);
 
 	useEffect(() => {
@@ -55,6 +56,7 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 					onShowTraining={handleShowTraining}
 				/>
 			)}
+			{mode === 'weekly' && <WeeklyChart trainings={trainings} onFetch={onFetch} onShowTraining={handleShowTraining} />}
 
 			{currentTraining && <CompactTrainingView training={currentTraining} exercises={exercises} />}
 		</View>
