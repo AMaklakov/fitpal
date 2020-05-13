@@ -63,8 +63,7 @@ const isStateLoading = (state: StoreModel): boolean => {
 		exercise,
 		user: { weightData, auth },
 		training,
-		covid,
 	} = state;
 
-	return [exercise, weightData, auth, training, covid].some(s => s.loading);
+	return [exercise, weightData, auth, training].some(s => s.loading);
 };

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { View } from 'react-native';
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory-native';
 import { TrainingModel } from '@model/training.model';
 import { calculateTrainingTotal } from '@util/training-exercise.util';
@@ -9,16 +9,18 @@ import { IFetchByDateRange } from '@redux/action/training-exercise.action';
 import { DateFormatEnum, formatDate } from '@util/date.util';
 
 const DAYS_COUNT = 10;
+const DEFAULT_OPACITY = 0.6;
 
 interface IProps {
 	daysCount: number;
 	trainings: TrainingModel[];
 
 	onFetch: (data: IFetchByDateRange) => void;
+	onShowTraining: (training: TrainingModel) => void;
 }
 
 export const LastDaysStatistics = (props: IProps) => {
-	const { trainings, daysCount = DAYS_COUNT, onFetch } = props;
+	const { trainings, daysCount = DAYS_COUNT, onFetch, onShowTraining } = props;
 
 	useEffect(() => {
 		onFetch({
@@ -50,18 +52,48 @@ export const LastDaysStatistics = (props: IProps) => {
 			x: moment(t.date).toDate(),
 			y: +calculateTrainingTotal(t).toFixed(),
 			name: t._id,
+			training: t,
 			color: Colors.LightGreen,
 		}));
 	}, [trainings]);
 
+	const handleShowTraining = useCallback(({ datum }) => onShowTraining(datum?.training), []);
+
 	return (
-		<View style={styles.wrapper}>
-			<VictoryChart scale={{ x: 'time' }} domainPadding={10}>
+		<View>
+			<VictoryChart
+				scale={{ x: 'time' }}
+				domainPadding={10}
+				events={[
+					{
+						childName: 'Bar',
+						target: 'data',
+						eventHandlers: {
+							onPressIn: (_, data) => [
+								{
+									childName: 'Bar',
+									target: 'data',
+									eventKey: 'all',
+									mutation: props => ({
+										style: { ...props.style, fillOpacity: DEFAULT_OPACITY, fill: props.datum.color },
+									}),
+								},
+								{
+									childName: 'Bar',
+									target: 'data',
+									mutation: props => ({ style: { ...props.style, fillOpacity: 1, fill: Colors.LightBlue } }),
+									callback: () => handleShowTraining(data),
+								},
+							],
+						},
+					},
+				]}>
 				<VictoryBar
+					name="Bar"
 					style={{
 						data: {
 							fill: ({ datum }) => datum.color,
-							fillOpacity: 0.7,
+							fillOpacity: DEFAULT_OPACITY,
 						},
 					}}
 					cornerRadius={{
@@ -69,19 +101,6 @@ export const LastDaysStatistics = (props: IProps) => {
 						bottom: 6,
 					}}
 					barWidth={15}
-					events={[
-						{
-							target: 'data',
-							eventHandlers: {
-								onPressIn: () => [
-									{
-										target: 'data',
-										mutation: props => ({ style: { ...props.style, fillOpacity: 1 } }),
-									},
-								],
-							},
-						},
-					]}
 					labels={({ datum }) => datum.y}
 					data={dataList}
 				/>
@@ -96,9 +115,3 @@ export const LastDaysStatistics = (props: IProps) => {
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	wrapper: {
-		flex: 1,
-	},
-});
