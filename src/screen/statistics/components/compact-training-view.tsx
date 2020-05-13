@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { H2 } from '@components/heading/h2';
 import { ExerciseModel } from '@model/exercise.model';
@@ -16,30 +16,28 @@ export const CompactTrainingView: FC<IProps> = props => {
 	const { t } = useTranslation();
 
 	return (
-		<ScrollView>
-			<View style={styles.currentTrainingWrapper}>
-				<H2 text={training.name} />
+		<View style={styles.currentTrainingWrapper}>
+			<H2 text={training.name} />
 
-				<FlatList
-					data={training.exerciseList}
-					keyExtractor={ex => ex._id}
-					renderItem={data => (
-						<View style={styles.itemWrapper}>
-							<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
-							<Text>
-								{calcTotal(data.item)} {t('Kg')}
-							</Text>
-						</View>
-					)}
-				/>
+			<FlatList
+				data={training.exerciseList}
+				keyExtractor={ex => ex._id}
+				renderItem={data => (
+					<View style={styles.itemWrapper}>
+						<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
+						<Text>
+							{calcTotal(data.item)} {t('Kg')}
+						</Text>
+					</View>
+				)}
+			/>
 
-				<View style={styles.total}>
-					<Text>
-						{t('Total')}: {calculateTrainingTotal(training).toString()}
-					</Text>
-				</View>
+			<View style={styles.total}>
+				<Text>
+					{t('Total')}: {calculateTrainingTotal(training).toString()}
+				</Text>
 			</View>
-		</ScrollView>
+		</View>
 	);
 };
 

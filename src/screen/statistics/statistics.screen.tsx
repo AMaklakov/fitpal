@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { ICreateTraining, TrainingModel } from '@model/training.model';
@@ -13,6 +13,7 @@ import { CompactTrainingView } from '@screen/statistics/components/compact-train
 import { EXERCISE_ACTION_CREATORS } from '@redux/action/exercise.action';
 import { WeeklyChart } from '@screen/statistics/components/weekly-chart';
 import { Moment } from 'moment';
+import { SelectInput } from '@components/select-input';
 
 interface IDispatch {
 	onFetch: (data: IFetchByDateRange) => void;
@@ -36,7 +37,7 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 	const { trainings, exercises, onFetch, onFetchExercises, isFetchingExercises, trainingsByDates } = props;
 	const { t } = useTranslation();
 
-	const [mode] = useState<ModeType>('weekly');
+	const [mode, setMode] = useState<ModeType>('weekly');
 	const [currentTraining, setCurrentTraining] = useState<TrainingModel | null>(null);
 
 	useEffect(() => {
@@ -45,11 +46,34 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 		}
 	}, [exercises, isFetchingExercises, onFetchExercises]);
 
+	const selectItems = useMemo<Array<{ label: string; value: ModeType }>>(
+		() => [
+			{
+				label: t('Weekly'),
+				value: 'weekly',
+			},
+			{
+				label: t('Last 10 days'),
+				value: 'lastDays',
+			},
+		],
+		[t]
+	);
+
 	const handleShowTraining = useCallback((t: TrainingModel | null) => setCurrentTraining(t), []);
 
+	const handleSelectMode = useCallback((value: ModeType | null) => {
+		setMode(value || 'weekly');
+		setCurrentTraining(null);
+	}, []);
+
 	return (
-		<View style={styles.wrapper}>
-			<H1 text={t('Statistics')} />
+		<ScrollView style={styles.wrapper}>
+			<View style={styles.headerWrapper}>
+				<H1 text={t('Statistics')} style={styles.h1} />
+
+				<SelectInput items={selectItems} onChange={handleSelectMode} value={mode} />
+			</View>
 
 			{mode === 'lastDays' && (
 				<LastDaysStatistics
@@ -64,13 +88,22 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 			)}
 
 			{currentTraining && <CompactTrainingView training={currentTraining} exercises={exercises} />}
-		</View>
+		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
 	wrapper: {
 		flex: 1,
+	},
+	h1: {
+		textAlign: 'left',
+	},
+	headerWrapper: {
+		marginTop: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
 	},
 });
 
