@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory-native';
 import { TrainingModel } from '@model/training.model';
 import { calculateTrainingTotal } from '@util/training-exercise.util';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { Colors } from '@css/colors.style';
 import { IFetchByDateRange } from '@redux/action/training-exercise.action';
 import { DateFormatEnum, formatDate } from '@util/date.util';
@@ -16,48 +16,74 @@ const DEFAULT_OPACITY = 0.6;
 const DAYS_COUNT = 7;
 
 interface IProps {
-	trainings: TrainingModel[];
-
+	trainingsByDates: (start: Moment, end: Moment) => TrainingModel[];
 	onFetch: (data: IFetchByDateRange) => void;
-	onShowTraining: (training: TrainingModel) => void;
+	onShowTraining: (training: TrainingModel | null) => void;
 }
 
 export const WeeklyChart = (props: IProps) => {
-	const { trainings, onFetch, onShowTraining } = props;
+	const { trainingsByDates, onFetch, onShowTraining } = props;
+
+	const [currentWeekStart] = useState(moment().startOf('week'));
+	const [currentDate, setCurrentDate] = useState(moment());
+	const [externalMutations, setExtiernalMutations] = useState();
 
 	useEffect(() => {
 		onFetch({
-			startDate: moment().startOf('week'),
-			endDate: moment().endOf('week'),
+			startDate: currentDate.clone().startOf('week'),
+			endDate: currentDate.clone().endOf('week'),
 		});
-	}, [onFetch]);
+	}, [currentDate, onFetch]);
 
-	const tickValues = useMemo(
-		() =>
-			Array(DAYS_COUNT)
-				.fill('')
-				.map((_, i) =>
-					moment()
-						.startOf('week')
-						.add(i, 'days')
-				),
-		[]
-	);
+	const tickValues = useMemo(() => getArrayWeekDates(currentDate), [currentDate]);
 
 	const dataList = useMemo(() => {
-		return trainings.map(t => ({
+		const startDate = currentDate.clone().startOf('week');
+		const endDate = currentDate.clone().endOf('week');
+
+		return trainingsByDates(startDate, endDate).map(t => ({
 			x: moment(t.date).startOf('day'),
 			y: +calculateTrainingTotal(t).toFixed(),
 			name: t._id,
 			training: t,
 			color: Colors.LightGreen,
 		}));
-	}, [trainings]);
+	}, [currentDate, trainingsByDates]);
 
-	const handleShowTraining = useCallback(({ datum }) => onShowTraining(datum?.training), []);
+	const handleShowTraining = useCallback(({ datum }) => onShowTraining(datum?.training), [onShowTraining]);
 
-	const handleLeftPress = useCallback(() => {}, []);
-	const handleRightPress = useCallback(() => {}, []);
+	const handleResetExternalMutations = useCallback(() => setExtiernalMutations(undefined), []);
+	const handleSetExternalMutations = useCallback(() => {
+		setExtiernalMutations([
+			{
+				childName: 'Bar',
+				target: 'data',
+				eventKey: 'all',
+				mutation: props => ({
+					style: { ...props.style, fillOpacity: DEFAULT_OPACITY, fill: props.datum.color },
+				}),
+				callback: handleResetExternalMutations,
+			},
+		]);
+	}, [handleResetExternalMutations]);
+
+	const handleLeftPress = useCallback(() => {
+		setCurrentDate(prev => prev.clone().subtract(1, 'week'));
+		handleSetExternalMutations();
+		onShowTraining(null);
+	}, [handleSetExternalMutations, onShowTraining]);
+
+	const handleRightPress = useCallback(() => {
+		const weekStart = currentDate.clone().startOf('week');
+
+		if (currentWeekStart.isSame(weekStart)) {
+			return;
+		}
+
+		setCurrentDate(prev => prev.clone().add(1, 'week'));
+		handleSetExternalMutations();
+		onShowTraining(null);
+	}, [currentDate, currentWeekStart, handleSetExternalMutations, onShowTraining]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -71,6 +97,7 @@ export const WeeklyChart = (props: IProps) => {
 			<VictoryChart
 				width={CHART_WIDTH}
 				scale={{ x: 'time' }}
+				externalEventMutations={externalMutations}
 				events={[
 					{
 						childName: 'Bar',
@@ -125,9 +152,21 @@ export const WeeklyChart = (props: IProps) => {
 				icon={<ChevronRightIcon />}
 				onPress={handleRightPress}
 				style={[styles.arrowButton, styles.arrowRightBorder]}
+				disabled={currentDate
+					.clone()
+					.startOf('week')
+					.isSame(currentWeekStart)}
 			/>
 		</View>
 	);
+};
+
+const getArrayWeekDates = (day: Moment): Moment[] => {
+	const emptyArray = Array(DAYS_COUNT).fill('');
+	return emptyArray.map((_, i) => {
+		const weekStart = day.clone().startOf('week');
+		return weekStart.add(i, 'days');
+	});
 };
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
