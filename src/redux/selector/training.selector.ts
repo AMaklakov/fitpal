@@ -24,11 +24,15 @@ export const selectLast = (store: StoreModel, n: number): TrainingModel[] => {
 	return store.training.trainings.sort((a, b) => +moment(a.date).isAfter(b.date)).slice(0, n);
 };
 
+export const selectByDates = (store: StoreModel, startDate: Moment, endDate: Moment): TrainingModel[] => {
+	return store.training.trainings.filter(x => moment(x.date).isBetween(startDate, endDate));
+};
+
 export const selectLastDays = (store: StoreModel, numberOfDays: number): TrainingModel[] => {
 	const startDate = moment()
 		.subtract(numberOfDays, 'days')
 		.startOf('day');
 	const endDate = moment().endOf('day');
 
-	return store.training.trainings.filter(x => moment(x.date).isBetween(startDate, endDate));
+	return selectByDates(store, startDate, endDate);
 };
