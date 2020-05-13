@@ -30,14 +30,16 @@ interface IProps extends IMenuWrapperProps {
 }
 
 export const MenuComponent = (props: IProps & IState & IDispatch) => {
-	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed } = props;
+	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed, isCovidLoading } = props;
 	const { t } = useTranslation();
 
 	const goToPage = (page: Routes) => () => navigate(page);
 
 	useEffect(() => {
-		onFetchCovidConfirmed();
-	}, [onFetchCovidConfirmed]);
+		if (isOpen && covidConfirmed === 0 && !isCovidLoading) {
+			onFetchCovidConfirmed();
+		}
+	}, [covidConfirmed, isCovidLoading, isOpen, onFetchCovidConfirmed]);
 
 	return (
 		<MenuWrapper isOpen={isOpen} onCloseMenu={onCloseMenu}>
