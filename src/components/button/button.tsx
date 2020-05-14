@@ -2,40 +2,34 @@ import React, { FC, useMemo } from 'react';
 import { Button as ButtonComponent, ButtonProps } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
-import LinearGradient from 'react-native-linear-gradient';
 
 interface IProps extends ButtonProps {}
 
 export const Button: FC<IProps> = props => {
-	const { type, ...rest } = props;
+	const { type, buttonStyle, titleStyle, ...rest } = props;
 
-	let buttonStyles;
-	let titleStyles;
-
-	const typeOfButton = useMemo(() => {
-
+	const [originalButtonStyle, originalTitleStyle] = useMemo(() => {
 		switch (type) {
 			case 'outline':
-				buttonStyles = styles.outlineStyle;
-				return;
+				return [styles.outlineStyle, styles.defaultTitleStyle];
 			case 'clear':
-				buttonStyles = styles.clearStyle;
-				titleStyles = styles.clearTitleStyle;
-				return;
+				return [styles.clearStyle, styles.clearTitleStyle];
 			case 'solid':
-				buttonStyles = styles.solidStyle;
-				return;
+				return [styles.solidStyle, styles.defaultTitleStyle];
 			default:
-				buttonStyles = styles.defaultStyle;
-				titleStyles = styles.defaultTitleStyle;
-				return;
+				return [styles.defaultStyle, styles.defaultTitleStyle];
 		}
 	}, [type]);
 
-	return <ButtonComponent buttonStyle={buttonStyles} titleStyle={titleStyles} type={type} {...rest} />;
+	return (
+		<ButtonComponent
+			buttonStyle={[originalButtonStyle, buttonStyle]}
+			titleStyle={[originalTitleStyle, titleStyle]}
+			type={type}
+			{...rest}
+		/>
+	);
 };
-
-// TODO write styles here
 
 const styles = StyleSheet.create({
 	defaultTitleStyle: {
@@ -50,21 +44,17 @@ const styles = StyleSheet.create({
 	defaultStyle: {
 		paddingTop: 12,
 		paddingBottom: 12,
-		width: '100%',
 		backgroundColor: '#292929',
 	},
 	outlineStyle: {
-		width: '100%',
-		backgroundColor: 'transparent'
+		backgroundColor: 'transparent',
 	},
 	clearStyle: {
 		paddingTop: 12,
 		paddingBottom: 12,
-		width: '100%',
-		backgroundColor: '#EAEAEA'
+		backgroundColor: '#EAEAEA',
 	},
 	solidStyle: {
-		width: '100%',
-		backgroundColor: '#292929'
-	}
+		backgroundColor: '#292929',
+	},
 });
