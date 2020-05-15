@@ -70,15 +70,14 @@ const WINDOW = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 	wrapper: {
-		paddingBottom: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		alignItems: 'flex-start',
+		alignItems: 'center',
+		paddingVertical: 10,
 	},
 	sequenceNumber: {
 		textAlign: 'center',
 		width: WINDOW.width / 10,
-		paddingTop: 24,
 	},
 	repeats: {
 		width: WINDOW.width / 3,
@@ -87,8 +86,7 @@ const styles = StyleSheet.create({
 		width: WINDOW.width / 3,
 	},
 	actions: {
-		paddingTop: 22,
-		textAlign: 'center',
 		width: WINDOW.width / 8,
+		alignItems: 'center',
 	},
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IMenuWrapperProps, MenuWrapper } from '@components/menu/menu-wrapper';
 import { MenuItem } from '@components/menu/menu-item';
@@ -8,17 +8,36 @@ import { ChevronRightIcon } from '@icons/chevron-right.icon';
 import { SettingsIcon } from '@icons/settings.icon';
 import { Colors } from '@css/colors.style';
 import { toRgba } from '@util/css.util';
+import { DeadIcon } from '@icons/dead.icon';
+import { connect } from 'react-redux';
+import { StoreModel } from '@redux/store';
+import { Dispatch } from 'redux';
+import { COVID_ACTION_CREATORS } from '@redux/action/covid.action';
+import { getCovidConfirmed } from '@redux/selector/covid.selector';
+
+interface IState {
+	covidConfirmed: string | number;
+	isCovidLoading: boolean;
+}
+
+interface IDispatch {
+	onFetchCovidConfirmed: () => void;
+}
 
 interface IProps extends IMenuWrapperProps {
 	navigate: (route: Routes) => void;
 	activeRoute: Routes;
 }
 
-export const Menu = (props: IProps) => {
-	const { isOpen, onCloseMenu, navigate, activeRoute } = props;
+export const MenuComponent = (props: IProps & IState & IDispatch) => {
+	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed } = props;
 	const { t } = useTranslation();
 
 	const goToPage = (page: Routes) => () => navigate(page);
+
+	useEffect(() => {
+		onFetchCovidConfirmed();
+	}, [onFetchCovidConfirmed]);
 
 	return (
 		<MenuWrapper isOpen={isOpen} onCloseMenu={onCloseMenu}>
@@ -42,6 +61,12 @@ export const Menu = (props: IProps) => {
 				{/* BOTTOM NAVIGATION */}
 				<View style={styles.bottomNavigationWrapper}>
 					<MenuItem
+						item={{
+							text: t('Covid |count|', { value: covidConfirmed }),
+							icon: <DeadIcon />,
+						}}
+					/>
+					<MenuItem
 						item={{ text: t('Settings'), icon: <SettingsIcon />, isActive: activeRoute === Routes.Settings }}
 						onPress={goToPage(Routes.Settings)}
 					/>
@@ -63,3 +88,14 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 	},
 });
+
+const mapStateToProps = (state: StoreModel): IState => ({
+	covidConfirmed: getCovidConfirmed(state),
+	isCovidLoading: state.covid.loading,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
+	onFetchCovidConfirmed: () => dispatch(COVID_ACTION_CREATORS.FETCH.START(undefined)),
+});
+
+export const Menu = connect(mapStateToProps, mapDispatchToProps)(MenuComponent);

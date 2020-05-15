@@ -1,145 +1,104 @@
 import { Action, Reducer } from 'redux';
-import { TrainingModel } from '../../../model/training.model';
-import { generateId } from '../../../util/uuid.util';
-import { getCurrentDate } from '../../../util/date.util';
-import { TrainingActions, TrainingExerciseAction } from '../../action/training-exercise.action';
-import { ChangeTrainingAction, CreateTrainingAction, DeleteTrainingAction } from '../../action/training.action';
+import { TrainingModel } from '@model/training.model';
+import { TRAINING_ACTIONS } from '@redux/action/training-exercise.action';
+import { IFetchState } from '@model/fetch-state.model';
+import { isPresent } from '@util/type.util';
+import { DataAction } from '@model/data-action.model';
+import { setError, startLoading } from '@util/state.util';
 
-export type TrainingStateModel = TrainingModel[];
+interface IState extends IFetchState {
+	trainings: TrainingModel[];
+}
 
-const DEFAULT_STATE: TrainingStateModel = [
-	{
-		id: generateId(),
-		name: 'Training today',
-		date: getCurrentDate(),
-		exerciseList: [],
-	},
-	{
-		id: generateId(),
-		name: 'Training today 2',
-		date: getCurrentDate(),
-		exerciseList: [],
-	},
-];
-
-const createTrainingExerciseByTrainingId = (
-	state: TrainingStateModel,
-	action: TrainingExerciseAction
-): TrainingStateModel => {
-	const { exercise, trainingId } = action.payload;
-
-	const newExercise = {
-		...exercise,
-		sequenceNumber: state.length + 1,
-	};
-
-	return state.map(item => {
-		if (item.id === trainingId) {
-			item = {
-				...item,
-				exerciseList: [...item.exerciseList, newExercise],
-			};
-		}
-
-		return item;
-	});
+const DEFAULT_STATE: IState = {
+	trainings: [],
+	loading: false,
+	error: null,
 };
 
-const editTrainingExerciseByTrainingId = (
-	state: TrainingStateModel,
-	action: TrainingExerciseAction
-): TrainingStateModel => {
-	const { exercise, trainingId } = action.payload;
-
-	return state.map(item => {
-		if (item.id === trainingId) {
-			item = {
-				...item,
-				exerciseList: item.exerciseList.map(x => {
-					if (x.id === exercise.id) {
-						x = exercise;
-					}
-
-					return { ...x };
-				}),
-			};
-		}
-
-		return item;
-	});
-};
-
-const deleteTrainingExerciseByTrainingId = (
-	state: TrainingStateModel,
-	action: TrainingExerciseAction
-): TrainingStateModel => {
-	const { exercise, trainingId } = action.payload;
-
-	return state.map(item => {
-		if (item.id === trainingId) {
-			item = {
-				...item,
-				exerciseList: [...item.exerciseList.filter(x => x.id !== exercise.id).map(x => ({ ...x }))],
-			};
-		}
-
-		return item;
-	});
-};
-
-const changeTraining = (
-	state: TrainingStateModel,
-	{ payload: { training } }: ChangeTrainingAction
-): TrainingStateModel => {
-	return state.map(t => {
-		if (t.id === training.id) {
-			return {
-				...training,
-				exerciseList: [...training.exerciseList],
-			};
-		}
-
-		return { ...t };
-	});
-};
-
-const deleteTrainingById = (
-	state: TrainingStateModel,
-	{ payload: { trainingId } }: DeleteTrainingAction
-): TrainingStateModel => {
-	return state.filter(t => t.id !== trainingId);
-};
-
-const createTraining = (
-	state: TrainingStateModel,
-	{ payload: { training } }: CreateTrainingAction
-): TrainingStateModel => {
-	return [...state, { ...training }];
-};
-
-const training: Reducer<TrainingStateModel, Action<TrainingActions>> = (state = DEFAULT_STATE, action) => {
+export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
-		case TrainingActions.CreateTrainingExerciseByTrainingId:
-			return createTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+		case TRAINING_ACTIONS.EXERCISE.ADD.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.EXERCISE.ADD.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.EXERCISE.ADD.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.EditTrainingExerciseByTrainingId:
-			return editTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+		case TRAINING_ACTIONS.EXERCISE.REMOVE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.EXERCISE.REMOVE.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.EXERCISE.REMOVE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.DeleteTrainingExerciseByTrainingId:
-			return deleteTrainingExerciseByTrainingId(state, action as TrainingExerciseAction);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.EXERCISE.EDIT.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.ChangeTraining:
-			return changeTraining(state, action as ChangeTrainingAction);
+		case TRAINING_ACTIONS.FETCH_BY_DATE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.FETCH_BY_DATE.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel[] | undefined>).payload);
+		case TRAINING_ACTIONS.FETCH_BY_DATE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.DeleteTrainingById:
-			return deleteTrainingById(state, action as DeleteTrainingAction);
+		case TRAINING_ACTIONS.FETCH_BY_ID.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.FETCH_BY_ID.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel | undefined>).payload);
+		case TRAINING_ACTIONS.FETCH_BY_ID.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case TrainingActions.CreateTraining:
-			return createTraining(state, action as CreateTrainingAction);
+		case TRAINING_ACTIONS.CREATE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.CREATE.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.CREATE.ERROR:
+			return setError(state, (action as any).payload);
+
+		case TRAINING_ACTIONS.DELETE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.DELETE.SUCCESS:
+			return deleteById(state, (action as DataAction<string>).payload);
+		case TRAINING_ACTIONS.DELETE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
+
+		case TRAINING_ACTIONS.UPDATE.START:
+			return startLoading(state);
+		case TRAINING_ACTIONS.UPDATE.SUCCESS:
+			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+		case TRAINING_ACTIONS.UPDATE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
 		default:
 			return state;
 	}
 };
 
-export default training;
+const deleteById = (state: IState, id: string): IState => ({
+	...state,
+	loading: false,
+	error: null,
+	trainings: state.trainings.filter(t => t._id !== id),
+});
+
+const addTrainingsToState = (state: IState, trainings: TrainingModel[] | TrainingModel | undefined): IState => {
+	if (!isPresent(trainings)) {
+		return { ...state };
+	}
+
+	const concatedList = state.trainings.concat(trainings);
+	const idList = concatedList.map(x => x._id);
+	const newTrainings = concatedList.filter((x, index) => idList.lastIndexOf(x._id) === index);
+
+	return {
+		...state,
+		loading: false,
+		error: null,
+		trainings: newTrainings,
+	};
+};

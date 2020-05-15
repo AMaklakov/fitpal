@@ -1,47 +1,42 @@
-import { WithOptional } from '../../util/type.util';
-import { ExerciseModel, isExerciseValid } from '../../model/exercise.model';
-import { Action } from 'redux';
-import { Alert } from 'react-native';
-import { generateId } from '../../util/uuid.util';
+import { ExerciseModel, ICreateExercise } from '@model/exercise.model';
+import { progressActions, progressTypes } from '@util/redux.util';
 
 export enum ExerciseActions {
-	Create = 'Exercise/Create',
-	Update = 'Exercise/Update',
+	FetchStart = 'EXERCISE/FETCH/START',
+	FetchSuccess = 'EXERCISE/FETCH/SUCCESS',
+	FetchError = 'EXERCISE/FETCH/ERROR',
+
+	CreateStart = 'EXERCISE/CREATE/START',
+	CreateSuccess = 'EXERCISE/CREATE/SUCCESS',
+	CreateError = 'EXERCISE/CREATE/ERROR',
 }
 
-export type ExerciseAction<T extends Object = {}> = Action<ExerciseActions> & { payload: T };
-
-export type CreateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
-export const createExerciseAction = (ex: WithOptional<ExerciseModel, 'id'>): CreateExerciseAction | undefined => {
-	const exercise = { ...ex };
-
-	if (!exercise.id) {
-		exercise.id = generateId();
-	}
-
-	if (!isExerciseValid(exercise)) {
-		Alert.alert('Exercise is not valid!');
-		return;
-	}
-
-	return {
-		type: ExerciseActions.Create,
-		payload: { exercise: exercise as ExerciseModel },
-	};
+export const EXERCISE_ACTIONS = {
+	UPDATE: progressTypes('EXERCISE', 'UPDATE'),
 };
 
-// TODO rewrite to 2 separate functions
-export type UpdateExerciseAction = ExerciseAction<{ exercise: ExerciseModel }>;
-export const updateExerciseAction = (ex: ExerciseModel): UpdateExerciseAction | undefined => {
-	const exercise = { ...ex };
-
-	if (!isExerciseValid(exercise)) {
-		Alert.alert('Exercise is not valid!');
-		return;
-	}
-
-	return {
-		type: ExerciseActions.Update,
-		payload: { exercise: exercise as ExerciseModel },
-	};
+export const EXERCISE_ACTION_CREATORS = {
+	FETCH: progressActions<null, ExerciseModel, object>({
+		START: ExerciseActions.FetchStart,
+		SUCCESS: ExerciseActions.FetchSuccess,
+		ERROR: ExerciseActions.FetchError,
+	}),
+	CREATE: progressActions<ICreateExercise, ExerciseModel, object>({
+		START: ExerciseActions.CreateStart,
+		SUCCESS: ExerciseActions.CreateSuccess,
+		ERROR: ExerciseActions.CreateError,
+	}),
+	UPDATE: progressActions<ExerciseModel, ExerciseModel, object>(EXERCISE_ACTIONS.UPDATE),
 };
+
+export const {
+	START: fetchExercisesStart,
+	SUCCESS: fetchExercisesSuccess,
+	ERROR: fetchExercisesError,
+} = EXERCISE_ACTION_CREATORS.FETCH;
+
+export const {
+	START: createExerciseStart,
+	SUCCESS: createExerciseSuccess,
+	ERROR: createExerciseError,
+} = EXERCISE_ACTION_CREATORS.CREATE;

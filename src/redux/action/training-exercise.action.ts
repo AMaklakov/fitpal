@@ -1,59 +1,35 @@
-import { Action } from 'redux';
-import { PropType } from '@util/type.util';
-import { TrainingModel } from '@model/training.model';
 import { IBaseTrainingExercise } from '@model/training-exercise';
+import { progressActions, progressTypes } from '@util/redux.util';
+import { ICreateTraining, TrainingModel } from '@model/training.model';
+import { MomentInput } from 'moment';
 
-export enum TrainingActions {
-	CreateTrainingExerciseByTrainingId = 'CreateTrainingExerciseByTrainingId',
-	EditTrainingExerciseByTrainingId = 'EditTrainingExerciseByTrainingId',
-	DeleteTrainingExerciseByTrainingId = 'DeleteTrainingExerciseByTrainingId',
+export const TRAINING_ACTIONS = {
+	FETCH_BY_DATE: progressTypes('TRAINING', 'FETCH_BY_DATE'),
+	FETCH_BY_ID: progressTypes('TRAINING', 'FETCH_BY_ID'),
+	CREATE: progressTypes('TRAINING', 'CREATE'),
+	DELETE: progressTypes('TRAINING', 'DELETE'),
+	UPDATE: progressTypes('TRAINING', 'UPDATE'),
 
-	CreateTraining = 'CreateTraining',
-	ChangeTraining = 'ChangeTraining',
-	DeleteTrainingById = 'DeleteTrainingById',
-}
-
-export type TrainingExerciseByTrainingId = {
-	trainingId: PropType<TrainingModel, 'id'>;
-	exercise: IBaseTrainingExercise;
+	EXERCISE: {
+		ADD: progressTypes('TRAINING/EXERCISE', 'ADD'),
+		EDIT: progressTypes('TRAINING/EXERCISE', 'EDIT'),
+		REMOVE: progressTypes('TRAINING/EXERCISE', 'REMOVE'),
+	},
 };
 
-export type TrainingExerciseAction<PayloadType extends Object = TrainingExerciseByTrainingId> = Action<
-	TrainingActions
-> & { payload: PayloadType };
+export type IAddExerciseStart = { trainingId: string; exercise: IBaseTrainingExercise };
+export type IEditExerciseStart = IAddExerciseStart;
+export type IRemoveExerciseStart = { trainingId: string; exerciseId: string };
+export const TRAINING_ACTION_CREATORS = {
+	FETCH_BY_DATE: progressActions<MomentInput, TrainingModel[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
+	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
+	CREATE: progressActions<ICreateTraining, TrainingModel | undefined, object>(TRAINING_ACTIONS.CREATE),
+	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.CREATE),
+	UPDATE: progressActions<TrainingModel, TrainingModel, object>(TRAINING_ACTIONS.UPDATE),
 
-export const createTrainingExerciseByTrainingId = (
-	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: IBaseTrainingExercise
-): TrainingExerciseAction => ({
-	type: TrainingActions.CreateTrainingExerciseByTrainingId,
-
-	payload: {
-		trainingId,
-		exercise,
+	EXERCISE: {
+		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
+		EDIT: progressActions<IEditExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.EDIT),
+		REMOVE: progressActions<IRemoveExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.REMOVE),
 	},
-});
-
-export const editTrainingExerciseByTrainingId = (
-	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: IBaseTrainingExercise
-): TrainingExerciseAction => ({
-	type: TrainingActions.EditTrainingExerciseByTrainingId,
-
-	payload: {
-		trainingId,
-		exercise,
-	},
-});
-
-export const deleteTrainingExerciseByTrainingId = (
-	trainingId: PropType<TrainingModel, 'id'>,
-	exercise: IBaseTrainingExercise
-): TrainingExerciseAction => ({
-	type: TrainingActions.DeleteTrainingExerciseByTrainingId,
-
-	payload: {
-		trainingId,
-		exercise,
-	},
-});
+};

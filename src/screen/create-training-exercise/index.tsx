@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CreateExercise } from './create-exercise';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { PropType } from '@util/type.util';
-import { TrainingModel } from '@model/training.model';
 import { Action, Dispatch } from 'redux';
-import {
-	createTrainingExerciseByTrainingId,
-	editTrainingExerciseByTrainingId,
-} from '@redux/action/training-exercise.action';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { StoreModel } from '@redux/store';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { NavigationPropsModel } from '@model/navigation-props.model';
@@ -15,6 +10,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import { createEmptyTrainingExercise, validateTrainingExercise } from '@util/training-exercise.util';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { BigSource } from 'big.js';
+import { fetchExercisesStart } from '@redux/action/exercise.action';
 
 interface IState {
 	exerciseList: ExerciseModel[];
@@ -22,49 +18,54 @@ interface IState {
 }
 
 interface IDispatch {
-	saveAction: (trainingId: string, exercise: IBaseTrainingExercise) => void;
-	editAction: (trainingId: string, exercise: IBaseTrainingExercise) => void;
+	onSave: (trainingId: string, exercise: IBaseTrainingExercise) => void;
+	onEdit: (trainingId: string, exercise: IBaseTrainingExercise) => void;
+	onFetchExercises: () => void;
 }
 
 interface IProps extends NavigationPropsModel {}
 
 const Screen = (props: IProps & IState & IDispatch) => {
-	const { navigation, saveAction, editAction, exerciseList, userWeight } = props;
+	const { navigation, onSave, onEdit, exerciseList, userWeight, onFetchExercises } = props;
 
-	const id = navigation.getParam('trainingId');
-	const trainingExercise = navigation.getParam('trainingExercise');
-	const [disabledSave, changeDisabledSave] = useState(true);
+	const id: string = useMemo(() => navigation.getParam('trainingId'), [navigation]);
+	const trainingExercise = useMemo(() => navigation.getParam('trainingExercise'), [navigation]);
+	const [disabledSave, setDisabledSave] = useState(true);
+
+	useEffect(() => {
+		if (exerciseList.length === 0) {
+			onFetchExercises();
+		}
+	}, [onFetchExercises, exerciseList]);
 
 	const [exercise, setExercise] = useState<IBaseTrainingExercise>(
 		trainingExercise ?? createEmptyTrainingExercise(userWeight)
 	);
 
-	const handleSetExercise = (e: IBaseTrainingExercise) => {
+	const handleSetExercise = useCallback((e: IBaseTrainingExercise) => {
 		setExercise(e);
-		changeDisabledSave(!e.exerciseId);
-	};
+		setDisabledSave(!e.exerciseId);
+	}, []);
 
-	const onSave = () => {
+	const goBack = useCallback(() => navigation.goBack(), [navigation]);
+
+	const handleSave = useCallback(() => {
 		if (disabledSave) {
 			return;
 		}
 
 		const isValid = validateTrainingExercise(exercise);
 		if (!isValid) {
-			changeDisabledSave(true);
+			setDisabledSave(true);
 			return;
 		}
 
-		trainingExercise ? editAction(id, exercise) : saveAction(id, exercise);
-
-		goBack();
-	};
-
-	const goBack = () => navigation.goBack();
+		trainingExercise ? onEdit(id, exercise) : onSave(id, exercise);
+	}, [disabledSave, onEdit, exercise, id, onSave, trainingExercise]);
 
 	return (
 		<CreateExercise
-			onSave={onSave}
+			onSave={handleSave}
 			exerciseList={exerciseList}
 			onCancel={goBack}
 			trainingExercise={exercise}
@@ -81,13 +82,13 @@ const mapStateToProps: MapStateToProps<IState, IProps, StoreModel> = (store: Sto
 });
 
 const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dispatch<Action>): IDispatch => ({
-	saveAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: IBaseTrainingExercise) => {
-		dispatch(createTrainingExerciseByTrainingId(trainingId, exercise));
+	onSave: (trainingId: string, exercise: IBaseTrainingExercise) => {
+		dispatch(TRAINING_ACTION_CREATORS.EXERCISE.ADD.START({ trainingId, exercise }));
 	},
-
-	editAction: (trainingId: PropType<TrainingModel, 'id'>, exercise: IBaseTrainingExercise) => {
-		dispatch(editTrainingExerciseByTrainingId(trainingId, exercise));
+	onEdit: (trainingId: string, exercise: IBaseTrainingExercise) => {
+		dispatch(TRAINING_ACTION_CREATORS.EXERCISE.EDIT.START({ trainingId, exercise }));
 	},
+	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 });
 
 export const CreateTrainingExerciseScreen = connect<IState, IDispatch, IProps, StoreModel>(

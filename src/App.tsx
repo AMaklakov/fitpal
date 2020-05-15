@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import store from '@redux/store';
-import AppNavigator, { Routes } from '@screen/navigator';
+import { Navigator, Routes } from '@screen/navigator';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { changeLanguage } from '@i18n/index';
 import { CalendarTrainingModal } from '@screen/calendar/calendar-training-modal';
@@ -9,6 +9,8 @@ import { Header } from '@components/header/header';
 import { Menu } from '@components/menu/menu';
 import { NavigationActions, NavigationContainerComponent, NavigationState } from 'react-navigation';
 import { UserWeightModal } from '@components/user-weight/user-weight.modal';
+import { SpinnerModal } from '@components/progress-bars/spinner.modal';
+import { setNavigator } from '@util/navigation.util';
 
 changeLanguage(store.getState().settings.language);
 
@@ -16,14 +18,21 @@ export const App = () => {
 	const [isMenuOpen, changeIsMenuOpen] = useState();
 	const navigatorRef = useRef<NavigationContainerComponent & { state: { nav: NavigationState } }>(null);
 
-	const handleNavigate = (routeName: Routes) => {
-		navigatorRef.current?.dispatch(NavigationActions.navigate({ routeName }));
+	useEffect(() => {
+		setNavigator(navigatorRef.current);
+	}, [navigatorRef]);
 
-		handleCloseMenu();
-	};
+	const handleOpenMenu = useCallback(() => changeIsMenuOpen(true), []);
+	const handleCloseMenu = useCallback(() => changeIsMenuOpen(false), []);
 
-	const handleOpenMenu = () => changeIsMenuOpen(true);
-	const handleCloseMenu = () => changeIsMenuOpen(false);
+	const handleNavigate = useCallback(
+		(routeName: Routes) => {
+			navigatorRef.current?.dispatch(NavigationActions.navigate({ routeName }));
+
+			handleCloseMenu();
+		},
+		[handleCloseMenu]
+	);
 
 	return (
 		<>
@@ -33,10 +42,11 @@ export const App = () => {
 				<Provider store={store}>
 					<Header onOpenMenu={handleOpenMenu} />
 
-					<AppNavigator ref={navigatorRef} />
+					<Navigator ref={navigatorRef} />
 
 					<UserWeightModal />
 					<CalendarTrainingModal />
+					<SpinnerModal />
 
 					<Menu
 						isOpen={isMenuOpen}

@@ -9,7 +9,7 @@ describe('TrainingMinimalView', () => {
 			name: 'Long name of exercise that causes showing ellipsis',
 			exerciseList: [],
 			date: '01.01.1999',
-			id: '1',
+			_id: '1',
 		};
 
 		const tree = renderer.create(<TrainingMinimalView training={training} onTrainingPress={() => {}} />);

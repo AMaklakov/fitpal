@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { MomentInput } from 'moment';
 
 /**
  * @deprecated use `DateFormatEnum.Default` instead
@@ -16,10 +16,10 @@ export const getCurrentDate = (format: string = DateFormatEnum.Default): string 
 
 export const getToday = () => moment();
 
-export const formatDate = (date: moment.MomentInput, format: string = DateFormatEnum.Calendar): string => {
+export const formatDate = (date: MomentInput, format: string = DateFormatEnum.Calendar): string => {
 	return moment(date).format(format);
 };
 
-export const convertStringToMoment = (dateStr: string, format: DateFormatEnum = DateFormatEnum.Default) => {
+export const convertStringToMoment = (dateStr: MomentInput, format: DateFormatEnum = DateFormatEnum.Default) => {
 	return moment(dateStr, format);
 };

@@ -1,55 +1,57 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Modal, Text } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
 import { H1 } from '@components/heading/h1';
 import { StringInputWithValidation } from '@components/inputs/string-input/string-input';
-import { TrainingModel } from '@model/training.model';
+import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { cleanUpAction, toggleCalendarTrainingModalAction } from '@redux/action/calendar-training-modal.action';
 import { StoreModel } from '@redux/store';
-import { convertStringToMoment, DateFormatEnum, formatDate, getToday } from '@util/date.util';
-import { checkAndCreateTraining } from '@redux/action/training.action';
+import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util';
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import moment from 'moment';
+import moment, { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
+import { Button } from '@components/button/button';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 
 interface IStateProps {
 	isOpen: boolean;
 	training: TrainingModel | null;
-	dateFromStore: string | null;
+	dateFromStore: MomentInput | null;
+	createTrainingError: null | string | object;
 }
 
 interface IDispatchToProps {
 	closeModal: () => void;
 	cleanUp: () => void;
-	createTraining: (training: Partial<TrainingModel>) => void;
+	createTraining: (training: ICreateTraining) => void;
 }
 
 const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
-	const { isOpen, training, createTraining, cleanUp, dateFromStore } = props;
+	const { isOpen, training, createTraining, cleanUp, dateFromStore, createTrainingError } = props;
 	const { t } = useTranslation();
 
 	const DEFAULT_TRAINING_NAME = t('New training');
 
-	const [name, changeName] = useState(DEFAULT_TRAINING_NAME);
-	const [hasNameErrors, changeHasNameErrors] = useState(false);
-	const [date, changeDate] = useState<moment.Moment>(getToday());
+	const [name, setName] = useState(DEFAULT_TRAINING_NAME);
+	const [hasNameErrors, setHasNameErrors] = useState(false);
+	const [date, setDate] = useState<Moment>(getToday());
 
 	useEffect(() => {
 		let newName = DEFAULT_TRAINING_NAME;
-		let newDate = dateFromStore ? convertStringToMoment(dateFromStore) : getToday();
+		let newDate = dateFromStore ? convertStringToMoment(dateFromStore, DateFormatEnum.Calendar) : getToday();
 
 		if (training) {
 			newName = `${training.name} - COPY`;
-			newDate = convertStringToMoment(training.date);
+			newDate = moment(training.date);
 		}
 
-		changeName(newName);
-		changeDate(newDate);
+		setName(newName);
+		setDate(newDate);
 	}, [isOpen, dateFromStore, training, DEFAULT_TRAINING_NAME]);
 
 	const isSaveDisabled = useMemo(() => !name || !date || hasNameErrors, [name, date, hasNameErrors]);
@@ -59,14 +61,13 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 			return;
 		}
 
-		const newTraining: Partial<TrainingModel> = {
+		const newTraining: ICreateTraining = {
 			name: name,
-			date: formatDate(date, DateFormatEnum.Default),
+			date: date,
 			exerciseList: cloneTrainingExerciseList(training?.exerciseList),
 		};
 
 		createTraining(newTraining);
-		cleanUp();
 	};
 
 	const handleCancelPress = () => {
@@ -74,8 +75,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	};
 
 	const handleChangeName = (name: string, errors?: IErrors) => {
-		changeName(name);
-		changeHasNameErrors(!!errors);
+		setName(name);
+		setHasNameErrors(!!errors);
 	};
 
 	return (
@@ -93,34 +94,49 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 				{!!training && <Text>{t('Training date')}</Text>}
 				{!!training && (
-					<DatepickerInput
-						date={date}
-						size={24}
-						color={Colors.LightBlue}
-						onDateChange={changeDate}
-						minDate={getToday()}
-					/>
+					<DatepickerInput date={date} size={24} color={Colors.LightBlue} onDateChange={setDate} minDate={getToday()} />
 				)}
 
-				<Button title={t('Cancel')} onPress={handleCancelPress} />
-				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
+				{createTrainingError && (
+					<View>
+						<Text style={styles.errorText}>{createTrainingError.toString()}</Text>
+					</View>
+				)}
+
+				<View style={styles.buttonsWrapper}>
+					<Button type="clear" title={t('Cancel')} onPress={handleCancelPress} />
+					<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
+				</View>
 			</SafeAreaView>
 		</Modal>
 	);
 };
+
+const styles = StyleSheet.create({
+	errorText: {
+		color: Colors.LightRed,
+		fontSize: 12,
+	},
+	buttonsWrapper: {
+		paddingTop: 20,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
+});
 
 const mapStateToProps = (state: StoreModel): IStateProps => {
 	return {
 		isOpen: state.calendarTrainingModal.isOpen,
 		training: state.calendarTrainingModal.training,
 		dateFromStore: state.calendarTrainingModal.date,
+		createTrainingError: state.training.error,
 	};
 };
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatchToProps, {}> = dispatch => {
 	return {
 		closeModal: () => dispatch(toggleCalendarTrainingModalAction(false)),
-		createTraining: (training: Partial<TrainingModel>) => checkAndCreateTraining(dispatch, training),
+		createTraining: (training: ICreateTraining) => dispatch(TRAINING_ACTION_CREATORS.CREATE.START(training)),
 		cleanUp: () => dispatch(cleanUpAction()),
 	};
 };

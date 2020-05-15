@@ -21,11 +21,13 @@ export enum ExerciseTypes {
 }
 
 export interface ExerciseModel {
-	id: string;
+	_id: string;
 
 	type: ExerciseTypes;
 	name: string;
 }
+
+export type ICreateExercise = Omit<ExerciseModel, '_id'>;
 
 const isTypeValid = (type?: ExerciseTypes): boolean => {
 	if (!isPresent(type)) {
@@ -48,9 +50,9 @@ export const isExerciseValid = (exercise?: Partial<ExerciseModel>): boolean => {
 		return false;
 	}
 
-	const { id, name, type } = exercise;
+	const { name, type } = exercise;
 
-	if (!id || !name) {
+	if (!name) {
 		return false;
 	}
 

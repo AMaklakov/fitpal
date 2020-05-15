@@ -1,5 +1,5 @@
 import { TrainingModel } from '@model/training.model';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { H1 } from '@components/heading/h1';
 import { SaveIcon } from '@icons/save.icon';
@@ -22,6 +22,10 @@ export const TrainingHeading: FC<IProps> = props => {
 
 	const [name, changeName] = useState(training.name);
 	const [isHeadingValid, changeIsHeadingValid] = useState(true);
+
+	useEffect(() => {
+		changeName(training.name);
+	}, [training.name]);
 
 	const [isEdit, changeIsEdit] = useState(false);
 	const handleEditButtonPress = () => changeIsEdit(true);

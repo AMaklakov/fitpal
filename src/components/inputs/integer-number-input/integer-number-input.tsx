@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { removeLeadingZeros } from '@util/string.util';
-import { placeholderTextColor } from '@css/colors.style';
+import { Colors, placeholderTextColor } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
 
 interface IProps {
@@ -35,14 +35,12 @@ export const IntegerNumberInputWithValidation = withValidation(IntegerNumberInpu
 
 const styles = StyleSheet.create({
 	input: {
-		margin: 10,
-		fontSize: 18,
-		color: 'black',
+		padding: 10,
+		fontSize: 16,
+		color: Colors.Black,
+		borderColor: Colors.Black,
 		borderWidth: 1,
-		borderColor: 'black',
-		paddingHorizontal: 15,
 		borderRadius: 15,
-		height: 50,
 	},
 	errorMessageShow: {
 		color: 'red',

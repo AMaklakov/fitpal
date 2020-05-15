@@ -1,93 +1,54 @@
-import { Action, Reducer } from 'redux';
-import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
-import { generateId } from '@util/uuid.util';
-import { CreateExerciseAction, ExerciseActions, UpdateExerciseAction } from '@redux/action/exercise.action';
+import { Reducer } from 'redux';
+import { ExerciseModel } from '@model/exercise.model';
+import { EXERCISE_ACTIONS, ExerciseActions } from '@redux/action/exercise.action';
+import { IFetchState } from '@model/fetch-state.model';
+import { DataAction } from '@model/data-action.model';
+import { setError, startLoading } from '@util/state.util';
 
-const DEFAULT_EXERCISE_LIST: Array<{ name: string; type?: ExerciseTypes }> = [
-	{ name: 'Приседания' },
-	{ name: 'Выпады с гантелями' },
-	{ name: 'Выпады в Смите' },
-	{ name: 'Болгарские приседания' },
-	{ name: 'Румынская становая тяга' },
-	{ name: 'Классическая становая тяга' },
-	{ name: 'Тяга «сумо»' },
-	{ name: 'Сквозная тяга' },
-	{ name: 'Разведения ног в тренажере' },
-	{ name: 'Сведения ног в тренажере' },
-	{ name: 'Ягодичный мост' },
-	{ name: 'Гиперэкстензия' },
-	{ name: 'Обратная гиперэкстензия' },
-	{ name: 'Вертикальная тяга верхнего блока' },
-	{ name: 'Горизонтальная тяга верхнего блока' },
-	{ name: 'Тяга верхнего блока в наклоне' },
-	{ name: 'Жим лежа' },
-	{ name: 'Бабочка' },
-	{ name: 'Подъем гантелей на бицепс' },
-	{ name: 'Подъем штанги на бицепс' },
-	{ name: 'Сгибания ног в тренажере лежа' },
-	{ name: 'Сгибания ног в тренажере сидя' },
-	{ name: 'Разгибание ног в тренажере сидя' },
-	{ name: 'Французский жим' },
-	{ name: 'Подтягивания с суппортом', type: ExerciseTypes.WithNegativeWeight },
-	{ name: 'Подтягивания', type: ExerciseTypes.WithAdditionalWeight },
-	{ name: 'Жим платформы ногами лежа' },
-	{ name: 'Тяга штанги к поясу в наклоне' },
-	{ name: 'Махи гантелями в стороны' },
-	{ name: 'Жим гантелей над головой' },
-	{ name: 'Жим гантелей на наклонной скамье' },
-	{ name: 'Отжимания на брусьях', type: ExerciseTypes.WithAdditionalWeight },
-	{ name: 'Сведения в кроссоверы снизу вверх' },
-	{ name: 'Подъем гантелей перед собой' },
-	{ name: 'Молот в блоке на веревке' },
-	{ name: 'Фронтальные приседания' },
-	{ name: 'Тяга блока к лицу' },
-	{ name: 'Разведения гантелей в стороны' },
-	{ name: 'Тяга верхнего блока узким хватом' },
-	{ name: 'Пулловер' },
-	{ name: 'Разведения гантелей сидя в наклоне' },
-	{ name: 'Обратные отжимания', type: ExerciseTypes.WithAdditionalWeight },
-	{ name: 'Разгибания из-за головы' },
-	{ name: 'Разгибания стоя в блоке' },
-	{ name: 'Ягодичный мост в Смите' },
-	{ name: 'Обратная гиперэкстензия' },
-	{ name: 'Отведение бедра' },
-	{ name: 'Приподнятые приседания' },
-	{ name: 'Становая тяга на прямых ногах' },
-	{ name: 'Подъем на носки в Смите' },
-	{ name: 'Подъем на носки в тренажере' },
-	{ name: 'Подъем на носки стоя с гантелей' },
-];
+interface IExerciseState {
+	exercises: ExerciseModel[];
+}
 
-export type ExerciseStateModel = ExerciseModel[];
+type IState = IExerciseState & IFetchState;
 
-const DEFAULT_STATE: ExerciseStateModel = DEFAULT_EXERCISE_LIST.map(({ name, type }) => ({
-	id: generateId(),
-	type: type ?? ExerciseTypes.Default,
-	name,
-}));
+const DEFAULT_STATE: IState = {
+	loading: false,
+	error: null,
 
-const createExercise = (state: ExerciseStateModel, { payload: { exercise } }: CreateExerciseAction) => {
-	return [...state, exercise];
+	exercises: [],
 };
 
-const updateExercise = (state: ExerciseStateModel, { payload: { exercise } }: UpdateExerciseAction) => {
-	return [...state.filter(ex => ex.id !== exercise.id).concat([exercise])];
-};
-
-const exercise: Reducer<ExerciseStateModel> = (
-	state: ExerciseStateModel = DEFAULT_STATE,
-	action: Action<ExerciseActions>
-) => {
+export const exercise: Reducer<IState, DataAction> = (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
-		case ExerciseActions.Create:
-			return createExercise(state, action as CreateExerciseAction);
+		case ExerciseActions.CreateStart:
+			return startLoading(state);
+		case ExerciseActions.CreateSuccess:
+			return { ...state, loading: false, error: null, exercises: [...state.exercises, action.payload] };
+		case ExerciseActions.CreateError:
+			return setError(state, (action as DataAction<object>).payload);
 
-		case ExerciseActions.Update:
-			return updateExercise(state, action as UpdateExerciseAction);
+		case ExerciseActions.FetchStart:
+			return startLoading(state);
+		case ExerciseActions.FetchSuccess:
+			return { ...state, loading: false, error: null, exercises: action.payload };
+		case ExerciseActions.FetchError:
+			return setError(state, (action as DataAction<object>).payload);
+
+		case EXERCISE_ACTIONS.UPDATE.START:
+			return startLoading(state);
+		case EXERCISE_ACTIONS.UPDATE.SUCCESS:
+			return updateExercise(state, (action as DataAction<ExerciseModel>).payload);
+		case EXERCISE_ACTIONS.UPDATE.ERROR:
+			return setError(state, (action as DataAction<object>).payload);
 
 		default:
 			return state;
 	}
 };
 
-export default exercise;
+const updateExercise = (state: IState, ex: ExerciseModel) => ({
+	...state,
+	error: null,
+	loading: false,
+	exercises: state.exercises.filter(e => e._id !== ex._id).concat(ex),
+});
