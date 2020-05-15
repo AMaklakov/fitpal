@@ -1,15 +1,16 @@
 import React, { useCallback } from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { ExerciseModel } from '../../model/exercise.model';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationPropsModel } from '../../model/navigation-props.model';
-import { StoreModel } from '../../redux/store';
-import { getExerciseById } from '../../redux/selector/exercise.selector';
-import { H1 } from '../../components/heading/h1';
-import { H2 } from '../../components/heading/h2';
+import { ExerciseModel } from '@model/exercise.model';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationPropsModel } from '@model/navigation-props.model';
+import { StoreModel } from '@redux/store';
+import { getExerciseById } from '@redux/selector/exercise.selector';
+import { H1 } from '@components/heading/h1';
+import { H2 } from '@components/heading/h2';
 import { Routes } from '../navigator';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
+import { Button } from '@components/button/button';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -29,11 +30,10 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 
 	const handleEdit = useCallback(() => {
 		navigation.navigate(Routes.ExerciseCreate, {
-			exerciseId: exercise.id,
+			exerciseId: exercise._id,
 		});
 	}, [exercise, navigation]);
 
-	// @ts-ignore
 	return (
 		<View style={styles.container}>
 			<H1 text={exercise.name} />
@@ -48,8 +48,8 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button title={t('Edit')} onPress={handleEdit} />
-				<Button color={Colors.LightRed} title={t('Delete')} onPress={handleEdit} />
+				<Button type="clear" title={t('Edit')} onPress={handleEdit} />
+				<Button type="clear" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />
 			</View>
 		</View>
 	);

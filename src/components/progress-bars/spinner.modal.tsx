@@ -2,8 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import { StoreModel } from '@redux/store';
-import Spinner from 'react-native-spinkit';
-import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { useDebounce } from '@util/hooks.util';
 
@@ -27,7 +26,7 @@ const SpinnerComponent: FC<IProps & IState> = props => {
 		<Modal isVisible={showModal} backdropOpacity={0.4} animationIn="flash" animationOut="flash">
 			<View style={styles.modal}>
 				<View style={styles.spinnerWrapper}>
-					<Spinner isVisible={true} size={50} type="Circle" />
+					<ActivityIndicator size="large" style={styles.spinner} />
 				</View>
 			</View>
 		</Modal>
@@ -43,21 +42,29 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.White,
 		width: 80,
 		height: 80,
-		borderWidth: 1,
-		borderColor: 'transparent',
 		borderRadius: 10,
-		paddingLeft: 7,
-		paddingTop: 7,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	spinner: {
-		backgroundColor: 'red',
+		paddingLeft: 4,
+		paddingTop: 4,
 	},
 });
 
 const mapStateToProps = (state: StoreModel): IState => ({
-	isLoading: Object.keys(state)
-		.map(key => state[key] as { [k: string]: any })
-		.some(s => !!s.loading),
+	isLoading: isStateLoading(state),
 });
 
 export const SpinnerModal = connect(mapStateToProps)(SpinnerComponent);
+
+const isStateLoading = (state: StoreModel): boolean => {
+	const {
+		exercise,
+		user: { weightData, auth },
+		training,
+		covid,
+	} = state;
+
+	return [exercise, weightData, auth, training, covid].some(s => s.loading);
+};

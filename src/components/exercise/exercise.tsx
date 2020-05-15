@@ -22,7 +22,7 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 	return (
 		<TouchableOpacity activeOpacity={1} onLongPress={onLongPressAction} onPress={onPressAction} style={style.wrapper}>
 			<View style={style.innerWrapper}>
-				<H2 text={exerciseList?.find(e => e.id === exerciseId)?.name || ''} />
+				<H2 text={exerciseList?.find(e => e._id === exerciseId)?.name || ''} />
 				<View style={style.table}>
 					<View style={style.tableHeading}>
 						<HashtagIcon color={Colors.White} />
@@ -32,7 +32,7 @@ const TrainingExercise = (props: TrainingExerciseProps) => {
 
 					{seriesList.map((s: ISeries, index: number) => (
 						<View key={index} style={style.tableBody}>
-							<Text>{s.sequenceNumber}</Text>
+							<Text>{index + 1}</Text>
 							<Text>{s.repeats}</Text>
 							<Text>
 								{s.weight} {t('Kg')}

@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
-import { formatDate, getToday } from '@util/date.util';
-import moment, { Moment } from 'moment';
-import { PropType } from '@util/type.util';
+import { getToday } from '@util/date.util';
+import moment, { Moment, MomentInput } from 'moment';
 import { TrainingModel } from '@model/training.model';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import {
@@ -15,17 +14,18 @@ import { TrainingListMinimalView } from '@components/training-minimal-view/train
 import { CalendarStrip } from '@components/calendar/calendar-strip';
 import { getTrainingListByDate } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
-import { deleteTrainingByIdAction, fetchTrainingsByDateStart } from '@redux/action/training.action';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import { Colors } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
+import { Button } from '@components/button/button';
+import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
-	deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => void;
-	openTrainingModal: (training?: TrainingModel, date?: string) => void;
+	deleteTrainingById: (trainingId: string) => void;
+	openTrainingModal: (training?: TrainingModel, date?: MomentInput) => void;
 }
 
 interface IState {
@@ -44,51 +44,43 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	} = props;
 	const { t } = useTranslation();
 
-	const [selectedDate, changeSelectedDate] = useState(getToday());
-	const [trainingToDelete, changeTrainingToDelete] = useState<TrainingModel | undefined>();
+	const [selectedDate, setSelectedDate] = useState(getToday());
+	const [trainingToDelete, setTrainingToDelete] = useState<TrainingModel | undefined>();
 	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
 
 	useEffect(() => {
 		fetchTrainingListByDate(selectedDate);
 	}, [fetchTrainingListByDate, selectedDate]);
 
-	const handleOpenDeleteTrainingConfirm = (training: TrainingModel) => {
-		changeTrainingToDelete(training);
-	};
+	const handleOpenDeleteTrainingConfirm = useCallback((training: TrainingModel) => setTrainingToDelete(training), []);
 
-	const handleCloseDeleteTrainingConfirm = () => {
-		changeTrainingToDelete(undefined);
-	};
+	const handleCloseDeleteTrainingConfirm = useCallback(() => setTrainingToDelete(undefined), []);
 
-	const deleteTraining = () => {
+	const handleChangeSelectedDate = useCallback((date: moment.Moment) => setSelectedDate(date), []);
+
+	const handleOnTrainingTouch = useCallback(
+		(training: TrainingModel) => navigation.navigate(Routes.Training, { trainingId: training?._id }),
+		[navigation]
+	);
+
+	const handleCopyTraining = useCallback((training: TrainingModel) => openTrainingModal(training), [openTrainingModal]);
+
+	const handleDeleteTraining = useCallback((training: TrainingModel) => deleteTrainingById(training._id), [
+		deleteTrainingById,
+	]);
+
+	const deleteTraining = useCallback(() => {
 		if (trainingToDelete) {
 			handleDeleteTraining(trainingToDelete);
 		}
 
 		handleCloseDeleteTrainingConfirm();
-	};
+	}, [handleCloseDeleteTrainingConfirm, handleDeleteTraining, trainingToDelete]);
 
-	const handleChangeSelectedDate = (date: moment.Moment) => {
-		changeSelectedDate(date);
-	};
-
-	const handleOnTrainingTouch = (training: TrainingModel) => {
-		navigation.navigate(Routes.Training, {
-			trainingId: training?.id,
-		});
-	};
-
-	const handleCopyTraining = (training: TrainingModel) => {
-		openTrainingModal(training);
-	};
-
-	const handleDeleteTraining = (training: TrainingModel) => {
-		deleteTrainingById(training.id);
-	};
-
-	const handleCreateTraining = () => {
-		openTrainingModal(undefined, formatDate(selectedDate));
-	};
+	const handleCreateTraining = useCallback(() => openTrainingModal(undefined, selectedDate), [
+		openTrainingModal,
+		selectedDate,
+	]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -112,7 +104,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 						/>
 
 						<View style={styles.buttonWrapper}>
-							<Button color={Colors.LightRed} title={t('Delete')} onPress={deleteTraining} />
+							<Button type="clear" title={t('Delete')} onPress={deleteTraining} titleStyle={styles.redText} />
 							<Button title={t('Hide modal')} onPress={handleCloseDeleteTrainingConfirm} />
 						</View>
 					</View>
@@ -120,7 +112,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button title={t('Add training +')} onPress={handleCreateTraining} />
+				<Button type="outline" title={t('Add training +')} onPress={handleCreateTraining} />
 			</View>
 		</View>
 	);
@@ -148,6 +140,9 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start',
 		height: 50,
 	},
+	redText: {
+		color: Colors.LightRed,
+	},
 });
 
 const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state => {
@@ -158,9 +153,9 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
-		fetchTrainingListByDate: (date: Moment) => dispatch(fetchTrainingsByDateStart(date)),
-		deleteTrainingById: (trainingId: PropType<TrainingModel, 'id'>) => dispatch(deleteTrainingByIdAction(trainingId)),
-		openTrainingModal: (training?: TrainingModel, date?: string) => {
+		fetchTrainingListByDate: (date: Moment) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.START(date)),
+		deleteTrainingById: (trainingId: string) => dispatch(TRAINING_ACTION_CREATORS.DELETE.START(trainingId)),
+		openTrainingModal: (training?: TrainingModel, date?: MomentInput) => {
 			dispatch(updateTrainingModalAction(training ?? null));
 			dispatch(updateDateInTrainingModalAction(date ?? null));
 			dispatch(toggleCalendarTrainingModalAction(true));

@@ -1,12 +1,19 @@
-import React, { useMemo } from 'react';
-import { Button, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ExerciseListProps } from './types';
-import { mapExerciseListToSectionList } from './util';
-import { ExerciseModel } from '../../model/exercise.model';
+import React, { FC, useMemo } from 'react';
+import { SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { mapExerciseListToSectionList } from '@screen/exercise-list/util';
+import { ExerciseModel } from '@model/exercise.model';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
+import { Button } from '@components/button/button';
 
-const ExerciseList = (props: ExerciseListProps) => {
+interface IProps {
+	exerciseList: ExerciseModel[];
+
+	goToCreateExercise: () => void;
+	onExercisePress: (exercise: ExerciseModel) => void;
+}
+
+const ExerciseList: FC<IProps> = props => {
 	const { exerciseList = [], goToCreateExercise, onExercisePress } = props;
 	const sections = useMemo(() => mapExerciseListToSectionList(exerciseList), [exerciseList]);
 
@@ -19,12 +26,12 @@ const ExerciseList = (props: ExerciseListProps) => {
 					sections={sections}
 					renderItem={({ item }) => <Item data={item} onPress={onExercisePress} />}
 					renderSectionHeader={({ section }) => <Text style={styles.title}>{section.title}</Text>}
-					keyExtractor={item => item.id}
+					keyExtractor={item => item._id}
 				/>
 			</View>
 
 			<View style={styles.buttons}>
-				<Button title={t('Add exercise +')} onPress={goToCreateExercise} />
+				<Button type="clear" title={t('Add exercise +')} onPress={goToCreateExercise} />
 			</View>
 		</View>
 	);

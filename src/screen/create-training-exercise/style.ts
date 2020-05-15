@@ -26,4 +26,5 @@ export const commonStyles = StyleSheet.create({
 	disabledButton: {
 		color: Colors.Grey,
 	},
+	cancelButtonText: { color: Colors.LightRed },
 });

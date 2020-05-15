@@ -1,6 +1,5 @@
 import { Big, BigSource } from 'big.js';
 import { cloneSeriesList } from './series.util';
-import { generateId } from './uuid.util';
 import {
 	IAdditionalWeightTrainingExercise,
 	IBaseTrainingExercise,
@@ -30,7 +29,6 @@ export const cloneTrainingExerciseList = (list?: IBaseTrainingExercise[]): IBase
 };
 
 export const createEmptyTrainingExercise = (userWeight?: BigSource): Partial<IBaseTrainingExercise> => ({
-	id: generateId(),
 	seriesList: [],
 	userWeight,
 });
