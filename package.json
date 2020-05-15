@@ -1,6 +1,6 @@
 {
 	"name": "fitless",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"private": true,
 	"scripts": {
 		"pod-install": "cd ios && pod install && cd ..",
