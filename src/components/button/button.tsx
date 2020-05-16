@@ -35,10 +35,12 @@ const styles = StyleSheet.create({
 	defaultTitleStyle: {
 		fontSize: 16,
 		color: Colors.White,
+		fontFamily: 'kerson-bold',
 	},
 	clearTitleStyle: {
 		fontSize: 16,
 		color: Colors.Darkgray,
+		fontFamily: 'kerson-bold',
 	},
 
 	defaultStyle: {
