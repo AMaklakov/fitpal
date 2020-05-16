@@ -104,7 +104,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 				)}
 
 				<View style={styles.buttonsWrapper}>
-					<Button type="clear" title={t('Cancel')} onPress={handleCancelPress} />
+					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />
 					<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
 				</View>
 			</SafeAreaView>
