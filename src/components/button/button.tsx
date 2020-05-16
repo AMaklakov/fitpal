@@ -38,23 +38,25 @@ const styles = StyleSheet.create({
 	},
 	clearTitleStyle: {
 		fontSize: 16,
-		color: '#62676A',
+		color: Colors.Darkgray,
 	},
 
 	defaultStyle: {
-		paddingTop: 12,
-		paddingBottom: 12,
-		backgroundColor: '#292929',
+		paddingVertical: 16,
+		paddingHorizontal: 20,
+		backgroundColor: Colors.Primary,
 	},
 	outlineStyle: {
-		backgroundColor: 'transparent',
+		paddingVertical: 16,
+		paddingHorizontal: 20,
+		backgroundColor: Colors.Purple,
 	},
 	clearStyle: {
-		paddingTop: 12,
-		paddingBottom: 12,
-		backgroundColor: '#EAEAEA',
+		paddingVertical: 16,
+		paddingHorizontal: 20,
+		backgroundColor: Colors.Lightgray,
 	},
 	solidStyle: {
-		backgroundColor: '#292929',
+		backgroundColor: Colors.Primary,
 	},
 });

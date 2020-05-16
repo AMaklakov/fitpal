@@ -18,5 +18,10 @@ export enum Colors {
 	White = '#ffffff',
 	Grey = '#bbbbbb',
 
+	Primary = '#292929',
+	Purple = '#b02c74',
+	Lightgray = '#EAEAEA',
+	Darkgray = '#62676A',
+
 	LightGreen = '#5eaca7',
 }
