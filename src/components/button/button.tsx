@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { Button as ButtonComponent, ButtonProps } from 'react-native-elements';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Fonts } from '@css/fonts';
 
@@ -25,9 +25,9 @@ export const Button: FC<IProps> = props => {
 
 		switch (type) {
 			case 'outline':
-				return [styles.outline, styles.outlineTitle];
+				return [StyleSheet.flatten([styles.default, styles.outline]), styles.outlineTitle];
 			case 'clear':
-				return [styles.clear, styles.clearTitle];
+				return [StyleSheet.flatten([styles.clear, IS_IOS && styles.iosClear]), styles.clearTitle];
 			default:
 				return [styles.default, styles.defaultTitle];
 		}
@@ -43,6 +43,8 @@ export const Button: FC<IProps> = props => {
 	);
 };
 
+const IS_IOS = Platform.OS === 'ios';
+
 const styles = StyleSheet.create({
 	defaultTitle: {
 		fontSize: 16,
@@ -57,10 +59,12 @@ const styles = StyleSheet.create({
 	outlineTitle: {
 		fontSize: 16,
 		color: Colors.Black,
+		fontFamily: Fonts.KelsonBold,
 	},
 
 	default: {
-		paddingVertical: 16,
+		paddingTop: IS_IOS ? 19 : 16,
+		paddingBottom: IS_IOS ? 13 : 16,
 		paddingHorizontal: 20,
 	},
 
@@ -69,7 +73,12 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		borderColor: Colors.Darkgray,
 	},
+
 	clear: {},
+	iosClear: {
+		paddingTop: 11,
+		paddingBottom: 5,
+	},
 
 	solidPrimary: {
 		backgroundColor: Colors.Primary,
