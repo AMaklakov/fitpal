@@ -17,6 +17,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* fitlessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fitlessTests.m */; };
 		9653692908E9506FDBC8849C /* libPods-fitless-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F24D418D8682ACF4EEFCA1F4 /* libPods-fitless-tvOS.a */; };
+		998485B92471C32400CF7B00 /* KelsonSans-BoldRU.otf in Resources */ = {isa = PBXBuildFile; fileRef = 998485B72471C30B00CF7B00 /* KelsonSans-BoldRU.otf */; };
+		998485BA2471C32400CF7B00 /* KelsonSans-RegularRU.otf in Resources */ = {isa = PBXBuildFile; fileRef = 998485B82471C30B00CF7B00 /* KelsonSans-RegularRU.otf */; };
 		D05F23EE592D758C01089687 /* libPods-fitless.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEAE0F82710AECED59ABE4B0 /* libPods-fitless.a */; };
 		D8AA5FCD71C4C4BD0F0F657F /* libPods-fitlessTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C6639E4C833DE76DB1531E /* libPods-fitlessTests.a */; };
 		ED36606C09F22F7644930272 /* libPods-fitless-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C172DF861F96D914C47BC /* libPods-fitless-tvOSTests.a */; };
@@ -60,6 +62,8 @@
 		5E8C172DF861F96D914C47BC /* libPods-fitless-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fitless-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C0480B5117E4CCBD9F28704 /* Pods-fitless.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitless.debug.xcconfig"; path = "Target Support Files/Pods-fitless/Pods-fitless.debug.xcconfig"; sourceTree = "<group>"; };
 		70317D85EF0E658357EDFD94 /* Pods-fitless-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitless-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-fitless-tvOSTests/Pods-fitless-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		998485B72471C30B00CF7B00 /* KelsonSans-BoldRU.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KelsonSans-BoldRU.otf"; path = "../assets/fonts/KelsonSans-BoldRU.otf"; sourceTree = "<group>"; };
+		998485B82471C30B00CF7B00 /* KelsonSans-RegularRU.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KelsonSans-RegularRU.otf"; path = "../assets/fonts/KelsonSans-RegularRU.otf"; sourceTree = "<group>"; };
 		AEAE0F82710AECED59ABE4B0 /* libPods-fitless.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fitless.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C6639E4C833DE76DB1531E /* libPods-fitlessTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fitlessTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3CB8264E354C60535F277B /* Pods-fitless-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitless-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-fitless-tvOSTests/Pods-fitless-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 		6F8732EC761E46F883139BC0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				998485B72471C30B00CF7B00 /* KelsonSans-BoldRU.otf */,
+				998485B82471C30B00CF7B00 /* KelsonSans-RegularRU.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -351,6 +357,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998485B92471C32400CF7B00 /* KelsonSans-BoldRU.otf in Resources */,
+				998485BA2471C32400CF7B00 /* KelsonSans-RegularRU.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -386,7 +394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;

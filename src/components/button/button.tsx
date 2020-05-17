@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { Button as ButtonComponent, ButtonProps } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
+import { Fonts } from '@css/fonts';
 
 interface IProps extends ButtonProps {
 	solidType?: 'primary' | 'gray' | 'purple';
@@ -46,12 +47,12 @@ const styles = StyleSheet.create({
 	defaultTitle: {
 		fontSize: 16,
 		color: Colors.White,
-		fontFamily: 'kerson-bold',
+		fontFamily: Fonts.KelsonBold,
 	},
 	clearTitle: {
 		fontSize: 16,
 		color: Colors.Darkgray,
-		fontFamily: 'kerson-bold',
+		fontFamily: Fonts.KelsonBold,
 	},
 	outlineTitle: {
 		fontSize: 16,
