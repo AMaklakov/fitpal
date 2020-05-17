@@ -5,6 +5,7 @@ import { TrainingMinimalView } from './training-minimal-view';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { Colors } from '../../css/colors.style';
 import { SwipeHiddenButton } from '../swipe-list/button';
+import { useTranslation } from 'react-i18next';
 
 interface TrainingListMinimalViewProps {
 	trainingList?: TrainingModel[];
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
 
 export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => {
 	const { trainingList, onTrainingPress, onCopy = () => {}, onDelete = () => {} } = props;
+	const { t } = useTranslation();
 
 	return (
 		<SwipeListView<TrainingModel>
@@ -41,7 +43,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 				<View style={styles.rowBack}>
 					<SwipeHiddenButton
 						style={styles.button1}
-						title={'Copy'}
+						title={t('Copy')}
 						item={data.item}
 						textColor={Colors.White}
 						onTouch={onCopy}
@@ -49,7 +51,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 
 					<SwipeHiddenButton
 						style={styles.button2}
-						title={'Delete'}
+						title={t('Delete')}
 						item={data.item}
 						onTouch={onDelete}
 						backgroundColor={Colors.LightRed}
@@ -57,10 +59,10 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 					/>
 				</View>
 			)}
-			leftOpenValue={75}
-			stopLeftSwipe={100}
-			rightOpenValue={-75}
-			stopRightSwipe={-100}
+			leftOpenValue={115}
+			stopLeftSwipe={130}
+			rightOpenValue={-115}
+			stopRightSwipe={-130}
 		/>
 	);
 };
