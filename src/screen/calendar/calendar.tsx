@@ -112,7 +112,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button type="outline" title={t('Add training +')} onPress={handleCreateTraining} />
+				<Button solidType="purple" title={t('Add training +')} onPress={handleCreateTraining} />
 			</View>
 		</View>
 	);
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	wrapper: {
 		flex: 1,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'flex-start',
-		height: 50,
+		marginBottom: 15,
 	},
 	redText: {
 		color: Colors.LightRed,

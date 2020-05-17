@@ -45,16 +45,10 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 			<View style={[styles.inputWrapper, styles.buttonWrapper]}>
 				<View style={styles.registrationWrapper}>
 					<Text>{t('Have no account?')} </Text>
-					<Button type="clear" onPress={handleRegister} titleStyle={styles.link} title={t('Register')} />
+					<Button type="clear" onPress={handleRegister} title={t('Register')} />
 				</View>
 
-				<Button
-					onPress={handleLogin}
-					buttonStyle={styles.buttonWithIconWrapper}
-					titleStyle={styles.loginButtonText}
-					title={t('Login')}
-					disabled={!email || !password}
-				/>
+				<Button onPress={handleLogin} title={t('Login')} disabled={!email || !password} />
 			</View>
 		</View>
 	);

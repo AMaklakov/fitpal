@@ -98,23 +98,10 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 				<View style={styles.buttonsWrapper}>
 					<View>
 						<Text>{t('Already have account?')} </Text>
-						<Button
-							type="clear"
-							onPress={handleLogin}
-							titleStyle={styles.link}
-							title={t('Go to Login')}
-							buttonStyle={styles.loginButton}
-							containerStyle={styles.loginContainer}
-						/>
+						<Button type="clear" onPress={handleLogin} buttonStyle={styles.loginButton} title={t('Go to Login')} />
 					</View>
 
-					<Button
-						onPress={handleRegister}
-						buttonStyle={[styles.buttonWrapper, styles.registerWrapper]}
-						titleStyle={styles.registerText}
-						title={t('Register')}
-						disabled={!email || !password || !weight}
-					/>
+					<Button onPress={handleRegister} title={t('Register')} disabled={!email || !password || !weight} />
 				</View>
 			</View>
 		</ScrollView>
@@ -132,19 +119,10 @@ const styles = StyleSheet.create({
 	},
 	buttonsWrapper: {
 		width: '80%',
-		paddingTop: 20,
+		marginTop: 20,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
-	},
-	buttonWrapper: {
-		height: 40,
-		width: 100,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	loginText: {
-		color: Colors.LightBlue,
 	},
 	registerWrapper: {
 		backgroundColor: Colors.LightBlue,
@@ -157,7 +135,7 @@ const styles = StyleSheet.create({
 		color: Colors.DarkBlue,
 		textDecorationLine: 'underline',
 	},
-	loginButton: { padding: 0 },
+	loginButton: { paddingVertical: 0 },
 	loginContainer: { alignItems: 'baseline' },
 });
 
