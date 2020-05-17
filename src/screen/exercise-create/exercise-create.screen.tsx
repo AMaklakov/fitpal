@@ -65,8 +65,8 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button type="clear" disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
-				<Button type="clear" title={t('Cancel')} onPress={handleGoBack} titleStyle={styles.redText} />
+				<Button type="outline" title={t('Cancel')} onPress={handleGoBack} titleStyle={styles.redText} />
+				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
 			</View>
 		</View>
 	);
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	buttonContainer: {
-		height: 50,
+		marginBottom: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},

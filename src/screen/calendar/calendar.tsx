@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	wrapper: {
 		flex: 1,

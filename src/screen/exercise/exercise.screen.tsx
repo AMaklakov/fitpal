@@ -48,8 +48,8 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button type="clear" title={t('Edit')} onPress={handleEdit} />
-				<Button type="clear" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />
+				<Button type="outline" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />
+				<Button title={t('Edit')} onPress={handleEdit} />
 			</View>
 		</View>
 	);
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	buttonContainer: {
+		margin: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'flex-start',
-		height: 50,
 	},
 });
 
