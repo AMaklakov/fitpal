@@ -1,5 +1,4 @@
-import { PropType } from '@util/type.util';
-import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
+import { ExerciseTypes } from '@model/exercise.model';
 import { BigSource } from 'big.js';
 
 export interface ISeries {
@@ -11,7 +10,8 @@ export interface ISeries {
 
 export interface IBaseTrainingExercise {
 	_id: string;
-	exerciseId: PropType<ExerciseModel, '_id'>;
+	exerciseId: string;
+
 	type: ExerciseTypes;
 	sequenceNumber: number;
 	userWeight: BigSource;

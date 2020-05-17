@@ -10,6 +10,7 @@ import { SettingsScreen } from '@screen/settings/settings';
 import { AuthLoadingScreen } from '@screen/auth/auth-loading/auth-loading.screen';
 import { LoginScreen } from '@screen/auth/login/login.screen';
 import { RegistrationScreen } from '@screen/auth/registration/registration.screen';
+import { StatisticsScreen } from '@screen/statistics/statistics.screen';
 
 export enum Routes {
 	// ----- ZONES
@@ -30,6 +31,7 @@ export enum Routes {
 	Calendar = 'Calendar',
 	Training = 'Training',
 	CreateTrainingExercise = 'CreateTrainingExercise',
+	Statistics = 'Statistics',
 
 	ExerciseList = 'ExerciseList',
 	Exercise = 'Exercise',
@@ -42,6 +44,7 @@ const AppStack = createStackNavigator(
 		[Routes.Calendar]: { screen: CalendarScreen },
 		[Routes.Training]: { screen: TrainingScreen },
 		[Routes.CreateTrainingExercise]: { screen: CreateTrainingExerciseScreen },
+		[Routes.Statistics]: { screen: StatisticsScreen },
 
 		[Routes.ExerciseList]: { screen: ExerciseListScreen },
 		[Routes.Exercise]: { screen: ExerciseScreen },
