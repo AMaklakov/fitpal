@@ -21,6 +21,8 @@ import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import GestureRecognizer from 'react-native-swipe-gestures';
+import { Calendar as CalendarMonth } from '@components/calendar/calendar';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
@@ -33,6 +35,8 @@ interface IState {
 }
 
 interface IProps extends NavigationPropsModel {}
+
+type ICalendarTypes = 'strip' | 'month';
 
 const Calendar = (props: IProps & IState & IDispatch) => {
 	const {
@@ -47,6 +51,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	const [selectedDate, setSelectedDate] = useState(getToday());
 	const [trainingToDelete, setTrainingToDelete] = useState<TrainingModel | undefined>();
 	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
+	const [calendarType, setCalendarType] = useState<ICalendarTypes>('strip');
 
 	useEffect(() => {
 		fetchTrainingListByDate(selectedDate);
@@ -56,7 +61,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 
 	const handleCloseDeleteTrainingConfirm = useCallback(() => setTrainingToDelete(undefined), []);
 
-	const handleChangeSelectedDate = useCallback((date: moment.Moment) => setSelectedDate(date), []);
+	const handleChangeSelectedDate = useCallback((date: MomentInput) => setSelectedDate(moment(date)), []);
 
 	const handleOnTrainingTouch = useCallback(
 		(training: TrainingModel) => navigation.navigate(Routes.Training, { trainingId: training?._id }),
@@ -82,9 +87,21 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		selectedDate,
 	]);
 
+	const handleChangeCalendarType = useCallback(
+		() => setCalendarType(type => (type === 'strip' ? 'month' : 'strip')),
+		[]
+	);
+
 	return (
 		<View style={styles.wrapper}>
-			<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
+			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
+				{calendarType === 'strip' && (
+					<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
+				)}
+				{calendarType === 'month' && (
+					<CalendarMonth selectedDate={selectedDate} onDateChange={handleChangeSelectedDate} />
+				)}
+			</GestureRecognizer>
 
 			<View style={styles.wrapper}>
 				<TrainingListMinimalView
