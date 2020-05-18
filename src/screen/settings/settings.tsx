@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
@@ -22,12 +22,15 @@ interface IProps {}
 const Settings = (props: IProps & IState & IDispatch) => {
 	const { currentLanguage, onUpdateLanguage, onOpenWeightModal } = props;
 
-	const handleChangeLanguage = async (language: Languages | null) => {
-		const newLanguage = language ?? currentLanguage;
+	const handleChangeLanguage = useCallback(
+		(language: Languages | null) => {
+			const newLanguage = language ?? currentLanguage;
 
-		changeLanguage(newLanguage);
-		onUpdateLanguage(newLanguage);
-	};
+			changeLanguage(newLanguage);
+			onUpdateLanguage(newLanguage);
+		},
+		[currentLanguage, onUpdateLanguage]
+	);
 
 	return (
 		<View style={styles.wrapper}>
@@ -41,6 +44,7 @@ const Settings = (props: IProps & IState & IDispatch) => {
 
 const styles = StyleSheet.create({
 	wrapper: {
+		paddingHorizontal: 20,
 		flex: 1,
 	},
 });

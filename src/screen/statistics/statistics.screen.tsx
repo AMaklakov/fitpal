@@ -72,7 +72,9 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 			<View style={styles.headerWrapper}>
 				<H1 text={t('Statistics')} style={styles.h1} />
 
-				<SelectInput items={selectItems} onChange={handleSelectMode} value={mode} />
+				<View style={styles.inputWrapper}>
+					<SelectInput items={selectItems} onChange={handleSelectMode} value={mode} placeholder={{}} />
+				</View>
 			</View>
 
 			{mode === 'lastDays' && (
@@ -104,6 +106,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
+	},
+	inputWrapper: {
+		minWidth: '40%',
 	},
 });
 

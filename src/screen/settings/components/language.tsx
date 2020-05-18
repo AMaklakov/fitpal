@@ -31,11 +31,23 @@ export const Language = (props: IProps) => {
 	const handleChange = (value: Languages | null) => onChange(value);
 
 	return (
-		<View>
+		<View style={styles.wrapper}>
 			<H2 text={t('Language')} />
-			<SelectInput<IItem> items={LANGUAGES_LIST} value={lang} onChange={handleChange} placeholder={{}} />
+			<View style={styles.inputWrapper}>
+				<SelectInput<IItem> items={LANGUAGES_LIST} value={lang} onChange={handleChange} placeholder={{}} />
+			</View>
 		</View>
 	);
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	wrapper: {
+		marginTop: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	inputWrapper: {
+		minWidth: '50%',
+	},
+});
