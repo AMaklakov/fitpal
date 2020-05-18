@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { ExerciseModel } from '@model/exercise.model';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import { StoreModel } from '@redux/store';
 import { getExerciseById } from '@redux/selector/exercise.selector';
@@ -35,17 +35,18 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 	}, [exercise, navigation]);
 
 	return (
-		<View style={styles.container}>
-			<H1 text={exercise.name} />
-
-			<View style={styles.description}>
-				<H2 text={t('Description')} />
-				<Text style={styles.details}>
-					{Array(parseInt((Math.random() * 20).toFixed(), 10))
-						.fill(exercise.name)
-						.join(', ')}
-				</Text>
-			</View>
+		<View style={styles.wrapper}>
+			<ScrollView>
+				<H1 text={exercise.name} wrapperStyle={styles.h1} />
+				<View style={styles.description}>
+					<H2 text={t('Description')} wrapperStyle={styles.h2} />
+					<Text style={styles.details}>
+						{Array(parseInt((Math.random() * 20).toFixed(), 10))
+							.fill(exercise.name)
+							.join(', ')}
+					</Text>
+				</View>
+			</ScrollView>
 
 			<View style={styles.buttonContainer}>
 				<Button type="outline" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />
@@ -56,16 +57,14 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 };
 
 const styles = StyleSheet.create({
-	container: {
+	wrapper: {
 		flex: 1,
-		paddingTop: 12,
+		paddingHorizontal: 10,
 	},
 	description: {
 		flex: 1,
-		paddingTop: 12,
 	},
 	details: {
-		paddingTop: 12,
 		marginHorizontal: 10,
 		textAlign: 'center',
 	},
@@ -74,6 +73,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'flex-start',
+	},
+	h1: {
+		marginVertical: 15,
+	},
+	h2: {
+		marginBottom: 10,
 	},
 });
 

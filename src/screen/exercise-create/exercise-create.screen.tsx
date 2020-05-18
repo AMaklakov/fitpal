@@ -52,7 +52,7 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} />
+			<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} wrapperStyle={styles.h1} />
 
 			<View style={styles.mainContent}>
 				<StringInputWithValidation
@@ -75,6 +75,7 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 const styles = StyleSheet.create({
 	wrapper: {
 		flex: 1,
+		paddingHorizontal: 10,
 	},
 	buttonContainer: {
 		marginBottom: 10,
@@ -86,6 +87,9 @@ const styles = StyleSheet.create({
 	},
 	redText: {
 		color: Colors.LightRed,
+	},
+	h1: {
+		marginVertical: 15,
 	},
 });
 

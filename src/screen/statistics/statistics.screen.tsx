@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
 		textAlign: 'left',
 	},
 	headerWrapper: {
-		marginTop: 10,
+		marginVertical: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',

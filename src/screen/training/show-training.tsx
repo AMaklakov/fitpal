@@ -54,7 +54,7 @@ export const ShowTraining = (props: IProps) => {
 };
 
 const style = StyleSheet.create({
-	wrapper: { flex: 1 },
+	wrapper: { flex: 1, paddingHorizontal: 10 },
 	total: {
 		paddingVertical: 10,
 		alignItems: 'center',

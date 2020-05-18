@@ -96,8 +96,8 @@ export const CreateExercise = (props: IProps) => {
 
 	return (
 		<View style={commonStyles.wrapper}>
-			<View style={commonStyles.wrapper}>
-				<H1 text={t('Exercise')} />
+			<View style={commonStyles.mainWrapper}>
+				<H1 text={t('Exercise')} wrapperStyle={commonStyles.h1} />
 
 				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>

@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
 
 export const commonStyles = StyleSheet.create({
+	mainWrapper: {
+		flex: 1,
+		paddingHorizontal: 10,
+	},
 	wrapper: {
 		flex: 1,
 	},
@@ -27,4 +31,5 @@ export const commonStyles = StyleSheet.create({
 		color: Colors.Grey,
 	},
 	cancelButtonText: { color: Colors.LightRed },
+	h1: { marginVertical: 10 },
 });

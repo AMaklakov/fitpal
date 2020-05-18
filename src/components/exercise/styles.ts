@@ -8,16 +8,13 @@ const style = StyleSheet.create({
 	tableHeading: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-
 		backgroundColor: 'darkgrey',
-
 		padding: 5,
 		borderRadius: 15,
 	},
 	tableBody: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-
 		padding: 5,
 	},
 	h2: {
@@ -34,7 +31,6 @@ const style = StyleSheet.create({
 	},
 	wrapper: {
 		backgroundColor: Colors.Default,
-
 		borderBottomWidth: 0.3,
 		borderBottomColor: Colors.Grey,
 	},

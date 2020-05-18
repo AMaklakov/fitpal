@@ -81,8 +81,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 	return (
 		<Modal visible={isOpen}>
-			<SafeAreaView>
-				<H1 text={training ? t('Copy training') : t('Create training')} />
+			<SafeAreaView style={styles.wrapper}>
+				<H1 text={t(training ? 'Copy training' : 'Create training')} wrapperStyle={styles.h1} />
 
 				<Text>{t('Training name')}</Text>
 				<StringInputWithValidation
@@ -113,6 +113,9 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 };
 
 const styles = StyleSheet.create({
+	wrapper: {
+		paddingHorizontal: 10,
+	},
 	errorText: {
 		color: Colors.LightRed,
 		fontSize: 12,
@@ -121,6 +124,9 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+	},
+	h1: {
+		marginVertical: 15,
 	},
 });
 
