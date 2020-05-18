@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import { IMenuWrapperProps, MenuWrapper } from '@components/menu/menu-wrapper';
-import { MenuItem } from '@components/menu/menu-item';
 import { Routes } from '@screen/navigator';
 import { useTranslation } from 'react-i18next';
 import { ChevronRightIcon } from '@icons/chevron-right.icon';
@@ -14,6 +13,8 @@ import { StoreModel } from '@redux/store';
 import { Dispatch } from 'redux';
 import { COVID_ACTION_CREATORS } from '@redux/action/covid.action';
 import { getCovidConfirmed } from '@redux/selector/covid.selector';
+import { ListItem } from 'react-native-elements';
+import { Fonts } from '@css/fonts';
 
 interface IState {
 	covidConfirmed: string | number;
@@ -33,7 +34,7 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed, isCovidLoading } = props;
 	const { t } = useTranslation();
 
-	const goToPage = (page: Routes) => () => navigate(page);
+	const goToPage = useCallback((page: Routes) => () => navigate(page), [navigate]);
 
 	useEffect(() => {
 		if (isOpen && covidConfirmed === 0 && !isCovidLoading) {
@@ -41,61 +42,111 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 		}
 	}, [covidConfirmed, isCovidLoading, isOpen, onFetchCovidConfirmed]);
 
+	const topNavigationList = useMemo(
+		() => [
+			{
+				name: t('Calendar'),
+				icon: <ChevronRightIcon />,
+				isActive: activeRoute === Routes.Calendar,
+				onPress: goToPage(Routes.Calendar),
+			},
+			{
+				name: t('Exercise list'),
+				icon: <ChevronRightIcon />,
+				isActive: activeRoute === Routes.ExerciseList,
+				onPress: goToPage(Routes.ExerciseList),
+			},
+			{
+				name: t('Statistics'),
+				icon: <ChevronRightIcon />,
+				isActive: activeRoute === Routes.Statistics,
+				onPress: goToPage(Routes.Statistics),
+			},
+		],
+		[activeRoute, goToPage, t]
+	);
+
+	const bottomNavigationList = useMemo(
+		() => [
+			{
+				name: t('Covid |count|', { value: covidConfirmed }),
+				description: t('Infected by the virus'),
+				icon: <DeadIcon />,
+			},
+			{
+				name: t('Settings'),
+				icon: <SettingsIcon />,
+				isActive: activeRoute === Routes.Settings,
+				onPress: goToPage(Routes.Settings),
+			},
+		],
+		[activeRoute, covidConfirmed, goToPage, t]
+	);
+
 	return (
 		<MenuWrapper isOpen={isOpen} onCloseMenu={onCloseMenu}>
 			<View style={styles.itemsWrapper}>
 				{/* TOP NAVIGATION */}
 				<View>
-					<MenuItem
-						item={{ text: t('Calendar'), icon: <ChevronRightIcon />, isActive: activeRoute === Routes.Calendar }}
-						onPress={goToPage(Routes.Calendar)}
-					/>
-					<MenuItem
-						item={{
-							text: t('Exercise list'),
-							icon: <ChevronRightIcon />,
-							isActive: activeRoute === Routes.ExerciseList,
-						}}
-						onPress={goToPage(Routes.ExerciseList)}
-					/>
-					<MenuItem
-						item={{
-							text: t('Statistics'),
-							icon: <ChevronRightIcon />,
-							isActive: activeRoute === Routes.Statistics,
-						}}
-						onPress={goToPage(Routes.Statistics)}
-					/>
+					{topNavigationList.map(({ name, icon, isActive, onPress }) => (
+						<ListItem
+							key={name}
+							title={name}
+							rightIcon={icon}
+							containerStyle={StyleSheet.flatten([isActive && styles.selectedItem])}
+							titleStyle={StyleSheet.flatten([styles.listItemTitle, isActive && styles.selectedItemText])}
+							bottomDivider={true}
+							onPress={onPress}
+						/>
+					))}
 				</View>
 
 				{/* BOTTOM NAVIGATION */}
 				<View style={styles.bottomNavigationWrapper}>
-					<MenuItem
-						item={{
-							text: t('Covid |count|', { value: covidConfirmed }),
-							icon: <DeadIcon />,
-						}}
-					/>
-					<MenuItem
-						item={{ text: t('Settings'), icon: <SettingsIcon />, isActive: activeRoute === Routes.Settings }}
-						onPress={goToPage(Routes.Settings)}
-					/>
+					{bottomNavigationList.map(({ name, description, icon, isActive, onPress }) => (
+						<ListItem
+							key={name}
+							title={name}
+							subtitle={description}
+							rightIcon={icon}
+							containerStyle={StyleSheet.flatten([isActive && styles.selectedItem])}
+							titleStyle={StyleSheet.flatten([styles.listItemTitle, isActive && styles.selectedItemText])}
+							subtitleStyle={styles.listItemSubtitle}
+							bottomDivider={true}
+							onPress={onPress}
+						/>
+					))}
 				</View>
 			</View>
 		</MenuWrapper>
 	);
 };
 
+const IS_IOS = Platform.OS === 'ios';
+
 const styles = StyleSheet.create({
 	itemsWrapper: {
 		flex: 1,
 		justifyContent: 'space-between',
-		paddingVertical: 10,
 	},
 	bottomNavigationWrapper: {
 		borderTopWidth: 0.3,
 		borderTopColor: toRgba(Colors.Black, 0.8),
-		paddingTop: 10,
+	},
+	listItemTitle: {
+		fontSize: 16,
+		paddingTop: IS_IOS ? 5 : 0,
+		fontFamily: Fonts.Kelson,
+	},
+	selectedItem: {
+		backgroundColor: Colors.Purple,
+	},
+	selectedItemText: {
+		color: Colors.White,
+		fontWeight: 'bold',
+	},
+	listItemSubtitle: {
+		color: Colors.LightGrey,
 	},
 });
 

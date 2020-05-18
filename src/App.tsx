@@ -7,7 +7,7 @@ import { changeLanguage } from '@i18n/index';
 import { CalendarTrainingModal } from '@screen/calendar/calendar-training-modal';
 import { Header } from '@components/header/header';
 import { Menu } from '@components/menu/menu';
-import { NavigationActions, NavigationContainerComponent, NavigationState } from 'react-navigation';
+import { NavigationActions, NavigationContainerComponent, NavigationRoute, NavigationState } from 'react-navigation';
 import { UserWeightModal } from '@components/user-weight/user-weight.modal';
 import { SpinnerModal } from '@components/progress-bars/spinner.modal';
 import { setNavigator } from '@util/navigation.util';
@@ -60,4 +60,12 @@ export const App = () => {
 	);
 };
 
-const getCurrentRoute = (nav?: NavigationState): Routes => nav?.routes[nav.index]?.routeName as Routes;
+const getCurrentRoute = (nav?: NavigationState): Routes => {
+	const newNav = nav?.routes[nav.index] as NavigationState | NavigationRoute;
+
+	if (newNav.routes) {
+		return getCurrentRoute(newNav);
+	}
+
+	return (newNav as NavigationRoute).routeName as Routes;
+};

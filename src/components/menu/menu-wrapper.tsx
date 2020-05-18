@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NativeModules, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { toRgba } from '@util/css.util';
 
@@ -26,7 +26,7 @@ export const MenuWrapper: FC<IMenuWrapperProps> = props => {
 	);
 };
 
-const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 20 : NativeModules.StatusBarManager.HEIGHT;
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 const styles = StyleSheet.create({
 	wrapper: {
