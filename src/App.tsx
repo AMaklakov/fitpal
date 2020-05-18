@@ -63,9 +63,9 @@ export const App = () => {
 const getCurrentRoute = (nav?: NavigationState): Routes => {
 	const newNav = nav?.routes[nav.index] as NavigationState | NavigationRoute;
 
-	if (newNav.routes) {
+	if (newNav?.routes) {
 		return getCurrentRoute(newNav);
 	}
 
-	return (newNav as NavigationRoute).routeName as Routes;
+	return (newNav as NavigationRoute)?.routeName as Routes;
 };
