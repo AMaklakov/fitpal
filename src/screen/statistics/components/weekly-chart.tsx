@@ -41,13 +41,15 @@ export const WeeklyChart = (props: IProps) => {
 		const startDate = getWeek(currentDate, 'start');
 		const endDate = getWeek(currentDate, 'end');
 
-		return trainingsByDates(startDate, endDate).map(t => ({
-			x: moment(t.date).startOf('day'),
-			y: +calculateTrainingTotal(t).toFixed(),
-			name: t._id,
-			training: t,
-			color: Colors.LightGreen,
-		}));
+		return trainingsByDates(startDate, endDate)
+			.filter(t => calculateTrainingTotal(t).gt(0))
+			.map(t => ({
+				x: moment(t.date).startOf('day'),
+				y: +calculateTrainingTotal(t).toFixed(),
+				name: t._id,
+				training: t,
+				color: Colors.LightGreen,
+			}));
 	}, [currentDate, trainingsByDates]);
 
 	const handleShowTraining = useCallback(({ datum }) => onShowTraining(datum?.training), [onShowTraining]);

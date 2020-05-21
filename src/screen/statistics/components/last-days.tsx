@@ -48,13 +48,17 @@ export const LastDaysStatistics = (props: IProps) => {
 	// }, [exercises, onCreateTraining]);
 
 	const dataList = useMemo(() => {
-		return trainings.map(t => ({
-			x: moment(t.date).toDate(),
-			y: +calculateTrainingTotal(t).toFixed(),
-			name: t._id,
-			training: t,
-			color: Colors.LightGreen,
-		}));
+		return trainings
+			.filter(t => calculateTrainingTotal(t).gt(0))
+			.map(t => ({
+				x: moment(t.date)
+					.startOf('day')
+					.toDate(),
+				y: +calculateTrainingTotal(t).toFixed(),
+				name: t._id,
+				training: t,
+				color: Colors.LightGreen,
+			}));
 	}, [trainings]);
 
 	const handleShowTraining = useCallback(({ datum }) => onShowTraining(datum?.training), []);
