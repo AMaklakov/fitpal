@@ -29,7 +29,7 @@ export const TRAINING_ACTION_CREATORS = {
 	FETCH_BY_DATE: progressActions<MomentInput, TrainingModel[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
 	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
 	CREATE: progressActions<ICreateTraining, TrainingModel | undefined, object>(TRAINING_ACTIONS.CREATE),
-	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.CREATE),
+	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.DELETE),
 	UPDATE: progressActions<TrainingModel, TrainingModel, object>(TRAINING_ACTIONS.UPDATE),
 
 	EXERCISE: {
