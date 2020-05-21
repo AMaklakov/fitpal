@@ -21,6 +21,5 @@ const styles = StyleSheet.create({
 	wrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		marginTop: 10,
 	},
 });

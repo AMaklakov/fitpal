@@ -7,6 +7,7 @@ import { updateLanguageAction } from '@redux/action/settings.action';
 import { Language } from '@screen/settings/components/language';
 import { Weight } from '@screen/settings/components/weight';
 import { setWeightModalVisible } from '@redux/action/user.action';
+import { Divider } from 'react-native-elements';
 
 interface IDispatch {
 	onUpdateLanguage: (language: Languages) => void;
@@ -36,6 +37,9 @@ const Settings = (props: IProps & IState & IDispatch) => {
 		<View style={styles.wrapper}>
 			<ScrollView>
 				<Language lang={currentLanguage} onChange={handleChangeLanguage} />
+
+				<Divider style={styles.divider} />
+
 				<Weight onOpenModal={onOpenWeightModal} />
 			</ScrollView>
 		</View>
@@ -46,6 +50,10 @@ const styles = StyleSheet.create({
 	wrapper: {
 		paddingHorizontal: 20,
 		flex: 1,
+	},
+	divider: {
+		height: 1,
+		marginVertical: 15,
 	},
 });
 
