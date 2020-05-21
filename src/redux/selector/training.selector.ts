@@ -13,7 +13,9 @@ export const getFirstTrainingByDate = (
 
 export const getTrainingListByDate = (store: StoreModel, date: Moment): TrainingModel[] | undefined => {
 	const selectedDate = formatDate(date);
-	return store.training.trainings.filter((t: TrainingModel) => formatDate(t.date) === selectedDate);
+	return store.training.trainings
+		.filter((t: TrainingModel) => formatDate(t.date) === selectedDate)
+		.sort((a, b) => +moment(a.createdAt).isBefore(b.createdAt));
 };
 
 export const getTrainingById = (store: StoreModel, id: string): TrainingModel | undefined => {
