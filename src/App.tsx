@@ -40,7 +40,9 @@ export const App = () => {
 
 			<SafeAreaView style={{ flex: 1 }}>
 				<Provider store={store}>
-					<Header onOpenMenu={handleOpenMenu} />
+					{getCurrentRoute(navigatorRef.current?.state?.nav, true) === Routes.AppZone && (
+						<Header onOpenMenu={handleOpenMenu} />
+					)}
 
 					<Navigator ref={navigatorRef} />
 
@@ -60,11 +62,11 @@ export const App = () => {
 	);
 };
 
-const getCurrentRoute = (nav?: NavigationState): Routes => {
+const getCurrentRoute = (nav?: NavigationState, isTopLevel?: boolean): Routes => {
 	const newNav = nav?.routes[nav.index] as NavigationState | NavigationRoute;
 
-	if (newNav?.routes) {
-		return getCurrentRoute(newNav);
+	if (!isTopLevel && newNav?.routes) {
+		return getCurrentRoute(newNav, false);
 	}
 
 	return (newNav as NavigationRoute)?.routeName as Routes;
