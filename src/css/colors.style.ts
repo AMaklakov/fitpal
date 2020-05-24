@@ -1,5 +1,3 @@
-export const placeholderTextColor = 'darkgray';
-
 export enum Colors {
 	Default = '#F2F2F2',
 
@@ -18,10 +16,13 @@ export enum Colors {
 	White = '#ffffff',
 	Grey = '#bbbbbb',
 
-	Primary = '#292929',
 	Purple = '#b02c74',
 	Lightgray = '#EAEAEA',
 	Darkgray = '#62676A',
 
 	LightGreen = '#5eaca7',
+
+	Primary = '#292929',
+	Secondary = Lightgray,
+	Accent = Purple,
 }

@@ -33,13 +33,11 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 	return (
 		<View style={styles.wrapper}>
 			<View style={styles.inputWrapper}>
-				<Text> {t('Enter email')} </Text>
-				<StringInput value={email} onChange={setEmail} />
+				<StringInput label={t('Enter email')} value={email} onChange={setEmail} autoCapitalize="none" />
 			</View>
 
 			<View style={styles.inputWrapper}>
-				<Text> {t('Enter password')} </Text>
-				<StringInput value={password} onChange={setPassword} isPassword={true} />
+				<StringInput label={t('Enter password')} value={password} onChange={setPassword} isPassword={true} />
 			</View>
 
 			<View style={[styles.inputWrapper, styles.buttonWrapper]}>
@@ -56,11 +54,11 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 
 const styles = StyleSheet.create({
 	wrapper: {
+		paddingTop: 20,
 		alignItems: 'center',
 	},
 	inputWrapper: {
 		width: '85%',
-		paddingTop: 15,
 	},
 	buttonWrapper: {
 		flexDirection: 'row',

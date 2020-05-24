@@ -84,8 +84,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 			<SafeAreaView style={styles.wrapper}>
 				<H1 text={t(training ? 'Copy training' : 'Create training')} wrapperStyle={styles.h1} />
 
-				<Text>{t('Training name')}</Text>
 				<StringInputWithValidation
+					label={t('Training name')}
 					value={name}
 					onChange={handleChangeName}
 					maxLength={[TRAINING_TITLE_MAXLENGTH, t('Max length is |len|', { len: TRAINING_TITLE_MAXLENGTH })]}

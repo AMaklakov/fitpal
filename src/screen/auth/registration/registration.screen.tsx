@@ -59,28 +59,23 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 		<ScrollView>
 			<View style={styles.wrapper}>
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter email')}</Text>
-					<StringInput value={email} onChange={setEmail} />
+					<StringInput value={email} onChange={setEmail} label={t('Enter email')} />
 				</View>
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter password')} </Text>
-					<StringInput value={password} onChange={setPassword} isPassword={true} />
+					<StringInput value={password} onChange={setPassword} isPassword={true} label={t('Enter password')} />
 				</View>
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter first name')}</Text>
-					<StringInput value={firstName} onChange={setFirstName} />
+					<StringInput value={firstName} onChange={setFirstName} label={t('Enter first name')} />
 				</View>
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter last name')}</Text>
-					<StringInput value={lastName} onChange={setLastName} />
+					<StringInput value={lastName} onChange={setLastName} label={t('Enter last name')} />
 				</View>
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter middle name')}</Text>
-					<StringInput value={middleName} onChange={setMiddleName} />
+					<StringInput value={middleName} onChange={setMiddleName} label={t('Enter middle name')} />
 				</View>
 
 				{/*	TODO add sex switch */}
@@ -111,11 +106,10 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 const styles = StyleSheet.create({
 	wrapper: {
 		alignItems: 'center',
-		paddingBottom: 15,
+		paddingVertical: 20,
 	},
 	inputWrapper: {
-		width: '80%',
-		marginTop: 15,
+		width: '85%',
 	},
 	buttonsWrapper: {
 		width: '80%',

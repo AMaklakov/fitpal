@@ -1,34 +1,38 @@
-import React, { FC } from 'react';
-import { StyleProp, StyleSheet, TextInput, TextStyle, View } from 'react-native';
-import { Colors, placeholderTextColor } from '@css/colors.style';
+import React, { FC, useCallback, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { Colors } from '@css/colors.style';
+import { Input, InputProps } from 'react-native-elements';
 import { withValidation } from '@components/with-validation/with-validation';
+import { Fonts } from '@css/fonts';
 
-interface IProps {
-	placeholder?: string;
-
+interface IProps extends Omit<InputProps, 'onChange'> {
 	value: string;
 	onChange: (v: string) => void;
 
 	isPassword?: boolean;
-	inputStyle?: StyleProp<TextStyle>;
+	hasShadow?: boolean;
 }
 
 export const StringInput: FC<IProps> = (props: IProps) => {
-	const { onChange, placeholder = '', value, inputStyle = {}, isPassword = false } = props;
+	const { onChange, value, isPassword = false, hasShadow = true, ...rest } = props;
 
-	const onTextChangeHandler = (v: string) => onChange(v);
+	const [isFocused, setFocused] = useState(false);
+	const onTextChangeHandler = useCallback((v: string) => onChange(v), [onChange]);
+
+	const handleFocus = useCallback(() => setFocused(true), []);
+	const handleBlur = useCallback(() => setFocused(false), []);
 
 	return (
-		<View style={styles.inputWrapper}>
-			<TextInput
-				style={[styles.input, inputStyle]}
-				placeholder={placeholder}
-				placeholderTextColor={placeholderTextColor}
-				onChangeText={onTextChangeHandler}
-				value={value}
-				secureTextEntry={isPassword}
-			/>
-		</View>
+		<Input
+			value={value}
+			onChangeText={onTextChangeHandler}
+			labelStyle={[styles.labelStyle]}
+			onFocus={handleFocus}
+			onBlur={handleBlur}
+			secureTextEntry={isPassword}
+			inputContainerStyle={[styles.inputWrapper, isFocused && styles.focused, hasShadow && styles.shadow]}
+			{...rest}
+		/>
 	);
 };
 
@@ -36,13 +40,35 @@ export const StringInputWithValidation = withValidation(StringInput);
 
 const styles = StyleSheet.create({
 	inputWrapper: {
+		paddingHorizontal: 5,
 		borderWidth: 1,
-		borderColor: Colors.Black,
-		borderRadius: 15,
+		borderColor: 'transparent',
+		borderRadius: 5,
+		backgroundColor: Colors.White,
 	},
 	input: {
 		color: Colors.Black,
-		padding: 10,
 		fontSize: 16,
+	},
+	focused: {
+		borderColor: Colors.Accent,
+	},
+	shadow: {
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 1.41,
+
+		elevation: 2,
+	},
+	labelStyle: {
+		marginBottom: 2,
+		fontSize: 14,
+		fontFamily: Fonts.Kelson,
+		fontWeight: 'normal',
+		color: Colors.Primary,
 	},
 });

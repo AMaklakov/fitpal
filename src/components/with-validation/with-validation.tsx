@@ -1,8 +1,7 @@
 import { Big, BigSource } from 'big.js';
-import React, { FC, useState } from 'react';
-import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
+import React, { FC, useCallback, useState } from 'react';
+import { View } from 'react-native';
 import { isPresent } from '@util/type.util';
-import { Colors } from '@css/colors.style';
 
 export type IErrors = { [k: string]: any } | null;
 
@@ -22,59 +21,64 @@ interface IValidation {
 	isNumber?: IValidationItem<boolean>;
 
 	needTrim?: boolean;
-	errorTextStyle?: StyleProp<TextStyle>;
 
 	onChange: (value: string, errors: IErrors) => void;
 }
 
 interface IComponent {
 	onChange: (value: string) => void;
+	errorMessage?: string;
 }
 
-export const withValidation = <C extends IComponent>(component: FC<C>): FC<C & IValidation> => {
-	return (props: C & IValidation) => {
-		const { onChange, max, maxLength, min, minLength, isNumber = false, needTrim = false, errorTextStyle = {} } = props;
+export const withValidation = <C extends IComponent>(
+	component: FC<C>
+): FC<Omit<C, keyof IValidation> & IValidation> => {
+	return props => {
+		const { onChange, max, maxLength, min, minLength, isNumber = false, needTrim = false, ...rest } = props;
 
 		const [errors, changeErrors] = useState<IErrors>(null);
 
-		const checkErrors = (value: string) => {
-			let errors: IErrors = {};
+		const checkErrors = useCallback(
+			(value: string) => {
+				let errors: IErrors = {};
 
-			if (needTrim) {
-				value = value.trim();
-			}
-
-			if (isNumber || isPresent(min) || isPresent(max)) {
-				try {
-					// check is number or not
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					const num = new Big(value);
-
-					if (isPresent(min) && !checkMin(value, min[0])) {
-						errors.min = min[1];
-					}
-					if (isPresent(max) && !checkMax(value, max[0])) {
-						errors.max = max[1];
-					}
-				} catch (e) {
-					errors.isNum = isNumber ? isNumber[1] : false;
+				if (needTrim) {
+					value = value.trim();
 				}
-			}
 
-			if (isPresent(minLength) && !checkMinLength(value, minLength[0])) {
-				errors.minLength = minLength[1];
-			}
+				if (isNumber || isPresent(min) || isPresent(max)) {
+					try {
+						// check is number or not
+						// eslint-disable-next-line @typescript-eslint/no-unused-vars
+						const num = new Big(value);
 
-			if (isPresent(maxLength) && !checkMaxLength(value, maxLength[0])) {
-				errors.maxLength = maxLength[1];
-			}
+						if (isPresent(min) && !checkMin(value, min[0])) {
+							errors.min = min[1];
+						}
+						if (isPresent(max) && !checkMax(value, max[0])) {
+							errors.max = max[1];
+						}
+					} catch (e) {
+						errors.isNum = isNumber ? isNumber[1] : false;
+					}
+				}
 
-			if (Object.keys(errors).length === 0) {
-				errors = null;
-			}
+				if (isPresent(minLength) && !checkMinLength(value, minLength[0])) {
+					errors.minLength = minLength[1];
+				}
 
-			return errors;
-		};
+				if (isPresent(maxLength) && !checkMaxLength(value, maxLength[0])) {
+					errors.maxLength = maxLength[1];
+				}
+
+				if (Object.keys(errors).length === 0) {
+					errors = null;
+				}
+
+				return errors;
+			},
+			[isNumber, max, maxLength, min, minLength, needTrim]
+		);
 
 		const handleChange = (value: string) => {
 			const errors = checkErrors(value);
@@ -85,16 +89,11 @@ export const withValidation = <C extends IComponent>(component: FC<C>): FC<C & I
 
 		return (
 			<View>
-				{component({ ...props, onChange: handleChange })}
-
-				<View>
-					{!!errors &&
-						Object.keys(errors).map((e: string) => (
-							<Text style={StyleSheet.flatten([styles.errorText, errorTextStyle])} key={e}>
-								{errors[e]}
-							</Text>
-						))}
-				</View>
+				{(component as any)({
+					...rest,
+					onChange: handleChange,
+					errorMessage: errors ? Object.keys(errors).map(k => errors[k])?.[0] : undefined,
+				})}
 			</View>
 		);
 	};
@@ -104,10 +103,3 @@ const checkMin = (v: string, min: BigSource) => new Big(v).gte(min);
 const checkMax = (v: string, max: BigSource) => new Big(v).lte(max);
 const checkMinLength = (v: string, length: number) => v.length >= length;
 const checkMaxLength = (v: string, length: number) => v.length <= length;
-
-const styles = StyleSheet.create({
-	errorText: {
-		color: Colors.LightRed,
-		fontSize: 12,
-	},
-});

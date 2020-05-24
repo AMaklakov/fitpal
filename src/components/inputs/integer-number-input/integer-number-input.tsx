@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { removeLeadingZeros } from '@util/string.util';
-import { Colors, placeholderTextColor } from '@css/colors.style';
+import { Colors } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
 
 interface IProps {
@@ -22,7 +22,7 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 			style={isFocused ? focusedInputStyles : styles.input}
 			keyboardType="number-pad"
 			placeholder={placeholder}
-			placeholderTextColor={placeholderTextColor}
+			placeholderTextColor={Colors.Darkgray}
 			onChangeText={handleTextChange}
 			onFocus={() => setFocused(() => true)}
 			onBlur={() => setFocused(() => false)}
