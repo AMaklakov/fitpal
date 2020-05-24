@@ -9,6 +9,7 @@ import { IErrors } from '@components/with-validation/with-validation';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components/button/button';
 import { Overlay } from 'react-native-elements';
+import { ButtonIcon } from '@components/button-icon/button-icon';
 
 interface IProps {
 	training: TrainingModel;
@@ -54,7 +55,7 @@ export const TrainingHeading: FC<IProps> = props => {
 			{heading}
 
 			<View style={styles.iconWrapper}>
-				<Button type="clear" icon={<EditIcon />} onPress={handleEditButtonPress} />
+				<ButtonIcon icon={<EditIcon />} onPress={handleEditButtonPress} />
 			</View>
 
 			<Overlay isVisible={isEdit} onBackdropPress={handleCancelButtonPress} overlayStyle={styles.overlayWrapper}>
