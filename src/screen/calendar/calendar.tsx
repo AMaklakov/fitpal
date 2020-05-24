@@ -153,10 +153,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	buttonContainer: {
+		paddingVertical: 10,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'flex-start',
-		marginBottom: 15,
 	},
 	redText: {
 		color: Colors.LightRed,
