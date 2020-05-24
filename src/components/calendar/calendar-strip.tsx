@@ -5,6 +5,7 @@ import { getToday } from '../../util/date.util';
 import { Colors } from '../../css/colors.style';
 import moment from 'moment';
 import { toRgba } from '@util/css.util';
+import { Fonts } from '@css/fonts';
 
 const styles = StyleSheet.create({
 	headingText: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 		paddingBottom: 0,
 		fontSize: 32,
-		fontFamily: 'kerson-bold',
+		fontFamily: Fonts.KelsonBold,
 	},
 	calendar: {
 		minHeight: 160,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		backgroundColor: Colors.Lightgray,
 		color: Colors.White,
-		fontFamily: 'kerson-bold',
+		fontFamily: Fonts.KelsonBold,
 	},
 	dateNumberStyle: {
 		color: Colors.Primary,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 
 interface CalendarStripProps {
 	selectedDate: moment.Moment;
-	changeSelectedDate: (selectedDate: moment.Moment) => void;
+	changeSelectedDate: (selectedDate: moment.MomentInput) => void;
 }
 
 export const CalendarStrip = (props: CalendarStripProps) => {
@@ -43,18 +44,18 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 				dateNameStyle: { color: Colors.White },
 				dateNumberStyle: { color: Colors.White },
 				dateContainerStyle: { backgroundColor: toRgba(Colors.Red, 0.5) },
-			} as any,
+			},
 		],
 		[]
 	);
 
-	const daySelectionAnimation = useMemo(
+	const daySelectionAnimation = useMemo<any>(
 		() =>
 			({
 				type: 'background',
 				duration: 200,
 				highlightColor: Colors.Purple,
-			} as any),
+			}),
 		[]
 	);
 
@@ -68,8 +69,8 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 				highlightDateNumberStyle={{ color: Colors.White }}
 				highlightDateNameStyle={{ color: Colors.White }}
 				weekendDateNameStyle={{ color: Colors.White }}
-				selectedDate={(selectedDate as unknown) as Date}
-				onDateSelected={changeSelectedDate as any}
+				selectedDate={selectedDate.toDate()}
+				onDateSelected={changeSelectedDate}
 				calendarAnimation={{ type: 'sequence', duration: 30 }}
 				daySelectionAnimation={daySelectionAnimation}
 				customDatesStyles={customDatesStyles}
