@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { IntegerNumberInputWithValidation } from '@inputs/integer-number-input/integer-number-input';
 import { Big, BigSource } from 'big.js';
@@ -14,6 +14,7 @@ import { SaveIcon } from '@icons/save.icon';
 import { IErrors } from '@components/with-validation/with-validation';
 import { USER_MAX_WEIGHT, USER_MIN_WEIGHT } from '@const/validation-const';
 import { Button } from '@components/button/button';
+import { H2 } from '@components/heading/h2';
 
 interface IState {
 	userWeight: BigSource;
@@ -52,7 +53,7 @@ const UserWeightModalComponent: FC<IProps & IState & IDispatch> = props => {
 	return (
 		<Modal isVisible={isVisible}>
 			<View style={styles.wrapper}>
-				<Text>{t('Enter your weight')}</Text>
+				<H2 text={t('Enter your weight')} />
 				<IntegerNumberInputWithValidation
 					onChange={handleSetWeight}
 					value={weight}

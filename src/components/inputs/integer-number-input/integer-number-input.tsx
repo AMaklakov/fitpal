@@ -1,32 +1,43 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import React, { FC, useCallback, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { removeLeadingZeros } from '@util/string.util';
 import { Colors } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
+import { Input, InputProps } from 'react-native-elements';
+import { Fonts } from '@css/fonts';
 
-interface IProps {
+interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	onChange: (v: string) => void;
-	placeholder?: string;
+	hasShadow?: boolean;
 }
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
-	const { value = '', placeholder = '', onChange } = props;
+	const { value = '', onChange, hasShadow = true, ...rest } = props;
 
 	const [isFocused, setFocused] = useState(false);
 
-	const handleTextChange = (v: string) => onChange(removeLeadingZeros(v));
+	const handleTextChange = useCallback((v: string) => onChange(removeLeadingZeros(v)), [onChange]);
+
+	const handleFocus = useCallback(() => setFocused(true), []);
+	const handleBlur = useCallback(() => setFocused(false), []);
 
 	return (
-		<TextInput
-			style={isFocused ? focusedInputStyles : styles.input}
-			keyboardType="number-pad"
-			placeholder={placeholder}
-			placeholderTextColor={Colors.Darkgray}
+		<Input
 			onChangeText={handleTextChange}
-			onFocus={() => setFocused(() => true)}
-			onBlur={() => setFocused(() => false)}
+			onFocus={handleFocus}
+			onBlur={handleBlur}
 			value={value}
+			placeholderTextColor={Colors.Darkgray}
+			keyboardType="number-pad"
+			labelStyle={[styles.labelStyle]}
+			inputContainerStyle={[
+				styles.inputWrapper,
+				isFocused && styles.focused,
+				hasShadow && styles.shadow,
+				!!rest.errorMessage && styles.error,
+			]}
+			{...rest}
 		/>
 	);
 };
@@ -34,20 +45,39 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 export const IntegerNumberInputWithValidation = withValidation(IntegerNumberInput);
 
 const styles = StyleSheet.create({
-	input: {
-		padding: 10,
-		fontSize: 16,
-		color: Colors.Black,
-		borderColor: Colors.Black,
+	inputWrapper: {
+		paddingHorizontal: 5,
 		borderWidth: 1,
-		borderRadius: 15,
+		borderColor: 'transparent',
+		borderRadius: 5,
+		backgroundColor: Colors.White,
 	},
-	errorMessageShow: {
-		color: 'red',
+	input: {
+		color: Colors.Black,
+		fontSize: 16,
 	},
-	inputFocused: {
-		borderColor: '#6cbbf7',
+	focused: {
+		borderColor: Colors.Accent,
+	},
+	shadow: {
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 1.41,
+
+		elevation: 2,
+	},
+	labelStyle: {
+		marginBottom: 2,
+		fontSize: 14,
+		fontFamily: Fonts.Kelson,
+		fontWeight: 'normal',
+		color: Colors.Primary,
+	},
+	error: {
+		borderColor: Colors.LightRed,
 	},
 });
-
-const focusedInputStyles = StyleSheet.flatten([styles.input, styles.inputFocused]);

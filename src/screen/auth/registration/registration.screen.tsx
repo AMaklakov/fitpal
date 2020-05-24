@@ -81,13 +81,11 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 				{/*	TODO add sex switch */}
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter age')}</Text>
-					<IntegerNumberInput value={age} onChange={setAge} />
+					<IntegerNumberInput label={t('Enter age')} value={age} onChange={setAge} />
 				</View>
 
 				<View style={styles.inputWrapper}>
-					<Text>{t('Enter weight')}</Text>
-					<IntegerNumberInput value={weight} onChange={setWeight} />
+					<IntegerNumberInput label={t('Enter weight')} value={weight} onChange={setWeight} />
 				</View>
 
 				<View style={styles.buttonsWrapper}>

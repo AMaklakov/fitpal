@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { IntegerNumberInputWithValidation } from '@components/inputs/integer-number-input/integer-number-input';
 import { RepeatOnceIcon } from '@icons/repeat-one.icon';
 import { ISeries } from '@model/training-exercise';
 import { useTranslation } from 'react-i18next';
 import { ButtonIcon } from '@components/button-icon/button-icon';
 import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
+import { Text } from 'react-native-elements';
 
 interface IProps {
-	series?: ISeries;
 	index: number;
+	onChange: (s: Partial<ISeries>) => void;
 
-	onChange: (s: ISeries) => void;
+	series?: ISeries;
 	onRepeatIconPress?: () => void;
-
 	weightMax?: number;
 }
 
@@ -21,21 +21,20 @@ export const CreateSeries = (props: IProps) => {
 	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT } = props;
 	const { t } = useTranslation();
 
-	const [sequenceNumber] = useState(series?.sequenceNumber ?? index + 1);
+	const [sequenceNumber] = useState(index + 1);
 	const [repeats, setRepeats] = useState<string | undefined>(series?.repeats?.toString() ?? '1');
 	const [weight, setWeight] = useState<string | undefined>(series?.weight?.toString() ?? '0');
 
 	useEffect(() => {
 		onChange({
-			sequenceNumber,
 			repeats: Number(repeats),
 			weight: Number(weight),
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sequenceNumber, repeats, weight]);
 
-	const handleSetRepeats = (v: string) => setRepeats(v);
-	const handleSetWeight = (v: string) => setWeight(v);
+	const handleSetRepeats = useCallback((v: string) => setRepeats(v), []);
+	const handleSetWeight = useCallback((v: string) => setWeight(v), []);
 
 	return (
 		<View style={styles.wrapper}>
@@ -43,6 +42,7 @@ export const CreateSeries = (props: IProps) => {
 
 			<View style={styles.repeats}>
 				<IntegerNumberInputWithValidation
+					isNumber={[true, t('Not a number')]}
 					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
 					value={repeats}
@@ -52,10 +52,13 @@ export const CreateSeries = (props: IProps) => {
 
 			<View style={styles.weight}>
 				<IntegerNumberInputWithValidation
+					isNumber={[true, t('Not a number')]}
 					min={[1, t('Min value is |min|', { min: MIN_WEIGHT })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
 					value={weight}
 					onChange={handleSetWeight}
+					rightIcon={<Text>{t('Kg')}</Text>}
+					rightIconContainerStyle={styles.iconContainerStyle}
 				/>
 			</View>
 
@@ -76,6 +79,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 	},
 	sequenceNumber: {
+		height: '100%',
+		paddingTop: 12,
 		textAlign: 'center',
 		width: WINDOW.width / 10,
 	},
@@ -86,7 +91,10 @@ const styles = StyleSheet.create({
 		width: WINDOW.width / 3,
 	},
 	actions: {
+		height: '100%',
+		paddingTop: 10,
 		width: WINDOW.width / 8,
 		alignItems: 'center',
 	},
+	iconContainerStyle: { marginVertical: 0 },
 });
