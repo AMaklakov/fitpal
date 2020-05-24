@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { Button as ButtonComponent, ButtonProps } from 'react-native-elements';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Fonts } from '@css/fonts';
 
@@ -15,19 +15,19 @@ export const Button: FC<IProps> = props => {
 		if (type === 'solid') {
 			switch (solidType) {
 				case 'primary':
-					return [StyleSheet.flatten([styles.default, styles.solidPrimary]), styles.defaultTitle];
+					return [styles.solidPrimary, styles.defaultTitle];
 				case 'gray':
-					return [StyleSheet.flatten([styles.default, styles.solidGray]), styles.clearTitle];
+					return [styles.solidGray, styles.clearTitle];
 				case 'purple':
-					return [StyleSheet.flatten([styles.default, styles.solidPurple]), styles.defaultTitle];
+					return [styles.solidPurple, styles.defaultTitle];
 			}
 		}
 
 		switch (type) {
 			case 'outline':
-				return [StyleSheet.flatten([styles.default, styles.outline]), styles.outlineTitle];
+				return [styles.outline, styles.outlineTitle];
 			case 'clear':
-				return [StyleSheet.flatten([styles.clear, IS_IOS && styles.iosClear]), styles.clearTitle];
+				return [styles.clear, styles.clearTitle];
 			default:
 				return [styles.default, styles.defaultTitle];
 		}
@@ -35,15 +35,13 @@ export const Button: FC<IProps> = props => {
 
 	return (
 		<ButtonComponent
-			buttonStyle={[originalButtonStyle, buttonStyle]}
+			buttonStyle={[originalButtonStyle, styles.default, buttonStyle]}
 			titleStyle={[originalTitleStyle, titleStyle]}
 			type={type}
 			{...rest}
 		/>
 	);
 };
-
-const IS_IOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
 	defaultTitle: {
@@ -63,8 +61,7 @@ const styles = StyleSheet.create({
 	},
 
 	default: {
-		paddingTop: IS_IOS ? 19 : 16,
-		paddingBottom: IS_IOS ? 13 : 16,
+		paddingVertical: 15,
 		paddingHorizontal: 20,
 	},
 
@@ -75,10 +72,6 @@ const styles = StyleSheet.create({
 	},
 
 	clear: {},
-	iosClear: {
-		paddingTop: 11,
-		paddingBottom: 5,
-	},
 
 	solidPrimary: {
 		backgroundColor: Colors.Primary,

@@ -61,8 +61,9 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
-		<string>KelsonSans-RegularRU.otf</string>
-		<string>KelsonSans-BoldRU.otf</string>
+		<string>KelsonSansRU-Bold.ttf</string>
+		<string>KelsonSansRU-Normal.ttf</string>
+		<string>KelsonSansRU-Light.ttf</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>

@@ -40,13 +40,10 @@ export const BaseHeading = (props: IBaseHeadingProps) => {
 const IS_IOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
-	wrapper: {
-		// backgroundColor: 'orange',
-	},
+	wrapper: {},
 	text: {
 		fontFamily: Fonts.Kelson,
-		paddingTop: IS_IOS ? 9 : 5,
-		paddingBottom: IS_IOS ? 1 : 5,
+		paddingVertical: 5,
 	},
 	textCenter: {
 		textAlign: 'center',
