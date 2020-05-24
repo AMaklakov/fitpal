@@ -23,7 +23,8 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 	const { t } = useTranslation();
 	const tooltip = useRef<Tooltip>(null);
 
-	const handleOnPress = useCallback(() => {
+	const handleTrainingPress = useCallback(() => onTrainingPress?.(training), [onTrainingPress, training]);
+	const handleDetailsPress = useCallback(() => {
 		tooltip.current?.toggleTooltip();
 		onTrainingPress?.(training);
 	}, [onTrainingPress, training]);
@@ -40,7 +41,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 		<Card
 			title={
 				<View style={styles.titleContainer}>
-					<TouchableOpacity onPress={handleOnPress}>
+					<TouchableOpacity onPress={handleTrainingPress}>
 						<H2 text={training?.name} />
 					</TouchableOpacity>
 					<Tooltip
@@ -52,7 +53,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 							<View style={styles.tooltipInner}>
 								<ListItem
 									title={t('Details')}
-									onPress={handleOnPress}
+									onPress={handleDetailsPress}
 									leftIcon={{ type: 'material', name: 'search' }}
 									titleStyle={styles.listItemTitle}
 								/>
