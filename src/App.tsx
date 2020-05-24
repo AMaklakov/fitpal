@@ -5,17 +5,19 @@ import { Navigator, Routes } from '@screen/navigator';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { changeLanguage } from '@i18n/index';
 import { CalendarTrainingModal } from '@screen/calendar/calendar-training-modal';
-import { Header } from '@components/header/header';
 import { Menu } from '@components/menu/menu';
 import { NavigationActions, NavigationContainerComponent, NavigationRoute, NavigationState } from 'react-navigation';
 import { UserWeightModal } from '@components/user-weight/user-weight.modal';
 import { SpinnerModal } from '@components/progress-bars/spinner.modal';
 import { setNavigator } from '@util/navigation.util';
+import { Header } from '@components/header/header';
 
 changeLanguage(store.getState().settings.language);
 
 export const App = () => {
 	const [isMenuOpen, changeIsMenuOpen] = useState();
+	const [navZone, setNavZone] = useState<Routes>(Routes.AuthZone);
+	const [navRoute, setNavRoute] = useState<Routes>(Routes.Login);
 	const navigatorRef = useRef<NavigationContainerComponent & { state: { nav: NavigationState } }>(null);
 
 	useEffect(() => {
@@ -34,28 +36,29 @@ export const App = () => {
 		[handleCloseMenu]
 	);
 
+	const handleSetNavigations = useCallback(
+		(prevNavigationState: NavigationState, nextNavigationState: NavigationState) => {
+			setNavZone(getCurrentRoute(nextNavigationState, true));
+			setNavRoute(getCurrentRoute(nextNavigationState));
+		},
+		[]
+	);
+
 	return (
 		<>
 			<StatusBar barStyle="dark-content" />
 
 			<SafeAreaView style={{ flex: 1 }}>
 				<Provider store={store}>
-					{getCurrentRoute(navigatorRef.current?.state?.nav, true) === Routes.AppZone && (
-						<Header onOpenMenu={handleOpenMenu} />
-					)}
+					{navZone === Routes.AppZone && <Header onOpenMenu={handleOpenMenu} />}
 
-					<Navigator ref={navigatorRef} />
+					<Navigator ref={navigatorRef} onNavigationStateChange={handleSetNavigations} />
 
 					<UserWeightModal />
 					<CalendarTrainingModal />
 					<SpinnerModal />
 
-					<Menu
-						isOpen={isMenuOpen}
-						onCloseMenu={handleCloseMenu}
-						navigate={handleNavigate}
-						activeRoute={getCurrentRoute(navigatorRef.current?.state?.nav)}
-					/>
+					<Menu isOpen={isMenuOpen} onCloseMenu={handleCloseMenu} navigate={handleNavigate} activeRoute={navRoute} />
 				</Provider>
 			</SafeAreaView>
 		</>
