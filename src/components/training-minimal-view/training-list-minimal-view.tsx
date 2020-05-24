@@ -7,6 +7,7 @@ import { ExerciseModel } from '@model/exercise.model';
 interface TrainingListMinimalViewProps {
 	trainingList?: TrainingModel[];
 	onTrainingPress?: (training: TrainingModel) => void;
+	onExercisePress?: (exerciseId: string) => void;
 
 	onCopy: (training: TrainingModel) => void;
 	onDelete: (training: TrainingModel) => void;
@@ -14,11 +15,12 @@ interface TrainingListMinimalViewProps {
 }
 
 export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => {
-	const { trainingList, exercises, onTrainingPress, onCopy = () => {}, onDelete = () => {} } = props;
+	const { trainingList, exercises, onTrainingPress, onCopy, onDelete, onExercisePress } = props;
 
 	return (
 		<FlatList<TrainingModel>
 			data={trainingList}
+			keyExtractor={x => x._id}
 			renderItem={data => (
 				<TrainingMinimalView
 					training={data.item}
@@ -26,6 +28,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 					onTrainingPress={onTrainingPress}
 					onDelete={onDelete}
 					onCopy={onCopy}
+					onExercisePress={onExercisePress}
 				/>
 			)}
 		/>

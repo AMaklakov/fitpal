@@ -101,6 +101,13 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		[]
 	);
 
+	const handleExercisePress = useCallback(
+		(id: string) => {
+			navigation.navigate(Routes.Exercise, { exerciseId: id });
+		},
+		[navigation]
+	);
+
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
@@ -119,6 +126,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					trainingList={trainingList}
 					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
+					onExercisePress={handleExercisePress}
 				/>
 			</View>
 

@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { H2 } from '@components/heading/h2';
 import { Card, Divider, Icon, ListItem, Tooltip } from 'react-native-elements';
@@ -11,19 +11,30 @@ import { ExerciseModel } from '@model/exercise.model';
 
 interface TrainingMinimalViewProps {
 	training: TrainingModel;
+	exercises: ExerciseModel[];
 	onTrainingPress?: (training: TrainingModel) => void;
 	onCopy?: (training: TrainingModel) => void;
 	onDelete?: (training: TrainingModel) => void;
-	exercises: ExerciseModel[];
+	onExercisePress?: (exerciseId: string) => void;
 }
 
 export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
-	const { training, exercises, onTrainingPress, onCopy, onDelete } = props;
+	const { training, exercises, onTrainingPress, onCopy, onDelete, onExercisePress } = props;
 	const { t } = useTranslation();
+	const tooltip = useRef<Tooltip>(null);
 
-	const handleOnPress = useCallback(() => onTrainingPress?.(training), [onTrainingPress, training]);
-	const handleOnCopy = useCallback(() => onCopy?.(training), [onCopy, training]);
-	const handleOnDelete = useCallback(() => onDelete?.(training), [onDelete, training]);
+	const handleOnPress = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onTrainingPress?.(training);
+	}, [onTrainingPress, training]);
+	const handleOnCopy = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onCopy?.(training);
+	}, [onCopy, training]);
+	const handleOnDelete = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onDelete?.(training);
+	}, [onDelete, training]);
 
 	return (
 		<Card
@@ -33,6 +44,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 						<H2 text={training?.name} />
 					</TouchableOpacity>
 					<Tooltip
+						ref={tooltip}
 						withPointer={false}
 						containerStyle={styles.tooltip}
 						width={200}
@@ -63,10 +75,12 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 				</View>
 			}>
 			<Divider />
-			<View style={styles.exerciseWrap}>
-				<Text>{training?.exerciseList?.length} упражнений</Text>
-			</View>
-			<CompactTrainingView useHeading={false} training={training} exercises={exercises} listItemAction={handleOnPress}/>
+			<CompactTrainingView
+				useHeading={false}
+				training={training}
+				exercises={exercises}
+				onExerciseNamePress={onExercisePress}
+			/>
 		</Card>
 	);
 };

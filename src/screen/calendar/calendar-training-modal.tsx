@@ -9,7 +9,6 @@ import { cleanUpAction, toggleCalendarTrainingModalAction } from '@redux/action/
 import { StoreModel } from '@redux/store';
 import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util';
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
-import { DatepickerInput } from '@inputs/datepicker/datepicker';
 import moment, { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
@@ -17,6 +16,7 @@ import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/valid
 import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import { DatepickerInput } from '@inputs/datepicker/datepicker';
 
 interface IStateProps {
 	isOpen: boolean;

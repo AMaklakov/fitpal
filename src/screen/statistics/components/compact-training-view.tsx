@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { H2 } from '@components/heading/h2';
@@ -12,42 +12,44 @@ interface IProps {
 	training: TrainingModel;
 	exercises: ExerciseModel[];
 	useHeading?: boolean;
-	listItemAction: any;
+	onExerciseNamePress?: (exerciseId: string) => void;
 }
 
 export const CompactTrainingView: FC<IProps> = props => {
-	const { training, exercises, useHeading = true, listItemAction } = props;
+	const { training, exercises, useHeading = true, onExerciseNamePress } = props;
 	const { t } = useTranslation();
 
+	const handleExercisePress = useCallback((id: string) => () => onExerciseNamePress?.(id), [onExerciseNamePress]);
+
 	return (
-		<View style={styles.currentTrainingWrapper}>
+		<View style={styles.wrapper}>
 			{useHeading && <H2 text={training.name} />}
 
-				<View>
-					<Text style={styles.heading}>
-						{t('Exercise list')}:
-					</Text>
-				</View>
+			<Text style={styles.heading}>{t('Exercise list')}:</Text>
+
 			<FlatList
 				data={training.exerciseList}
 				keyExtractor={ex => ex._id}
 				renderItem={data => (
-				<TouchableOpacity onPress={listItemAction}>
-					<View style={styles.itemWrapper}>
-						<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
-						<Text>
-							{calcTotal(data.item)} {t('Kg')}
-						</Text>
-					</View>
-				</TouchableOpacity>
+					<TouchableOpacity onPress={handleExercisePress(data.item.exerciseId)}>
+						<View style={styles.itemWrapper}>
+							<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
+							<Text>
+								{calcTotal(data.item)} {t('Kg')}
+							</Text>
+						</View>
+					</TouchableOpacity>
 				)}
 			/>
+
 			<Divider />
+
 			<View style={styles.total}>
-				<Text style={styles.totalLabel}>
-					{t('Total')}:</Text>
+				<Text style={styles.totalLabel}>{t('Total')}:</Text>
 				<View>
-					<Text style={styles.totalValue}>{calculateTrainingTotal(training).toString()} {t('Kg')}</Text>
+					<Text style={styles.totalValue}>
+						{calculateTrainingTotal(training).toString()} {t('Kg')}
+					</Text>
 				</View>
 			</View>
 		</View>
@@ -58,18 +60,18 @@ const getExerciseName = (exerciseId: string, exercises: ExerciseModel[]) =>
 	exercises.find(e => e._id === exerciseId)?.name;
 
 const styles = StyleSheet.create({
-	currentTrainingWrapper: {
-		paddingTop: 30
+	wrapper: {
+		paddingTop: 10,
 	},
 	heading: {
-			fontFamily: Fonts.Kelson,
-			fontSize: 19,
-			paddingVertical: 5,
+		fontFamily: Fonts.Kelson,
+		fontSize: 18,
+		paddingVertical: 5,
 	},
 	itemWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		paddingVertical: 10
+		paddingVertical: 10,
 	},
 	total: {
 		paddingVertical: 10,
@@ -83,6 +85,6 @@ const styles = StyleSheet.create({
 	totalValue: {
 		paddingTop: 8,
 		fontFamily: Fonts.KelsonBold,
-		fontSize: 34
-	}
+		fontSize: 34,
+	},
 });
