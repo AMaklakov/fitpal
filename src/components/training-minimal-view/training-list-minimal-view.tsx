@@ -2,6 +2,7 @@ import { TrainingModel } from '@model/training.model';
 import { FlatList } from 'react-native';
 import React from 'react';
 import { TrainingMinimalView } from './training-minimal-view';
+import { ExerciseModel } from '@model/exercise.model';
 
 interface TrainingListMinimalViewProps {
 	trainingList?: TrainingModel[];
@@ -9,10 +10,11 @@ interface TrainingListMinimalViewProps {
 
 	onCopy: (training: TrainingModel) => void;
 	onDelete: (training: TrainingModel) => void;
+	exercises: ExerciseModel[];
 }
 
 export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => {
-	const { trainingList, onTrainingPress, onCopy = () => {}, onDelete = () => {} } = props;
+	const { trainingList, exercises, onTrainingPress, onCopy = () => {}, onDelete = () => {} } = props;
 
 	return (
 		<FlatList<TrainingModel>
@@ -20,6 +22,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 			renderItem={data => (
 				<TrainingMinimalView
 					training={data.item}
+					exercises={exercises}
 					onTrainingPress={onTrainingPress}
 					onDelete={onDelete}
 					onCopy={onCopy}

@@ -6,16 +6,19 @@ import { Card, Divider, Icon, ListItem, Tooltip } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import { Fonts } from '@css/fonts';
 import { Colors } from '@css/colors.style';
+import { CompactTrainingView } from '@screen/statistics/components/compact-training-view';
+import { ExerciseModel } from '@model/exercise.model';
 
 interface TrainingMinimalViewProps {
 	training: TrainingModel;
 	onTrainingPress?: (training: TrainingModel) => void;
 	onCopy?: (training: TrainingModel) => void;
 	onDelete?: (training: TrainingModel) => void;
+	exercises: ExerciseModel[];
 }
 
 export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
-	const { training, onTrainingPress, onCopy, onDelete } = props;
+	const { training, exercises, onTrainingPress, onCopy, onDelete } = props;
 	const { t } = useTranslation();
 
 	const handleOnPress = useCallback(() => onTrainingPress?.(training), [onTrainingPress, training]);
@@ -29,7 +32,6 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 					<TouchableOpacity onPress={handleOnPress}>
 						<H2 text={training?.name} />
 					</TouchableOpacity>
-
 					<Tooltip
 						withPointer={false}
 						containerStyle={styles.tooltip}
@@ -64,6 +66,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 			<View style={styles.exerciseWrap}>
 				<Text>{training?.exerciseList?.length} упражнений</Text>
 			</View>
+			<CompactTrainingView useHeading={false} training={training} exercises={exercises} listItemAction={handleOnPress}/>
 		</Card>
 	);
 };

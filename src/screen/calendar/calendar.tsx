@@ -117,6 +117,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					onCopy={handleCopyTraining}
 					onDelete={handleOpenDeleteTrainingConfirm}
 					trainingList={trainingList}
+					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
 				/>
 			</View>
