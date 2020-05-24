@@ -4,11 +4,10 @@ import Strip from 'react-native-calendar-strip';
 import { getToday } from '../../util/date.util';
 import { Colors } from '../../css/colors.style';
 import moment from 'moment';
-import { colors } from 'react-native-elements';
+import { toRgba } from '@util/css.util';
 
 const styles = StyleSheet.create({
 	headingText: {
-		// backgroundColor: 'pink',
 		color: Colors.Primary,
 		paddingTop: 10,
 		paddingBottom: 0,
@@ -21,7 +20,11 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		backgroundColor: Colors.Lightgray,
 		color: Colors.White,
-		fontFamily: 'kerson-bold'
+		fontFamily: 'kerson-bold',
+	},
+	dateNumberStyle: {
+		color: Colors.Primary,
+		fontSize: 16,
 	},
 });
 
@@ -33,13 +36,24 @@ interface CalendarStripProps {
 export const CalendarStrip = (props: CalendarStripProps) => {
 	const { selectedDate = getToday(), changeSelectedDate } = props;
 
+	const customDatesStyles = useMemo(
+		() => [
+			{
+				startDate: moment(),
+				dateNameStyle: { color: Colors.White },
+				dateNumberStyle: { color: Colors.White },
+				dateContainerStyle: { backgroundColor: toRgba(Colors.Red, 0.5) },
+			} as any,
+		],
+		[]
+	);
+
 	const daySelectionAnimation = useMemo(
 		() =>
 			({
-				type: 'border',
+				type: 'background',
 				duration: 200,
-				borderWidth: 2,
-				borderHighlightColor: Colors.Purple,
+				highlightColor: Colors.Purple,
 			} as any),
 		[]
 	);
@@ -49,12 +63,16 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 			<Strip
 				style={styles.calendar}
 				calendarHeaderStyle={styles.headingText}
-				dateNumberStyle={{color: Colors.Primary}}
-				dateNameStyle={{color: Colors.Primary}}
+				dateNumberStyle={styles.dateNumberStyle}
+				dateNameStyle={{ color: Colors.Primary }}
+				highlightDateNumberStyle={{ color: Colors.White }}
+				highlightDateNameStyle={{ color: Colors.White }}
+				weekendDateNameStyle={{ color: Colors.White }}
 				selectedDate={(selectedDate as unknown) as Date}
 				onDateSelected={changeSelectedDate as any}
-				calendarAnimation={{ type: 'sequence', duration: 50 }}
+				calendarAnimation={{ type: 'sequence', duration: 30 }}
 				daySelectionAnimation={daySelectionAnimation}
+				customDatesStyles={customDatesStyles}
 			/>
 		</View>
 	);
