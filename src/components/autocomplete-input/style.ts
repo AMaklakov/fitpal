@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
+import { Fonts } from '@css/fonts';
 
 const style = StyleSheet.create({
 	selectedWrapper: {
@@ -41,6 +42,13 @@ const style = StyleSheet.create({
 		paddingTop: 5,
 		paddingBottom: 5,
 		fontSize: 18,
+	},
+	asLabel: {
+		fontFamily: Fonts.Kelson,
+		fontSize: 14,
+	},
+	defaultPaddingHorizontal: {
+		paddingHorizontal: 24,
 	},
 });
 
