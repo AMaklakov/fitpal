@@ -25,10 +25,11 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 	return (
 		<SwipeListView<IBaseTrainingExercise>
 			data={trainingExerciseList}
-			renderItem={(data, rowMap) => (
+			keyExtractor={x => x._id}
+			renderItem={data => (
 				<TrainingExercise trainingExercise={data.item} exerciseList={exerciseList} onLongPress={onRowLongPress} />
 			)}
-			renderHiddenItem={(data, rowMap) => (
+			renderHiddenItem={data => (
 				<View style={styles.hiddenActionsWrapper}>
 					<SwipeHiddenButton
 						style={styles.button}

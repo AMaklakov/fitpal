@@ -1,68 +1,36 @@
-import { TrainingModel } from '../../model/training.model';
-import { StyleSheet, View } from 'react-native';
+import { TrainingModel } from '@model/training.model';
+import { FlatList } from 'react-native';
 import React from 'react';
 import { TrainingMinimalView } from './training-minimal-view';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import { Colors } from '../../css/colors.style';
-import { SwipeHiddenButton } from '../swipe-list/button';
-import { useTranslation } from 'react-i18next';
+import { ExerciseModel } from '@model/exercise.model';
 
 interface TrainingListMinimalViewProps {
 	trainingList?: TrainingModel[];
 	onTrainingPress?: (training: TrainingModel) => void;
+	onExercisePress?: (exerciseId: string) => void;
 
 	onCopy: (training: TrainingModel) => void;
 	onDelete: (training: TrainingModel) => void;
+	exercises: ExerciseModel[];
 }
 
-const styles = StyleSheet.create({
-	rowBack: {
-		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	},
-	button1: {
-		flex: 1,
-		alignItems: 'flex-start',
-	},
-	button2: {
-		flex: 1,
-		alignItems: 'flex-end',
-	},
-});
-
 export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => {
-	const { trainingList, onTrainingPress, onCopy = () => {}, onDelete = () => {} } = props;
-	const { t } = useTranslation();
+	const { trainingList, exercises, onTrainingPress, onCopy, onDelete, onExercisePress } = props;
 
 	return (
-		<SwipeListView<TrainingModel>
+		<FlatList<TrainingModel>
 			data={trainingList}
-			renderItem={data => <TrainingMinimalView training={data.item} onTrainingPress={onTrainingPress} />}
-			renderHiddenItem={data => (
-				<View style={styles.rowBack}>
-					<SwipeHiddenButton
-						style={styles.button1}
-						title={t('Copy')}
-						item={data.item}
-						textColor={Colors.White}
-						onTouch={onCopy}
-					/>
-
-					<SwipeHiddenButton
-						style={styles.button2}
-						title={t('Delete')}
-						item={data.item}
-						onTouch={onDelete}
-						backgroundColor={Colors.LightRed}
-						textColor={Colors.White}
-					/>
-				</View>
+			keyExtractor={x => x._id}
+			renderItem={data => (
+				<TrainingMinimalView
+					training={data.item}
+					exercises={exercises}
+					onTrainingPress={onTrainingPress}
+					onDelete={onDelete}
+					onCopy={onCopy}
+					onExercisePress={onExercisePress}
+				/>
 			)}
-			leftOpenValue={115}
-			stopLeftSwipe={130}
-			rightOpenValue={-115}
-			stopRightSwipe={-130}
 		/>
 	);
 };

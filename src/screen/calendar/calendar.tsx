@@ -23,29 +23,32 @@ import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { Calendar as CalendarMonth } from '@components/calendar/calendar';
+import { fetchExercisesStart } from '@redux/action/exercise.action';
+import { getExerciseList } from '@redux/selector/exercise.selector';
+import { ExerciseModel } from '@model/exercise.model';
 
 interface IDispatch {
 	fetchTrainingListByDate: (date: Moment) => void;
 	deleteTrainingById: (trainingId: string) => void;
 	openTrainingModal: (training?: TrainingModel, date?: MomentInput) => void;
+	onFetchExercises: () => void;
 }
 
 interface IState {
 	selectTrainingListByDate: (date: Moment) => TrainingModel[] | undefined;
+	isFetching: boolean;
+	hasErrors: boolean;
 }
 
-interface IProps extends NavigationPropsModel {}
+interface IProps extends NavigationPropsModel {
+	exercises: ExerciseModel[];
+}
 
 type ICalendarTypes = 'strip' | 'month';
 
 const Calendar = (props: IProps & IState & IDispatch) => {
-	const {
-		navigation,
-		fetchTrainingListByDate,
-		deleteTrainingById,
-		openTrainingModal,
-		selectTrainingListByDate,
-	} = props;
+	const { navigation, fetchTrainingListByDate, deleteTrainingById, openTrainingModal } = props;
+	const { selectTrainingListByDate, onFetchExercises, exercises, isFetching, hasErrors } = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, setSelectedDate] = useState(getToday());
@@ -56,6 +59,12 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	useEffect(() => {
 		fetchTrainingListByDate(selectedDate);
 	}, [fetchTrainingListByDate, selectedDate]);
+
+	useEffect(() => {
+		if (exercises.length === 0 && !isFetching && !hasErrors) {
+			onFetchExercises();
+		}
+	}, [onFetchExercises, exercises, isFetching, hasErrors]);
 
 	const handleOpenDeleteTrainingConfirm = useCallback((training: TrainingModel) => setTrainingToDelete(training), []);
 
@@ -92,6 +101,13 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		[]
 	);
 
+	const handleExercisePress = useCallback(
+		(id: string) => {
+			navigation.navigate(Routes.Exercise, { exerciseId: id });
+		},
+		[navigation]
+	);
+
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
@@ -108,7 +124,9 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					onCopy={handleCopyTraining}
 					onDelete={handleOpenDeleteTrainingConfirm}
 					trainingList={trainingList}
+					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
+					onExercisePress={handleExercisePress}
 				/>
 			</View>
 
@@ -165,6 +183,9 @@ const styles = StyleSheet.create({
 const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state => {
 	return {
 		selectTrainingListByDate: (date: Moment) => getTrainingListByDate(state, date),
+		exercises: getExerciseList(state),
+		isFetching: state.exercise.loading,
+		hasErrors: !!state.exercise.error,
 	};
 };
 
@@ -177,6 +198,7 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch 
 			dispatch(updateDateInTrainingModalAction(date ?? null));
 			dispatch(toggleCalendarTrainingModalAction(true));
 		},
+		onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 	};
 };
 

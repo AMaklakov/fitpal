@@ -89,7 +89,11 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 				<WeeklyChart trainingsByDates={trainingsByDates} onFetch={onFetch} onShowTraining={handleShowTraining} />
 			)}
 
-			{currentTraining && <CompactTrainingView training={currentTraining} exercises={exercises} />}
+			{currentTraining && (
+				<View style={styles.trainingWrapper}>
+					<CompactTrainingView training={currentTraining} exercises={exercises} />
+				</View>
+			)}
 		</ScrollView>
 	);
 };
@@ -109,6 +113,9 @@ const styles = StyleSheet.create({
 	},
 	inputWrapper: {
 		minWidth: '40%',
+	},
+	trainingWrapper: {
+		paddingHorizontal: 20,
 	},
 });
 
