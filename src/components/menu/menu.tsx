@@ -51,7 +51,10 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 
 	const goToPage = useCallback((page: Routes) => () => navigate(page), [navigate]);
 
-	const handleLogout = useCallback(() => onLogout(), [onLogout]);
+	const handleLogout = useCallback(() => {
+		onLogout();
+		onCloseMenu();
+	}, [onCloseMenu, onLogout]);
 
 	useEffect(() => {
 		if (isOpen && covidConfirmed === 0 && !isCovidLoading) {
@@ -99,6 +102,7 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 			{
 				name: t('Exit'),
 				styles: { color: Colors.Red },
+				titleStyles: { color: Colors.Red },
 				icon: <ExitIcon />,
 				onPress: handleLogout,
 			},
@@ -126,14 +130,14 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 
 				{/* BOTTOM NAVIGATION */}
 				<View style={styles.bottomNavigationWrapper}>
-					{bottomNavigationList.map(({ name, description, icon, isActive, onPress }) => (
+					{bottomNavigationList.map(({ name, description, icon, isActive, onPress, titleStyles }) => (
 						<ListItem
 							key={name}
 							title={name}
 							subtitle={description}
 							rightIcon={icon}
 							containerStyle={StyleSheet.flatten([isActive && styles.selectedItem])}
-							titleStyle={StyleSheet.flatten([styles.listItemTitle, isActive && styles.selectedItemText])}
+							titleStyle={StyleSheet.flatten([styles.listItemTitle, isActive && styles.selectedItemText, titleStyles])}
 							subtitleStyle={styles.listItemSubtitle}
 							bottomDivider={true}
 							onPress={onPress}
