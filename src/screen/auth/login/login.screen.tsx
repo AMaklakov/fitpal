@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
 		textDecorationLine: 'underline',
 	},
 	registrationWrapper: {
-		flexDirection: 'row',
 		alignItems: 'center',
 	},
 	buttonWithIconWrapper: {
