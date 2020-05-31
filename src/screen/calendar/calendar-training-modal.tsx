@@ -17,6 +17,7 @@ import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
+import { Fonts } from '@css/fonts';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -92,10 +93,10 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 					minLength={[TRAINING_TITLE_MINLENGTH, t('Min length is |len|', { len: TRAINING_TITLE_MINLENGTH })]}
 				/>
 
-				{!!training && <Text>{t('Training date')}</Text>}
-				{!!training && (
-					<DatepickerInput date={date} size={24} color={Colors.LightBlue} onDateChange={setDate} minDate={getToday()} />
-				)}
+				<View style={styles.calendarButton}>
+					{!!training && <Text style={styles.asLabel}>{t('Training date')}</Text>}
+					{!!training && <DatepickerInput date={date} onDateChange={setDate} minDate={getToday()} />}
+				</View>
 
 				{createTrainingError && (
 					<View>
@@ -127,6 +128,17 @@ const styles = StyleSheet.create({
 	},
 	h1: {
 		marginVertical: 15,
+	},
+	calendarButton: {
+		paddingHorizontal: 12,
+		marginTop: 12,
+	},
+	asLabel: {
+		marginBottom: 2,
+		fontSize: 14,
+		fontFamily: Fonts.Kelson,
+		fontWeight: 'normal',
+		color: Colors.Primary,
 	},
 });
 

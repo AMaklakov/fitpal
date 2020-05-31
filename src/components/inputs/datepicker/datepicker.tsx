@@ -1,64 +1,62 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import DatePicker from 'react-native-datepicker';
 import moment from 'moment';
-import { StyleSheet } from 'react-native';
-import { DateFormatEnum } from '../../../util/date.util';
+import { StyleSheet, View } from 'react-native';
+import { DateFormatEnum } from '@util/date.util';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Fonts } from '@css/fonts';
+import { Colors } from '@css/colors.style';
 
 type DatepickerType = 'date' | 'datetime' | 'time';
 
 interface IProps {
+	date: moment.Moment;
+	onDateChange: (value: moment.Moment) => void;
+
 	/**
 	 * 'date' by default
 	 */
 	type?: DatepickerType;
-	date: moment.Moment;
-	onDateChange: (value: moment.Moment) => void;
-
 	minDate?: moment.Moment;
 	maxDate?: moment.Moment;
-
 	placeholder?: string;
 	format?: DateFormatEnum;
-
 	confirmText?: string;
 	cancelText?: string;
 	color?: string;
 	size?: number;
+	themeType?: 'dark' | 'light';
 }
 
 export const DatepickerInput = (props: IProps) => {
-	const {
-		onDateChange,
-		type = 'date',
-		color = '#000',
-		size = 24,
-		date,
-		placeholder,
-		format = DateFormatEnum.Default,
-		minDate,
-		maxDate,
-		cancelText = 'Cancel',
-		confirmText = 'Confirm',
-	} = props;
+	const { onDateChange, date, placeholder, format = DateFormatEnum.Default, minDate, maxDate } = props;
+	const { type = 'date', color, size = 24, cancelText = 'Cancel', confirmText = 'Confirm', themeType = 'dark' } = props;
 
-	const handleOnDateChange = (dateString: string, dateObj: Date) => onDateChange(moment(dateObj));
+	const isDark = useMemo(() => themeType === 'dark', [themeType]);
+
+	const handleOnDateChange = useCallback((dateString: string, dateObj: Date) => onDateChange(moment(dateObj)), [
+		onDateChange,
+	]);
 
 	return (
 		<DatePicker
-			style={styles.wrapper}
+			style={[styles.wrapper, isDark && styles.darkWrapper]}
 			date={date}
 			mode={type}
 			placeholder={placeholder}
 			format={format}
 			minDate={minDate ? minDate.toDate() : undefined}
 			maxDate={maxDate ? maxDate.toDate() : undefined}
-			iconComponent={<Icon style={styles.dateIcon} color={color} size={size} name="calendar" />}
+			iconComponent={
+				<View style={[styles.dateIconWrapper, isDark && styles.darkDateIconWrapper]}>
+					<Icon color={color ?? (themeType === 'dark' ? Colors.White : Colors.Darkgray)} size={size} name="calendar" />
+				</View>
+			}
 			confirmBtnText={confirmText}
 			cancelBtnText={cancelText}
 			customStyles={{
-				dateIcon: styles.dateIcon,
 				dateInput: styles.dateInput,
+				dateText: styles.dateText,
 			}}
 			onDateChange={handleOnDateChange}
 		/>
@@ -67,22 +65,36 @@ export const DatepickerInput = (props: IProps) => {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		width: 140,
+		minWidth: 160,
 		borderWidth: 1,
-		borderColor: 'black',
-		borderRadius: 15,
-		padding: 5,
-		marginTop: 12,
-		marginBottom: 24,
+		borderColor: Colors.Primary,
+		borderRadius: 8,
 	},
-	dateIcon: {
+	dateIconWrapper: {
+		width: 36,
+		height: '100%',
 		position: 'absolute',
-		left: 8,
-		top: 8,
-		marginLeft: 0,
+		left: 0,
+		borderTopStartRadius: 6,
+		borderBottomStartRadius: 6,
+		backgroundColor: Colors.LightGrey,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	dateInput: {
 		marginLeft: 36,
 		borderWidth: 0,
+	},
+	dateText: {
+		fontFamily: Fonts.Kelson,
+		fontSize: 18,
+	},
+
+	// dark theme
+	darkWrapper: {
+		borderColor: Colors.Darkgray,
+	},
+	darkDateIconWrapper: {
+		backgroundColor: Colors.Darkgray,
 	},
 });
