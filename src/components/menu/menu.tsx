@@ -15,6 +15,8 @@ import { COVID_ACTION_CREATORS } from '@redux/action/covid.action';
 import { getCovidConfirmed } from '@redux/selector/covid.selector';
 import { ListItem } from 'react-native-elements';
 import { Fonts } from '@css/fonts';
+import { ExitIcon } from '@icons/exit.icon';
+import { logoutStart } from '@redux/action/user.action';
 
 interface IState {
 	covidConfirmed: string | number;
@@ -30,11 +32,26 @@ interface IProps extends IMenuWrapperProps {
 	activeRoute: Routes;
 }
 
+interface IDispatch {
+	onLogout: () => void;
+}
+
 export const MenuComponent = (props: IProps & IState & IDispatch) => {
-	const { isOpen, onCloseMenu, navigate, activeRoute, onFetchCovidConfirmed, covidConfirmed, isCovidLoading } = props;
+	const {
+		isOpen,
+		onCloseMenu,
+		navigate,
+		activeRoute,
+		onFetchCovidConfirmed,
+		covidConfirmed,
+		isCovidLoading,
+		onLogout,
+	} = props;
 	const { t } = useTranslation();
 
 	const goToPage = useCallback((page: Routes) => () => navigate(page), [navigate]);
+
+	const handleLogout = useCallback(() => onLogout(), [onLogout]);
 
 	useEffect(() => {
 		if (isOpen && covidConfirmed === 0 && !isCovidLoading) {
@@ -79,8 +96,14 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 				isActive: activeRoute === Routes.Settings,
 				onPress: goToPage(Routes.Settings),
 			},
+			{
+				name: t('Exit'),
+				styles: { color: Colors.Red },
+				icon: <ExitIcon />,
+				onPress: handleLogout,
+			},
 		],
-		[activeRoute, covidConfirmed, goToPage, t]
+		[activeRoute, covidConfirmed, goToPage, t, handleLogout]
 	);
 
 	return (
@@ -156,6 +179,7 @@ const mapStateToProps = (state: StoreModel): IState => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
+	onLogout: () => dispatch(logoutStart(null)),
 	onFetchCovidConfirmed: () => dispatch(COVID_ACTION_CREATORS.FETCH.START(undefined)),
 });
 
