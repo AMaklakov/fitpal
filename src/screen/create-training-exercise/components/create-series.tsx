@@ -14,11 +14,12 @@ interface IProps {
 
 	series?: ISeries;
 	onRepeatIconPress?: () => void;
+	weightMin?: number;
 	weightMax?: number;
 }
 
 export const CreateSeries = (props: IProps) => {
-	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT } = props;
+	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT, weightMin = 1 } = props;
 	const { t } = useTranslation();
 
 	const [sequenceNumber] = useState(index + 1);
@@ -53,7 +54,7 @@ export const CreateSeries = (props: IProps) => {
 			<View style={styles.weight}>
 				<IntegerNumberInputWithValidation
 					isNumber={[true, t('Not a number')]}
-					min={[1, t('Min value is |min|', { min: MIN_WEIGHT })]}
+					min={[weightMin, t('Min value is |min|', { min: weightMin })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
 					value={weight}
 					onChange={handleSetWeight}
