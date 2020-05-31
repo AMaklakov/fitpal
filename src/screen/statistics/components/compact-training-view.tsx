@@ -13,17 +13,27 @@ interface IProps {
 	exercises: ExerciseModel[];
 	useHeading?: boolean;
 	onExerciseNamePress?: (exerciseId: string) => void;
+	onTrainingHeadingPress?: (trainingId: string) => void;
 }
 
 export const CompactTrainingView: FC<IProps> = props => {
-	const { training, exercises, useHeading = true, onExerciseNamePress } = props;
+	const { training, exercises, useHeading = true, onExerciseNamePress, onTrainingHeadingPress } = props;
 	const { t } = useTranslation();
 
 	const handleExercisePress = useCallback((id: string) => () => onExerciseNamePress?.(id), [onExerciseNamePress]);
 
+	const handleHeadingPress = useCallback(() => onTrainingHeadingPress?.(training._id), [
+		onTrainingHeadingPress,
+		training._id,
+	]);
+
 	return (
 		<View style={styles.wrapper}>
-			{useHeading && <H2 text={training.name} />}
+			{useHeading && (
+				<TouchableOpacity onPress={handleHeadingPress}>
+					<H2 text={training.name} />
+				</TouchableOpacity>
+			)}
 
 			<Text style={styles.heading}>{t('Exercise list')}:</Text>
 
