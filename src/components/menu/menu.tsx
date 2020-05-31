@@ -51,7 +51,10 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 
 	const goToPage = useCallback((page: Routes) => () => navigate(page), [navigate]);
 
-	const handleLogout = useCallback(() => onLogout(), [onLogout]);
+	const handleLogout = useCallback(() => {
+		onLogout();
+		onCloseMenu();
+	}, [onCloseMenu, onLogout]);
 
 	useEffect(() => {
 		if (isOpen && covidConfirmed === 0 && !isCovidLoading) {
