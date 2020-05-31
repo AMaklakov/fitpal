@@ -9,7 +9,6 @@ import { H1 } from '@components/heading/h1';
 import { H2 } from '@components/heading/h2';
 import { Routes } from '../navigator';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '@css/colors.style';
 import { Button } from '@components/button/button';
 
 interface IProps extends NavigationPropsModel {}
@@ -49,7 +48,7 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 			</ScrollView>
 
 			<View style={styles.buttonContainer}>
-				<Button type="outline" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />
+				{/*<Button type="outline" title={t('Delete')} onPress={handleEdit} titleStyle={{ color: Colors.LightRed }} />*/}
 				<Button title={t('Edit')} onPress={handleEdit} />
 			</View>
 		</View>
