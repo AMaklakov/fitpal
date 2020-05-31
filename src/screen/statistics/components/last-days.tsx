@@ -33,19 +33,15 @@ export const LastDaysStatistics = (props: IProps) => {
 		const data = [];
 
 		for (let i = 0; i < daysCount; i++) {
-			data.push(moment().subtract(i, 'days'));
+			data.push(
+				moment()
+					.startOf('day')
+					.subtract(i, 'days')
+			);
 		}
 
 		return data.reverse();
 	}, [daysCount]);
-
-	// useEffect(() => {
-	// 	if (trainings.length < 10) {
-	// 		const newTrainings = createFakeTrainings(moment().subtract(10, 'days'), moment(), exercises, 1);
-	// 		newTrainings.forEach(t => onCreateTraining(t));
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [exercises, onCreateTraining]);
 
 	const dataList = useMemo(() => {
 		return trainings

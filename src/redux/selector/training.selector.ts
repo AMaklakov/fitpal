@@ -27,7 +27,7 @@ export const selectLast = (store: StoreModel, n: number): TrainingModel[] => {
 };
 
 export const selectByDates = (store: StoreModel, startDate: Moment, endDate: Moment): TrainingModel[] => {
-	return store.training.trainings.filter(x => moment(x.date).isBetween(startDate, endDate));
+	return store.training.trainings.filter(x => moment(x.date).isBetween(startDate, endDate, undefined, '[]'));
 };
 
 export const selectLastDays = (store: StoreModel, numberOfDays: number): TrainingModel[] => {
