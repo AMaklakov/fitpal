@@ -17,7 +17,7 @@ import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import { Fonts } from '@css/fonts';
+import { FontSizes, Fonts } from '@css/fonts';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	errorText: {
 		color: Colors.LightRed,
-		fontSize: 12,
+		fontSize: FontSizes.Paragraph,
 	},
 	buttonsWrapper: {
 		paddingTop: 20,

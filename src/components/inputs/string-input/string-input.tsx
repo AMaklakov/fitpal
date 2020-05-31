@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Input, InputProps } from 'react-native-elements';
 import { withValidation } from '@components/with-validation/with-validation';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 
 interface IProps extends Omit<InputProps, 'onChange'> {
 	value: string;
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		color: Colors.Black,
-		fontSize: 16,
+		fontSize: FontSizes.Medium,
 	},
 	focused: {
 		borderColor: Colors.Accent,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 	},
 	labelStyle: {
 		marginBottom: 2,
-		fontSize: 14,
+		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
 		fontWeight: 'normal',
 		color: Colors.Primary,

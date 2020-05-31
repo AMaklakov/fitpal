@@ -5,6 +5,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '@css/colors.style';
 import { Button } from '@components/button/button';
+import { FontSizes } from '@css/fonts';
 
 interface IProps {
 	exerciseList: ExerciseModel[];
@@ -67,13 +68,13 @@ const styles = StyleSheet.create({
 		paddingRight: 10,
 		paddingBottom: 2,
 		backgroundColor: Colors.LightGrey,
-		fontSize: 14,
+		fontSize: FontSizes.Small,
 		fontWeight: 'bold',
 	},
 	item: {
 		marginHorizontal: 15,
 		padding: 10,
-		fontSize: 16,
+		fontSize: FontSizes.Medium,
 		height: 44,
 	},
 });

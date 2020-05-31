@@ -5,14 +5,14 @@ import { getToday } from '../../util/date.util';
 import { Colors } from '../../css/colors.style';
 import moment from 'moment';
 import { toRgba } from '@util/css.util';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 
 const styles = StyleSheet.create({
 	headingText: {
 		color: Colors.Primary,
 		paddingTop: 10,
 		paddingBottom: 0,
-		fontSize: 32,
+		fontSize: FontSizes.Biggest,
 		fontFamily: Fonts.KelsonBold,
 	},
 	calendar: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 	},
 	dateNumberStyle: {
 		color: Colors.Primary,
-		fontSize: 16,
+		fontSize: FontSizes.Medium,
 	},
 });
 

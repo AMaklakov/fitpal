@@ -11,6 +11,7 @@ import { IRegisterRequestBody } from '@model/register-request-body.model';
 import { Dispatch } from 'redux';
 import { registerStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
+import { FontSizes } from '@css/fonts';
 
 interface IState {}
 
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
 		color: Colors.White,
 	},
 	link: {
-		fontSize: 15,
+		fontSize: FontSizes.Medium,
 		color: Colors.DarkBlue,
 		textDecorationLine: 'underline',
 	},
