@@ -7,6 +7,7 @@ import { TrainingExerciseSwipeList } from '@components/training-exercise-swipe-l
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { calculateTrainingTotal } from '@util/training-exercise.util';
 import { Button } from '@components/button/button';
+import { FontSizes } from '@css/fonts';
 
 interface IProps {
 	training: TrainingModel;
@@ -60,7 +61,7 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 	},
 	totalText: {
-		fontSize: 20,
+		fontSize: FontSizes.H3,
 	},
 	noExercises: {
 		marginTop: 20,

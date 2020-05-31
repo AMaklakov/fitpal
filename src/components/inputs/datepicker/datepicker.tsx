@@ -4,7 +4,7 @@ import moment from 'moment';
 import { StyleSheet, View } from 'react-native';
 import { DateFormatEnum } from '@util/date.util';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { Colors } from '@css/colors.style';
 
 type DatepickerType = 'date' | 'datetime' | 'time';
@@ -29,8 +29,9 @@ interface IProps {
 }
 
 export const DatepickerInput = (props: IProps) => {
-	const { onDateChange, date, placeholder, format = DateFormatEnum.Default, minDate, maxDate } = props;
-	const { type = 'date', color, size = 24, cancelText = 'Cancel', confirmText = 'Confirm', themeType = 'dark' } = props;
+	const { onDateChange, date, placeholder, format = DateFormatEnum.Default, minDate, maxDate, color } = props;
+	const { type = 'date', size = FontSizes.H1  } = props;
+	const { cancelText = 'Cancel', confirmText = 'Confirm', themeType = 'dark' } = props;
 
 	const isDark = useMemo(() => themeType === 'dark', [themeType]);
 

@@ -5,7 +5,7 @@ import { H2 } from '@components/heading/h2';
 import { ExerciseModel } from '@model/exercise.model';
 import { calcTotal, calculateTrainingTotal } from '@util/training-exercise.util';
 import { useTranslation } from 'react-i18next';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { Divider } from 'react-native-elements';
 
 interface IProps {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 	},
 	heading: {
 		fontFamily: Fonts.Kelson,
-		fontSize: 18,
+		fontSize: FontSizes.Big,
 		paddingVertical: 5,
 	},
 	itemWrapper: {
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
 	totalValue: {
 		paddingTop: 8,
 		fontFamily: Fonts.KelsonBold,
-		fontSize: 34,
+		fontSize: FontSizes.Biggest,
 	},
 });

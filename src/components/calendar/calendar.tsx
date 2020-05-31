@@ -3,7 +3,7 @@ import { Calendar as CalendarMonth, CalendarBaseProps, CalendarMarkingProps, Dat
 import moment, { MomentInput } from 'moment';
 import { DateFormatEnum, formatDate } from '@util/date.util';
 import { Colors } from '@css/colors.style';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { toRgba } from '@util/css.util';
 
 interface IProps {
@@ -35,9 +35,9 @@ export const Calendar: FC<CalendarMarkingProps & CalendarBaseProps & IProps> = p
 				textMonthFontFamily: Fonts.KelsonBold,
 
 				textMonthFontWeight: 'bold',
-				textMonthFontSize: 20,
-				textDayFontSize: 16,
-				textDayHeaderFontSize: 14,
+				textMonthFontSize: FontSizes.H3,
+				textDayFontSize: FontSizes.Medium,
+				textDayHeaderFontSize: FontSizes.Small,
 			}}
 			markedDates={{
 				[formatDate(selectedDate)]: {

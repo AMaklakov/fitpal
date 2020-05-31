@@ -4,7 +4,7 @@ import { TrainingModel } from '@model/training.model';
 import { H2 } from '@components/heading/h2';
 import { Card, Divider, Icon, ListItem, Tooltip } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { Colors } from '@css/colors.style';
 import { CompactTrainingView } from '@screen/statistics/components/compact-training-view';
 import { ExerciseModel } from '@model/exercise.model';
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 	},
 	tooltipInner: { width: '100%' },
 	listItemTitle: {
-		fontSize: 14,
+		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
 	},
 });

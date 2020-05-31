@@ -10,6 +10,7 @@ import { ILoginRequestBody } from '@model/login-request-body';
 import { Dispatch } from 'redux';
 import { loginStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
+import { FontSizes } from '@css/fonts';
 
 interface IState {}
 
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	link: {
-		fontSize: 15,
+		fontSize: FontSizes.Medium,
 		color: Colors.DarkBlue,
 		textDecorationLine: 'underline',
 	},
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
 		width: 100,
 	},
 	loginButtonText: {
-		fontSize: 18,
+		fontSize: FontSizes.Big,
 	},
 });
 

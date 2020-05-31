@@ -14,7 +14,7 @@ import { Dispatch } from 'redux';
 import { COVID_ACTION_CREATORS } from '@redux/action/covid.action';
 import { getCovidConfirmed } from '@redux/selector/covid.selector';
 import { ListItem } from 'react-native-elements';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { ExitIcon } from '@icons/exit.icon';
 import { logoutStart } from '@redux/action/user.action';
 
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
 		borderTopColor: toRgba(Colors.Black, 0.8),
 	},
 	listItemTitle: {
-		fontSize: 16,
+		fontSize: FontSizes.Medium,
 		paddingTop: IS_IOS ? 5 : 0,
 		fontFamily: Fonts.Kelson,
 	},

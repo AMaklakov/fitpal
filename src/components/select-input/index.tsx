@@ -3,7 +3,7 @@ import Select, { Item } from 'react-native-picker-select';
 import { Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { PropType } from '@util/type.util';
 import { Colors } from '@css/colors.style';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { ExpandMoreIcon } from '@components/icons/expand-more.icon';
 
 interface IProps<T extends Item> {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	common: {
 		paddingLeft: 10,
 		paddingRight: 40, // to ensure the text is never behind the icon
-		fontSize: 16,
+		fontSize: FontSizes.Medium,
 		borderWidth: 1,
 		borderColor: Colors.Darkgray,
 		color: Colors.Black,
