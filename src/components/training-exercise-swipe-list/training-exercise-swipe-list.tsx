@@ -7,6 +7,7 @@ import { Colors } from '@css/colors.style';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import TrainingExercise from '@components/exercise/exercise';
 import { useTranslation } from 'react-i18next';
+import { Fonts, FontSizes } from '@css/fonts';
 
 interface IProps {
 	trainingExerciseList: IBaseTrainingExercise[];
@@ -35,7 +36,8 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 						style={styles.button}
 						title={t('Edit')}
 						item={data.item}
-						textColor={Colors.White}
+						backgroundColor={Colors.LightGrey}
+						textColor={Colors.Primary}
 						onTouch={onRowEdit}
 					/>
 
@@ -44,7 +46,7 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 						title={t('Delete')}
 						item={data.item}
 						onTouch={onRowDelete}
-						backgroundColor={Colors.LightRed}
+						backgroundColor={Colors.Red}
 						textColor={Colors.White}
 					/>
 				</View>
@@ -64,7 +66,9 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		flex: 1,
+		fontSize: FontSizes.Medium,
 		minHeight: 50,
 		alignItems: 'flex-end',
+		fontFamily: Fonts.KelsonBold,
 	},
 });

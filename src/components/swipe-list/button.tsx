@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Button } from '@components/button/button';
+import { FontSizes } from '@css/fonts';
 
 const makeStyles = (color: Colors, textColor: Colors) => {
 	return StyleSheet.create({
@@ -11,6 +12,8 @@ const makeStyles = (color: Colors, textColor: Colors) => {
 		},
 		redText: {
 			color: textColor,
+			fontSize: FontSizes.Small,
+			letterSpacing: 0.5,
 		},
 	});
 };
