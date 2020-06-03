@@ -16,10 +16,11 @@ interface IProps {
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
 	changeOrder: () => void;
+	onCalcRM?: (e: IBaseTrainingExercise) => void;
 }
 
 export const ShowTraining = (props: IProps) => {
-	const { exercises, training, onAddExercise, removeExercise, changeOrder } = props;
+	const { exercises, training, onAddExercise, removeExercise, changeOrder, onCalcRM } = props;
 	const { exerciseList = [] } = training;
 	const { t } = useTranslation();
 
@@ -41,6 +42,7 @@ export const ShowTraining = (props: IProps) => {
 				onRowDelete={removeExercise}
 				onRowEdit={handleEditExercise}
 				onRowLongPress={longTapAction}
+				onCalcRM={onCalcRM}
 			/>
 
 			<View style={style.total}>

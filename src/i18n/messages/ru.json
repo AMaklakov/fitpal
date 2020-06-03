@@ -5,6 +5,8 @@
 	"Additional weight": "Отягощение",
 	"Already have account?": "Уже есть аккаунт?",
 	"Are you sure want to delete |item| ?": "Вы действительно желаете удалить \"{{item}}\" ?",
+	"Calculate RM": "Рассчитать ПМ",
+	"Calculate repetition maximum": "Повторный максимум",
 	"Calendar": "Календарь",
 	"Cancel": "Отменить",
 	"Change my weight": "Изменить мой вес",
@@ -16,6 +18,7 @@
 	"Delete": "Удалить",
 	"Description": "Описание",
 	"Details": "Детали",
+	"Dismiss": "Закрыть",
 	"Edit": "Редактировать",
 	"Edit exercise": "Редактировать упражнение",
 	"En": "Английский",
@@ -52,6 +55,7 @@
 	"No exercises": "Нет упражнений",
 	"Nomination": "Название",
 	"Not a number": "Не число",
+	"RM description": "1ПМ (повтоный максимум) - одно повторение с максимально возможным весом. Отражает предельную силу человека. Расчет производится по формуле Мэтта Бжицки.",
 	"Register": "Зарегистроваться",
 	"Repeats": "Повторения",
 	"Ru": "Русский",
@@ -66,5 +70,6 @@
 	"Training name": "Название тренировки",
 	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}",
 	"Weekly": "По неделям",
-	"Weight": "Вес"
+	"Weight": "Вес",
+	"reps": "повт."
 }

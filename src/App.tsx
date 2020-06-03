@@ -11,6 +11,7 @@ import { UserWeightModal } from '@components/user-weight/user-weight.modal';
 import { SpinnerModal } from '@components/progress-bars/spinner.modal';
 import { setNavigator } from '@util/navigation.util';
 import { Header } from '@components/header/header';
+import { RepetitionMaxModal } from '@components/repetition-maximum/repetition-maximum.modal';
 
 changeLanguage(store.getState().settings.language);
 
@@ -57,6 +58,7 @@ export const App = () => {
 					<UserWeightModal />
 					<CalendarTrainingModal />
 					<SpinnerModal />
+					<RepetitionMaxModal />
 
 					<Menu isOpen={isMenuOpen} onCloseMenu={handleCloseMenu} navigate={handleNavigate} activeRoute={navRoute} />
 				</Provider>

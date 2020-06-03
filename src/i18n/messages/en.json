@@ -5,6 +5,8 @@
 	"Additional weight": "Additional weight",
 	"Already have account?": "Already have an account?",
 	"Are you sure want to delete |item| ?": "Are you sure want to delete \"{{item}}\" ?",
+	"Calculate RM": "Calculate RM",
+	"Calculate repetition maximum": "Calculate repetition maximum",
 	"Calendar": "Calendar",
 	"Cancel": "Cancel",
 	"Change my weight": "Change my weight",
@@ -16,6 +18,7 @@
 	"Delete": "Delete",
 	"Description": "Description",
 	"Details": "Details",
+	"Dismiss": "Dismiss",
 	"Edit": "Edit",
 	"Edit exercise": "Edit exercise",
 	"En": "English",
@@ -52,6 +55,7 @@
 	"No exercises": "No exercises",
 	"Nomination": "Name",
 	"Not a number": "Not a number",
+	"RM description": "1RM (repetition maximum) - one repetiton with maximum possible weight. It shows the limit of a person's strength. We use Matt Brzycki formula for calculations.",
 	"Register": "Register",
 	"Repeats": "Repeats",
 	"Ru": "Russian",
@@ -66,5 +70,6 @@
 	"Training name": "Training name",
 	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}",
 	"Weekly": "Weekly",
-	"Weight": "Weight"
+	"Weight": "Weight",
+	"reps": "reps"
 }

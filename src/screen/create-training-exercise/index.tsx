@@ -54,14 +54,14 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			return;
 		}
 
-		const isValid = validateTrainingExercise(exercise);
+		const isValid = validateTrainingExercise(exercise, userWeight);
 		if (!isValid) {
 			setDisabledSave(true);
 			return;
 		}
 
 		trainingExercise ? onEdit(id, exercise) : onSave(id, exercise);
-	}, [disabledSave, onEdit, exercise, id, onSave, trainingExercise]);
+	}, [disabledSave, exercise, userWeight, trainingExercise, onEdit, id, onSave]);
 
 	return (
 		<CreateExercise
