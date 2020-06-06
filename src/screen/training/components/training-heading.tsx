@@ -81,7 +81,6 @@ export const TrainingHeading: FC<IProps> = props => {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		marginVertical: 10,
 		paddingHorizontal: 10,
 	},
 	heading: {

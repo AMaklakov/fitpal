@@ -50,7 +50,7 @@ export const ShowTraining = (props: IProps) => {
 			</View>
 
 			<View style={style.button}>
-				<Button type="clear" title={t('Add exercise +')} onPress={handleAddExercise} />
+				<Button solidType="purple" title={t('Add exercise +')} onPress={handleAddExercise} />
 			</View>
 		</View>
 	);
@@ -58,21 +58,12 @@ export const ShowTraining = (props: IProps) => {
 
 const style = StyleSheet.create({
 	wrapper: { flex: 1, paddingHorizontal: 10 },
-	total: {
-		paddingVertical: 10,
-		alignItems: 'center',
-	},
-	totalText: {
-		fontSize: FontSizes.H3,
-	},
-	noExercises: {
-		marginTop: 20,
-	},
-	noExerciseText: {
-		textAlign: 'center',
-	},
+	total: { paddingTop: 10, alignItems: 'center' },
+	totalText: { fontSize: FontSizes.H3 },
+	noExerciseText: { textAlign: 'center' },
 	button: {
-		height: 50,
+		paddingVertical: 10,
+		flexDirection: 'row',
 		justifyContent: 'center',
 	},
 });
