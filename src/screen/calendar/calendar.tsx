@@ -66,9 +66,14 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		}
 	}, [onFetchExercises, exercises, isFetching, hasErrors]);
 
-	const handleOpenDeleteTrainingConfirm = useCallback((training: TrainingModel) => setTrainingToDelete(training), []);
-
-	const handleCloseDeleteTrainingConfirm = useCallback(() => setTrainingToDelete(undefined), []);
+	const handleOpenDeleteDialog = useCallback((training: TrainingModel) => setTrainingToDelete(training), []);
+	const handleCloseDeleteDialog = useCallback(() => setTrainingToDelete(undefined), []);
+	const handleConfirmDelete = useCallback(() => {
+		handleCloseDeleteDialog();
+		if (trainingToDelete) {
+			deleteTrainingById(trainingToDelete._id);
+		}
+	}, [deleteTrainingById, handleCloseDeleteDialog, trainingToDelete]);
 
 	const handleChangeSelectedDate = useCallback((date: MomentInput) => setSelectedDate(moment(date)), []);
 
@@ -78,18 +83,6 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	);
 
 	const handleCopyTraining = useCallback((training: TrainingModel) => openTrainingModal(training), [openTrainingModal]);
-
-	const handleDeleteTraining = useCallback((training: TrainingModel) => deleteTrainingById(training._id), [
-		deleteTrainingById,
-	]);
-
-	const deleteTraining = useCallback(() => {
-		if (trainingToDelete) {
-			handleDeleteTraining(trainingToDelete);
-		}
-
-		handleCloseDeleteTrainingConfirm();
-	}, [handleCloseDeleteTrainingConfirm, handleDeleteTraining, trainingToDelete]);
 
 	const handleCreateTraining = useCallback(() => openTrainingModal(undefined, selectedDate), [
 		openTrainingModal,
@@ -122,7 +115,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 			<View style={styles.wrapper}>
 				<TrainingListMinimalView
 					onCopy={handleCopyTraining}
-					onDelete={handleOpenDeleteTrainingConfirm}
+					onDelete={handleOpenDeleteDialog}
 					trainingList={trainingList}
 					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
@@ -139,8 +132,8 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 						/>
 
 						<View style={styles.buttonWrapper}>
-							<Button type="clear" title={t('Delete')} onPress={deleteTraining} titleStyle={styles.redText} />
-							<Button title={t('Hide modal')} onPress={handleCloseDeleteTrainingConfirm} />
+							<Button type="clear" title={t('Delete')} onPress={handleConfirmDelete} titleStyle={styles.redText} />
+							<Button solidType="gray" title={t('Cancel')} onPress={handleCloseDeleteDialog} />
 						</View>
 					</View>
 				</Modal>

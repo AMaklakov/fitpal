@@ -32,7 +32,7 @@ const ExerciseList: FC<IProps> = props => {
 			</View>
 
 			<View style={styles.buttons}>
-				<Button type="clear" title={t('Add exercise +')} onPress={goToCreateExercise} />
+				<Button solidType="purple" title={t('Add exercise +')} onPress={goToCreateExercise} />
 			</View>
 		</View>
 	);
@@ -60,7 +60,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	buttons: {
-		height: 50,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		paddingVertical: 10,
 	},
 	title: {
 		paddingTop: 2,

@@ -10,7 +10,6 @@ import { Dispatch } from 'redux';
 import { changeUserWeightSuccess, setWeightModalVisible } from '@redux/action/user.action';
 import moment from 'moment';
 import { Colors } from '@css/colors.style';
-import { SaveIcon } from '@icons/save.icon';
 import { IErrors } from '@components/with-validation/with-validation';
 import { USER_MAX_WEIGHT, USER_MIN_WEIGHT } from '@const/validation-const';
 import { Button } from '@components/button/button';
@@ -67,14 +66,7 @@ const UserWeightModalComponent: FC<IProps & IState & IDispatch> = props => {
 					{/*	<Text style={styles.cancelButton}>{t('Cancel')}</Text>*/}
 					{/*</TouchableOpacity>*/}
 
-					<Button
-						type="clear"
-						icon={<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />}
-						titleStyle={styles.saveButtonText}
-						disabled={disabledSave}
-						onPress={handleSave}
-						title={t('Save')}
-					/>
+					<Button disabled={disabledSave} onPress={handleSave} title={t('Save')} />
 				</View>
 			</View>
 		</Modal>
@@ -91,10 +83,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		paddingTop: 10,
-	},
-	saveButtonText: {
-		paddingLeft: 10,
-		color: Colors.LightBlue,
 	},
 	cancelButton: {
 		paddingLeft: 10,
