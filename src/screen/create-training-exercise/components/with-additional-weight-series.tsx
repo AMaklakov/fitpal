@@ -45,6 +45,7 @@ export const WithAdditionalWeightSeries = (props: IProps) => {
 					<CreateSeries
 						index={index}
 						series={item}
+						weightMin={0}
 						onChange={handleUpdateById(index)}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>

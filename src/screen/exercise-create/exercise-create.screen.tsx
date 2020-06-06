@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { EXERCISE_NAME_MAXLENGTH, EXERCISE_NAME_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
-import { Colors } from '@css/colors.style';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -65,7 +64,7 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 			</View>
 
 			<View style={styles.buttonContainer}>
-				<Button type="outline" title={t('Cancel')} onPress={handleGoBack} titleStyle={styles.redText} />
+				<Button solidType="gray" title={t('Cancel')} onPress={handleGoBack} />
 				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
 			</View>
 		</View>
@@ -84,9 +83,6 @@ const styles = StyleSheet.create({
 	},
 	mainContent: {
 		flex: 1,
-	},
-	redText: {
-		color: Colors.LightRed,
 	},
 	h1: {
 		marginVertical: 15,

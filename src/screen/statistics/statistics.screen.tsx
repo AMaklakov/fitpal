@@ -14,6 +14,8 @@ import { EXERCISE_ACTION_CREATORS } from '@redux/action/exercise.action';
 import { WeeklyChart } from '@screen/statistics/components/weekly-chart';
 import { Moment } from 'moment';
 import { SelectInput } from '@components/select-input';
+import { NavigationPropsModel } from '@model/navigation-props.model';
+import { Routes } from '@screen/navigator';
 
 interface IDispatch {
 	onFetch: (data: IFetchByDateRange) => void;
@@ -29,12 +31,12 @@ interface IState {
 	trainingsByDates: (start: Moment, end: Moment) => TrainingModel[];
 }
 
-interface IProps {}
+interface IProps extends NavigationPropsModel {}
 
 type ModeType = 'lastDays' | 'weekly';
 
 const Statistics = (props: IProps & IState & IDispatch) => {
-	const { trainings, exercises, onFetch, onFetchExercises, isFetchingExercises, trainingsByDates } = props;
+	const { trainings, exercises, onFetch, onFetchExercises, isFetchingExercises, trainingsByDates, navigation } = props;
 	const { t } = useTranslation();
 
 	const [mode, setMode] = useState<ModeType>('weekly');
@@ -67,6 +69,16 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 		setCurrentTraining(null);
 	}, []);
 
+	const handleNavigateToTraining = useCallback(
+		(id: string) => navigation.navigate(Routes.Training, { trainingId: id }),
+		[navigation]
+	);
+
+	const handleNavigateToExercise = useCallback(
+		(id: string) => navigation.navigate(Routes.Exercise, { exerciseId: id }),
+		[navigation]
+	);
+
 	return (
 		<ScrollView style={styles.wrapper}>
 			<View style={styles.headerWrapper}>
@@ -91,7 +103,12 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 
 			{currentTraining && (
 				<View style={styles.trainingWrapper}>
-					<CompactTrainingView training={currentTraining} exercises={exercises} />
+					<CompactTrainingView
+						training={currentTraining}
+						exercises={exercises}
+						onTrainingHeadingPress={handleNavigateToTraining}
+						onExerciseNamePress={handleNavigateToExercise}
+					/>
 				</View>
 			)}
 		</ScrollView>

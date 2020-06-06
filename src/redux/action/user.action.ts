@@ -3,6 +3,7 @@ import { IWeight } from '@redux/store/reducer/user/weight.reducer';
 import { DataActionCreator } from '@model/data-action.model';
 import { ILoginRequestBody } from '@model/login-request-body';
 import { IRegisterRequestBody } from '@model/register-request-body.model';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export enum UserActions {
 	SetModalVisible = 'USER/WEIGHT/CHANGE_USER_WEIGHT/SET_MODAL_VISIBLE',
@@ -21,6 +22,8 @@ export enum UserActions {
 	LogoutStart = 'USER/AUTH/LOGOUT/START',
 	LogoutSuccess = 'USER/AUTH/LOGOUT/SUCCESS',
 	LogoutError = 'USER/AUTH/LOGOUT/ERROR',
+
+	SetRepetitionMaximumExercise = 'USER/REPETITION_MAXIMUM/SET_EXERCISE',
 }
 
 export const setWeightModalVisible = (visible?: boolean) => ({
@@ -77,5 +80,10 @@ export const logoutSuccess: DataActionCreator<null> = data => ({
 });
 export const logoutError: DataActionCreator<object> = data => ({
 	type: UserActions.LogoutError,
+	payload: data,
+});
+
+export const setRepetitionMaximumExercise: DataActionCreator<IBaseTrainingExercise | null> = data => ({
+	type: UserActions.SetRepetitionMaximumExercise,
 	payload: data,
 });

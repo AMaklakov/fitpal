@@ -24,7 +24,7 @@ export const TrainingStatusBar = (props: IProps) => {
 const styles = StyleSheet.create({
 	wrapper: {
 		height: 20,
-		paddingHorizontal: 20,
+		paddingHorizontal: 10,
 		marginTop: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

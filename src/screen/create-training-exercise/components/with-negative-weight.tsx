@@ -49,6 +49,7 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 						series={item}
 						onChange={handleUpdateById(index)}
 						weightMax={+userWeight}
+						weightMin={0}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>
 				)}

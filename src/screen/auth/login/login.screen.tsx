@@ -11,6 +11,7 @@ import { Dispatch } from 'redux';
 import { loginStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
 import { FontSizes } from '@css/fonts';
+import { H1 } from '@components/heading/h1';
 
 interface IState {}
 
@@ -33,20 +34,16 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 
 	return (
 		<View style={styles.wrapper}>
-			<View style={styles.inputWrapper}>
-				<StringInput label={t('Enter email')} value={email} onChange={setEmail} autoCapitalize="none" />
-			</View>
+			<H1 text={t('Auth')} />
 
-			<View style={styles.inputWrapper}>
-				<StringInput label={t('Enter password')} value={password} onChange={setPassword} isPassword={true} />
-			</View>
+			<StringInput label={t('Enter email')} value={email} onChange={setEmail} autoCapitalize="none" />
+			<StringInput label={t('Enter password')} value={password} onChange={setPassword} isPassword={true} />
 
-			<View style={[styles.inputWrapper, styles.buttonWrapper]}>
+			<View style={styles.buttonWrapper}>
 				<View style={styles.registrationWrapper}>
 					<Text>{t('Have no account?')} </Text>
-					<Button type="clear" onPress={handleRegister} title={t('Register')} />
+					<Button type="clear" onPress={handleRegister} title={t('Register')} buttonStyle={{ paddingVertical: 0 }} />
 				</View>
-
 				<Button onPress={handleLogin} title={t('Login')} disabled={!email || !password} />
 			</View>
 		</View>
@@ -55,11 +52,8 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		paddingTop: 20,
+		padding: 20,
 		alignItems: 'center',
-	},
-	inputWrapper: {
-		width: '85%',
 	},
 	buttonWrapper: {
 		flexDirection: 'row',
@@ -72,7 +66,6 @@ const styles = StyleSheet.create({
 		textDecorationLine: 'underline',
 	},
 	registrationWrapper: {
-		flexDirection: 'row',
 		alignItems: 'center',
 	},
 	buttonWithIconWrapper: {

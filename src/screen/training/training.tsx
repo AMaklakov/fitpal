@@ -14,32 +14,21 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
 	training?: TrainingModel;
 	changeTraining: (training: TrainingModel) => void;
-
 	exercises: ExerciseModel[];
-
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
 	onUpdateTrainingName: (name: string) => void;
 	onGoBack: () => void;
-
 	canEdit: boolean;
 	lastUserUpdatedWeight: MomentInput;
 	onShowWeightModal: () => void;
+
+	onCalcRM?: (e: IBaseTrainingExercise) => void;
 }
 
 export const Training = (props: IProps) => {
-	const {
-		training,
-		onAddExercise,
-		exercises,
-		removeExercise,
-		changeTraining,
-		canEdit = true,
-		onUpdateTrainingName,
-		lastUserUpdatedWeight,
-		onShowWeightModal,
-		onGoBack,
-	} = props;
+	const { training, onAddExercise, exercises, removeExercise, changeTraining, canEdit = true } = props;
+	const { onUpdateTrainingName, lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM } = props;
 
 	const { t } = useTranslation();
 	const [isReorder, changeIsReorder] = useState(false);
@@ -90,6 +79,7 @@ export const Training = (props: IProps) => {
 					removeExercise={removeExercise}
 					training={training}
 					changeOrder={onChangeOrderExercises}
+					onCalcRM={onCalcRM}
 				/>
 			)}
 		</View>

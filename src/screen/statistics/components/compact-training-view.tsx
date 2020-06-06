@@ -13,34 +13,50 @@ interface IProps {
 	exercises: ExerciseModel[];
 	useHeading?: boolean;
 	onExerciseNamePress?: (exerciseId: string) => void;
+	onTrainingHeadingPress?: (trainingId: string) => void;
 }
 
 export const CompactTrainingView: FC<IProps> = props => {
-	const { training, exercises, useHeading = true, onExerciseNamePress } = props;
+	const { training, exercises, useHeading = true, onExerciseNamePress, onTrainingHeadingPress } = props;
 	const { t } = useTranslation();
 
 	const handleExercisePress = useCallback((id: string) => () => onExerciseNamePress?.(id), [onExerciseNamePress]);
 
+	const handleHeadingPress = useCallback(() => onTrainingHeadingPress?.(training._id), [
+		onTrainingHeadingPress,
+		training._id,
+	]);
+
 	return (
 		<View style={styles.wrapper}>
-			{useHeading && <H2 text={training.name} />}
+			{useHeading && (
+				<TouchableOpacity onPress={handleHeadingPress}>
+					<H2 text={training.name} />
+				</TouchableOpacity>
+			)}
 
 			<Text style={styles.heading}>{t('Exercise list')}:</Text>
-
-			<FlatList
-				data={training.exerciseList}
-				keyExtractor={ex => ex._id}
-				renderItem={data => (
-					<TouchableOpacity onPress={handleExercisePress(data.item.exerciseId)}>
-						<View style={styles.itemWrapper}>
-							<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
-							<Text>
-								{calcTotal(data.item)} {t('Kg')}
-							</Text>
-						</View>
-					</TouchableOpacity>
-				)}
-			/>
+			{!training.exerciseList.length && (
+				<View style={styles.noExercise}>
+					<Text>{t('No exercises')}</Text>
+				</View>
+			)}
+			{!!training.exerciseList.length && (
+				<FlatList
+					data={training.exerciseList}
+					keyExtractor={ex => ex._id}
+					renderItem={data => (
+						<TouchableOpacity onPress={handleExercisePress(data.item.exerciseId)}>
+							<View style={styles.itemWrapper}>
+								<Text>{getExerciseName(data.item.exerciseId, exercises)}</Text>
+								<Text>
+									{calcTotal(data.item)} {t('Kg')}
+								</Text>
+							</View>
+						</TouchableOpacity>
+					)}
+				/>
+			)}
 
 			<Divider />
 
@@ -67,6 +83,9 @@ const styles = StyleSheet.create({
 		fontFamily: Fonts.Kelson,
 		fontSize: FontSizes.Big,
 		paddingVertical: 5,
+	},
+	noExercise: {
+		paddingVertical: 10,
 	},
 	itemWrapper: {
 		flexDirection: 'row',
