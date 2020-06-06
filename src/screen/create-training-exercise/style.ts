@@ -12,7 +12,7 @@ export const commonStyles = StyleSheet.create({
 	bottomActionWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		paddingVertical: 20,
+		paddingVertical: 10,
 		backgroundColor: Colors.White,
 	},
 	buttonWithIconWrapper: {

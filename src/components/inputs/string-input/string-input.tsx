@@ -8,13 +8,12 @@ import { Fonts, FontSizes } from '@css/fonts';
 interface IProps extends Omit<InputProps, 'onChange'> {
 	value: string;
 	onChange: (v: string) => void;
-
 	isPassword?: boolean;
 	hasShadow?: boolean;
 }
 
 export const StringInput: FC<IProps> = (props: IProps) => {
-	const { onChange, value, isPassword = false, hasShadow = true, ...rest } = props;
+	const { onChange, value, isPassword = false, hasShadow = true, inputContainerStyle, ...rest } = props;
 
 	const [isFocused, setFocused] = useState(false);
 	const onTextChangeHandler = useCallback((v: string) => onChange(v), [onChange]);
@@ -30,7 +29,12 @@ export const StringInput: FC<IProps> = (props: IProps) => {
 			onFocus={handleFocus}
 			onBlur={handleBlur}
 			secureTextEntry={isPassword}
-			inputContainerStyle={[styles.inputWrapper, isFocused && styles.focused, hasShadow && styles.shadow]}
+			inputContainerStyle={[
+				styles.inputWrapper,
+				isFocused && styles.focused,
+				hasShadow && styles.shadow,
+				inputContainerStyle,
+			]}
 			{...rest}
 		/>
 	);

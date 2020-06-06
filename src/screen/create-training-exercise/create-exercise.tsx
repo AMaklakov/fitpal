@@ -1,13 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { ExerciseModel, ExerciseTypes } from '@model/exercise.model';
-import AutocompleteInput from '@components/autocomplete-input';
-import ShowSelectedExercise from './components/show-selected-exercise';
-import { CancelIcon } from '@icons/cancel.icon';
+import { AutocompleteInput } from '@components/autocomplete-input';
 import { useTranslation } from 'react-i18next';
 import { H1 } from '@components/heading/h1';
-import { Colors } from '@css/colors.style';
-import { SaveIcon } from '@icons/save.icon';
 import { assertUnreachable } from '@util/assert-unreachable';
 import { DefaultSeries } from '@screen/create-training-exercise/components/default-series';
 import {
@@ -25,13 +21,10 @@ import { Button } from '@components/button/button';
 interface IProps {
 	trainingExercise: IBaseTrainingExercise;
 	setTrainingExercise: (exercise: IBaseTrainingExercise) => void;
-
 	userWeight: BigSource;
 	exerciseList: ExerciseModel[];
-
 	onSave: () => void;
 	onCancel: () => void;
-
 	disabledSave: boolean;
 }
 
@@ -99,37 +92,21 @@ export const CreateExercise = (props: IProps) => {
 			<View style={commonStyles.mainWrapper}>
 				<H1 text={t('Exercise')} wrapperStyle={commonStyles.h1} />
 
-				<Text>{t('Nomination')}</Text>
 				<AutocompleteInput<ExerciseModel>
+					label={t('Nomination')}
 					autocompleteList={exerciseList}
 					autocompleteField={'name'}
 					selectedItem={selectedExercise}
 					changeSelectedItem={handleSelectExercise}
-					selectedItemViewComponent={ShowSelectedExercise}
+					onShowSelected={v => v.name}
 				/>
 
 				{createSeries}
 			</View>
 
 			<View style={commonStyles.bottomActionWrapper}>
-				<Button
-					type="clear"
-					title={t('Cancel')}
-					titleStyle={commonStyles.cancelButton}
-					icon={<CancelIcon color={Colors.Red} />}
-					onPress={onCancel}
-					style={commonStyles.buttonWithIconWrapper}
-				/>
-
-				<Button
-					type="clear"
-					title={t('Save')}
-					disabled={disabledSave}
-					titleStyle={commonStyles.saveButtonText}
-					icon={<SaveIcon color={disabledSave ? Colors.Grey : Colors.LightBlue} />}
-					onPress={onSave}
-					style={commonStyles.buttonWithIconWrapper}
-				/>
+				<Button solidType="gray" title={t('Cancel')} onPress={onCancel} />
+				<Button title={t('Save')} disabled={disabledSave} onPress={onSave} />
 			</View>
 		</View>
 	);
