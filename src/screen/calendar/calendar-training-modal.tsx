@@ -11,13 +11,14 @@ import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import moment, { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '@css/colors.style';
+import { Colors, PALETTE_COLORS } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import { FontSizes, Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
+import { ColorPalette } from '@inputs/color-palette/color-palette';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -47,6 +48,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 		let newDate = dateFromStore ? convertStringToMoment(dateFromStore, DateFormatEnum.Calendar) : getToday();
 
 		if (training) {
+			// TODO if training exists set color to it's color
 			newName = `${training.name} - COPY`;
 			newDate = moment(training.date);
 		}
@@ -103,6 +105,10 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 						<Text style={styles.errorText}>{createTrainingError.toString()}</Text>
 					</View>
 				)}
+
+				{/* TODO add label */}
+				{/* TODO on change => set state */}
+				<ColorPalette onChange={() => {}} colors={PALETTE_COLORS} />
 
 				<View style={styles.buttonsWrapper}>
 					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />
