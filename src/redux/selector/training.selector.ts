@@ -2,20 +2,12 @@ import { StoreModel } from '@redux/store';
 import { PropType } from '@util/type.util';
 import { TrainingModel } from '@model/training.model';
 import moment, { Moment } from 'moment';
-import { formatDate } from '@util/date.util';
 
 export const getFirstTrainingByDate = (
 	store: StoreModel,
 	date: PropType<TrainingModel, 'date'>
 ): TrainingModel | undefined => {
 	return store?.training?.trainings.find((t: TrainingModel) => t.date === date);
-};
-
-export const getTrainingListByDate = (store: StoreModel, date: Moment): TrainingModel[] | undefined => {
-	const selectedDate = formatDate(date);
-	return store.training.trainings
-		.filter((t: TrainingModel) => formatDate(t.date) === selectedDate)
-		.sort((a, b) => +moment(a.createdAt).isBefore(b.createdAt));
 };
 
 export const getTrainingById = (store: StoreModel, id: string): TrainingModel | undefined => {
@@ -37,4 +29,9 @@ export const selectLastDays = (store: StoreModel, numberOfDays: number): Trainin
 	const endDate = moment().endOf('day');
 
 	return selectByDates(store, startDate, endDate);
+};
+
+export const getTrainingListByDate = (store: StoreModel, date: Moment): TrainingModel[] => {
+	const [start, end] = [date.clone().startOf('day'), date.clone().endOf('day')];
+	return selectByDates(store, start, end).sort((a, b) => +moment(a.createdAt).isBefore(b.createdAt));
 };

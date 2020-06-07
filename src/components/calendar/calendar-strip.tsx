@@ -1,41 +1,35 @@
-import React, { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
-import Strip from 'react-native-calendar-strip';
-import { getToday } from '../../util/date.util';
-import { Colors } from '../../css/colors.style';
-import moment from 'moment';
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import StripCalendar from 'react-native-calendar-strip';
+import { StyleSheet } from 'react-native';
+import { getToday } from '@util/date.util';
+import { Colors } from '@css/colors.style';
+import moment, { Moment, MomentInput } from 'moment';
 import { toRgba } from '@util/css.util';
 import { Fonts, FontSizes } from '@css/fonts';
 
-const styles = StyleSheet.create({
-	headingText: {
-		color: Colors.Primary,
-		paddingTop: 10,
-		paddingBottom: 0,
-		fontSize: FontSizes.Biggest,
-		fontFamily: Fonts.KelsonBold,
-	},
-	calendar: {
-		minHeight: 160,
-		paddingTop: 10,
-		paddingBottom: 10,
-		backgroundColor: Colors.Lightgray,
-		color: Colors.White,
-		fontFamily: Fonts.KelsonBold,
-	},
-	dateNumberStyle: {
-		color: Colors.Primary,
-		fontSize: FontSizes.Medium,
-	},
-});
-
-interface CalendarStripProps {
-	selectedDate: moment.Moment;
-	changeSelectedDate: (selectedDate: moment.MomentInput) => void;
+export interface IMarkedDate {
+	date: Moment;
+	dots: Array<{ color: string }>;
 }
 
+interface CalendarStripProps {
+	selectedDate: Moment;
+	changeSelectedDate: (selectedDate: MomentInput) => void;
+	markedDates?: IMarkedDate[];
+	onWeekChange?: (weekStart: Moment) => void;
+}
+
+const Strip = (StripCalendar as unknown) as FC<any>;
 export const CalendarStrip = (props: CalendarStripProps) => {
-	const { selectedDate = getToday(), changeSelectedDate } = props;
+	const { selectedDate = getToday(), changeSelectedDate, markedDates, onWeekChange } = props;
+	const [currentWeek, setCurrentWeek] = useState<Moment>(selectedDate.clone());
+	const ref = useRef<{ updateWeekView: (date: Moment) => void }>(null);
+
+	useEffect(() => {
+		if (markedDates && markedDates?.length > 0) {
+			ref.current?.updateWeekView(currentWeek);
+		}
+	}, [currentWeek, markedDates]);
 
 	const customDatesStyles = useMemo(
 		() => [
@@ -50,31 +44,60 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 	);
 
 	const daySelectionAnimation = useMemo<any>(
-		() =>
-			({
-				type: 'background',
-				duration: 200,
-				highlightColor: Colors.Purple,
-			}),
+		() => ({
+			type: 'background',
+			duration: 200,
+			highlightColor: Colors.Purple,
+		}),
 		[]
 	);
 
+	const handleWeekChange = useCallback(
+		(weekStart: Moment) => {
+			setCurrentWeek(weekStart);
+			onWeekChange?.(weekStart);
+		},
+		[onWeekChange]
+	);
+
 	return (
-		<View>
-			<Strip
-				style={styles.calendar}
-				calendarHeaderStyle={styles.headingText}
-				dateNumberStyle={styles.dateNumberStyle}
-				dateNameStyle={{ color: Colors.Primary }}
-				highlightDateNumberStyle={{ color: Colors.White }}
-				highlightDateNameStyle={{ color: Colors.White }}
-				weekendDateNameStyle={{ color: Colors.White }}
-				selectedDate={selectedDate.toDate()}
-				onDateSelected={changeSelectedDate}
-				calendarAnimation={{ type: 'sequence', duration: 30 }}
-				daySelectionAnimation={daySelectionAnimation}
-				customDatesStyles={customDatesStyles}
-			/>
-		</View>
+		<Strip
+			ref={ref}
+			startingDate={moment().startOf('week')}
+			selectedDate={selectedDate.toDate()}
+			onDateSelected={changeSelectedDate}
+			style={styles.calendar}
+			calendarHeaderStyle={styles.headingText}
+			dateNumberStyle={styles.dateNumberStyle}
+			dateNameStyle={{ color: Colors.Primary }}
+			highlightDateNumberStyle={{ color: Colors.White }}
+			highlightDateNameStyle={{ color: Colors.White }}
+			weekendDateNameStyle={{ color: Colors.White }}
+			calendarAnimation={null}
+			daySelectionAnimation={daySelectionAnimation}
+			customDatesStyles={customDatesStyles}
+			markedDates={markedDates}
+			onWeekChanged={handleWeekChange}
+		/>
 	);
 };
+
+const styles = StyleSheet.create({
+	headingText: {
+		color: Colors.Primary,
+		fontSize: FontSizes.Big,
+		fontFamily: Fonts.KelsonBold,
+	},
+	calendar: {
+		minHeight: 100,
+		paddingVertical: 10,
+		marginHorizontal: 5,
+		backgroundColor: Colors.Lightgray,
+		color: Colors.White,
+		fontFamily: Fonts.KelsonBold,
+	},
+	dateNumberStyle: {
+		color: Colors.Primary,
+		fontSize: FontSizes.Medium,
+	},
+});
