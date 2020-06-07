@@ -22,11 +22,13 @@ interface CalendarStripProps {
 const Strip = (StripCalendar as unknown) as FC<any>;
 export const CalendarStrip = (props: CalendarStripProps) => {
 	const { selectedDate = getToday(), changeSelectedDate, markedDates, onWeekChange } = props;
-	const [currentWeek, setCurrentWeek] = useState<Moment>(selectedDate.clone());
-	const ref = useRef<{ updateWeekView: (date: Moment) => void }>(null);
+	const [currentWeek, setCurrentWeek] = useState<Moment>(moment(selectedDate).clone());
+	const ref = useRef<{ updateWeekView: (date: Moment) => void; state: { numVisibleDays: number } }>(null);
 
 	useEffect(() => {
-		if (markedDates && markedDates?.length > 0) {
+		// TODO replace this workaround when version of CalendarStrip is stable
+		const isAbleToRender = Boolean(ref.current?.state?.numVisibleDays);
+		if (markedDates && markedDates?.length > 0 && isAbleToRender) {
 			ref.current?.updateWeekView(currentWeek);
 		}
 	}, [currentWeek, markedDates]);
