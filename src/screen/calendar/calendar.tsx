@@ -11,8 +11,8 @@ import {
 	updateTrainingModalAction,
 } from '@redux/action/calendar-training-modal.action';
 import { TrainingListMinimalView } from '@components/training-minimal-view/training-list-minimal-view';
-import { CalendarStrip } from '@components/calendar/calendar-strip';
-import { getTrainingListByDate } from '@redux/selector/training.selector';
+import { CalendarStrip, IMarkedDate } from '@components/calendar/calendar-strip';
+import { getTrainingListByDate, selectByDates } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
@@ -26,16 +26,18 @@ import { Calendar as CalendarMonth } from '@components/calendar/calendar';
 import { fetchExercisesStart } from '@redux/action/exercise.action';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { ExerciseModel } from '@model/exercise.model';
+import uniq from 'lodash/uniq';
 
 interface IDispatch {
-	fetchTrainingListByDate: (date: Moment) => void;
+	fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) => void;
 	deleteTrainingById: (trainingId: string) => void;
 	openTrainingModal: (training?: TrainingModel, date?: MomentInput) => void;
 	onFetchExercises: () => void;
 }
 
 interface IState {
-	selectTrainingListByDate: (date: Moment) => TrainingModel[] | undefined;
+	selectTrainingListByDate: (date: Moment) => TrainingModel[];
+	selectTrainingListByDateRange: (startDate: Moment, endDate: Moment) => TrainingModel[];
 	isFetching: boolean;
 	hasErrors: boolean;
 }
@@ -47,8 +49,9 @@ interface IProps extends NavigationPropsModel {
 type ICalendarTypes = 'strip' | 'month';
 
 const Calendar = (props: IProps & IState & IDispatch) => {
-	const { navigation, fetchTrainingListByDate, deleteTrainingById, openTrainingModal } = props;
+	const { navigation, fetchTrainingListByDateRange, deleteTrainingById, openTrainingModal } = props;
 	const { selectTrainingListByDate, onFetchExercises, exercises, isFetching, hasErrors } = props;
+	const { selectTrainingListByDateRange } = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, setSelectedDate] = useState(getToday());
@@ -56,9 +59,29 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
 	const [calendarType, setCalendarType] = useState<ICalendarTypes>('strip');
 
+	const [viewedStartDate, setViewedStartDate] = useState(moment());
+	const trainingsInDateRange = useMemo(() => {
+		const unit = calendarType === 'strip' ? 'week' : 'month';
+		return selectTrainingListByDateRange(viewedStartDate.clone().startOf(unit), viewedStartDate.clone().endOf(unit));
+	}, [calendarType, selectTrainingListByDateRange, viewedStartDate]);
+	const markedDates = useMemo<Array<IMarkedDate>>(() => {
+		return uniq(trainingsInDateRange.map(x => x.date)).map<IMarkedDate>(date => ({
+			date: moment(date),
+			dots: trainingsInDateRange
+				.filter(x => x.date === date)
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				.map(x => ({
+					// TODO replace `color: smth` with training color
+					color: Colors.Red,
+				})),
+		}));
+	}, [trainingsInDateRange]);
+
 	useEffect(() => {
-		fetchTrainingListByDate(selectedDate);
-	}, [fetchTrainingListByDate, selectedDate]);
+		const unit = calendarType === 'strip' ? 'week' : 'month';
+		const [startDate, endDate] = [viewedStartDate.clone().startOf(unit), viewedStartDate.clone().endOf(unit)];
+		fetchTrainingListByDateRange(startDate, endDate);
+	}, [calendarType, fetchTrainingListByDateRange, viewedStartDate]);
 
 	useEffect(() => {
 		if (exercises.length === 0 && !isFetching && !hasErrors) {
@@ -101,11 +124,18 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		[navigation]
 	);
 
+	const handleChangeViewedWeek = useCallback((weekStart: Moment) => setViewedStartDate(weekStart), []);
+
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
 				{calendarType === 'strip' && (
-					<CalendarStrip selectedDate={selectedDate} changeSelectedDate={handleChangeSelectedDate} />
+					<CalendarStrip
+						selectedDate={selectedDate}
+						changeSelectedDate={handleChangeSelectedDate}
+						onWeekChange={handleChangeViewedWeek}
+						markedDates={markedDates}
+					/>
 				)}
 				{calendarType === 'month' && (
 					<CalendarMonth selectedDate={selectedDate} onDateChange={handleChangeSelectedDate} />
@@ -176,6 +206,7 @@ const styles = StyleSheet.create({
 const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state => {
 	return {
 		selectTrainingListByDate: (date: Moment) => getTrainingListByDate(state, date),
+		selectTrainingListByDateRange: (startDate: Moment, endDate: Moment) => selectByDates(state, startDate, endDate),
 		exercises: getExerciseList(state),
 		isFetching: state.exercise.loading,
 		hasErrors: !!state.exercise.error,
@@ -184,7 +215,8 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 
 const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch => {
 	return {
-		fetchTrainingListByDate: (date: Moment) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE.START(date)),
+		fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) =>
+			dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_DATE_RANGE.START({ startDate, endDate })),
 		deleteTrainingById: (trainingId: string) => dispatch(TRAINING_ACTION_CREATORS.DELETE.START(trainingId)),
 		openTrainingModal: (training?: TrainingModel, date?: MomentInput) => {
 			dispatch(updateTrainingModalAction(training ?? null));
