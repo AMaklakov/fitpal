@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
@@ -11,13 +11,14 @@ import { convertStringToMoment, DateFormatEnum, getToday } from '@util/date.util
 import { cloneTrainingExerciseList } from '@util/training-exercise.util';
 import moment, { Moment, MomentInput } from 'moment';
 import { useTranslation } from 'react-i18next';
-import { Colors } from '@css/colors.style';
+import { Colors, PALETTE_COLORS } from '@css/colors.style';
 import { TRAINING_TITLE_MAXLENGTH, TRAINING_TITLE_MINLENGTH } from '@const/validation-const';
 import { IErrors } from '@components/with-validation/with-validation';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
-import { FontSizes, Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
+import { ColorPalette } from '@inputs/color-palette/color-palette';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -41,18 +42,22 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	const [name, setName] = useState(DEFAULT_TRAINING_NAME);
 	const [hasNameErrors, setHasNameErrors] = useState(false);
 	const [date, setDate] = useState<Moment>(getToday());
+	const [color, setColor] = useState<string>(PALETTE_COLORS[0]);
 
 	useEffect(() => {
 		let newName = DEFAULT_TRAINING_NAME;
 		let newDate = dateFromStore ? convertStringToMoment(dateFromStore, DateFormatEnum.Calendar) : getToday();
+		let newColor = PALETTE_COLORS[0] as string;
 
 		if (training) {
 			newName = `${training.name} - COPY`;
 			newDate = moment(training.date);
+			newColor = training.color;
 		}
 
 		setName(newName);
 		setDate(newDate);
+		setColor(newColor);
 	}, [isOpen, dateFromStore, training, DEFAULT_TRAINING_NAME]);
 
 	const isSaveDisabled = useMemo(() => !name || !date || hasNameErrors, [name, date, hasNameErrors]);
@@ -65,6 +70,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 		const newTraining: ICreateTraining = {
 			name: name,
 			date: date,
+			color: color,
 			exerciseList: cloneTrainingExerciseList(training?.exerciseList),
 		};
 
@@ -74,6 +80,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	const handleCancelPress = () => {
 		cleanUp();
 	};
+
+	const handleSetColor = useCallback((v: string) => setColor(v), []);
 
 	const handleChangeName = (name: string, errors?: IErrors) => {
 		setName(name);
@@ -103,6 +111,9 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 						<Text style={styles.errorText}>{createTrainingError.toString()}</Text>
 					</View>
 				)}
+
+				<Text style={styles.asLabel}>{t('Choose training color')}</Text>
+				<ColorPalette onChange={handleSetColor} colors={PALETTE_COLORS} />
 
 				<View style={styles.buttonsWrapper}>
 					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />

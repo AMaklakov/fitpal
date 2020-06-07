@@ -16,7 +16,7 @@ import { getTrainingListByDate, selectByDates } from '@redux/selector/training.s
 import { StoreModel } from '@redux/store';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
-import { Colors } from '@css/colors.style';
+import { Colors, PALETTE_COLORS } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
 import { Button } from '@components/button/button';
@@ -71,10 +71,8 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 			date: moment(date),
 			dots: trainingsInDateRange
 				.filter(x => x.date === date)
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				.map(x => ({
-					// TODO replace `color: smth` with training color
-					color: Colors.Red,
+					color: x.color || PALETTE_COLORS[0],
 				})),
 		}));
 
