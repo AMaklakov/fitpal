@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import StripCalendar from 'react-native-calendar-strip';
-import { StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { getToday } from '@util/date.util';
 import { Colors } from '@css/colors.style';
 import moment, { Moment, MomentInput } from 'moment';
@@ -22,6 +22,7 @@ interface CalendarStripProps {
 const Strip = (StripCalendar as unknown) as FC<any>;
 export const CalendarStrip = (props: CalendarStripProps) => {
 	const { selectedDate = getToday(), changeSelectedDate, markedDates, onWeekChange } = props;
+	const [currentWeek, setCurrentWeek] = useState<Moment>(selectedDate.clone());
 
 	const customDatesStyles = useMemo(
 		() => [
@@ -44,25 +45,39 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 		[]
 	);
 
-	const handleWeekChange = useCallback((weekStart: Moment) => onWeekChange?.(weekStart), [onWeekChange]);
+	const handleWeekChange = useCallback(
+		(weekStart: Moment) => {
+			setCurrentWeek(weekStart);
+			onWeekChange?.(weekStart);
+		},
+		[onWeekChange]
+	);
 
 	return (
-		<Strip
-			startingDate={moment().startOf('week')}
-			selectedDate={selectedDate.toDate()}
-			onDateSelected={changeSelectedDate}
-			style={styles.calendar}
-			calendarHeaderStyle={styles.headingText}
-			dateNumberStyle={styles.dateNumberStyle}
-			dateNameStyle={{ color: Colors.Primary }}
-			highlightDateNumberStyle={{ color: Colors.White }}
-			highlightDateNameStyle={{ color: Colors.White }}
-			weekendDateNameStyle={{ color: Colors.White }}
-			calendarAnimation={{ type: 'sequence', duration: 30 }}
-			daySelectionAnimation={daySelectionAnimation}
-			customDatesStyles={customDatesStyles}
-			markedDates={markedDates}
-			onWeekChanged={handleWeekChange}
+		<FlatList
+			data={markedDates}
+			ListHeaderComponent={() => (
+				<Strip
+					startingDate={currentWeek.startOf('week')}
+					selectedDate={selectedDate}
+					onDateSelected={changeSelectedDate}
+					style={styles.calendar}
+					calendarHeaderStyle={styles.headingText}
+					dateNumberStyle={styles.dateNumberStyle}
+					dateNameStyle={{ color: Colors.Primary }}
+					highlightDateNumberStyle={{ color: Colors.White }}
+					highlightDateNameStyle={{ color: Colors.White }}
+					weekendDateNameStyle={{ color: Colors.White }}
+					calendarAnimation={null}
+					daySelectionAnimation={daySelectionAnimation}
+					customDatesStyles={customDatesStyles}
+					markedDates={markedDates}
+					onWeekChanged={handleWeekChange}
+				/>
+			)}
+			stickyHeaderIndices={[0]}
+			renderItem={() => null}
+			scrollEnabled={false}
 		/>
 	);
 };

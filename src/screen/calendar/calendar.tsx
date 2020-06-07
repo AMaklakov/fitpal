@@ -27,6 +27,7 @@ import { fetchExercisesStart } from '@redux/action/exercise.action';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { ExerciseModel } from '@model/exercise.model';
 import uniq from 'lodash/uniq';
+import isEqual from 'lodash/isEqual';
 
 interface IDispatch {
 	fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) => void;
@@ -64,8 +65,9 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		const unit = calendarType === 'strip' ? 'week' : 'month';
 		return selectTrainingListByDateRange(viewedStartDate.clone().startOf(unit), viewedStartDate.clone().endOf(unit));
 	}, [calendarType, selectTrainingListByDateRange, viewedStartDate]);
-	const markedDates = useMemo<Array<IMarkedDate>>(() => {
-		return uniq(trainingsInDateRange.map(x => x.date)).map<IMarkedDate>(date => ({
+	const [markedDates, setMarkedDates] = useState<Array<IMarkedDate>>([]);
+	useEffect(() => {
+		const newMarkedDates = uniq(trainingsInDateRange.map(x => x.date)).map<IMarkedDate>(date => ({
 			date: moment(date),
 			dots: trainingsInDateRange
 				.filter(x => x.date === date)
@@ -75,7 +77,11 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					color: Colors.Red,
 				})),
 		}));
-	}, [trainingsInDateRange]);
+
+		if (!isEqual(markedDates, newMarkedDates)) {
+			setMarkedDates(newMarkedDates);
+		}
+	}, [markedDates, trainingsInDateRange]);
 
 	useEffect(() => {
 		const unit = calendarType === 'strip' ? 'week' : 'month';
@@ -125,6 +131,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	);
 
 	const handleChangeViewedWeek = useCallback((weekStart: Moment) => setViewedStartDate(weekStart), []);
+	const handleMonthChange = useCallback((month: Moment) => setViewedStartDate(month), []);
 
 	return (
 		<View style={styles.wrapper}>
@@ -138,7 +145,12 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					/>
 				)}
 				{calendarType === 'month' && (
-					<CalendarMonth selectedDate={selectedDate} onDateChange={handleChangeSelectedDate} />
+					<CalendarMonth
+						selectedDate={selectedDate}
+						onDateChange={handleChangeSelectedDate}
+						onMonthChanged={handleMonthChange}
+						customMarkedDates={markedDates}
+					/>
 				)}
 			</GestureRecognizer>
 
