@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
@@ -42,19 +42,22 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	const [name, setName] = useState(DEFAULT_TRAINING_NAME);
 	const [hasNameErrors, setHasNameErrors] = useState(false);
 	const [date, setDate] = useState<Moment>(getToday());
+	const [color, setColor] = useState<string>(PALETTE_COLORS[0]);
 
 	useEffect(() => {
 		let newName = DEFAULT_TRAINING_NAME;
 		let newDate = dateFromStore ? convertStringToMoment(dateFromStore, DateFormatEnum.Calendar) : getToday();
+		let newColor = PALETTE_COLORS[0] as string;
 
 		if (training) {
-			// TODO if training exists set color to it's color
 			newName = `${training.name} - COPY`;
 			newDate = moment(training.date);
+			newColor = training.color;
 		}
 
 		setName(newName);
 		setDate(newDate);
+		setColor(newColor);
 	}, [isOpen, dateFromStore, training, DEFAULT_TRAINING_NAME]);
 
 	const isSaveDisabled = useMemo(() => !name || !date || hasNameErrors, [name, date, hasNameErrors]);
@@ -67,6 +70,7 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 		const newTraining: ICreateTraining = {
 			name: name,
 			date: date,
+			color: color,
 			exerciseList: cloneTrainingExerciseList(training?.exerciseList),
 		};
 
@@ -76,6 +80,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 	const handleCancelPress = () => {
 		cleanUp();
 	};
+
+	const handleSetColor = useCallback((v: string) => setColor(v), []);
 
 	const handleChangeName = (name: string, errors?: IErrors) => {
 		setName(name);
@@ -106,9 +112,8 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 					</View>
 				)}
 
-				{/* TODO add label */}
-				{/* TODO on change => set state */}
-				<ColorPalette onChange={() => {}} colors={PALETTE_COLORS} />
+				<Text style={styles.asLabel}>{t('Choose training color')}</Text>
+				<ColorPalette onChange={handleSetColor} colors={PALETTE_COLORS} />
 
 				<View style={styles.buttonsWrapper}>
 					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />

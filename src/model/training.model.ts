@@ -6,6 +6,7 @@ export interface TrainingModel {
 	userId?: string;
 
 	name: string;
+	color: string;
 	date: MomentInput;
 	exerciseList: IBaseTrainingExercise[];
 
