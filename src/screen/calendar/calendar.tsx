@@ -28,12 +28,14 @@ import { getExerciseList } from '@redux/selector/exercise.selector';
 import { ExerciseModel } from '@model/exercise.model';
 import uniq from 'lodash/uniq';
 import isEqual from 'lodash/isEqual';
+import { TRAINING_PLAY_ACTION_CREATORS } from '@redux/action/training-play.action';
 
 interface IDispatch {
 	fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) => void;
 	deleteTrainingById: (trainingId: string) => void;
 	openTrainingModal: (training?: TrainingModel, date?: MomentInput) => void;
 	onFetchExercises: () => void;
+	onSetTrainingPlayId: (training: TrainingModel) => void;
 }
 
 interface IState {
@@ -52,7 +54,7 @@ type ICalendarTypes = 'strip' | 'month';
 const Calendar = (props: IProps & IState & IDispatch) => {
 	const { navigation, fetchTrainingListByDateRange, deleteTrainingById, openTrainingModal } = props;
 	const { selectTrainingListByDate, onFetchExercises, exercises, isFetching, hasErrors } = props;
-	const { selectTrainingListByDateRange } = props;
+	const { selectTrainingListByDateRange, onSetTrainingPlayId } = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, setSelectedDate] = useState(getToday());
@@ -131,6 +133,15 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	const handleChangeViewedWeek = useCallback((weekStart: Moment) => setViewedStartDate(weekStart), []);
 	const handleMonthChange = useCallback((month: Moment) => setViewedStartDate(month), []);
 
+	const handleStartTraining = useCallback(
+		(training: TrainingModel) => {
+			// TODO check training exercises lengths and series
+			onSetTrainingPlayId(training);
+			navigation.navigate(Routes.TrainingPlayDetails);
+		},
+		[navigation, onSetTrainingPlayId]
+	);
+
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
@@ -159,6 +170,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 					trainingList={trainingList}
 					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
+					onTrainingStart={handleStartTraining}
 					onExercisePress={handleExercisePress}
 				/>
 			</View>
@@ -234,6 +246,7 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch 
 			dispatch(toggleCalendarTrainingModalAction(true));
 		},
 		onFetchExercises: () => dispatch(fetchExercisesStart(null)),
+		onSetTrainingPlayId: (training: TrainingModel) => dispatch(TRAINING_PLAY_ACTION_CREATORS.SET_TRAINING(training)),
 	};
 };
 
