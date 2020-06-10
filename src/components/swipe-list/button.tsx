@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Button } from '@components/button/button';
@@ -18,11 +18,11 @@ const makeStyles = (color: Colors, textColor: Colors) => {
 interface IProps<T> {
 	title: string;
 	item: T;
-	onTouch: (item: T) => void;
 
 	backgroundColor?: Colors;
 	textColor?: Colors;
 	style?: StyleSheet.NamedStyles<object>;
+	onTouch?: (item: T) => void;
 }
 
 export const SwipeHiddenButton = <T extends any>(props: IProps<T>) => {
@@ -30,7 +30,7 @@ export const SwipeHiddenButton = <T extends any>(props: IProps<T>) => {
 
 	const styles = useMemo(() => makeStyles(backgroundColor, textColor), [backgroundColor, textColor]);
 
-	const handleOnTouch = () => onTouch(item);
+	const handleOnTouch = useCallback(() => onTouch?.(item), [item, onTouch]);
 
 	return (
 		<View style={{ ...styles.button, ...style }}>

@@ -15,6 +15,7 @@ import first from 'lodash/first';
 import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
 import { isPresent } from '@util/type.util';
 import { ShowCurrentSeries } from '@screen/training-play/components/show-current-series';
+import { Routes } from '@screen/navigator';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -80,12 +81,11 @@ const Progress: FC<IProps & IState & IDispatch> = props => {
 		}
 
 		const [nextExerciseId, nextSeriesId] = getNextSeries(training, currentExercise, currentSeries);
-		if (isPresent(nextExerciseId) && isPresent(nextSeriesId)) {
-			// TODO go to results
-			// navigation.navigate();
+		if (!isPresent(nextExerciseId) && !isPresent(nextSeriesId)) {
+			navigation.navigate(Routes.TrainingPlayResult);
 		}
 		onSetSeries({ exerciseId: nextExerciseId ?? null, seriesId: nextSeriesId ?? null });
-	}, [currentExercise, currentSeries, handelCloseModal, onSetSeries, training]);
+	}, [currentExercise, currentSeries, handelCloseModal, navigation, onSetSeries, training]);
 
 	if (!training || !currentExercise || !currentSeries || !currentExerciseId || !currentSeriesId) {
 		return null;

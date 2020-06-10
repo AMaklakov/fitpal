@@ -82,7 +82,7 @@ const TrainingExercise = (props: IProps) => {
 								)}
 							</View>
 						}>
-						<Icon type="material" name="more-vert" />
+						{(!!onEdit || !!onCalcRM || !!onDelete) && <Icon type="material" name="more-vert" />}
 					</Tooltip>
 				</View>
 				<View style={styles.table}>
