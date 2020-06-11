@@ -1,0 +1,2 @@
+export const DEFAULT_REST_TIMER_SECONDS = 90;
+export const DEFAULT_TRAINING_TIMER_SECONDS = 1.5 * 60 * 60;

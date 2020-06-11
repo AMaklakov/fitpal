@@ -10,6 +10,7 @@ import { Countdown } from '@components/timer/countdown';
 import { navigate } from '@util/navigation.util';
 import { Routes } from '@screen/navigator';
 import { useTranslation } from 'react-i18next';
+import { DEFAULT_TRAINING_TIMER_SECONDS } from '@const/app.const';
 
 interface IDispatch {}
 
@@ -29,7 +30,7 @@ const Component = (props: IProps & IState & IDispatch) => {
 		return trainingStart
 			? moment(trainingStart)
 					.clone()
-					.add(90, 'minutes')
+					.add(DEFAULT_TRAINING_TIMER_SECONDS, 'seconds')
 			: null;
 	}, [trainingStart]);
 
@@ -49,7 +50,7 @@ const Component = (props: IProps & IState & IDispatch) => {
 									onEnd={() =>
 										Alert.alert(
 											t('Training already lasts for |time|. We think it is time have a rest', {
-												time: `90 ${t('minutes')}`,
+												time: `${DEFAULT_TRAINING_TIMER_SECONDS / 60} ${t('minutes')}`,
 											})
 										)
 									}

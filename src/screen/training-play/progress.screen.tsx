@@ -16,6 +16,7 @@ import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
 import { isPresent } from '@util/type.util';
 import { ShowCurrentSeries } from '@screen/training-play/components/show-current-series';
 import { Routes } from '@screen/navigator';
+import { DEFAULT_REST_TIMER_SECONDS } from '@const/app.const';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -108,7 +109,7 @@ const Progress: FC<IProps & IState & IDispatch> = props => {
 
 			<Overlay isVisible={isOpenRestTimer}>
 				<View style={styles.modalWrapper}>
-					<Timer time={90} onEnd={handleTimerEnd}>
+					<Timer time={DEFAULT_REST_TIMER_SECONDS} onEnd={handleTimerEnd}>
 						{isEnded && <Button title={t('Continue')} onPress={handleFinishSeries} />}
 						{!isEnded && <Button solidType="gray" title={t('Skip')} onLongPress={handleFinishSeries} />}
 					</Timer>
