@@ -17,7 +17,6 @@ interface IProps {
 	exercises: ExerciseModel[];
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
-	onUpdateTrainingName: (name: string) => void;
 	onGoBack: () => void;
 	canEdit: boolean;
 	lastUserUpdatedWeight: MomentInput;
@@ -28,7 +27,7 @@ interface IProps {
 
 export const Training = (props: IProps) => {
 	const { training, onAddExercise, exercises, removeExercise, changeTraining, canEdit = true } = props;
-	const { onUpdateTrainingName, lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM } = props;
+	const { lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM } = props;
 
 	const { t } = useTranslation();
 	const [isReorder, changeIsReorder] = useState(false);
@@ -63,7 +62,7 @@ export const Training = (props: IProps) => {
 	return (
 		<View style={{ flex: 1 }}>
 			<TrainingStatusBar training={training} />
-			<TrainingHeading training={training} canEdit={canEdit} onUpdateTrainingName={onUpdateTrainingName} />
+			<TrainingHeading training={training} canEdit={canEdit} onUpdateTraining={changeTraining} />
 
 			{isReorder ? (
 				<ReorderTrainingExercise
