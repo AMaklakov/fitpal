@@ -17,6 +17,7 @@
 	"Covid |count|": "COVID-19: {{value}}",
 	"Create exercise": "Create exercise",
 	"Create training": "Create training",
+	"Default exercise type description": "Only weight of burden will be used for total calculation.",
 	"Delete": "Delete",
 	"Description": "Description",
 	"Details": "Details",
@@ -35,6 +36,7 @@
 	"Exercise": "Exercise",
 	"Exercise list": "Exercise list",
 	"Exercise name": "Exercise name",
+	"Exercise type": "Exercise type",
 	"Exercises number": "Exercises:",
 	"Exit": "Exit",
 	"Go back to trainings": "Go back to trainings",
@@ -54,6 +56,7 @@
 	"Must be less than |userWeight|": "Must be less than {{userWeight}}",
 	"Name": "Name",
 	"New training": "New training",
+	"No description": "No description",
 	"No exercises": "No exercises",
 	"Nomination": "Name",
 	"Not a number": "Not a number",
@@ -76,5 +79,7 @@
 	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}",
 	"Weekly": "Weekly",
 	"Weight": "Weight",
+	"WithAdditionalWeight exercise type description": "Weight of burden will be added to user weight for total calculation.",
+	"WithNegativeWeight exercise type description": "Weight of burden will be subtracted from user weight for total calculation.",
 	"reps": "reps"
 }

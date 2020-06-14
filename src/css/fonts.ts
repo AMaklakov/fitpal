@@ -12,9 +12,8 @@ export enum FontSizes {
 	Big = 18,
 	Medium = 16,
 	Small = 14,
-	Paragraph = 12,
 
 	Regular = Medium,
 	Accent = Biggest,
-	Hint = Paragraph,
+	Hint = 12,
 }
