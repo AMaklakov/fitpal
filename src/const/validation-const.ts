@@ -1,10 +1,6 @@
 export const TRAINING_TITLE_MAXLENGTH = 100;
 export const TRAINING_TITLE_MINLENGTH = 3;
 
-// TODO replace with EXERCISE_VALID
-export const EXERCISE_NAME_MAXLENGTH = 100;
-export const EXERCISE_NAME_MINLENGTH = 3;
-
 export const MIN_REPEATS = 1;
 export const MAX_REPEATS = 200;
 export const MIN_WEIGHT = 1;
@@ -20,6 +16,6 @@ export const EXERCISE_VALID = {
 		maxLength: 100,
 	},
 	DESCRIPTION: {
-		maxLength: 1000,
+		maxLength: 10000,
 	},
 };

@@ -17,6 +17,7 @@
 	"Covid |count|": "COVID-19: {{value}}",
 	"Create exercise": "Создать упражнение",
 	"Create training": "Создать тренировку",
+	"Default exercise": "Стандатрное упражнение",
 	"Default exercise type description": "Только вес отягощения будет учитываться в результатах. Например, \"Жим лежа\" или \"Приседания со штангой\".",
 	"Delete": "Удалить",
 	"Description": "Описание",
@@ -79,6 +80,8 @@
 	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}",
 	"Weekly": "По неделям",
 	"Weight": "Вес",
+	"With additional weight": "С дополнительным отягощением",
+	"With negative weight": "С поддержкой",
 	"WithAdditionalWeight exercise type description": "Вес отягощения будет добавлен к весу пользователя при подсчете результатов. Например, \"Отжимания на брусьях\" или \"Подтягивания\"",
 	"WithNegativeWeight exercise type description": "Вес отягощения будет вычитаться из веса пользователя. Например, \"Подтягивания с суппортом\"",
 	"reps": "повт."
