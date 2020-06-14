@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 	},
 	errorText: {
 		color: Colors.LightRed,
-		fontSize: FontSizes.Paragraph,
+		fontSize: FontSizes.Hint,
 	},
 	buttonsWrapper: {
 		paddingTop: 20,

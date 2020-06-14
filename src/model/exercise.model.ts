@@ -25,6 +25,7 @@ export interface ExerciseModel {
 
 	type: ExerciseTypes;
 	name: string;
+	description?: string;
 }
 
 export type ICreateExercise = Omit<ExerciseModel, '_id'>;
