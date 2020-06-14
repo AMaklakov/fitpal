@@ -3,7 +3,7 @@ import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { StoreModel } from '@redux/store';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
-import { Header as HeaderComponent, Icon } from 'react-native-elements';
+import { Header as HeaderComponent } from 'react-native-elements';
 import moment, { MomentInput } from 'moment';
 import { FontSizes } from '@css/fonts';
 import { Countdown } from '@components/timer/countdown';
@@ -11,6 +11,7 @@ import { navigate } from '@util/navigation.util';
 import { Routes } from '@screen/navigator';
 import { useTranslation } from 'react-i18next';
 import { DEFAULT_TRAINING_TIMER_SECONDS } from '@const/app.const';
+import { Button } from '@components/button/button';
 
 interface IDispatch {}
 
@@ -39,7 +40,9 @@ const Component = (props: IProps & IState & IDispatch) => {
 	return (
 		<HeaderComponent
 			containerStyle={styles.wrapper}
-			leftComponent={<Icon name="menu" onPress={onOpenMenu} />}
+			leftComponent={
+				<Button type="clear" icon={{ name: 'menu' }} onPress={onOpenMenu} buttonStyle={styles.menuButton} />
+			}
 			centerComponent={
 				<View>
 					{!!restTime && (
@@ -75,11 +78,11 @@ const styles = StyleSheet.create({
 		height: HEADER_HEIGHT,
 		backgroundColor: Colors.White,
 	},
-	menuIconHolder: {
-		width: HEADER_HEIGHT,
+	menuButton: {
+		paddingHorizontal: 0,
+		paddingVertical: 0,
 		height: HEADER_HEIGHT,
-		justifyContent: 'center',
-		alignItems: 'center',
+		width: HEADER_HEIGHT + 10,
 	},
 });
 
