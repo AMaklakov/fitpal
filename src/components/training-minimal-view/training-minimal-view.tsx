@@ -63,12 +63,14 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 									titleStyle={styles.listItemTitle}
 								/>
 								{/* TODO check training exercise list and series */}
-								<ListItem
-									title={t('Start training')}
-									onPress={handleTrainingPlayPress}
-									leftIcon={{ name: 'play-arrow' }}
-									titleStyle={styles.listItemTitle}
-								/>
+								{false && (
+									<ListItem
+										title={t('Start training')}
+										onPress={handleTrainingPlayPress}
+										leftIcon={{ name: 'play-arrow' }}
+										titleStyle={styles.listItemTitle}
+									/>
+								)}
 								<ListItem
 									title={t('Copy')}
 									onPress={handleOnCopy}
