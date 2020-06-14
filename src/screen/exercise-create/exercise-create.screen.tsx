@@ -39,7 +39,7 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 
 	const EXERCISE_TYPES = useMemo(
 		() => [
-			{ label: t('Default'), value: ExerciseTypes.Default },
+			{ label: t('Default exercise'), value: ExerciseTypes.Default },
 			{ label: t('With additional weight'), value: ExerciseTypes.WithAdditionalWeight },
 			{ label: t('With negative weight'), value: ExerciseTypes.WithNegativeWeight },
 		],
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 	},
 	buttonContainer: {
-		marginBottom: 10,
+		paddingVertical: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},

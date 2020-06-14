@@ -17,6 +17,7 @@
 	"Covid |count|": "COVID-19: {{value}}",
 	"Create exercise": "Create exercise",
 	"Create training": "Create training",
+	"Default exercise": "Default exercise",
 	"Default exercise type description": "Only weight of burden will be used for total calculation.",
 	"Delete": "Delete",
 	"Description": "Description",
@@ -79,6 +80,8 @@
 	"Value in range from |min| to |max|": "Value in range from {{min}} to {{max}}",
 	"Weekly": "Weekly",
 	"Weight": "Weight",
+	"With additional weight": "With additional weight",
+	"With negative weight": "With support weight",
 	"WithAdditionalWeight exercise type description": "Weight of burden will be added to user weight for total calculation.",
 	"WithNegativeWeight exercise type description": "Weight of burden will be subtracted from user weight for total calculation.",
 	"reps": "reps"
