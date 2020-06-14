@@ -110,9 +110,10 @@ const styles = StyleSheet.create({
 	scrollArea: {
 		height: 200,
 		padding: 10,
+		position: 'absolute',
 		left: 0,
 		right: 0,
-		top: -15,
+		top: '110%',
 		borderRadius: 8,
 		backgroundColor: Colors.White,
 
