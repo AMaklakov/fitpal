@@ -17,6 +17,7 @@
 	"Covid |count|": "COVID-19: {{value}}",
 	"Create exercise": "Создать упражнение",
 	"Create training": "Создать тренировку",
+	"Default exercise type description": "Только вес отягощения будет учитываться в результатах. Например, \"Жим лежа\" или \"Приседания со штангой\".",
 	"Delete": "Удалить",
 	"Description": "Описание",
 	"Details": "Детали",
@@ -35,6 +36,7 @@
 	"Exercise": "Упражнение",
 	"Exercise list": "Список упражнений",
 	"Exercise name": "Наименование упражнения",
+	"Exercise type": "Тип упражнения",
 	"Exercises number": "Упражнений:",
 	"Exit": "Выйти",
 	"Go back to trainings": "Вернуться назад",
@@ -54,6 +56,7 @@
 	"Must be less than |userWeight|": "Должно быть меньше чем {{userWeight}}",
 	"Name": "Имя",
 	"New training": "Новая тренировка",
+	"No description": "Описание отсутствует",
 	"No exercises": "Нет упражнений",
 	"Nomination": "Название",
 	"Not a number": "Не число",
@@ -76,5 +79,7 @@
 	"Value in range from |min| to |max|": "Значание в диапазоне от {{min}} до {{max}}",
 	"Weekly": "По неделям",
 	"Weight": "Вес",
+	"WithAdditionalWeight exercise type description": "Вес отягощения будет добавлен к весу пользователя при подсчете результатов. Например, \"Отжимания на брусьях\" или \"Подтягивания\"",
+	"WithNegativeWeight exercise type description": "Вес отягощения будет вычитаться из веса пользователя. Например, \"Подтягивания с суппортом\"",
 	"reps": "повт."
 }
