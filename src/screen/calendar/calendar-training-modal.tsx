@@ -112,8 +112,10 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 					</View>
 				)}
 
-				<Text style={styles.asLabel}>{t('Choose training color')}</Text>
-				<ColorPalette onChange={handleSetColor} colors={PALETTE_COLORS} />
+				<View style={styles.paletteWrapper}>
+					<Text style={styles.asLabel}>{t('Choose training color')}</Text>
+					<ColorPalette onChange={handleSetColor} value={color} colors={PALETTE_COLORS} />
+				</View>
 
 				<View style={styles.buttonsWrapper}>
 					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />
@@ -142,14 +144,18 @@ const styles = StyleSheet.create({
 	},
 	calendarButton: {
 		paddingHorizontal: 12,
-		marginTop: 12,
+		marginBottom: 20,
 	},
 	asLabel: {
+		marginLeft: 5,
 		marginBottom: 2,
 		fontSize: 14,
 		fontFamily: Fonts.Kelson,
 		fontWeight: 'normal',
 		color: Colors.Primary,
+	},
+	paletteWrapper: {
+		marginLeft: 10,
 	},
 });
 

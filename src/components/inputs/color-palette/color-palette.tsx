@@ -7,10 +7,11 @@ interface IProps {
 	onChange: (v: string) => void;
 	defaultValue?: string;
 	value?: string;
+	colorsInRow?: number;
 }
 
 export const ColorPalette: FC<IProps> = props => {
-	const { colors, defaultValue, onChange, value } = props;
+	const { colors, defaultValue, onChange, value, colorsInRow = 4 } = props;
 
 	const [selectedColor, setSelectedColor] = useState<string>(defaultValue || value || colors[0]);
 
@@ -33,7 +34,13 @@ export const ColorPalette: FC<IProps> = props => {
 	return (
 		<View style={styles.wrapper}>
 			{colors.map(color => (
-				<ColorPaletteItem key={color} color={color} selected={color === selectedColor} onPress={handleSelect} />
+				<ColorPaletteItem
+					key={color}
+					color={color}
+					selected={color === selectedColor}
+					onPress={handleSelect}
+					colorsInRow={colorsInRow}
+				/>
 			))}
 		</View>
 	);
@@ -42,7 +49,7 @@ export const ColorPalette: FC<IProps> = props => {
 const styles = StyleSheet.create({
 	wrapper: {
 		flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'space-between',
 		flexWrap: 'wrap',
 	},
 });

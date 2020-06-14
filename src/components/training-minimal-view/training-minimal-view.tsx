@@ -13,17 +13,22 @@ interface TrainingMinimalViewProps {
 	training: TrainingModel;
 	exercises: ExerciseModel[];
 	onTrainingPress?: (training: TrainingModel) => void;
+	onTrainingStart?: (training: TrainingModel) => void;
 	onCopy?: (training: TrainingModel) => void;
 	onDelete?: (training: TrainingModel) => void;
 	onExercisePress?: (exerciseId: string) => void;
 }
 
 export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
-	const { training, exercises, onTrainingPress, onCopy, onDelete, onExercisePress } = props;
+	const { training, exercises, onTrainingPress, onCopy, onDelete, onExercisePress, onTrainingStart } = props;
 	const { t } = useTranslation();
 	const tooltip = useRef<Tooltip>(null);
 
 	const handleTrainingPress = useCallback(() => onTrainingPress?.(training), [onTrainingPress, training]);
+	const handleTrainingPlayPress = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onTrainingStart?.(training);
+	}, [onTrainingStart, training]);
 	const handleDetailsPress = useCallback(() => {
 		tooltip.current?.toggleTooltip();
 		onTrainingPress?.(training);
@@ -57,6 +62,15 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 									leftIcon={{ type: 'material', name: 'search' }}
 									titleStyle={styles.listItemTitle}
 								/>
+								{/* TODO check training exercise list and series */}
+								{false && (
+									<ListItem
+										title={t('Start training')}
+										onPress={handleTrainingPlayPress}
+										leftIcon={{ name: 'play-arrow' }}
+										titleStyle={styles.listItemTitle}
+									/>
+								)}
 								<ListItem
 									title={t('Copy')}
 									onPress={handleOnCopy}

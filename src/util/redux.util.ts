@@ -24,3 +24,7 @@ export const progressActions = <T1 = any, T2 = any, T3 = any>(types: IProgressTy
 		ERROR: data => ({ type: types.ERROR, payload: data }),
 	};
 };
+
+export const dataActionCreator = <PayloadType>(type: string): DataActionCreator<PayloadType> => {
+	return (payload: PayloadType) => ({ type, payload });
+};

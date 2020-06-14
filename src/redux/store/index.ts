@@ -8,10 +8,12 @@ import { user } from '@redux/store/reducer/user/user.reducer';
 import { covid } from '@redux/store/reducer/covid.reducer';
 import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from '@redux/sagas/root.saga';
+import { trainingPlay } from '@redux/store/reducer/training-play.reducer';
 
 const combinedReducers = combineReducers({
 	exercise,
 	training,
+	trainingPlay,
 	settings,
 	user,
 	covid,

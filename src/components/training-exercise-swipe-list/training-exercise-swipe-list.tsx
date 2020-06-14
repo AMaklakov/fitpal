@@ -13,9 +13,9 @@ interface IProps {
 	exerciseList: ExerciseModel[];
 	canEdit: boolean;
 
-	onRowLongPress: (e: IBaseTrainingExercise) => void;
-	onRowEdit: (e: IBaseTrainingExercise) => void;
-	onRowDelete: (e: IBaseTrainingExercise) => void;
+	onRowLongPress?: (e: IBaseTrainingExercise) => void;
+	onRowEdit?: (e: IBaseTrainingExercise) => void;
+	onRowDelete?: (e: IBaseTrainingExercise) => void;
 	onCalcRM?: (e: IBaseTrainingExercise) => void;
 }
 

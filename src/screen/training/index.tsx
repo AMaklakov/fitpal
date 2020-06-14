@@ -68,18 +68,12 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		[onRemoveTrainingExercise, training]
 	);
 
-	const handleUpdateTrainingName = useCallback(
-		(name: string) => onUpdateTraining({ ...(training as TrainingModel), name }),
-		[onUpdateTraining, training]
-	);
-
 	return (
 		<Training
 			training={training}
 			canEdit={true}
 			onAddExercise={addExerciseAction}
 			removeExercise={removeExerciseAction}
-			onUpdateTrainingName={handleUpdateTrainingName}
 			changeTraining={onUpdateTraining}
 			exercises={exercises}
 			lastUserUpdatedWeight={lastUserUpdatedWeight}
