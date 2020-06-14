@@ -5,6 +5,7 @@ import { Colors } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
 import { Input, InputProps } from 'react-native-elements';
 import { Fonts, FontSizes } from '@css/fonts';
+import { useTranslation } from 'react-i18next';
 
 interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
@@ -14,6 +15,7 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 	const { value = '', onChange, hasShadow = true, ...rest } = props;
+	const { t } = useTranslation();
 
 	const [isFocused, setFocused] = useState(false);
 
@@ -30,6 +32,8 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 			value={value}
 			placeholderTextColor={Colors.Darkgray}
 			keyboardType="number-pad"
+			returnKeyType="done"
+			returnKeyLabel={t('Done')}
 			labelStyle={[styles.labelStyle]}
 			inputContainerStyle={[
 				styles.inputWrapper,
