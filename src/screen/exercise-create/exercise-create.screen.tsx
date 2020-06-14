@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect, MapDispatchToPropsParam, MapStateToPropsParam } from 'react-redux';
 import { StoreModel } from '@redux/store';
 import { NavigationPropsModel } from '@model/navigation-props.model';
@@ -16,6 +16,7 @@ import { Text } from 'react-native-elements';
 import { Fonts, FontSizes } from '@css/fonts';
 import { Colors } from '@css/colors.style';
 import { validateExercise } from '@util/exercise.util';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -64,57 +65,55 @@ const ExerciseCreate = (props: IProps & IStateToProps & IDispatchToProps) => {
 	}, [exercise, handleGoBack, name, onCreateExercise, onUpdateExercise, type, description, isSaveDisabled]);
 
 	return (
-		<View style={styles.wrapper}>
-			<ScrollView>
-				<View>
+		<KeyboardAwareScrollView>
+			<View style={styles.wrapper}>
+				<View style={styles.contentWrapper}>
 					<H1 text={exercise ? t('Edit exercise') : t('Create exercise')} wrapperStyle={styles.h1} />
 
-					<View style={styles.mainContent}>
-						<StringInputWithValidation
-							defaultValue={name}
-							onChange={handleSetName}
-							maxLength={[
-								EXERCISE_VALID.NAME.maxLength,
-								t('Max length is |len|', { len: EXERCISE_VALID.NAME.maxLength }),
-							]}
-							minLength={[
-								EXERCISE_VALID.NAME.minLength,
-								t('Min length is |len|', { len: EXERCISE_VALID.NAME.minLength }),
-							]}
-							label={t('Nomination')}
-						/>
+					<StringInputWithValidation
+						defaultValue={name}
+						onChange={handleSetName}
+						maxLength={[
+							EXERCISE_VALID.NAME.maxLength,
+							t('Max length is |len|', { len: EXERCISE_VALID.NAME.maxLength }),
+						]}
+						minLength={[
+							EXERCISE_VALID.NAME.minLength,
+							t('Min length is |len|', { len: EXERCISE_VALID.NAME.minLength }),
+						]}
+						label={t('Nomination')}
+					/>
 
-						{!exercise && (
-							<View style={styles.exerciseTypeWrapper}>
-								<Text style={styles.asLabel}>{t('Exercise type')}</Text>
-								<SelectInput items={EXERCISE_TYPES} value={type} onChange={handleSetType} placeholder={{}} />
-								<Text style={styles.exerciseTypeDescription}>
-									{type === ExerciseTypes.Default && t('Default exercise type description')}
-									{type === ExerciseTypes.WithAdditionalWeight && t('WithAdditionalWeight exercise type description')}
-									{type === ExerciseTypes.WithNegativeWeight && t('WithNegativeWeight exercise type description')}
-								</Text>
-							</View>
-						)}
+					{!exercise && (
+						<View style={styles.exerciseTypeWrapper}>
+							<Text style={styles.asLabel}>{t('Exercise type')}</Text>
+							<SelectInput items={EXERCISE_TYPES} value={type} onChange={handleSetType} placeholder={{}} />
+							<Text style={styles.exerciseTypeDescription}>
+								{type === ExerciseTypes.Default && t('Default exercise type description')}
+								{type === ExerciseTypes.WithAdditionalWeight && t('WithAdditionalWeight exercise type description')}
+								{type === ExerciseTypes.WithNegativeWeight && t('WithNegativeWeight exercise type description')}
+							</Text>
+						</View>
+					)}
 
-						<StringInputWithValidation
-							defaultValue={description}
-							onChange={handleSetDescription}
-							maxLength={[
-								EXERCISE_VALID.DESCRIPTION.maxLength,
-								t('Max length is |len|', { len: EXERCISE_VALID.DESCRIPTION.maxLength }),
-							]}
-							multiline={true}
-							label={t('Description')}
-						/>
-					</View>
+					<StringInputWithValidation
+						defaultValue={description}
+						onChange={handleSetDescription}
+						maxLength={[
+							EXERCISE_VALID.DESCRIPTION.maxLength,
+							t('Max length is |len|', { len: EXERCISE_VALID.DESCRIPTION.maxLength }),
+						]}
+						multiline={true}
+						label={t('Description')}
+					/>
 				</View>
-			</ScrollView>
 
-			<View style={styles.buttonContainer}>
-				<Button solidType="gray" title={t('Cancel')} onPress={handleGoBack} />
-				<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
+				<View style={styles.buttonContainer}>
+					<Button solidType="gray" title={t('Cancel')} onPress={handleGoBack} />
+					<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSavePress} />
+				</View>
 			</View>
-		</View>
+		</KeyboardAwareScrollView>
 	);
 };
 
@@ -147,6 +146,9 @@ const styles = StyleSheet.create({
 		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
 		color: Colors.Primary,
+	},
+	contentWrapper: {
+		flex: 1,
 	},
 });
 
