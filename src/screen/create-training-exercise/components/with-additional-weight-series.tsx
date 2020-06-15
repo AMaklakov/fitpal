@@ -11,6 +11,9 @@ import {
 } from '@screen/create-training-exercise/helpers';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { Button } from '@components/button/button';
+import { Colors } from '@css/colors.style';
+import { Icon, Tooltip } from 'react-native-elements';
+import { FontSizes } from '@css/fonts';
 
 interface IProps {
 	trainingExercise: IAdditionalWeightTrainingExercise;
@@ -35,6 +38,13 @@ export const WithAdditionalWeightSeries = (props: IProps) => {
 				<Text style={styles.sequenceNumber}>№</Text>
 				<Text style={styles.repeats}>{t('Repeats')}</Text>
 				<Text style={styles.weight}>{t('Additional weight')}</Text>
+				<Tooltip
+					containerStyle={styles.tooltip}
+					width={300}
+					backgroundColor={Colors.Darkgray}
+					popover={<Text style={styles.tooltipText}>{t('AW description')}</Text>}>
+					<Icon name="info-outline" />
+				</Tooltip>
 				<Text style={styles.actions} />
 			</View>
 
@@ -94,5 +104,22 @@ const styles = StyleSheet.create({
 	seriesButtonWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+	},
+	tooltip: {
+		height: 'auto',
+		backgroundColor: Colors.White,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 1.41,
+
+		elevation: 2,
+	},
+	tooltipText: {
+		fontSize: FontSizes.Small,
+		color: Colors.Black,
 	},
 });

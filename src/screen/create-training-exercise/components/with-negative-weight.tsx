@@ -12,6 +12,9 @@ import {
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { BigSource } from 'big.js';
 import { Button } from '@components/button/button';
+import { Icon, Tooltip } from 'react-native-elements';
+import { Colors } from '@css/colors.style';
+import { FontSizes } from '@css/fonts';
 
 interface IProps {
 	userWeight: BigSource;
@@ -37,7 +40,14 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 				<Text style={styles.sequenceNumber}>№</Text>
 				<Text style={styles.repeats}>{t('Repeats')}</Text>
 				<Text style={styles.weight}>{t('Support weight')}</Text>
-				<Text style={styles.actions} />
+				<Tooltip
+					containerStyle={styles.tooltip}
+					width={300}
+					backgroundColor={Colors.Darkgray}
+					popover={<Text style={styles.tooltipText}>{t('SW description')}</Text>}>
+					<Icon name="info-outline" />
+				</Tooltip>
+				<Text style={styles.actions}></Text>
 			</View>
 
 			<FlatList<ISeries>
@@ -97,5 +107,22 @@ const styles = StyleSheet.create({
 	seriesButtonWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+	},
+	tooltip: {
+		height: 'auto',
+		backgroundColor: Colors.White,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 1.41,
+
+		elevation: 2,
+	},
+	tooltipText: {
+		fontSize: FontSizes.Small,
+		color: Colors.Black,
 	},
 });
