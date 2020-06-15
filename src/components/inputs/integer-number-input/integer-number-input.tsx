@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { removeLeadingZeros } from '@util/string.util';
 import { Colors } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
@@ -11,10 +11,11 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	onChange: (v: string) => void;
 	hasShadow?: boolean;
+	useOneLineErrors?: boolean
 }
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
-	const { value = '', onChange, hasShadow = true, ...rest } = props;
+	const { value = '',  useOneLineErrors = false, onChange, hasShadow = true, ...rest } = props;
 	const { t } = useTranslation();
 
 	const [isFocused, setFocused] = useState(false);
@@ -25,30 +26,36 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 	const handleBlur = useCallback(() => setFocused(false), []);
 
 	return (
-		<Input
-			onChangeText={handleTextChange}
-			onFocus={handleFocus}
-			onBlur={handleBlur}
-			value={value}
-			placeholderTextColor={Colors.Darkgray}
-			keyboardType="number-pad"
-			returnKeyType="done"
-			returnKeyLabel={t('Done')}
-			labelStyle={[styles.labelStyle]}
-			inputContainerStyle={[
-				styles.inputWrapper,
-				isFocused && styles.focused,
-				hasShadow && styles.shadow,
-				!!rest.errorMessage && styles.error,
-			]}
-			{...rest}
-		/>
+		<View style={styles.inputBlock}>
+			<Input
+				onChangeText={handleTextChange}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				value={value}
+				placeholderTextColor={Colors.Darkgray}
+				keyboardType="number-pad"
+				returnKeyType="done"
+				returnKeyLabel={t('Done')}
+				labelStyle={[styles.labelStyle]}
+				errorStyle={useOneLineErrors && [styles.errorMessageStyles]}
+				inputContainerStyle={[
+					styles.inputWrapper,
+					isFocused && styles.focused,
+					hasShadow && styles.shadow,
+					!!rest.errorMessage && styles.error,
+				]}
+				{...rest}
+			/>
+		</View>
 	);
 };
 
 export const IntegerNumberInputWithValidation = withValidation(IntegerNumberInput);
 
 const styles = StyleSheet.create({
+	inputBlock: {
+		minHeight: 70
+	},
 	inputWrapper: {
 		paddingHorizontal: 5,
 		borderWidth: 1,
@@ -84,4 +91,10 @@ const styles = StyleSheet.create({
 	error: {
 		borderColor: Colors.LightRed,
 	},
+	errorMessageStyles: {
+		position: 'absolute',
+		fontSize: 10,
+		top: 50,
+		left: 5,
+	}
 });

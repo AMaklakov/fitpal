@@ -44,6 +44,7 @@ export const CreateSeries = (props: IProps) => {
 			<View style={styles.repeats}>
 				<IntegerNumberInputWithValidation
 					isNumber={[true, t('Not a number')]}
+					useOneLineErrors={true}
 					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
 					value={repeats}
@@ -54,6 +55,7 @@ export const CreateSeries = (props: IProps) => {
 			<View style={styles.weight}>
 				<IntegerNumberInputWithValidation
 					isNumber={[true, t('Not a number')]}
+					useOneLineErrors={true}
 					min={[weightMin, t('Min value is |min|', { min: weightMin })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
 					value={weight}
