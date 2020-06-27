@@ -118,10 +118,17 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		selectedDate,
 	]);
 
-	const handleChangeCalendarType = useCallback(
-		() => setCalendarType(type => (type === 'strip' ? 'month' : 'strip')),
-		[]
-	);
+	const handleCalendarSwipeUp = useCallback(() => {
+		if (calendarType === 'month') {
+			setCalendarType('strip');
+		}
+	}, [calendarType]);
+
+	const handleCalendarSwipeDown = useCallback(() => {
+		if (calendarType === 'strip') {
+			setCalendarType('month');
+		}
+	}, [calendarType]);
 
 	const handleExercisePress = useCallback(
 		(id: string) => {
@@ -144,7 +151,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
+			<GestureRecognizer onSwipeDown={handleCalendarSwipeDown} onSwipeUp={handleCalendarSwipeUp}>
 				{calendarType === 'strip' && (
 					<CalendarStrip
 						selectedDate={selectedDate}
