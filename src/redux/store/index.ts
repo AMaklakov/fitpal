@@ -25,6 +25,11 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(combinedReducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 sagaMiddleware.run(rootSaga);
 
-export type StoreModel = ReturnType<typeof combinedReducers>;
+export type IStore = ReturnType<typeof combinedReducers>;
+/**
+ * @deprecated
+ * TODO replace with IStore
+ */
+export type StoreModel = IStore;
 
 export default store;

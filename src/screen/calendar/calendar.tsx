@@ -36,6 +36,7 @@ interface IDispatch {
 	openTrainingModal: (training?: TrainingModel, date?: MomentInput) => void;
 	onFetchExercises: () => void;
 	onSetTrainingPlayId: (training: TrainingModel) => void;
+	onEditTraining: (training: TrainingModel) => void;
 }
 
 interface IState {
@@ -54,7 +55,7 @@ type ICalendarTypes = 'strip' | 'month';
 const Calendar = (props: IProps & IState & IDispatch) => {
 	const { navigation, fetchTrainingListByDateRange, deleteTrainingById, openTrainingModal } = props;
 	const { selectTrainingListByDate, onFetchExercises, exercises, isFetching, hasErrors } = props;
-	const { selectTrainingListByDateRange, onSetTrainingPlayId } = props;
+	const { selectTrainingListByDateRange, onSetTrainingPlayId, onEditTraining } = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, setSelectedDate] = useState(getToday());
@@ -149,7 +150,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		[navigation, onSetTrainingPlayId]
 	);
 
-	const handleOpenEditDialog = useCallback(() => {}, []);
+	const handleOpenEditDialog = useCallback((training: TrainingModel) => onEditTraining(training), [onEditTraining]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -256,7 +257,8 @@ const mapDispatchToProps: MapDispatchToPropsParam<IDispatch, IProps> = dispatch 
 			dispatch(toggleCalendarTrainingModalAction(true));
 		},
 		onFetchExercises: () => dispatch(fetchExercisesStart(null)),
-		onSetTrainingPlayId: (training: TrainingModel) => dispatch(TRAINING_PLAY_ACTION_CREATORS.SET_TRAINING(training)),
+		onSetTrainingPlayId: training => dispatch(TRAINING_PLAY_ACTION_CREATORS.SET_TRAINING(training)),
+		onEditTraining: training => dispatch(TRAINING_ACTION_CREATORS.SET_TO_UPDATE(training?._id)),
 	};
 };
 

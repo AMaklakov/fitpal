@@ -1,4 +1,4 @@
-import { Action, Reducer } from 'redux';
+import { Reducer } from 'redux';
 import { TrainingModel } from '@model/training.model';
 import { TRAINING_ACTIONS } from '@redux/action/training-exercise.action';
 import { IFetchState } from '@model/fetch-state.model';
@@ -8,15 +8,17 @@ import { setError, startLoading } from '@util/state.util';
 
 interface IState extends IFetchState {
 	trainings: TrainingModel[];
+	trainingIdToUpdate: string | null;
 }
 
 const DEFAULT_STATE: IState = {
 	trainings: [],
 	loading: false,
 	error: null,
+	trainingIdToUpdate: null,
 };
 
-export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE, action) => {
+export const training: Reducer<IState, DataAction> = (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
 		case TRAINING_ACTIONS.EXERCISE.ADD.START:
 			return startLoading(state);
@@ -70,16 +72,19 @@ export const training: Reducer<IState, Action<string>> = (state = DEFAULT_STATE,
 		case TRAINING_ACTIONS.DELETE.START:
 			return startLoading(state);
 		case TRAINING_ACTIONS.DELETE.SUCCESS:
-			return deleteById(state, (action as DataAction<string>).payload);
+			return deleteById(state, action.payload as string);
 		case TRAINING_ACTIONS.DELETE.ERROR:
-			return setError(state, (action as DataAction<object>).payload);
+			return setError(state, action.payload as object);
 
+		case TRAINING_ACTIONS.SET_TO_UPDATE:
+			return { ...state, trainingIdToUpdate: action.payload };
 		case TRAINING_ACTIONS.UPDATE.START:
 			return startLoading(state);
 		case TRAINING_ACTIONS.UPDATE.SUCCESS:
-			return addTrainingsToState(state, (action as DataAction<TrainingModel>).payload);
+			const updatedState = addTrainingsToState(state, action.payload as TrainingModel);
+			return { ...updatedState, trainingIdToUpdate: null };
 		case TRAINING_ACTIONS.UPDATE.ERROR:
-			return setError(state, (action as DataAction<object>).payload);
+			return setError(state, action.payload as object);
 
 		default:
 			return state;

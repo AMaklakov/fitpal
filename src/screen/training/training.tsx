@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
 	training?: TrainingModel;
 	changeTraining: (training: TrainingModel) => void;
+	onEdit?: (training?: TrainingModel) => void;
 	exercises: ExerciseModel[];
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
@@ -27,7 +28,7 @@ interface IProps {
 
 export const Training = (props: IProps) => {
 	const { training, onAddExercise, exercises, removeExercise, changeTraining, canEdit = true } = props;
-	const { lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM } = props;
+	const { lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM, onEdit } = props;
 
 	const { t } = useTranslation();
 	const [isReorder, changeIsReorder] = useState(false);
@@ -47,6 +48,8 @@ export const Training = (props: IProps) => {
 		[lastUserUpdatedWeight, onAddExercise, onShowWeightModal]
 	);
 
+	const handleEdit = useCallback(() => onEdit?.(training), [onEdit, training]);
+
 	if (!training) {
 		return (
 			<View>
@@ -62,7 +65,7 @@ export const Training = (props: IProps) => {
 	return (
 		<View style={{ flex: 1 }}>
 			<TrainingStatusBar training={training} />
-			<TrainingHeading training={training} canEdit={canEdit} onUpdateTraining={changeTraining} />
+			<TrainingHeading training={training} canEdit={canEdit} onEdit={handleEdit} />
 
 			{isReorder ? (
 				<ReorderTrainingExercise

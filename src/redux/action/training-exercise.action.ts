@@ -1,5 +1,5 @@
 import { IBaseTrainingExercise } from '@model/training-exercise';
-import { progressActions, progressTypes } from '@util/redux.util';
+import { dataActionCreator, progressActions, progressTypes } from '@util/redux.util';
 import { ICreateTraining, TrainingModel } from '@model/training.model';
 import { MomentInput } from 'moment';
 
@@ -9,6 +9,7 @@ export const TRAINING_ACTIONS = {
 	FETCH_BY_ID: progressTypes('TRAINING', 'FETCH_BY_ID'),
 	CREATE: progressTypes('TRAINING', 'CREATE'),
 	DELETE: progressTypes('TRAINING', 'DELETE'),
+	SET_TO_UPDATE: 'TRAINING/SET_TO_UPDATE',
 	UPDATE: progressTypes('TRAINING', 'UPDATE'),
 
 	EXERCISE: {
@@ -30,6 +31,7 @@ export const TRAINING_ACTION_CREATORS = {
 	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
 	CREATE: progressActions<ICreateTraining, TrainingModel | undefined, object>(TRAINING_ACTIONS.CREATE),
 	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.DELETE),
+	SET_TO_UPDATE: dataActionCreator<string | null>(TRAINING_ACTIONS.SET_TO_UPDATE),
 	UPDATE: progressActions<TrainingModel, TrainingModel, object>(TRAINING_ACTIONS.UPDATE),
 
 	EXERCISE: {

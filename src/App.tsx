@@ -13,6 +13,7 @@ import { SpinnerModal } from '@components/progress-bars/spinner.modal';
 import { setNavigator } from '@util/navigation.util';
 import { Header } from '@components/header/header';
 import { RepetitionMaxModal } from '@components/repetition-maximum/repetition-maximum.modal';
+import { EditTrainingModal } from '@components/modals/edit-training-modal';
 
 changeLanguage(store.getState().settings.language);
 
@@ -60,6 +61,7 @@ export const App = () => {
 					<CalendarTrainingModal />
 					<SpinnerModal />
 					<RepetitionMaxModal />
+					<EditTrainingModal />
 
 					<Menu isOpen={isMenuOpen} onCloseMenu={handleCloseMenu} navigate={handleNavigate} activeRoute={navRoute} />
 				</Provider>
