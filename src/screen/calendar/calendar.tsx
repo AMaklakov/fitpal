@@ -11,7 +11,7 @@ import {
 	updateTrainingModalAction,
 } from '@redux/action/calendar-training-modal.action';
 import { TrainingListMinimalView } from '@components/training-minimal-view/training-list-minimal-view';
-import { IMarkedDate } from '@components/calendar/calendar-strip';
+import { CalendarStrip, IMarkedDate } from '@components/calendar/calendar-strip';
 import { getTrainingListByDate, selectByDates } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
 import { useTranslation } from 'react-i18next';
@@ -60,7 +60,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	const [selectedDate, setSelectedDate] = useState(getToday());
 	const [trainingToDelete, setTrainingToDelete] = useState<TrainingModel | undefined>();
 	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
-	const [calendarType, setCalendarType] = useState<ICalendarTypes>('month');
+	const [calendarType, setCalendarType] = useState<ICalendarTypes>('strip');
 
 	const [viewedStartDate, setViewedStartDate] = useState(moment());
 	const trainingsInDateRange = useMemo(() => {
@@ -145,14 +145,14 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
-				{/*{calendarType === 'strip' && (*/}
-				{/*	<CalendarStrip*/}
-				{/*		selectedDate={selectedDate}*/}
-				{/*		changeSelectedDate={handleChangeSelectedDate}*/}
-				{/*		onWeekChange={handleChangeViewedWeek}*/}
-				{/*		markedDates={markedDates}*/}
-				{/*	/>*/}
-				{/*)}*/}
+				{calendarType === 'strip' && (
+					<CalendarStrip
+						selectedDate={selectedDate}
+						changeSelectedDate={handleChangeSelectedDate}
+						onWeekChange={handleChangeViewedWeek}
+						markedDates={markedDates}
+					/>
+				)}
 				{calendarType === 'month' && (
 					<CalendarMonth
 						selectedDate={selectedDate}

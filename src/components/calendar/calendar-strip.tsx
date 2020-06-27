@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
 import StripCalendar from 'react-native-calendar-strip';
 import { StyleSheet } from 'react-native';
 import { getToday } from '@util/date.util';
@@ -25,13 +25,15 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 	const [currentWeek, setCurrentWeek] = useState<Moment>(moment(selectedDate).clone());
 	const ref = useRef<{ updateWeekView: (date: Moment) => void; state: { numVisibleDays: number } }>(null);
 
-	useEffect(() => {
-		// TODO replace this workaround when version of CalendarStrip is stable
-		const isAbleToRender = Boolean(ref.current?.state?.numVisibleDays);
-		if (markedDates && markedDates?.length > 0 && isAbleToRender) {
-			ref.current?.updateWeekView(currentWeek);
-		}
-	}, [currentWeek, markedDates]);
+	// TODO fix this code
+	// useEffect(() => {
+	// 	console.log('here1');
+	// 	// TODO replace this workaround when version of CalendarStrip is stable
+	// 	const isAbleToRender = Boolean(ref.current?.state?.numVisibleDays);
+	// 	if (markedDates && markedDates?.length > 0 && isAbleToRender) {
+	// 		ref.current?.updateWeekView(currentWeek);
+	// 	}
+	// }, [currentWeek, markedDates]);
 
 	const customDatesStyles = useMemo(
 		() => [
@@ -56,6 +58,8 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 
 	const handleWeekChange = useCallback(
 		(weekStart: Moment) => {
+			console.log('here2');
+
 			setCurrentWeek(weekStart);
 			onWeekChange?.(weekStart);
 		},
