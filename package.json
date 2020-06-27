@@ -1,5 +1,5 @@
 {
-	"name": "fitless",
+	"name": "fitpal",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -10,8 +10,7 @@
 		"ios": "react-native run-ios --simulator=\"iPhone 8\"",
 		"metro": "react-native start --reset-cache",
 		"test": "jest",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-		"generate-trainings": "ts-node scripts/add-training-to-default-training-list.ts /Users/A.Maklakov/Documents/personal/fitpal/src/const/default-training-list.const.json 01.03.2020 30.04.2020"
+		"lint": "eslint . --ext .js,.jsx,.ts,.tsx"
 	},
 	"dependencies": {
 		"@react-native-community/async-storage": "^1.9.0",
@@ -22,9 +21,9 @@
 		"i18next": "^19.3.3",
 		"lodash": "^4.17.13",
 		"moment": "^2.24.0",
-		"react": "16.9.0",
+		"react": "16.11.0",
 		"react-i18next": "^11.3.4",
-		"react-native": "0.61.5",
+		"react-native": "0.62.2",
 		"react-native-calendar-strip": "^2.0.3",
 		"react-native-calendars": "^1.289.0",
 		"react-native-datepicker": "^1.7.2",
@@ -77,7 +76,7 @@
 		"husky": "^4.2.1",
 		"jest": "^25.3.0",
 		"lint-staged": "^10.0.3",
-		"metro-react-native-babel-preset": "^0.56.0",
+		"metro-react-native-babel-preset": "^0.58.0",
 		"node": "^13.12.0",
 		"prettier": "^1.19.1",
 		"react-test-renderer": "^16.13.1",
