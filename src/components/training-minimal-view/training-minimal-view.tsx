@@ -1,13 +1,12 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TrainingModel } from '@model/training.model';
 import { H2 } from '@components/heading/h2';
-import { Card, Divider, Icon, ListItem, Tooltip } from 'react-native-elements';
+import { Card, Divider, Tooltip } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
-import { Fonts, FontSizes } from '@css/fonts';
-import { Colors } from '@css/colors.style';
 import { CompactTrainingView } from '@screen/statistics/components/compact-training-view';
 import { ExerciseModel } from '@model/exercise.model';
+import { ITooltipMenuItem, TooltipMenu } from '@components/tooltip/tooltip-menu';
 
 interface TrainingMinimalViewProps {
 	training: TrainingModel;
@@ -16,11 +15,12 @@ interface TrainingMinimalViewProps {
 	onTrainingStart?: (training: TrainingModel) => void;
 	onCopy?: (training: TrainingModel) => void;
 	onDelete?: (training: TrainingModel) => void;
+	onEdit?: (training: TrainingModel) => void;
 	onExercisePress?: (exerciseId: string) => void;
 }
 
 export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
-	const { training, exercises, onTrainingPress, onCopy, onDelete, onExercisePress, onTrainingStart } = props;
+	const { training, exercises, onTrainingPress, onCopy, onDelete, onExercisePress, onTrainingStart, onEdit } = props;
 	const { t } = useTranslation();
 	const tooltip = useRef<Tooltip>(null);
 
@@ -41,52 +41,60 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 		tooltip.current?.toggleTooltip();
 		onDelete?.(training);
 	}, [onDelete, training]);
+	const handleEdit = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onEdit?.(training);
+	}, [onEdit, training]);
+
+	const tooltipItems = useMemo<ITooltipMenuItem[]>(
+		() => [
+			{
+				title: t('Details'),
+				leftIcon: { name: 'search' },
+				onPress: handleDetailsPress,
+				key: 'details',
+			},
+			/* TODO check training exercise list and series */
+			{
+				title: t('Start training'),
+				leftIcon: { name: 'play-arrow' },
+				onPress: handleTrainingPlayPress,
+				key: 'start',
+				isShown: false,
+			},
+			{
+				title: t('Edit'),
+				leftIcon: { name: 'edit' },
+				onPress: handleEdit,
+				key: 'edit',
+				isShown: !!onEdit,
+			},
+			{
+				title: t('Copy'),
+				leftIcon: { name: 'content-copy' },
+				onPress: handleOnCopy,
+				key: 'copy',
+				isShown: !!onCopy,
+			},
+			{
+				title: t('Delete'),
+				leftIcon: { name: 'delete' },
+				onPress: handleOnDelete,
+				key: 'delete',
+				isShown: !!onDelete,
+			},
+		],
+		[handleDetailsPress, handleEdit, handleOnCopy, handleOnDelete, handleTrainingPlayPress, onCopy, onDelete, onEdit, t]
+	);
 
 	return (
 		<Card
 			title={
 				<View style={styles.titleContainer}>
-					<TouchableOpacity onPress={handleTrainingPress}>
+					<TouchableOpacity onPress={handleTrainingPress} style={styles.heading}>
 						<H2 text={training?.name} />
 					</TouchableOpacity>
-					<Tooltip
-						ref={tooltip}
-						withPointer={false}
-						containerStyle={styles.tooltip}
-						width={200}
-						popover={
-							<View style={styles.tooltipInner}>
-								<ListItem
-									title={t('Details')}
-									onPress={handleDetailsPress}
-									leftIcon={{ type: 'material', name: 'search' }}
-									titleStyle={styles.listItemTitle}
-								/>
-								{/* TODO check training exercise list and series */}
-								{false && (
-									<ListItem
-										title={t('Start training')}
-										onPress={handleTrainingPlayPress}
-										leftIcon={{ name: 'play-arrow' }}
-										titleStyle={styles.listItemTitle}
-									/>
-								)}
-								<ListItem
-									title={t('Copy')}
-									onPress={handleOnCopy}
-									leftIcon={{ type: 'material', name: 'content-copy' }}
-									titleStyle={styles.listItemTitle}
-								/>
-								<ListItem
-									title={t('Delete')}
-									leftIcon={{ type: 'material', name: 'delete' }}
-									onPress={handleOnDelete}
-									titleStyle={styles.listItemTitle}
-								/>
-							</View>
-						}>
-						<Icon type="material" name="more-vert" />
-					</Tooltip>
+					<TooltipMenu items={tooltipItems} tooltipRef={tooltip} />
 				</View>
 			}>
 			<Divider />
@@ -101,31 +109,12 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 };
 
 const styles = StyleSheet.create({
-	exerciseWrap: {
-		maxWidth: 30 + '%',
-	},
+	exerciseWrap: { maxWidth: 30 + '%' },
+	heading: { flex: 1 },
 	titleContainer: {
-		paddingBottom: 10,
+		marginBottom: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-	},
-	tooltip: {
-		height: 'auto',
-		backgroundColor: Colors.White,
-		shadowColor: '#000',
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 1.41,
-
-		elevation: 2,
-	},
-	tooltipInner: { width: '100%' },
-	listItemTitle: {
-		fontSize: FontSizes.Small,
-		fontFamily: Fonts.Kelson,
 	},
 });

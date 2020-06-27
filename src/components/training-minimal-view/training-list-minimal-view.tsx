@@ -4,19 +4,20 @@ import React from 'react';
 import { TrainingMinimalView } from './training-minimal-view';
 import { ExerciseModel } from '@model/exercise.model';
 
-interface TrainingListMinimalViewProps {
-	trainingList?: TrainingModel[];
+interface IProps {
+	exercises: ExerciseModel[];
+	trainingList: TrainingModel[];
 	onTrainingPress?: (training: TrainingModel) => void;
 	onTrainingStart?: (training: TrainingModel) => void;
 	onExercisePress?: (exerciseId: string) => void;
-
-	onCopy: (training: TrainingModel) => void;
-	onDelete: (training: TrainingModel) => void;
-	exercises: ExerciseModel[];
+	onCopy?: (training: TrainingModel) => void;
+	onDelete?: (training: TrainingModel) => void;
+	onEdit?: (training: TrainingModel) => void;
 }
 
-export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => {
-	const { trainingList, exercises, onTrainingPress, onCopy, onDelete, onExercisePress, onTrainingStart } = props;
+export const TrainingListMinimalView = (props: IProps) => {
+	const { trainingList, exercises, onTrainingPress, onExercisePress, onTrainingStart } = props;
+	const { onCopy, onDelete, onEdit } = props;
 
 	return (
 		<FlatList<TrainingModel>
@@ -30,6 +31,7 @@ export const TrainingListMinimalView = (props: TrainingListMinimalViewProps) => 
 					onTrainingStart={onTrainingStart}
 					onDelete={onDelete}
 					onCopy={onCopy}
+					onEdit={onEdit}
 					onExercisePress={onExercisePress}
 				/>
 			)}

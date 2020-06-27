@@ -149,6 +149,8 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 		[navigation, onSetTrainingPlayId]
 	);
 
+	const handleOpenEditDialog = useCallback(() => {}, []);
+
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleCalendarSwipeDown} onSwipeUp={handleCalendarSwipeUp}>
@@ -174,6 +176,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 				<TrainingListMinimalView
 					onCopy={handleCopyTraining}
 					onDelete={handleOpenDeleteDialog}
+					onEdit={handleOpenEditDialog}
 					trainingList={trainingList}
 					exercises={exercises}
 					onTrainingPress={handleOnTrainingTouch}
