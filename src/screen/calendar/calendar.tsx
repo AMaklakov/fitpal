@@ -11,7 +11,7 @@ import {
 	updateTrainingModalAction,
 } from '@redux/action/calendar-training-modal.action';
 import { TrainingListMinimalView } from '@components/training-minimal-view/training-list-minimal-view';
-import { CalendarStrip, IMarkedDate } from '@components/calendar/calendar-strip';
+import { IMarkedDate } from '@components/calendar/calendar-strip';
 import { getTrainingListByDate, selectByDates } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,6 @@ import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import { Calendar as CalendarMonth } from '@components/calendar/calendar';
 import { fetchExercisesStart } from '@redux/action/exercise.action';
 import { getExerciseList } from '@redux/selector/exercise.selector';
@@ -29,6 +28,7 @@ import { ExerciseModel } from '@model/exercise.model';
 import uniq from 'lodash/uniq';
 import isEqual from 'lodash/isEqual';
 import { TRAINING_PLAY_ACTION_CREATORS } from '@redux/action/training-play.action';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 interface IDispatch {
 	fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) => void;
@@ -60,7 +60,7 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	const [selectedDate, setSelectedDate] = useState(getToday());
 	const [trainingToDelete, setTrainingToDelete] = useState<TrainingModel | undefined>();
 	const trainingList = useMemo(() => selectTrainingListByDate(selectedDate), [selectTrainingListByDate, selectedDate]);
-	const [calendarType, setCalendarType] = useState<ICalendarTypes>('strip');
+	const [calendarType, setCalendarType] = useState<ICalendarTypes>('month');
 
 	const [viewedStartDate, setViewedStartDate] = useState(moment());
 	const trainingsInDateRange = useMemo(() => {
@@ -145,14 +145,14 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	return (
 		<View style={styles.wrapper}>
 			<GestureRecognizer onSwipeDown={handleChangeCalendarType}>
-				{calendarType === 'strip' && (
-					<CalendarStrip
-						selectedDate={selectedDate}
-						changeSelectedDate={handleChangeSelectedDate}
-						onWeekChange={handleChangeViewedWeek}
-						markedDates={markedDates}
-					/>
-				)}
+				{/*{calendarType === 'strip' && (*/}
+				{/*	<CalendarStrip*/}
+				{/*		selectedDate={selectedDate}*/}
+				{/*		changeSelectedDate={handleChangeSelectedDate}*/}
+				{/*		onWeekChange={handleChangeViewedWeek}*/}
+				{/*		markedDates={markedDates}*/}
+				{/*	/>*/}
+				{/*)}*/}
 				{calendarType === 'month' && (
 					<CalendarMonth
 						selectedDate={selectedDate}

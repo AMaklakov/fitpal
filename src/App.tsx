@@ -16,7 +16,7 @@ import { RepetitionMaxModal } from '@components/repetition-maximum/repetition-ma
 changeLanguage(store.getState().settings.language);
 
 export const App = () => {
-	const [isMenuOpen, changeIsMenuOpen] = useState();
+	const [isMenuOpen, changeIsMenuOpen] = useState<boolean>(false);
 	const [navZone, setNavZone] = useState<Routes>(Routes.AuthZone);
 	const [navRoute, setNavRoute] = useState<Routes>(Routes.Login);
 	const navigatorRef = useRef<NavigationContainerComponent & { state: { nav: NavigationState } }>(null);
