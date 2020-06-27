@@ -11,7 +11,7 @@ import {
 import { DataAction } from '@model/data-action.model';
 import { ILoginRequestBody } from '@model/login-request-body';
 import { navigate } from '@util/navigation.util';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { IRegisterRequestBody } from '@model/register-request-body.model';
 
 export function* login(action: DataAction<ILoginRequestBody>) {

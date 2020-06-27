@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationPropsModel } from '@model/navigation-props.model';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { getToken } from '@util/axios';
 
 interface IState {}

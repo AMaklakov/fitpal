@@ -15,7 +15,7 @@ import first from 'lodash/first';
 import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
 import { isPresent } from '@util/type.util';
 import { ShowCurrentSeries } from '@screen/training-play/components/show-current-series';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { DEFAULT_REST_TIMER_SECONDS } from '@const/app.const';
 
 interface IProps extends NavigationPropsModel {}
@@ -54,7 +54,7 @@ const Progress: FC<IProps & IState & IDispatch> = props => {
 	}, [currentExerciseId, currentSeriesId, onSetSeries, training]);
 	const currentExercise = useMemo(() => training?.exerciseList.find(x => x._id === currentExerciseId), [
 		currentExerciseId,
-		training,
+		training?.exerciseList,
 	]);
 	const currentSeries = useMemo(() => currentExercise?.seriesList.find(x => x._id === currentSeriesId), [
 		currentExercise,

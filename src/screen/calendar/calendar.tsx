@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import Modal from 'react-native-modal';
 import { Colors, PALETTE_COLORS } from '@css/colors.style';
 import { H2 } from '@components/heading/h2';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
 import GestureRecognizer from 'react-native-swipe-gestures';

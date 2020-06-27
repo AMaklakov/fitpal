@@ -1,5 +1,5 @@
 import { NavigationActions, NavigationContainerComponent } from 'react-navigation';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 
 const config: { navigator?: NavigationContainerComponent } = {};
 

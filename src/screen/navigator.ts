@@ -14,36 +14,7 @@ import { StatisticsScreen } from '@screen/statistics/statistics.screen';
 import { TrainingPlayDetailsScreen } from '@screen/training-play/details.screen';
 import { TrainingPlayProgressScreen } from '@screen/training-play/progress.screen';
 import { TrainingPlayResultScreen } from '@screen/training-play/results.screen';
-
-export enum Routes {
-	// ----- ZONES
-
-	AppZone = 'App',
-	AuthZone = 'Auth',
-	LoadingAuthZone = 'LoadingAuth',
-
-	// ----- AUTH
-
-	Login = 'Login',
-	Registration = 'Registration',
-
-	// ----- APP
-
-	Settings = 'Settings',
-
-	Calendar = 'Calendar',
-	Training = 'Training',
-	CreateTrainingExercise = 'CreateTrainingExercise',
-	Statistics = 'Statistics',
-
-	ExerciseList = 'ExerciseList',
-	Exercise = 'Exercise',
-	ExerciseCreate = 'ExerciseCreate',
-
-	TrainingPlayDetails = 'TrainingPlayDetails',
-	TrainingPlayProgress = 'TrainingPlayProgress',
-	TrainingPlayResult = 'TrainingPlayResult',
-}
+import { Routes } from '@screen/routes';
 
 const AppStack = createStackNavigator(
 	{

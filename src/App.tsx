@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import store from '@redux/store';
-import { Navigator, Routes } from '@screen/navigator';
+import { Navigator } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { changeLanguage } from '@i18n/index';
 import { CalendarTrainingModal } from '@screen/calendar/calendar-training-modal';

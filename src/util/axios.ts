@@ -2,7 +2,7 @@ import axiosLib, { AxiosResponse } from 'axios';
 import { SERVER_URL } from '@const/server-const';
 import AsyncStorage from '@react-native-community/async-storage';
 import { navigate } from '@util/navigation.util';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 
 export const axios = axiosLib.create({
 	baseURL: `${SERVER_URL}/api/v1/`,
