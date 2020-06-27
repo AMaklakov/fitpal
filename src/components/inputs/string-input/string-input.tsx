@@ -6,8 +6,8 @@ import { withValidation } from '@components/with-validation/with-validation';
 import { Fonts, FontSizes } from '@css/fonts';
 
 interface IProps extends Omit<InputProps, 'onChange'> {
-	value: string;
 	onChange: (v: string) => void;
+	value?: string;
 	isPassword?: boolean;
 	hasShadow?: boolean;
 }

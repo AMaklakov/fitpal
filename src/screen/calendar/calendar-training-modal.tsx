@@ -19,6 +19,7 @@ import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action
 import { DatepickerInput } from '@inputs/datepicker/datepicker';
 import { Fonts, FontSizes } from '@css/fonts';
 import { ColorPalette } from '@inputs/color-palette/color-palette';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface IStateProps {
 	isOpen: boolean;
@@ -90,38 +91,40 @@ const CalendarTraining = (props: IStateProps & IDispatchToProps) => {
 
 	return (
 		<Modal visible={isOpen}>
-			<SafeAreaView style={styles.wrapper}>
-				<H1 text={t(training ? 'Copy training' : 'Create training')} wrapperStyle={styles.h1} />
+			<KeyboardAwareScrollView>
+				<SafeAreaView style={styles.wrapper}>
+					<H1 text={t(training ? 'Copy training' : 'Create training')} wrapperStyle={styles.h1} />
 
-				<StringInputWithValidation
-					label={t('Training name')}
-					value={name}
-					onChange={handleChangeName}
-					maxLength={[TRAINING_TITLE_MAXLENGTH, t('Max length is |len|', { len: TRAINING_TITLE_MAXLENGTH })]}
-					minLength={[TRAINING_TITLE_MINLENGTH, t('Min length is |len|', { len: TRAINING_TITLE_MINLENGTH })]}
-				/>
+					<StringInputWithValidation
+						label={t('Training name')}
+						value={name}
+						onChange={handleChangeName}
+						maxLength={[TRAINING_TITLE_MAXLENGTH, t('Max length is |len|', { len: TRAINING_TITLE_MAXLENGTH })]}
+						minLength={[TRAINING_TITLE_MINLENGTH, t('Min length is |len|', { len: TRAINING_TITLE_MINLENGTH })]}
+					/>
 
-				<View style={styles.calendarButton}>
-					{!!training && <Text style={styles.asLabel}>{t('Training date')}</Text>}
-					{!!training && <DatepickerInput date={date} onDateChange={setDate} minDate={getToday()} />}
-				</View>
-
-				{createTrainingError && (
-					<View>
-						<Text style={styles.errorText}>{createTrainingError.toString()}</Text>
+					<View style={styles.calendarButton}>
+						{!!training && <Text style={styles.asLabel}>{t('Training date')}</Text>}
+						{!!training && <DatepickerInput date={date} onDateChange={setDate} minDate={getToday()} />}
 					</View>
-				)}
 
-				<View style={styles.paletteWrapper}>
-					<Text style={styles.asLabel}>{t('Choose training color')}</Text>
-					<ColorPalette onChange={handleSetColor} value={color} colors={PALETTE_COLORS} />
-				</View>
+					{createTrainingError && (
+						<View>
+							<Text style={styles.errorText}>{createTrainingError.toString()}</Text>
+						</View>
+					)}
 
-				<View style={styles.buttonsWrapper}>
-					<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />
-					<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
-				</View>
-			</SafeAreaView>
+					<View style={styles.paletteWrapper}>
+						<Text style={styles.asLabel}>{t('Choose training color')}</Text>
+						<ColorPalette onChange={handleSetColor} value={color} colors={PALETTE_COLORS} />
+					</View>
+
+					<View style={styles.buttonsWrapper}>
+						<Button solidType="gray" title={t('Cancel')} onPress={handleCancelPress} />
+						<Button disabled={isSaveDisabled} title={t('Save')} onPress={handleSaveTraining} />
+					</View>
+				</SafeAreaView>
+			</KeyboardAwareScrollView>
 		</Modal>
 	);
 };
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
 	},
 	errorText: {
 		color: Colors.LightRed,
-		fontSize: FontSizes.Paragraph,
+		fontSize: FontSizes.Hint,
 	},
 	buttonsWrapper: {
 		paddingTop: 20,

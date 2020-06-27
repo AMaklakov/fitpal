@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { StringInput } from '@inputs/string-input/string-input';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ import { Dispatch } from 'redux';
 import { registerStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
 import { H1 } from '@components/heading/h1';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface IState {}
 
@@ -56,7 +57,7 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 	}, [age, email, firstName, isMale, lastName, middleName, onRegister, password, weight]);
 
 	return (
-		<ScrollView>
+		<KeyboardAwareScrollView>
 			<View style={styles.wrapper}>
 				<H1 text={t('Registration')} />
 
@@ -84,7 +85,7 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 					<Button onPress={handleRegister} title={t('Register')} disabled={!email || !password || !weight} />
 				</View>
 			</View>
-		</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 };
 

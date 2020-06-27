@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { ExerciseModel } from '@model/exercise.model';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -7,7 +7,7 @@ import { StoreModel } from '@redux/store';
 import { getExerciseById } from '@redux/selector/exercise.selector';
 import { H1 } from '@components/heading/h1';
 import { H2 } from '@components/heading/h2';
-import { Routes } from '../navigator';
+import { Routes } from '@screen/navigator';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components/button/button';
 
@@ -23,27 +23,28 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 	const { navigation, exercise } = props;
 	const { t } = useTranslation();
 
-	if (!exercise) {
-		throw new Error(`Exercise does not exist!`);
-	}
+	useEffect(() => {
+		if (!exercise) {
+			navigation.goBack();
+		}
+	}, [exercise, navigation]);
 
 	const handleEdit = useCallback(() => {
 		navigation.navigate(Routes.ExerciseCreate, {
-			exerciseId: exercise._id,
+			exerciseId: exercise?._id,
 		});
 	}, [exercise, navigation]);
 
+	if (!exercise) {
+		return null;
+	}
 	return (
 		<View style={styles.wrapper}>
 			<ScrollView>
 				<H1 text={exercise.name} wrapperStyle={styles.h1} />
 				<View style={styles.description}>
 					<H2 text={t('Description')} wrapperStyle={styles.h2} />
-					<Text style={styles.details}>
-						{Array(parseInt((Math.random() * 20).toFixed(), 10))
-							.fill(exercise.name)
-							.join(', ')}
-					</Text>
+					<Text style={styles.details}>{exercise.description ?? t('No description')}</Text>
 				</View>
 			</ScrollView>
 
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
 	},
 	details: {
 		marginHorizontal: 10,
-		textAlign: 'center',
 	},
 	buttonContainer: {
 		margin: 10,
