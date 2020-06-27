@@ -21,6 +21,7 @@ import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/navigator';
 import { Button } from '@components/button/button';
 import { TRAINING_ACTION_CREATORS } from '@redux/action/training-exercise.action';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import { Calendar as CalendarMonth } from '@components/calendar/calendar';
 import { fetchExercisesStart } from '@redux/action/exercise.action';
 import { getExerciseList } from '@redux/selector/exercise.selector';
@@ -28,7 +29,6 @@ import { ExerciseModel } from '@model/exercise.model';
 import uniq from 'lodash/uniq';
 import isEqual from 'lodash/isEqual';
 import { TRAINING_PLAY_ACTION_CREATORS } from '@redux/action/training-play.action';
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 interface IDispatch {
 	fetchTrainingListByDateRange: (startDate: Moment, endDate: Moment) => void;
