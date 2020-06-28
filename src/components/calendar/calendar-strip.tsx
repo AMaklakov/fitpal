@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import StripCalendar from 'react-native-calendar-strip';
 import { StyleSheet } from 'react-native';
 import { getToday } from '@util/date.util';
@@ -6,6 +6,7 @@ import { Colors } from '@css/colors.style';
 import moment, { Moment, MomentInput } from 'moment';
 import { toRgba } from '@util/css.util';
 import { Fonts, FontSizes } from '@css/fonts';
+import { useTranslation } from 'react-i18next';
 
 export interface IMarkedDate {
 	date: Moment;
@@ -22,18 +23,19 @@ interface CalendarStripProps {
 const Strip = (StripCalendar as unknown) as FC<any>;
 export const CalendarStrip = (props: CalendarStripProps) => {
 	const { selectedDate = getToday(), changeSelectedDate, markedDates, onWeekChange } = props;
-	const [currentWeek, setCurrentWeek] = useState<Moment>(moment(selectedDate).clone());
+	const [currentWeek, setCurrentWeek] = useState<string>(selectedDate.clone().toISOString());
 	const ref = useRef<{ updateWeekView: (date: Moment) => void; state: { numVisibleDays: number } }>(null);
+	const {
+		i18n: { language },
+	} = useTranslation();
 
-	// TODO fix this code
-	// useEffect(() => {
-	// 	console.log('here1');
-	// 	// TODO replace this workaround when version of CalendarStrip is stable
-	// 	const isAbleToRender = Boolean(ref.current?.state?.numVisibleDays);
-	// 	if (markedDates && markedDates?.length > 0 && isAbleToRender) {
-	// 		ref.current?.updateWeekView(currentWeek);
-	// 	}
-	// }, [currentWeek, markedDates]);
+	// TODO replace this workaround when version of CalendarStrip is stable
+	useEffect(() => {
+		const isAbleToRender = !!ref.current?.state?.numVisibleDays;
+		if (markedDates && markedDates?.length > 0 && isAbleToRender) {
+			ref.current?.updateWeekView(moment(currentWeek));
+		}
+	}, [currentWeek, markedDates]);
 
 	const customDatesStyles = useMemo(
 		() => [
@@ -58,9 +60,7 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 
 	const handleWeekChange = useCallback(
 		(weekStart: Moment) => {
-			console.log('here2');
-
-			setCurrentWeek(weekStart);
+			setCurrentWeek(weekStart.clone().toISOString());
 			onWeekChange?.(weekStart);
 		},
 		[onWeekChange]
@@ -69,7 +69,6 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 	return (
 		<Strip
 			ref={ref}
-			startingDate={moment().startOf('week')}
 			selectedDate={selectedDate.toDate()}
 			onDateSelected={changeSelectedDate}
 			style={styles.calendar}
@@ -84,6 +83,7 @@ export const CalendarStrip = (props: CalendarStripProps) => {
 			customDatesStyles={customDatesStyles}
 			markedDates={markedDates}
 			onWeekChanged={handleWeekChange}
+			locale={{ name: language, config: moment.localeData(language) }}
 		/>
 	);
 };
