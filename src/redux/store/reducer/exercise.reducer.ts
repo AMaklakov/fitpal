@@ -4,6 +4,7 @@ import { EXERCISE_ACTIONS, ExerciseActions } from '@redux/action/exercise.action
 import { IFetchState } from '@model/fetch-state.model';
 import { DataAction } from '@model/data-action.model';
 import { setError, startLoading } from '@util/state.util';
+import { UserActions } from '@redux/action/user.action';
 
 interface IExerciseState {
 	exercises: ExerciseModel[];
@@ -41,6 +42,9 @@ export const exercise: Reducer<IState, DataAction> = (state = DEFAULT_STATE, act
 		case EXERCISE_ACTIONS.UPDATE.ERROR:
 			return setError(state, (action as DataAction<object>).payload);
 
+		// Restore everything on login
+		case UserActions.LoginSuccess:
+			return { ...DEFAULT_STATE };
 		default:
 			return state;
 	}
