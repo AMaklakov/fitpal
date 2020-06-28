@@ -15,10 +15,12 @@ interface IProps {
 	icon?: IconProps;
 	tooltipContainerStyle?: StyleProp<ViewStyle>;
 	tooltipInnerContainerStyle?: StyleProp<ViewStyle>;
+	tooltipIconStyle?: StyleProp<ViewStyle>;
 }
 
 export const TooltipMenu: FC<IProps> = props => {
 	const { items, tooltipRef, tooltipContainerStyle, tooltipInnerContainerStyle, icon = { name: 'more-vert' } } = props;
+	const { tooltipIconStyle } = props;
 
 	const currentIcon = useMemo(() => icon ?? { name: 'more-vert' }, [icon]);
 
@@ -37,7 +39,9 @@ export const TooltipMenu: FC<IProps> = props => {
 						))}
 				</View>
 			}>
-			<Icon {...currentIcon} style={styles.icon} />
+			<View style={tooltipIconStyle}>
+				<Icon {...currentIcon} style={styles.icon} />
+			</View>
 		</Tooltip>
 	);
 };
