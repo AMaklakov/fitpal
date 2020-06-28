@@ -4,8 +4,8 @@ import { IntegerNumberInputWithValidation } from '@components/inputs/integer-num
 import { RepeatOnceIcon } from '@icons/repeat-one.icon';
 import { ISeries } from '@model/training-exercise';
 import { useTranslation } from 'react-i18next';
-import { ButtonIcon } from '@components/button-icon/button-icon';
-import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
+import { Button } from '@components/button/button';
+import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS } from '@const/validation-const';
 import { Text } from 'react-native-elements';
 
 interface IProps {
@@ -39,7 +39,9 @@ export const CreateSeries = (props: IProps) => {
 
 	return (
 		<View style={styles.wrapper}>
-			<Text style={styles.sequenceNumber}>{sequenceNumber}</Text>
+			<View style={styles.sequenceNumber}>
+				<Text>{sequenceNumber}</Text>
+			</View>
 
 			<View style={styles.repeats}>
 				<IntegerNumberInputWithValidation
@@ -59,30 +61,38 @@ export const CreateSeries = (props: IProps) => {
 					value={weight}
 					onChange={handleSetWeight}
 					rightIcon={<Text>{t('Kg')}</Text>}
-					rightIconContainerStyle={styles.iconContainerStyle}
+					rightIconContainerStyle={styles.iconContainer}
 				/>
 			</View>
 
 			<View style={styles.actions}>
-				{!!onRepeatIconPress && <ButtonIcon icon={<RepeatOnceIcon />} onPress={onRepeatIconPress} />}
+				{!!onRepeatIconPress && (
+					<Button
+						type="clear"
+						icon={<RepeatOnceIcon />}
+						onPress={onRepeatIconPress}
+						containerStyle={styles.buttonWrapper}
+						buttonStyle={styles.button}
+					/>
+				)}
 			</View>
 		</View>
 	);
 };
 
 const WINDOW = Dimensions.get('window');
+const INPUT_HEIGHT = 42;
 
 const styles = StyleSheet.create({
 	wrapper: {
+		marginVertical: 5,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		alignItems: 'center',
-		paddingVertical: 10,
 	},
 	sequenceNumber: {
-		height: '100%',
-		paddingTop: 12,
-		textAlign: 'center',
+		height: INPUT_HEIGHT,
+		justifyContent: 'center',
+		alignItems: 'center',
 		width: WINDOW.width / 10,
 	},
 	repeats: {
@@ -92,10 +102,16 @@ const styles = StyleSheet.create({
 		width: WINDOW.width / 3,
 	},
 	actions: {
-		height: '100%',
-		paddingTop: 10,
 		width: WINDOW.width / 8,
 		alignItems: 'center',
 	},
-	iconContainerStyle: { marginVertical: 0 },
+	iconContainer: { marginVertical: 0 },
+	buttonWrapper: {
+		width: '100%',
+	},
+	button: {
+		height: INPUT_HEIGHT,
+		paddingVertical: 0,
+		paddingHorizontal: 0,
+	},
 });
