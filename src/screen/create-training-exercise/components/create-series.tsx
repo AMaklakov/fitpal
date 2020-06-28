@@ -44,9 +44,9 @@ export const CreateSeries = (props: IProps) => {
 			<View style={styles.repeats}>
 				<IntegerNumberInputWithValidation
 					isNumber={[true, t('Not a number')]}
-					useOneLineErrors={true}
-					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
+					min={[MIN_REPEATS,t('Min value is |min|', { min: MIN_REPEATS })]}
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
+					haveErrorMessage={true}
 					value={repeats}
 					onChange={handleSetRepeats}
 				/>
@@ -55,10 +55,10 @@ export const CreateSeries = (props: IProps) => {
 			<View style={styles.weight}>
 				<IntegerNumberInputWithValidation
 					isNumber={[true, t('Not a number')]}
-					useOneLineErrors={true}
 					min={[weightMin, t('Min value is |min|', { min: weightMin })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
 					value={weight}
+					haveErrorMessage={true}
 					onChange={handleSetWeight}
 					rightIcon={<Text>{t('Kg')}</Text>}
 					rightIconContainerStyle={styles.iconContainerStyle}

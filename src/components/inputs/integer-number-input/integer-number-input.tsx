@@ -11,11 +11,11 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	onChange: (v: string) => void;
 	hasShadow?: boolean;
-	useOneLineErrors?: boolean
+	haveErrorMessage?: boolean;
 }
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
-	const { value = '',  useOneLineErrors = false, onChange, hasShadow = true, ...rest } = props;
+	const { value = '', onChange, hasShadow = true, haveErrorMessage = false,  ...rest } = props;
 	const { t } = useTranslation();
 
 	const [isFocused, setFocused] = useState(false);
@@ -37,12 +37,13 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 				returnKeyType="done"
 				returnKeyLabel={t('Done')}
 				labelStyle={[styles.labelStyle]}
-				errorStyle={useOneLineErrors && [styles.errorMessageStyles]}
+				errorStyle={haveErrorMessage && [styles.errorMessage]}
 				inputContainerStyle={[
 					styles.inputWrapper,
 					isFocused && styles.focused,
 					hasShadow && styles.shadow,
 					!!rest.errorMessage && styles.error,
+					haveErrorMessage && styles.inputErrorWrapper
 				]}
 				{...rest}
 			/>
@@ -54,7 +55,8 @@ export const IntegerNumberInputWithValidation = withValidation(IntegerNumberInpu
 
 const styles = StyleSheet.create({
 	inputBlock: {
-		minHeight: 70
+		minHeight: 70,
+		position: 'relative',
 	},
 	inputWrapper: {
 		paddingHorizontal: 5,
@@ -62,6 +64,9 @@ const styles = StyleSheet.create({
 		borderColor: 'transparent',
 		borderRadius: 5,
 		backgroundColor: Colors.White,
+	},
+	inputErrorWrapper: {
+		position: 'absolute',
 	},
 	input: {
 		color: Colors.Black,
@@ -82,6 +87,7 @@ const styles = StyleSheet.create({
 		elevation: 2,
 	},
 	labelStyle: {
+		position: 'relative',
 		marginBottom: 2,
 		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
@@ -91,10 +97,8 @@ const styles = StyleSheet.create({
 	error: {
 		borderColor: Colors.LightRed,
 	},
-	errorMessageStyles: {
-		position: 'absolute',
-		fontSize: 10,
+	errorMessage: {
 		top: 50,
-		left: 5,
+		fontSize: FontSizes.SmallHint,
 	}
 });
