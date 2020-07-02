@@ -22,6 +22,7 @@ export enum ExerciseTypes {
 
 export interface ExerciseModel {
 	_id: string;
+	userId?: string;
 
 	type: ExerciseTypes;
 	name: string;

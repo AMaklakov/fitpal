@@ -1,4 +1,4 @@
-import { Platform, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { Text } from 'react-native-elements';
 import { Fonts } from '@css/fonts';
@@ -23,21 +23,13 @@ export const BaseHeading = (props: IBaseHeadingProps) => {
 	return (
 		<View style={[styles.wrapper, wrapperStyle]}>
 			<Text
-				style={[
-					styles.text,
-					{ fontSize },
-					!IS_IOS && { lineHeight: fontSize + 7 },
-					useCenteredText && styles.textCenter,
-					style,
-				]}
+				style={[styles.text, { fontSize }, useCenteredText && styles.textCenter, style]}
 				numberOfLines={numberOfLinesEllipsis}>
 				{text}
 			</Text>
 		</View>
 	);
 };
-
-const IS_IOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
 	wrapper: {},
