@@ -8,7 +8,7 @@ import moment, { MomentInput } from 'moment';
 import { FontSizes } from '@css/fonts';
 import { Countdown } from '@components/timer/countdown';
 import { navigate } from '@util/navigation.util';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { useTranslation } from 'react-i18next';
 import { DEFAULT_TRAINING_TIMER_SECONDS } from '@const/app.const';
 import { Button } from '@components/button/button';

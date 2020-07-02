@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { IMenuWrapperProps, MenuWrapper } from '@components/menu/menu-wrapper';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { useTranslation } from 'react-i18next';
 import { ChevronRightIcon } from '@icons/chevron-right.icon';
 import { SettingsIcon } from '@icons/settings.icon';

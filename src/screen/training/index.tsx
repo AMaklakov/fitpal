@@ -3,7 +3,7 @@ import { Training } from './training';
 import { StoreModel } from '@redux/store';
 import { getTrainingById } from '@redux/selector/training.selector';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { getExerciseList } from '@redux/selector/exercise.selector';
 import { Dispatch } from 'redux';
 import { NavigationPropsModel } from '@model/navigation-props.model';

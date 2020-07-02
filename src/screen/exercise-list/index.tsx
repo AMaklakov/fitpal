@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect } from 'react';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { ExerciseModel } from '@model/exercise.model';
 import { NavigationPropsModel } from '@model/navigation-props.model';
 import ExerciseList from '@screen/exercise-list/exercise-list';

@@ -10,7 +10,7 @@ import { CompactTrainingView } from '@screen/statistics/components/compact-train
 import { ExerciseModel } from '@model/exercise.model';
 import { H1 } from '@components/heading/h1';
 import { Colors } from '@css/colors.style';
-import { Routes } from '@screen/navigator';
+import { Routes } from '@screen/routes';
 import { FontSizes } from '@css/fonts';
 import { Text } from 'react-native-elements';
 
