@@ -30,11 +30,11 @@ export const Training = (props: IProps) => {
 	const { lastUserUpdatedWeight, onShowWeightModal, onGoBack, onCalcRM } = props;
 
 	const { t } = useTranslation();
-	const [isReorder, changeIsReorder] = useState(false);
+	const [isReorder, setIsReorder] = useState(false);
 
 	const reorderExercises = (t: TrainingModel) => changeTraining(t);
 
-	const onChangeOrderExercises = () => changeIsReorder(!isReorder);
+	const handleToggleReorderMode = useCallback(() => setIsReorder(isReorder => !isReorder), []);
 
 	const handleAddOrEditExercise = useCallback(
 		(e?: IBaseTrainingExercise) => {
@@ -69,7 +69,7 @@ export const Training = (props: IProps) => {
 					exercises={exercises}
 					training={training}
 					changeTraining={reorderExercises}
-					onSave={onChangeOrderExercises}
+					onExitReorderMode={handleToggleReorderMode}
 				/>
 			) : (
 				<ShowTraining
@@ -77,7 +77,7 @@ export const Training = (props: IProps) => {
 					onAddExercise={handleAddOrEditExercise}
 					removeExercise={removeExercise}
 					training={training}
-					changeOrder={onChangeOrderExercises}
+					changeOrder={handleToggleReorderMode}
 					onCalcRM={onCalcRM}
 				/>
 			)}
