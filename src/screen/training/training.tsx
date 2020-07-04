@@ -77,7 +77,7 @@ export const Training = (props: IProps) => {
 					onAddExercise={handleAddOrEditExercise}
 					removeExercise={removeExercise}
 					training={training}
-					changeOrder={handleToggleReorderMode}
+					onReorder={handleToggleReorderMode}
 					onCalcRM={onCalcRM}
 				/>
 			)}

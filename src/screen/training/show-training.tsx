@@ -15,12 +15,12 @@ interface IProps {
 
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
-	changeOrder: () => void;
+	onReorder: () => void;
 	onCalcRM?: (e: IBaseTrainingExercise) => void;
 }
 
 export const ShowTraining = (props: IProps) => {
-	const { exercises, training, onAddExercise, removeExercise, changeOrder, onCalcRM } = props;
+	const { exercises, training, onAddExercise, removeExercise, onReorder, onCalcRM } = props;
 	const { exerciseList = [] } = training;
 	const { t } = useTranslation();
 
@@ -31,7 +31,7 @@ export const ShowTraining = (props: IProps) => {
 	const handleAddExercise = () => onAddExercise();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const longTapAction = (e: IBaseTrainingExercise) => changeOrder();
+	const longTapAction = (e: IBaseTrainingExercise) => onReorder();
 
 	return (
 		<View style={style.wrapper}>
@@ -43,6 +43,7 @@ export const ShowTraining = (props: IProps) => {
 				onRowEdit={handleEditExercise}
 				onRowLongPress={longTapAction}
 				onCalcRM={onCalcRM}
+				onReorder={onReorder}
 			/>
 
 			<View style={style.total}>
