@@ -14,10 +14,11 @@ interface IProps {
 	useHeading?: boolean;
 	onExerciseNamePress?: (exerciseId: string) => void;
 	onTrainingHeadingPress?: (trainingId: string) => void;
+	onTotalPress?: (trainingId: string) => void;
 }
 
 export const CompactTrainingView: FC<IProps> = props => {
-	const { training, exercises, useHeading = true, onExerciseNamePress, onTrainingHeadingPress } = props;
+	const { training, exercises, useHeading = true, onExerciseNamePress, onTrainingHeadingPress, onTotalPress } = props;
 	const { t } = useTranslation();
 
 	const handleExercisePress = useCallback((id: string) => () => onExerciseNamePress?.(id), [onExerciseNamePress]);
@@ -26,6 +27,8 @@ export const CompactTrainingView: FC<IProps> = props => {
 		onTrainingHeadingPress,
 		training._id,
 	]);
+
+	const handleTotalPress = useCallback(() => onTotalPress?.(training._id), [onTotalPress, training._id]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -60,14 +63,16 @@ export const CompactTrainingView: FC<IProps> = props => {
 
 			<Divider />
 
-			<View style={styles.total}>
-				<Text style={styles.totalLabel}>{t('Total')}:</Text>
-				<View>
-					<Text style={styles.totalValue}>
-						{calculateTrainingTotal(training).toString()} {t('Kg')}
-					</Text>
+			<TouchableOpacity onPress={handleTotalPress} activeOpacity={0.8}>
+				<View style={styles.total}>
+					<Text style={styles.totalLabel}>{t('Total')}:</Text>
+					<View>
+						<Text style={styles.totalValue}>
+							{calculateTrainingTotal(training).toString()} {t('Kg')}
+						</Text>
+					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 };

@@ -108,6 +108,7 @@ const Statistics = (props: IProps & IState & IDispatch) => {
 						exercises={exercises}
 						onTrainingHeadingPress={handleNavigateToTraining}
 						onExerciseNamePress={handleNavigateToExercise}
+						onTotalPress={handleNavigateToTraining}
 					/>
 				</View>
 			)}

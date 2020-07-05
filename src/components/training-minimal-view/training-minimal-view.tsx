@@ -103,6 +103,7 @@ export const TrainingMinimalView = (props: TrainingMinimalViewProps) => {
 				training={training}
 				exercises={exercises}
 				onExerciseNamePress={onExercisePress}
+				onTotalPress={handleTrainingPress}
 			/>
 		</Card>
 	);
