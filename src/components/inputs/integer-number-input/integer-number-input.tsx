@@ -11,10 +11,11 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	onChange: (v: string) => void;
 	hasShadow?: boolean;
+	useOneLineErrors?: boolean;
 }
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
-	const { value = '', onChange, hasShadow = true, ...rest } = props;
+	const { value = '', useOneLineErrors = false, onChange, hasShadow = true, ...rest } = props;
 	const { t } = useTranslation();
 
 	const [isFocused, setFocused] = useState(false);
@@ -35,11 +36,13 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 			returnKeyType="done"
 			returnKeyLabel={t('Done')}
 			labelStyle={[styles.labelStyle]}
+			errorStyle={useOneLineErrors && [styles.errorMessage]}
 			inputContainerStyle={[
 				styles.inputWrapper,
 				isFocused && styles.focused,
 				hasShadow && styles.shadow,
 				!!rest.errorMessage && styles.error,
+				useOneLineErrors && styles.inputErrorWrapper,
 			]}
 			{...rest}
 		/>
@@ -55,10 +58,14 @@ const styles = StyleSheet.create({
 		borderColor: 'transparent',
 		borderRadius: 5,
 		backgroundColor: Colors.White,
+		position: 'relative',
 	},
 	input: {
 		color: Colors.Black,
 		fontSize: FontSizes.Medium,
+	},
+	inputErrorWrapper: {
+		marginBottom: 20,
 	},
 	focused: {
 		borderColor: Colors.Accent,
@@ -75,6 +82,7 @@ const styles = StyleSheet.create({
 		elevation: 2,
 	},
 	labelStyle: {
+		position: 'relative',
 		marginBottom: 2,
 		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
@@ -83,5 +91,11 @@ const styles = StyleSheet.create({
 	},
 	error: {
 		borderColor: Colors.LightRed,
+	},
+	errorMessage: {
+		position: 'absolute',
+		bottom: -14,
+		left: 5,
+		fontSize: FontSizes.SmallHint,
 	},
 });

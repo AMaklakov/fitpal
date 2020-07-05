@@ -10,10 +10,19 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	isPassword?: boolean;
 	hasShadow?: boolean;
+	useOneLineErrors?: boolean;
 }
 
 export const StringInput: FC<IProps> = (props: IProps) => {
-	const { onChange, value, isPassword = false, hasShadow = true, inputContainerStyle, ...rest } = props;
+	const {
+		onChange,
+		value,
+		useOneLineErrors = false,
+		isPassword = false,
+		hasShadow = true,
+		inputContainerStyle,
+		...rest
+	} = props;
 
 	const [isFocused, setFocused] = useState(false);
 	const onTextChangeHandler = useCallback((v: string) => onChange(v), [onChange]);
@@ -29,10 +38,12 @@ export const StringInput: FC<IProps> = (props: IProps) => {
 			onFocus={handleFocus}
 			onBlur={handleBlur}
 			secureTextEntry={isPassword}
+			errorStyle={useOneLineErrors && [styles.errorMessage]}
 			inputContainerStyle={[
 				styles.inputWrapper,
 				isFocused && styles.focused,
 				hasShadow && styles.shadow,
+				useOneLineErrors && styles.inputErrorWrapper,
 				inputContainerStyle,
 			]}
 			{...rest}
@@ -74,5 +85,14 @@ const styles = StyleSheet.create({
 		fontFamily: Fonts.Kelson,
 		fontWeight: 'normal',
 		color: Colors.Primary,
+	},
+	inputErrorWrapper: {
+		marginBottom: 20,
+	},
+	errorMessage: {
+		position: 'absolute',
+		bottom: -14,
+		left: 5,
+		fontSize: FontSizes.SmallHint,
 	},
 });
