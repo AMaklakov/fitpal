@@ -1,7 +1,7 @@
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { MomentInput } from 'moment';
 
-export interface TrainingModel {
+export interface ITraining {
 	_id: string;
 	userId?: string;
 
@@ -14,9 +14,15 @@ export interface TrainingModel {
 	updatedAt?: MomentInput;
 }
 
-export type ICreateTraining = Omit<TrainingModel, '_id' | 'createdAt' | 'updatedAt' | 'userId'>;
+/**
+ * @deprecated
+ * TODO replace with ITraining
+ */
+export type TrainingModel = ITraining;
 
-export const isTrainingValid = (training?: Partial<TrainingModel>): boolean => {
+export type ICreateTraining = Omit<ITraining, '_id' | 'createdAt' | 'updatedAt' | 'userId'>;
+
+export const isTrainingValid = (training?: Partial<ITraining>): boolean => {
 	if (!training) {
 		return false;
 	}

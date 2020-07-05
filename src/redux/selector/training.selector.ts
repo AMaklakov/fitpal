@@ -10,9 +10,18 @@ export const getFirstTrainingByDate = (
 	return store?.training?.trainings.find((t: TrainingModel) => t.date === date);
 };
 
-export const getTrainingById = (store: StoreModel, id: string): TrainingModel | undefined => {
+export const selectTrainingById = (store: StoreModel, id: string | null | undefined): TrainingModel | undefined => {
+	if (!id) {
+		return undefined;
+	}
+
 	return store.training.trainings.find((t: TrainingModel) => t._id === id);
 };
+/**
+ * @deprecated
+ * TODO replace with `selectTrainingById`
+ */
+export const getTrainingById = selectTrainingById;
 
 export const selectLast = (store: StoreModel, n: number): TrainingModel[] => {
 	return store.training.trainings.sort((a, b) => +moment(a.date).isAfter(b.date)).slice(0, n);

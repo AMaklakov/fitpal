@@ -29,13 +29,14 @@ interface IDispatch {
 	onGoBack: () => void;
 	onFetchExercises: () => void;
 	onCalcRM: (e: IBaseTrainingExercise) => void;
+	onEdit?: (training?: TrainingModel) => void;
 }
 
 interface IProps extends NavigationPropsModel {}
 
 const Screen = (props: IProps & IState & IDispatch) => {
 	const { training, navigation, exercises, onRemoveTrainingExercise, lastUserUpdatedWeight, onShowWeightModal } = props;
-	const { onUpdateTraining, fetchTrainingById, onGoBack, onFetchExercises, onCalcRM } = props;
+	const { onUpdateTraining, fetchTrainingById, onGoBack, onFetchExercises, onCalcRM, onEdit } = props;
 
 	useEffect(() => {
 		fetchTrainingById(navigation?.state?.params?.trainingId);
@@ -72,6 +73,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		<Training
 			training={training}
 			canEdit={true}
+			onEdit={onEdit}
 			onAddExercise={addExerciseAction}
 			removeExercise={removeExerciseAction}
 			changeTraining={onUpdateTraining}
@@ -98,6 +100,7 @@ const mapDispatchToProps: MapDispatchToProps<IDispatch, IProps> = (dispatch: Dis
 	fetchTrainingById: (id: string | undefined) => dispatch(TRAINING_ACTION_CREATORS.FETCH_BY_ID.START(id)),
 	onFetchExercises: () => dispatch(fetchExercisesStart(null)),
 	onCalcRM: e => dispatch(setRepetitionMaximumExercise(e)),
+	onEdit: training => dispatch(TRAINING_ACTION_CREATORS.SET_TO_UPDATE(training?._id ?? null)),
 });
 
 export const TrainingScreen = connect<IState, IDispatch, IProps, StoreModel>(
