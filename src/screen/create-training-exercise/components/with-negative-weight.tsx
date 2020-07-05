@@ -12,6 +12,7 @@ import {
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { BigSource } from 'big.js';
 import { Button } from '@components/button/button';
+import { TooltipText } from '@components/tooltip/tooltip-text';
 
 interface IProps {
 	userWeight: BigSource;
@@ -37,7 +38,7 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 				<Text style={styles.sequenceNumber}>№</Text>
 				<Text style={styles.repeats}>{t('Repeats')}</Text>
 				<Text style={styles.weight}>{t('Support weight')}</Text>
-				<Text style={styles.actions} />
+				<TooltipText text={t('Support weight description')} icon={{ name: 'info-outline' }} />
 			</View>
 
 			<FlatList<ISeries>
