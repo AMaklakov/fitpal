@@ -11,6 +11,7 @@ import {
 } from '@screen/create-training-exercise/helpers';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { Button } from '@components/button/button';
+import { TooltipText } from '@components/tooltip/tooltip-text';
 
 interface IProps {
 	trainingExercise: IAdditionalWeightTrainingExercise;
@@ -35,7 +36,7 @@ export const WithAdditionalWeightSeries = (props: IProps) => {
 				<Text style={styles.sequenceNumber}>№</Text>
 				<Text style={styles.repeats}>{t('Repeats')}</Text>
 				<Text style={styles.weight}>{t('Additional weight')}</Text>
-				<Text style={styles.actions} />
+				<TooltipText text={t('Additional weight description')} icon={{ name: 'info-outline' }} />
 			</View>
 
 			<FlatList<ISeries>
