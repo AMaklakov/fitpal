@@ -1,7 +1,7 @@
 import { SectionListData } from 'react-native';
 import { ExerciseModel } from '@model/exercise.model';
+import sortBy from 'lodash/sortBy';
 
-// TODO may be optimized, now O(n^2)
 export const mapExerciseListToSectionList = (
 	exerciseList: ExerciseModel[] = []
 ): ReadonlyArray<SectionListData<ExerciseModel>> => {
@@ -9,14 +9,28 @@ export const mapExerciseListToSectionList = (
 		return [];
 	}
 
-	const uniqueTitles = unique(exerciseList.map(e => getFirstCharOfName(e))?.sort());
+	const sectionsTitles: { [name: string]: number } = {};
+	const sections: Array<SectionListData<ExerciseModel>> = [];
 
-	return uniqueTitles.map(title => ({
-		title,
-		data: exerciseList.filter(e => getFirstCharOfName(e) === title),
-	}));
+	exerciseList.forEach(exercise => {
+		const sectionTitle = exercise.name.charAt(0).toUpperCase();
+		const sectionIndex = getIndexOfSectionTitle(sectionTitle, sectionsTitles, sections);
+		(sections[sectionIndex].data as ExerciseModel[]).push(exercise);
+	});
+
+	return sortBy(sections, 'title');
 };
 
-const unique = <T>(arr: T[]) => Array.from(new Set<T>(arr));
+const getIndexOfSectionTitle = (
+	title: string,
+	titles: { [name: string]: number },
+	sections: Array<SectionListData<ExerciseModel>>
+): number => {
+	if (title in titles) {
+		return titles[title];
+	}
 
-const getFirstCharOfName = (e: ExerciseModel) => e?.name?.charAt(0)?.toUpperCase();
+	const sectionsLength = sections.push({ title, data: [] });
+	titles[title] = sectionsLength - 1;
+	return sectionsLength - 1;
+};
