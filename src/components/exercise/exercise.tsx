@@ -20,10 +20,11 @@ interface IProps {
 	onCalcRM?: (trainingExercise: IBaseTrainingExercise) => void;
 	onEdit?: (trainingExercise: IBaseTrainingExercise) => void;
 	onDelete?: (trainingExercise: IBaseTrainingExercise) => void;
+	onReorder?: (trainingExercise: IBaseTrainingExercise) => void;
 }
 
 const TrainingExercise = (props: IProps) => {
-	const { trainingExercise, exerciseList, onLongPress, onPress, onCalcRM, onDelete, onEdit } = props;
+	const { trainingExercise, exerciseList, onLongPress, onPress, onCalcRM, onDelete, onEdit, onReorder } = props;
 	const { exerciseId, seriesList } = trainingExercise;
 	const { t } = useTranslation();
 	const tooltip = useRef<Tooltip>(null);
@@ -43,6 +44,10 @@ const TrainingExercise = (props: IProps) => {
 		tooltip.current?.toggleTooltip();
 		onDelete?.(trainingExercise);
 	}, [onDelete, trainingExercise]);
+	const handleReorder = useCallback(() => {
+		tooltip.current?.toggleTooltip();
+		onReorder?.(trainingExercise);
+	}, [onReorder, trainingExercise]);
 
 	return (
 		<TouchableOpacity activeOpacity={1} onLongPress={onLongPressAction} onPress={onPressAction} style={styles.wrapper}>
@@ -69,6 +74,14 @@ const TrainingExercise = (props: IProps) => {
 										title={t('Calculate RM')}
 										onPress={handleCalcRMPress}
 										leftIcon={{ type: 'material-community', name: 'calculator' }}
+										titleStyle={styles.listItemTitle}
+									/>
+								)}
+								{!!onReorder && (
+									<ListItem
+										title={t('Reorder')}
+										onPress={handleReorder}
+										leftIcon={{ name: 'reorder' }}
 										titleStyle={styles.listItemTitle}
 									/>
 								)}

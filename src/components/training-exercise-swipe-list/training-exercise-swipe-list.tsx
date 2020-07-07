@@ -17,10 +17,11 @@ interface IProps {
 	onRowEdit?: (e: IBaseTrainingExercise) => void;
 	onRowDelete?: (e: IBaseTrainingExercise) => void;
 	onCalcRM?: (e: IBaseTrainingExercise) => void;
+	onReorder?: (e: IBaseTrainingExercise) => void;
 }
 
 export const TrainingExerciseSwipeList = (props: IProps) => {
-	const { exerciseList, trainingExerciseList = [], onRowLongPress, onRowDelete, onRowEdit, canEdit } = props;
+	const { exerciseList, trainingExerciseList = [], onRowLongPress, onRowDelete, onRowEdit, canEdit, onReorder } = props;
 	const { onCalcRM } = props;
 	const { t } = useTranslation();
 
@@ -54,6 +55,7 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 					onCalcRM={onCalcRM}
 					onEdit={onRowEdit}
 					onDelete={onRowDelete}
+					onReorder={onReorder}
 				/>
 			)}
 			renderHiddenItem={(data, rowMap) => (

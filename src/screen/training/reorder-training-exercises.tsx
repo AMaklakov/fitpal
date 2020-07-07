@@ -14,13 +14,12 @@ import { Button } from '@components/button/button';
 interface IProps {
 	training: TrainingModel;
 	changeTraining: (training: TrainingModel) => void;
-	onSave: () => void;
-
 	exercises: ExerciseModel[];
+	onExitReorderMode: () => void;
 }
 
 export const ReorderTrainingExercise = (props: IProps) => {
-	const { changeTraining, exercises, training, onSave } = props;
+	const { changeTraining, exercises, training, onExitReorderMode } = props;
 	const { t } = useTranslation();
 
 	const [exerciseList, setExerciseList] = useState(training.exerciseList);
@@ -29,8 +28,8 @@ export const ReorderTrainingExercise = (props: IProps) => {
 
 	const handleSavePress = useCallback(() => {
 		changeTraining({ ...training, exerciseList });
-		onSave();
-	}, [training, changeTraining, exerciseList, onSave]);
+		onExitReorderMode();
+	}, [training, changeTraining, exerciseList, onExitReorderMode]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -42,12 +41,21 @@ export const ReorderTrainingExercise = (props: IProps) => {
 				onDragEnd={handleSetExerciseList}
 			/>
 
-			<Button
-				title={t('Save')}
-				icon={{ name: 'save', color: Colors.White }}
-				onPress={handleSavePress}
-				style={styles.button}
-			/>
+			<View style={styles.buttonWrapper}>
+				<Button
+					title={t('Cancel')}
+					icon={{ name: 'cancel' }}
+					solidType="gray"
+					style={styles.button}
+					onPress={onExitReorderMode}
+				/>
+				<Button
+					title={t('Save')}
+					icon={{ name: 'save', color: Colors.White }}
+					style={styles.button}
+					onPress={handleSavePress}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -97,7 +105,12 @@ const styles = StyleSheet.create({
 	activeIcon: {
 		backgroundColor: Colors.White,
 	},
-	button: {
+	buttonWrapper: {
 		marginVertical: 20,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
+	button: {
+		marginHorizontal: 10,
 	},
 });
