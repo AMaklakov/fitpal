@@ -12,8 +12,13 @@ import { registerStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
 import { H1 } from '@components/heading/h1';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { IStore } from '@redux/store';
+import { FontSizes } from '@css/fonts';
+import { Colors } from '@css/colors.style';
 
-interface IState {}
+interface IState {
+	error: null | string | object;
+}
 
 interface IDispatch {
 	onRegister: (body: IRegisterRequestBody) => void;
@@ -22,7 +27,7 @@ interface IDispatch {
 interface IProps extends NavigationPropsModel {}
 
 const Registration: FC<IProps & IState & IDispatch> = props => {
-	const { navigation, onRegister } = props;
+	const { navigation, onRegister, error } = props;
 	const { t } = useTranslation();
 
 	const [email, setEmail] = useState('');
@@ -30,6 +35,7 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
+	const [height, setHeight] = useState('170');
 	// const [middleName, setMiddleName] = useState('');
 
 	const [isMale] = useState(true);
@@ -53,8 +59,9 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 			lastName,
 			// middleName,
 			weight,
+			height,
 		});
-	}, [age, email, firstName, isMale, lastName, onRegister, password, weight]);
+	}, [age, email, firstName, isMale, lastName, height, onRegister, password, weight]);
 
 	return (
 		<KeyboardAwareScrollView>
@@ -75,6 +82,19 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 					rightIcon={<Text>{t('Kg')}</Text>}
 					rightIconContainerStyle={styles.iconContainerStyle}
 				/>
+				<IntegerNumberInput
+					label={t('Height')}
+					value={height}
+					onChange={setHeight}
+					rightIcon={<Text>{t('sm')}</Text>}
+					rightIconContainerStyle={styles.iconContainerStyle}
+				/>
+
+				{!!error && (
+					<View>
+						<Text style={styles.errorText}>{error.toString()}</Text>
+					</View>
+				)}
 
 				<View style={styles.buttonsWrapper}>
 					<View>
@@ -103,9 +123,15 @@ const styles = StyleSheet.create({
 	},
 	loginButton: { paddingVertical: 0 },
 	loginContainer: { alignItems: 'baseline' },
+	errorText: {
+		fontSize: FontSizes.Regular,
+		color: Colors.Red,
+	},
 });
 
-const mapStateToProps = (): IState => ({});
+const mapStateToProps = (store: IStore): IState => ({
+	error: store.user.auth.error,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
 	onRegister: (body: IRegisterRequestBody) => dispatch(registerStart(body)),

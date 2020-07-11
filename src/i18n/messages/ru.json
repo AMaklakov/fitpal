@@ -45,6 +45,7 @@
 	"Go back to trainings": "Вернуться назад",
 	"Go to Login": "Войти",
 	"Have no account?": "Нет аккаунта?",
+	"Height": "Рост",
 	"Hide modal": "Вернуться",
 	"Infected by the virus": "Количестов зараженных",
 	"Kg": "кг",
@@ -88,5 +89,6 @@
 	"With negative weight": "С поддержкой",
 	"WithAdditionalWeight exercise type description": "Вес отягощения будет добавлен к весу пользователя при подсчете результатов. Например, \"Отжимания на брусьях\" или \"Подтягивания\"",
 	"WithNegativeWeight exercise type description": "Вес отягощения будет вычитаться из веса пользователя. Например, \"Подтягивания с суппортом\"",
-	"reps": "повт."
+	"reps": "повт.",
+	"sm": "см"
 }

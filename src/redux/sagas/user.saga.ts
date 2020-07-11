@@ -37,7 +37,9 @@ interface IRegisterRequest {
 	user: IRegisterRequestBody;
 }
 
-interface IRegisterResponse {}
+interface IRegisterResponse {
+	message?: string;
+}
 
 export function* register(action: DataAction<IRegisterRequestBody>) {
 	try {
@@ -48,7 +50,7 @@ export function* register(action: DataAction<IRegisterRequestBody>) {
 		navigate(Routes.Login);
 		yield put(registerSuccess(data));
 	} catch (e) {
-		yield put(registerError(e));
+		yield put(registerError(e?.response?.data?.message));
 	}
 }
 
