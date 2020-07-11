@@ -5,7 +5,7 @@ export interface IRegisterRequestBody {
 
 	firstName?: string;
 	lastName?: string;
-	middleName?: string;
+	// middleName?: string;
 
 	isMale?: boolean;
 	age?: string;

@@ -30,7 +30,7 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
-	const [middleName, setMiddleName] = useState('');
+	// const [middleName, setMiddleName] = useState('');
 
 	const [isMale] = useState(true);
 	const [age, setAge] = useState('18');
@@ -51,10 +51,10 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 			firstName,
 			isMale,
 			lastName,
-			middleName,
+			// middleName,
 			weight,
 		});
-	}, [age, email, firstName, isMale, lastName, middleName, onRegister, password, weight]);
+	}, [age, email, firstName, isMale, lastName, onRegister, password, weight]);
 
 	return (
 		<KeyboardAwareScrollView>
@@ -65,7 +65,7 @@ const Registration: FC<IProps & IState & IDispatch> = props => {
 				<StringInput value={password} onChange={setPassword} isPassword={true} label={t('Enter password')} />
 				<StringInput value={firstName} onChange={setFirstName} label={t('Enter first name')} />
 				<StringInput value={lastName} onChange={setLastName} label={t('Enter last name')} />
-				<StringInput value={middleName} onChange={setMiddleName} label={t('Enter middle name')} />
+				{/*<StringInput value={middleName} onChange={setMiddleName} label={t('Enter middle name')} />*/}
 				{/*	TODO add sex switch */}
 				<IntegerNumberInput label={t('Enter age')} value={age} onChange={setAge} />
 				<IntegerNumberInput
