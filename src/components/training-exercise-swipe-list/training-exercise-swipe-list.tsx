@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { ComponentType, ReactElement, useCallback } from 'react';
 import { ListRenderItemInfo, StyleSheet, View } from 'react-native';
 import { IBaseTrainingExercise } from '@model/training-exercise';
 import { ExerciseModel } from '@model/exercise.model';
@@ -12,7 +12,8 @@ interface IProps {
 	trainingExerciseList: IBaseTrainingExercise[];
 	exerciseList: ExerciseModel[];
 	canEdit: boolean;
-
+	ListHeaderComponent?: ComponentType | ReactElement | null;
+	ListFooterComponent?: ComponentType | ReactElement | null;
 	onRowLongPress?: (e: IBaseTrainingExercise) => void;
 	onRowEdit?: (e: IBaseTrainingExercise) => void;
 	onRowDelete?: (e: IBaseTrainingExercise) => void;
@@ -22,7 +23,7 @@ interface IProps {
 
 export const TrainingExerciseSwipeList = (props: IProps) => {
 	const { exerciseList, trainingExerciseList = [], onRowLongPress, onRowDelete, onRowEdit, canEdit, onReorder } = props;
-	const { onCalcRM } = props;
+	const { onCalcRM, ListHeaderComponent, ListFooterComponent } = props;
 	const { t } = useTranslation();
 
 	const handleRowEdit = useCallback(
@@ -47,6 +48,8 @@ export const TrainingExerciseSwipeList = (props: IProps) => {
 			closeOnRowBeginSwipe={true}
 			data={trainingExerciseList}
 			keyExtractor={x => x._id}
+			ListHeaderComponent={ListHeaderComponent}
+			ListFooterComponent={ListFooterComponent}
 			renderItem={data => (
 				<TrainingExercise
 					trainingExercise={data.item}
