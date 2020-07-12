@@ -87,11 +87,12 @@ const styles = StyleSheet.create({
 		color: Colors.Primary,
 	},
 	inputErrorWrapper: {
-		marginBottom: 20,
+		marginBottom: 20 + '%',
 	},
 	errorMessage: {
 		position: 'absolute',
-		bottom: -14,
+		top: 70 + '%',
+		bottom: 0,
 		left: 5,
 		fontSize: FontSizes.SmallHint,
 	},

@@ -64,9 +64,6 @@ const styles = StyleSheet.create({
 		color: Colors.Black,
 		fontSize: FontSizes.Medium,
 	},
-	inputErrorWrapper: {
-		marginBottom: 20,
-	},
 	focused: {
 		borderColor: Colors.Accent,
 	},
@@ -92,9 +89,13 @@ const styles = StyleSheet.create({
 	error: {
 		borderColor: Colors.LightRed,
 	},
+	inputErrorWrapper: {
+		marginBottom: 20 + '%',
+	},
 	errorMessage: {
 		position: 'absolute',
-		bottom: -14,
+		top: 70 + '%',
+		bottom: 0,
 		left: 5,
 		fontSize: FontSizes.SmallHint,
 	},
