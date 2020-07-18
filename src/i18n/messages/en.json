@@ -45,6 +45,7 @@
 	"Go back to trainings": "Go back to trainings",
 	"Go to Login": "Go to Login",
 	"Have no account?": "Have no account?",
+	"Height": "Height",
 	"Hide modal": "Hide modal",
 	"Infected by the virus": "Infected by the virus",
 	"Kg": "kg",
@@ -88,5 +89,6 @@
 	"With negative weight": "With support weight",
 	"WithAdditionalWeight exercise type description": "Weight of burden will be added to user weight for total calculation.",
 	"WithNegativeWeight exercise type description": "Weight of burden will be subtracted from user weight for total calculation.",
-	"reps": "reps"
+	"reps": "reps",
+	"sm": "sm"
 }
