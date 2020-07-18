@@ -12,6 +12,7 @@ import {
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { Button } from '@components/button/button';
 import { TooltipText } from '@components/tooltip/tooltip-text';
+import { TRAINING_EXERCISES } from '@const/validation-const';
 
 interface IProps {
 	trainingExercise: IAdditionalWeightTrainingExercise;
@@ -47,6 +48,7 @@ export const WithAdditionalWeightSeries = (props: IProps) => {
 						index={index}
 						series={item}
 						weightMin={0}
+						maxSequenceNumber={TRAINING_EXERCISES.MAX}
 						onChange={handleUpdateById(index)}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>
@@ -62,7 +64,12 @@ export const WithAdditionalWeightSeries = (props: IProps) => {
 					onPress={handleDeleteLast}
 				/>
 
-				<Button type="clear" title={t('Add')} onPress={handleAdd} />
+				<Button
+					type="clear"
+					disabled={seriesList.length >= TRAINING_EXERCISES.MAX}
+					title={t('Add')}
+					onPress={handleAdd}
+				/>
 			</View>
 		</View>
 	);

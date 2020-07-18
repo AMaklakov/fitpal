@@ -19,3 +19,7 @@ export const EXERCISE_VALID = {
 		maxLength: 10000,
 	},
 };
+
+export const TRAINING_EXERCISES = {
+	MAX: 50,
+};

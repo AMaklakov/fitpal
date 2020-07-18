@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { IntegerNumberInputWithValidation } from '@components/inputs/integer-number-input/integer-number-input';
 import { RepeatOnceIcon } from '@icons/repeat-one.icon';
@@ -16,15 +16,29 @@ interface IProps {
 	onRepeatIconPress?: () => void;
 	weightMin?: number;
 	weightMax?: number;
+	maxSequenceNumber?: number;
 }
 
 export const CreateSeries = (props: IProps) => {
-	const { index, onChange, series, onRepeatIconPress, weightMax = MAX_WEIGHT, weightMin = 1 } = props;
+	const {
+		index,
+		onChange,
+		series,
+		onRepeatIconPress,
+		weightMax = MAX_WEIGHT,
+		weightMin = 1,
+		maxSequenceNumber,
+	} = props;
 	const { t } = useTranslation();
 
 	const [sequenceNumber] = useState(index + 1);
 	const [repeats, setRepeats] = useState<string | undefined>(series?.repeats?.toString() ?? '1');
 	const [weight, setWeight] = useState<string | undefined>(series?.weight?.toString() ?? '0');
+
+	const showRepeatButton = useMemo(() => !maxSequenceNumber || index + 1 < maxSequenceNumber, [
+		index,
+		maxSequenceNumber,
+	]);
 
 	useEffect(() => {
 		onChange({
@@ -66,7 +80,7 @@ export const CreateSeries = (props: IProps) => {
 			</View>
 
 			<View style={styles.actions}>
-				{!!onRepeatIconPress && (
+				{!!onRepeatIconPress && showRepeatButton && (
 					<Button
 						type="clear"
 						icon={<RepeatOnceIcon />}
