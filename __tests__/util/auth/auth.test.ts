@@ -8,9 +8,9 @@ describe('util/auth/authValidate', () => {
 		}),
 	);
 
-	it('should be invalid if login length < 5', () => {
+	it('should be valid if login has @ or .', () => {
 		const data = {
-			login: '1243',
+			login: faker.internet.email(),
 			password: faker.internet.password(12),
 		};
 
@@ -18,20 +18,100 @@ describe('util/auth/authValidate', () => {
 		expect(value).toBeFalsy();
 	});
 
-	it('should be invalid if login length > 100', () => {
+	it('should be invalid if login length < 5', () => {
 		const data = {
-			login: faker.lorem.words(120),
-			password: faker.internet.password(12),
+			login: faker.internet.password(faker.random.number({min: 0, max:4})),
+			password: faker.internet.password(7),
 		};
 
 		const value = validateLogin(data);
 		expect(value).toBeFalsy();
+	});
+
+	it('should be valid if login length > 4', () => {
+		const data = {
+			login: faker.internet.password(faker.random.number({min: 5, max:99})),
+			password: faker.internet.password(7),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
+	});
+
+	it('should be invalid if login length > 100', () => {
+		const data = {
+			login: faker.internet.password(120),
+			password: faker.internet.password(7),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeFalsy();
+	});
+
+	it('should be valid if login length equal 100', () => {
+		const data = {
+			login: faker.internet.password(100),
+			password: faker.internet.password(7),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
+	});
+
+	it('should be valid if login length > 100', () => {
+		const data = {
+			login: faker.internet.password(faker.random.number({min: 10, max:99})),
+			password: faker.internet.password(7),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
 	});
 
 	it('should be invalid if password length < 6', () => {
 		const data = {
 			login: '1234',
-			password: faker.internet.password(4),
+			password: faker.internet.password(faker.random.number({min: 0, max:5})),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeFalsy();
+	});
+
+	it('should be valid if password length = 6', () => {
+		const data = {
+			login: faker.internet.email.toString(),
+			password: faker.internet.password(6),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
+	});
+
+	it('should be valid if password length = 7', () => {
+		const data = {
+			login: faker.internet.email.toString(),
+			password: faker.internet.password(7),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
+	});
+
+	it('should be valid if password length > 5 and < 41', () => {
+		const data = {
+			login: faker.internet.email.toString(),
+			password: faker.internet.password(faker.random.number({min: 6, max:39})),
+		};
+
+		const value = validateLogin(data);
+		expect(value).toBeTruthy();
+	});
+
+	it('should be invalid if password length = 40', () => {
+		const data = {
+			login: faker.internet.email.toString(),
+			password: faker.internet.password(40),
 		};
 
 		const value = validateLogin(data);
@@ -40,7 +120,7 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if password length > 40', () => {
 		const data = {
-			login: '1234',
+			login: faker.internet.email.toString(),
 			password: faker.internet.password(41),
 		};
 
@@ -48,33 +128,4 @@ describe('util/auth/authValidate', () => {
 		expect(value).toBeFalsy();
 	});
 
-	it('should be valid if login contains @', () => {
-		const data = {
-			login: '1234@',
-			password: faker.internet.password(41),
-		};
-
-		const value = validateLogin(data);
-		expect(value).toBeTruthy();
-	});
-
-	it('should be valid if login contains .', () => {
-		const data = {
-			login: '1234@mail.ru',
-			password: faker.internet.password(41),
-		};
-
-		const value = validateLogin(data);
-		expect(value).toBeTruthy();
-	});
-
-	it('should be valid if login contains mail', () => {
-		const data = {
-			login: '1234@mail.ru',
-			password: faker.internet.password(41),
-		};
-
-		const value = validateLogin(data);
-		expect(value).toBeTruthy();
-	});
 });
