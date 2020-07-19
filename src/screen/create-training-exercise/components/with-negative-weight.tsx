@@ -13,6 +13,7 @@ import { commonStyles } from '@screen/create-training-exercise/style';
 import { BigSource } from 'big.js';
 import { Button } from '@components/button/button';
 import { TooltipText } from '@components/tooltip/tooltip-text';
+import { TRAINING_EXERCISES } from '@const/validation-const';
 
 interface IProps {
 	userWeight: BigSource;
@@ -51,6 +52,7 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 						onChange={handleUpdateById(index)}
 						weightMax={+userWeight}
 						weightMin={0}
+						maxSequenceNumber={TRAINING_EXERCISES.MAX}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>
 				)}
@@ -65,7 +67,12 @@ export const WithNegativeWeightSeries = (props: IProps) => {
 					onPress={handleDeleteLast}
 				/>
 
-				<Button type="clear" title={t('Add')} onPress={handleAdd} />
+				<Button
+					type="clear"
+					disabled={seriesList.length >= TRAINING_EXERCISES.MAX}
+					title={t('Add')}
+					onPress={handleAdd}
+				/>
 			</View>
 		</View>
 	);

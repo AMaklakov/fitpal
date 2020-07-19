@@ -11,6 +11,7 @@ import {
 } from '@screen/create-training-exercise/helpers';
 import { commonStyles } from '@screen/create-training-exercise/style';
 import { Button } from '@components/button/button';
+import { TRAINING_EXERCISES } from '@const/validation-const';
 
 interface IProps {
 	trainingExercise: IDefaultTrainingExercise;
@@ -44,6 +45,7 @@ export const DefaultSeries = (props: IProps) => {
 					<CreateSeries
 						index={index}
 						series={item}
+						maxSequenceNumber={TRAINING_EXERCISES.MAX}
 						onChange={handleUpdateById(index)}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>
@@ -59,7 +61,12 @@ export const DefaultSeries = (props: IProps) => {
 					onPress={handleDeleteLast}
 				/>
 
-				<Button type="clear" title={t('Add')} onPress={handleAdd} />
+				<Button
+					type="clear"
+					disabled={seriesList.length >= TRAINING_EXERCISES.MAX}
+					title={t('Add')}
+					onPress={handleAdd}
+				/>
 			</View>
 		</View>
 	);
