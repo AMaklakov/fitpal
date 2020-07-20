@@ -19,3 +19,14 @@ export const EXERCISE_VALID = {
 		maxLength: 10000,
 	},
 };
+
+export const AUTH_VALID = {
+	LOGIN: {
+		minLength: 5,
+		maxLength: 100,
+	},
+	PASSWORD: {
+		minLength: 6,
+		maxLength: 40,
+	}
+};

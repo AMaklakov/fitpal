@@ -1,5 +1,6 @@
 import { validateLogin } from '@util/auth.util';
 import faker from 'faker';
+import { AUTH_VALID } from '@const/validation-const';
 
 describe('util/auth/authValidate', () => {
 
@@ -20,8 +21,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if login length < 5', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 0, max:4})),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(10) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
 		const value = validateLogin(data);
@@ -30,8 +31,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if login length > 4', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 5, max:99})),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
 		const value = validateLogin(data);
@@ -40,8 +41,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if login length > 100', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 101, max:130})),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(faker.random.number({min: 101, max:130})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
 		const value = validateLogin(data);
@@ -50,8 +51,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if login length equal 100', () => {
 		const data = {
-			login: faker.internet.password(100),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(100) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
 		const value = validateLogin(data);
@@ -60,8 +61,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if login length < 100', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength + 1),
 		};
 
 		const value = validateLogin(data);
@@ -70,7 +71,7 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if password length < 6', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
 			password: faker.internet.password(faker.random.number({min: 0, max:5})),
 		};
 
@@ -80,8 +81,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if password length = 6', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(6),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
 		const value = validateLogin(data);
@@ -90,8 +91,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if password length = 7', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(7),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength + 1),
 		};
 
 		const value = validateLogin(data);
@@ -100,8 +101,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be valid if password length > 5 and < 41', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(faker.random.number({min: 6, max:40})),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(faker.random.number({min: 6, max:AUTH_VALID.PASSWORD.maxLength})),
 		};
 
 		const value = validateLogin(data);
@@ -110,8 +111,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if password length = 40', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(40),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.maxLength),
 		};
 
 		const value = validateLogin(data);
@@ -120,8 +121,8 @@ describe('util/auth/authValidate', () => {
 
 	it('should be invalid if password length > 40', () => {
 		const data = {
-			login: faker.internet.password(faker.random.number({min: 10, max:99})),
-			password: faker.internet.password(41),
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.minLength, max: AUTH_VALID.LOGIN.maxLength})) + '@mail.ru',
+			password: faker.internet.password(AUTH_VALID.PASSWORD.maxLength + 1),
 		};
 
 		const value = validateLogin(data);
