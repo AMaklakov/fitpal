@@ -22,7 +22,7 @@ export const EXERCISE_VALID = {
 
 export const AUTH_VALID = {
 	LOGIN: {
-		minLength: 5,
+		minLength: 6,
 		maxLength: 100,
 	},
 	PASSWORD: {
