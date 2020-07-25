@@ -18,6 +18,7 @@ module.exports = {
 					'@components': './src/components',
 					'@icons': './src/components/icons',
 					'@inputs': './src/components/inputs',
+					'@navigation': './src/navigation',
 				},
 			},
 		],

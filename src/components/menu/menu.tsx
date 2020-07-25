@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { IMenuWrapperProps, MenuWrapper } from '@components/menu/menu-wrapper';
-import { Routes } from '@screen/routes';
+import { Routes } from '@navigation/routes';
 import { useTranslation } from 'react-i18next';
 import { ChevronRightIcon } from '@icons/chevron-right.icon';
 import { SettingsIcon } from '@icons/settings.icon';
@@ -17,6 +17,7 @@ import { ListItem } from 'react-native-elements';
 import { Fonts, FontSizes } from '@css/fonts';
 import { ExitIcon } from '@icons/exit.icon';
 import { logoutStart } from '@redux/action/user.action';
+import { navigate } from '@util/navigation.util';
 
 interface IState {
 	covidConfirmed: string | number;
@@ -28,7 +29,6 @@ interface IDispatch {
 }
 
 interface IProps extends IMenuWrapperProps {
-	navigate: (route: Routes) => void;
 	activeRoute: Routes;
 }
 
@@ -37,19 +37,10 @@ interface IDispatch {
 }
 
 export const MenuComponent = (props: IProps & IState & IDispatch) => {
-	const {
-		isOpen,
-		onCloseMenu,
-		navigate,
-		activeRoute,
-		onFetchCovidConfirmed,
-		covidConfirmed,
-		isCovidLoading,
-		onLogout,
-	} = props;
+	const { isOpen, onCloseMenu, activeRoute, onFetchCovidConfirmed, covidConfirmed, isCovidLoading, onLogout } = props;
 	const { t } = useTranslation();
 
-	const goToPage = useCallback((page: Routes) => () => navigate(page), [navigate]);
+	const goToPage = useCallback((page: Routes) => navigate(page), []);
 
 	const handleLogout = useCallback(() => {
 		onLogout();
@@ -68,19 +59,19 @@ export const MenuComponent = (props: IProps & IState & IDispatch) => {
 				name: t('Calendar'),
 				icon: <ChevronRightIcon />,
 				isActive: activeRoute === Routes.Calendar,
-				onPress: goToPage(Routes.Calendar),
+				onPress: () => goToPage(Routes.Calendar),
 			},
 			{
 				name: t('Exercise list'),
 				icon: <ChevronRightIcon />,
 				isActive: activeRoute === Routes.ExerciseList,
-				onPress: goToPage(Routes.ExerciseList),
+				onPress: () => goToPage(Routes.ExerciseList),
 			},
 			{
 				name: t('Statistics'),
 				icon: <ChevronRightIcon />,
 				isActive: activeRoute === Routes.Statistics,
-				onPress: goToPage(Routes.Statistics),
+				onPress: () => goToPage(Routes.Statistics),
 			},
 		],
 		[activeRoute, goToPage, t]

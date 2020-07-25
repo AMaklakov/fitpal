@@ -15,7 +15,7 @@ import { validateTrainingExercise } from '@util/training-exercise.util';
 import { getTrainingById as getTrainingByIdSlector } from '@redux/selector/training.selector';
 import { StoreModel } from '@redux/store';
 import { navigate } from '@util/navigation.util';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 import { toIsoString } from '@util/date.util';
 
 export function* getTrainingsByDate(action: DataAction<Moment>) {

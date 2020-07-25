@@ -7,7 +7,7 @@ import { StoreModel } from '@redux/store';
 import { getExerciseById } from '@redux/selector/exercise.selector';
 import { H1 } from '@components/heading/h1';
 import { H2 } from '@components/heading/h2';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 import { useTranslation } from 'react-i18next';
 import { ITooltipMenuItem, TooltipMenu } from '@components/tooltip/tooltip-menu';
 import { Tooltip } from 'react-native-elements';

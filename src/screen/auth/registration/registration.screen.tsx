@@ -5,7 +5,7 @@ import { StringInput } from '@inputs/string-input/string-input';
 import { useTranslation } from 'react-i18next';
 import { IntegerNumberInput } from '@inputs/integer-number-input/integer-number-input';
 import { NavigationPropsModel } from '@model/navigation-props.model';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../../navigation/routes';
 import { IRegisterRequestBody } from '@model/register-request-body.model';
 import { Dispatch } from 'redux';
 import { registerStart } from '@redux/action/user.action';

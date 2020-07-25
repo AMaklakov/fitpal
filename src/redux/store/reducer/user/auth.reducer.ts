@@ -5,14 +5,14 @@ import { DataAction } from '@model/data-action.model';
 import { setError, startLoading } from '@util/state.util';
 
 export interface IAuthState extends IFetchState {
-	isAuthorized: boolean;
+	isAuthorized: undefined | boolean;
 }
 
 export const DEFAULT_WEIGHT_STATE: IAuthState = {
 	loading: false,
 	error: null,
 
-	isAuthorized: false,
+	isAuthorized: undefined,
 };
 
 export const authReducer: Reducer<IAuthState, DataAction> = (state = DEFAULT_WEIGHT_STATE, action) => {

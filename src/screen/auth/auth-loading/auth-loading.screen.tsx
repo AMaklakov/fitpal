@@ -1,20 +1,23 @@
 import React, { FC, useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationPropsModel } from '@model/navigation-props.model';
-import { Routes } from '@screen/routes';
 import { getToken } from '@util/axios';
+import { loginError, loginSuccess } from '@redux/action/user.action';
+import { Dispatch } from 'redux';
 
 interface IState {}
 
-interface IDispatch {}
+interface IDispatch {
+	onLoginSuccess: (token: string) => void;
+	onLoginError: () => void;
+}
 
-interface IProps extends NavigationPropsModel {}
+interface IProps {}
 
-const AuthLoading: FC<IProps & IState & IDispatch> = ({ navigation }) => {
+const AuthLoading: FC<IProps & IState & IDispatch> = ({ onLoginError, onLoginSuccess }) => {
 	useEffect(() => {
-		getToken().then(token => navigation.navigate(token ? Routes.AppZone : Routes.AuthZone));
-	}, [navigation]);
+		getToken().then(token => (token ? onLoginSuccess(token) : onLoginError()));
+	}, [onLoginError, onLoginSuccess]);
 
 	return (
 		<View>
@@ -25,6 +28,9 @@ const AuthLoading: FC<IProps & IState & IDispatch> = ({ navigation }) => {
 
 const mapStateToProps = (): IState => ({});
 
-const mapDispatchToProps = (): IDispatch => ({});
+const mapDispatchToProps = (dispatch: Dispatch): IDispatch => ({
+	onLoginSuccess: token => dispatch(loginSuccess({ token })),
+	onLoginError: () => dispatch(loginError({})),
+});
 
 export const AuthLoadingScreen = connect(mapStateToProps, mapDispatchToProps)(AuthLoading);

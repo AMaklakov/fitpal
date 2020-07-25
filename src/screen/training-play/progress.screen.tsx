@@ -15,7 +15,7 @@ import first from 'lodash/first';
 import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
 import { isPresent } from '@util/type.util';
 import { ShowCurrentSeries } from '@screen/training-play/components/show-current-series';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 import { DEFAULT_REST_TIMER_SECONDS } from '@const/app.const';
 
 interface IProps extends NavigationPropsModel {}

@@ -10,7 +10,7 @@ import { CompactTrainingView } from '@screen/statistics/components/compact-train
 import { ExerciseModel } from '@model/exercise.model';
 import { H1 } from '@components/heading/h1';
 import { Colors } from '@css/colors.style';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 import { FontSizes } from '@css/fonts';
 import { Text } from 'react-native-elements';
 
@@ -28,6 +28,8 @@ const Details: FC<IProps & IState & IDispatch> = props => {
 	const { t } = useTranslation();
 
 	const handleGoToCalendar = useCallback(() => navigation.navigate(Routes.Calendar), [navigation]);
+
+	/// TODO use navigation v5
 	const handleStartTraining = useCallback(() => {
 		navigation.pop();
 		navigation.navigate(Routes.TrainingPlayProgress);

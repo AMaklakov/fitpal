@@ -9,7 +9,7 @@ import { TrainingModel } from '@model/training.model';
 import { ExerciseModel } from '@model/exercise.model';
 import { Dispatch } from 'redux';
 import { ISetSeries, TRAINING_PLAY_ACTION_CREATORS } from '@redux/action/training-play.action';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 import { TrainingExerciseSwipeList } from '@components/training-exercise-swipe-list/training-exercise-swipe-list';
 import { H1 } from '@components/heading/h1';
 
@@ -54,6 +54,16 @@ const Results: FC<IProps & IState & IDispatch> = props => {
 		</View>
 	);
 };
+
+// const WithLoading = Component => {
+// 	const traning = useSelector(state => getTraning(state));
+//
+// 	if (!training) {
+// 		return null;
+// 	}
+//
+// 	return <Component />;
+// };
 
 const styles = StyleSheet.create({
 	wrapper: {

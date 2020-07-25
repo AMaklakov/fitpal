@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { StringInput } from '@inputs/string-input/string-input';
 import { NavigationPropsModel } from '@model/navigation-props.model';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../../navigation/routes';
 import { Colors } from '@css/colors.style';
 import { ILoginRequestBody } from '@model/login-request-body';
 import { Dispatch } from 'redux';

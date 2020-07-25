@@ -1,24 +1,21 @@
-import { NavigationActions, NavigationContainerComponent } from 'react-navigation';
-import { Routes } from '@screen/routes';
+import { Routes } from '@navigation/routes';
+import { NavigationState } from '@react-navigation/routers';
+import { NavigationContainerRef } from '@react-navigation/native';
 
-const config: { navigator?: NavigationContainerComponent } = {};
+const config: { navigator: NavigationContainerRef | null } = { navigator: null };
 
-export const setNavigator = (nav?: NavigationContainerComponent | null) => {
-	if (nav) {
-		config.navigator = nav;
-	}
+export const setNavigator = (nav: NavigationContainerRef | null) => {
+	console.log(nav);
+	config.navigator = nav;
 };
 
 export const navigate = (routeName: Routes, params?: object) => {
-	if (config.navigator && routeName) {
-		const action = NavigationActions.navigate({ routeName, params });
-		config.navigator.dispatch(action);
+	if (routeName) {
+		config.navigator?.navigate(routeName, params);
 	}
 };
 
-export const goBack = () => {
-	if (config.navigator) {
-		const action = NavigationActions.back({});
-		config.navigator.dispatch(action);
-	}
-};
+export const goBack = () => config.navigator?.goBack();
+
+export const getCurrentRoute = (state?: NavigationState): undefined | Routes =>
+	state?.routes?.[state?.index]?.name as undefined | Routes;

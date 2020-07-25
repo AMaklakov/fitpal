@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Modal, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { Modal, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { connect, MapDispatchToPropsParam } from 'react-redux';
 import { H1 } from '@components/heading/h1';
 import { StringInputWithValidation } from '@components/inputs/string-input/string-input';

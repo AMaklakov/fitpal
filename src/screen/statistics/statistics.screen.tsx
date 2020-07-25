@@ -15,7 +15,7 @@ import { WeeklyChart } from '@screen/statistics/components/weekly-chart';
 import { Moment } from 'moment';
 import { SelectInput } from '@components/select-input';
 import { NavigationPropsModel } from '@model/navigation-props.model';
-import { Routes } from '@screen/routes';
+import { Routes } from '../../navigation/routes';
 
 interface IDispatch {
 	onFetch: (data: IFetchByDateRange) => void;
