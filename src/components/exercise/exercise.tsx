@@ -1,16 +1,14 @@
-import React, { useCallback, useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { FC, ReactNode, useCallback, useMemo, useRef } from 'react';
+import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, View } from 'react-native';
+import { Divider, Icon, ListItem, Text, Tooltip } from 'react-native-elements';
 import { H2 } from '../heading/h2';
 import { useTranslation } from 'react-i18next';
 import { calcTotal } from '@util/training-exercise.util';
 import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
 import { Colors } from '@css/colors.style';
-import { WeightIcon } from '@icons/weight.icon';
-import { CounterIcon } from '@icons/counter.icon';
-import { HashtagIcon } from '@icons/hashtag.icon';
-import { Icon, ListItem, Tooltip } from 'react-native-elements';
-import { Fonts } from '@css/fonts';
+import { Fonts, FontSizes } from '@css/fonts';
 import { ExerciseModel } from '@model/exercise.model';
+import { BigSource } from 'big.js';
 
 interface IProps {
 	trainingExercise: IBaseTrainingExercise;
@@ -28,6 +26,8 @@ const TrainingExercise = (props: IProps) => {
 	const { exerciseId, seriesList } = trainingExercise;
 	const { t } = useTranslation();
 	const tooltip = useRef<Tooltip>(null);
+
+	const total = useMemo(() => calcTotal(trainingExercise), [trainingExercise]);
 
 	const onLongPressAction = useCallback(() => onLongPress?.(trainingExercise), [onLongPress, trainingExercise]);
 	const onPressAction = useCallback(() => onPress?.(trainingExercise), [onPress, trainingExercise]);
@@ -51,114 +51,127 @@ const TrainingExercise = (props: IProps) => {
 
 	return (
 		<TouchableOpacity activeOpacity={1} onLongPress={onLongPressAction} onPress={onPressAction} style={styles.wrapper}>
-			<View style={styles.innerWrapper}>
-				<View style={styles.headerWrapper}>
-					<H2 text={exerciseList?.find(e => e._id === exerciseId)?.name ?? ''} numberOfLinesEllipsis={1} />
-					<Tooltip
-						ref={tooltip}
-						withPointer={false}
-						containerStyle={styles.tooltip}
-						width={200}
-						popover={
-							<View style={styles.tooltipInner}>
-								{!!onEdit && (
-									<ListItem
-										title={t('Edit')}
-										onPress={handleEditPress}
-										leftIcon={{ name: 'edit' }}
-										titleStyle={styles.listItemTitle}
-									/>
-								)}
-								{!!trainingExercise.seriesList.length && !!onCalcRM && (
-									<ListItem
-										title={t('Calculate RM')}
-										onPress={handleCalcRMPress}
-										leftIcon={{ type: 'material-community', name: 'calculator' }}
-										titleStyle={styles.listItemTitle}
-									/>
-								)}
-								{!!onReorder && (
-									<ListItem
-										title={t('Reorder')}
-										onPress={handleReorder}
-										leftIcon={{ name: 'reorder' }}
-										titleStyle={styles.listItemTitle}
-									/>
-								)}
-								{!!onDelete && (
-									<ListItem
-										title={t('Delete')}
-										onPress={handleDeletePress}
-										leftIcon={{ name: 'delete' }}
-										titleStyle={styles.listItemTitle}
-									/>
-								)}
-							</View>
-						}>
-						{(!!onEdit || !!onCalcRM || !!onDelete) && <Icon type="material" name="more-vert" />}
-					</Tooltip>
-				</View>
-				<View style={styles.table}>
-					<View style={styles.tableHeading}>
-						<HashtagIcon color={Colors.White} />
-						<CounterIcon color={Colors.White} />
-						<WeightIcon color={Colors.White} />
-					</View>
-
-					{seriesList.map((s: ISeries, index: number) => (
-						<View key={index} style={styles.tableBody}>
-							<Text>{index + 1}</Text>
-							<Text>{s.repeats}</Text>
-							<Text>
-								{s.weight} {t('Kg')}
-							</Text>
+			<View style={styles.headerWrapper}>
+				<H2
+					text={exerciseList?.find(e => e._id === exerciseId)?.name ?? ''}
+					numberOfLinesEllipsis={1}
+					style={styles.header}
+				/>
+				<Tooltip
+					ref={tooltip}
+					withPointer={false}
+					containerStyle={styles.tooltip}
+					width={200}
+					popover={
+						<View style={styles.tooltipInner}>
+							{!!onEdit && (
+								<ListItem
+									title={t('Edit')}
+									onPress={handleEditPress}
+									leftIcon={{ name: 'edit' }}
+									titleStyle={styles.listItemTitle}
+								/>
+							)}
+							{!!trainingExercise.seriesList.length && !!onCalcRM && (
+								<ListItem
+									title={t('Calculate RM')}
+									onPress={handleCalcRMPress}
+									leftIcon={{ type: 'material-community', name: 'calculator' }}
+									titleStyle={styles.listItemTitle}
+								/>
+							)}
+							{!!onReorder && (
+								<ListItem
+									title={t('Reorder')}
+									onPress={handleReorder}
+									leftIcon={{ name: 'reorder' }}
+									titleStyle={styles.listItemTitle}
+								/>
+							)}
+							{!!onDelete && (
+								<ListItem
+									title={t('Delete')}
+									onPress={handleDeletePress}
+									leftIcon={{ name: 'delete' }}
+									titleStyle={styles.listItemTitle}
+								/>
+							)}
 						</View>
-					))}
-				</View>
-				<Text style={styles.total}>{t('Total |num| kilos', { num: calcTotal(trainingExercise) })}</Text>
+					}>
+					{(!!onEdit || !!onCalcRM || !!onDelete) && (
+						<Icon type="material" name="more-vert" color={Colors.White} containerStyle={styles.tooltipIcon} />
+					)}
+				</Tooltip>
 			</View>
+
+			<View style={styles.setsHeaderWrapper}>
+				<Text style={[styles.setsHeader, styles.tableSet]}>{t('Sets')}</Text>
+				<Text style={[styles.setsHeader, styles.tableReps]}>{t('Repeats')}</Text>
+				<View style={styles.tableIcon} />
+				<Text style={[styles.setsHeader, styles.tableWeight]}>{t('Weight')}</Text>
+			</View>
+			{seriesList.map((s: ISeries, index: number) => (
+				<View key={index} style={styles.rowContainer}>
+					<View style={[styles.tableSet]}>
+						<Text style={styles.rowText}>{index + 1}</Text>
+					</View>
+					<View style={[styles.tableReps]}>
+						<Cell data={s.repeats} textStyle={styles.rowText} />
+					</View>
+					<View style={[styles.tableIcon, styles.multiply]}>
+						<Icon name="clear" size={FontSizes.Small} />
+					</View>
+					<View style={[styles.tableWeight]}>
+						<Cell
+							data={s.weight}
+							textStyle={styles.rowText}
+							afterElement={<Text style={styles.kilos}>{t('Kg')}</Text>}
+						/>
+					</View>
+				</View>
+			))}
+			<Divider style={styles.divider} />
+			<Text style={styles.total}>{t('Total |num| kilos', { num: total })}</Text>
 		</TouchableOpacity>
 	);
 };
 
 export default TrainingExercise;
 
+interface ICellProps {
+	data: string | number | BigSource;
+	textStyle: StyleProp<TextStyle>;
+	afterElement?: ReactNode;
+}
+
+const Cell: FC<ICellProps> = ({ data, textStyle, afterElement }) => {
+	return (
+		<View style={cellStyles.wrapper}>
+			<Text style={textStyle}>{data}</Text>
+			{!!afterElement && <View style={cellStyles.afterEl}>{afterElement}</View>}
+		</View>
+	);
+};
+
 const styles = StyleSheet.create({
-	table: {
-		margin: 10,
-	},
-	tableHeading: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		backgroundColor: 'darkgrey',
-		padding: 5,
-		borderRadius: 15,
-	},
-	tableBody: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		padding: 5,
-	},
-	headerWrapper: {
-		marginTop: 10,
-		paddingHorizontal: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	total: {
-		fontSize: 16,
-		textAlign: 'right',
-		paddingRight: 25,
-		paddingTop: 10,
-	},
 	wrapper: {
-		backgroundColor: Colors.Default,
+		backgroundColor: Colors.White,
 		borderBottomWidth: 0.3,
 		borderBottomColor: Colors.Grey,
 	},
-	innerWrapper: {
-		paddingBottom: 10,
+	headerWrapper: {
+		padding: 10,
+		marginBottom: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		backgroundColor: Colors.Accent,
+		borderBottomLeftRadius: 15,
+		borderBottomRightRadius: 15,
+	},
+	header: {
+		color: Colors.White,
+		fontFamily: Fonts.OswaldRegular,
 	},
 
 	tooltip: {
@@ -176,7 +189,97 @@ const styles = StyleSheet.create({
 	},
 	tooltipInner: { width: '100%' },
 	listItemTitle: {
-		fontSize: 14,
+		fontSize: FontSizes.Small,
 		fontFamily: Fonts.Kelson,
+	},
+	tooltipIcon: {
+		width: 40,
+	},
+
+	total: {
+		marginRight: 25,
+		marginBottom: 15,
+		fontSize: FontSizes.Big,
+		fontFamily: Fonts.OswaldMedium,
+		textAlign: 'right',
+	},
+
+	// rows
+
+	rowContainer: {
+		marginTop: 5,
+		marginHorizontal: 20,
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	set: {
+		textAlign: 'center',
+	},
+	repeats: {
+		fontSize: FontSizes.Big,
+		textAlign: 'center',
+	},
+	weight: {
+		textAlign: 'center',
+		fontSize: FontSizes.Big,
+	},
+	multiply: {
+		// marginHorizontal: 5,
+	},
+	setsHeaderWrapper: {
+		marginHorizontal: 20,
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	setsHeader: {
+		textAlign: 'center',
+		fontSize: FontSizes.Small,
+		lineHeight: FontSizes.Regular,
+		fontFamily: Fonts.RobotoCondensedLight,
+	},
+	tableSet: {
+		flex: 5,
+	},
+	tableReps: {
+		flex: 4,
+		alignItems: 'center',
+	},
+	tableWeight: {
+		flex: 4,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	rowText: {
+		fontSize: FontSizes.Big,
+		textAlign: 'center',
+		fontFamily: Fonts.RobotoCondensedLight,
+	},
+	tableIcon: {
+		flexBasis: 25,
+	},
+	divider: {
+		height: 1,
+		marginVertical: 15,
+		backgroundColor: Colors.Grey,
+	},
+	kilos: {
+		fontFamily: Fonts.RobotoCondensedLight,
+	},
+});
+
+const cellStyles = StyleSheet.create({
+	wrapper: {
+		backgroundColor: '#F1F1F1',
+		borderRadius: 5,
+		width: 40,
+		height: 40,
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'relative',
+	},
+	afterEl: {
+		position: 'absolute',
+		left: '105%',
 	},
 });

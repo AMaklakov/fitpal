@@ -36,7 +36,6 @@ export const TrainingHeading: FC<IProps> = props => {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		paddingHorizontal: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { TrainingModel } from '@model/training.model';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ITraining } from '@model/training.model';
 import { ShowTraining } from './show-training';
 import { ReorderTrainingExercise } from './reorder-training-exercises';
 import { TrainingHeading } from '@screen/training/components/training-heading';
@@ -12,9 +12,9 @@ import { USER_WEIGHT_EXPIRATION_TIME_HOURS } from '@const/validation-const';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-	training?: TrainingModel;
-	changeTraining: (training: TrainingModel) => void;
-	onEdit?: (training?: TrainingModel) => void;
+	training?: ITraining;
+	changeTraining: (training: ITraining) => void;
+	onEdit?: (training?: ITraining) => void;
 	exercises: ExerciseModel[];
 	onAddExercise: (e?: IBaseTrainingExercise) => void;
 	removeExercise: (e: IBaseTrainingExercise) => void;
@@ -33,7 +33,7 @@ export const Training = (props: IProps) => {
 	const { t } = useTranslation();
 	const [isReorder, setIsReorder] = useState(false);
 
-	const reorderExercises = (t: TrainingModel) => changeTraining(t);
+	const reorderExercises = useCallback((t: ITraining) => changeTraining(t), [changeTraining]);
 
 	const handleToggleReorderMode = useCallback(() => setIsReorder(isReorder => !isReorder), []);
 
@@ -63,9 +63,9 @@ export const Training = (props: IProps) => {
 	}
 
 	return (
-		<View style={{ flex: 1 }}>
-			<TrainingStatusBar training={training} />
-			<TrainingHeading training={training} canEdit={canEdit} onEdit={handleEdit} />
+		<View style={styles.wrapper}>
+			{isReorder && <TrainingStatusBar training={training} />}
+			{isReorder && <TrainingHeading training={training} canEdit={canEdit} onEdit={handleEdit} />}
 
 			{isReorder ? (
 				<ReorderTrainingExercise
@@ -82,8 +82,21 @@ export const Training = (props: IProps) => {
 					training={training}
 					onReorder={handleToggleReorderMode}
 					onCalcRM={onCalcRM}
+					header={
+						<View>
+							<TrainingStatusBar training={training} />
+							<TrainingHeading training={training} canEdit={canEdit} onEdit={handleEdit} />
+						</View>
+					}
 				/>
 			)}
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	wrapper: {
+		marginHorizontal: 15,
+		flex: 1,
+	},
+});
