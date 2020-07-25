@@ -12,7 +12,8 @@ export enum Colors {
 	SaturatedRed = '#DE5D6C',
 	// TODO rename to `Pink`
 	Red = '#DF737F',
-	LightRed = '#EE8782',
+	LightRed = '#BE5156',
+	LightPink = '#D3857B',
 	Yellow = '#EBBB99',
 
 	LightGrey = '#D0D0D0',
