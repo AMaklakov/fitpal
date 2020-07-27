@@ -1,14 +1,18 @@
-import { removeSpacesAndLowercase } from '../../util/string.util';
+import { removeSpacesAndLowercase } from '@util/string.util';
+
+interface IArgs<T extends Object> {
+	value: string;
+	autocompleteList: T[];
+	autocompleteField: keyof T;
+	autocompleteType: 'substring' | 'starts-with';
+}
 
 export const autocomplete = <T extends Object>({
 	value,
 	autocompleteList,
 	autocompleteField,
-}: {
-	value: string;
-	autocompleteList: T[];
-	autocompleteField: keyof T;
-}): T[] => {
+	autocompleteType,
+}: IArgs<T>): T[] => {
 	value = removeSpacesAndLowercase(value);
 
 	return autocompleteList.filter(obj => {
@@ -18,6 +22,14 @@ export const autocomplete = <T extends Object>({
 			throw new Error(`'obj[autocompleteField]' must be a string`);
 		}
 
-		return removeSpacesAndLowercase(field).includes(value);
+		const trimmedValue = removeSpacesAndLowercase(field);
+
+		if (autocompleteType === 'substring') {
+			return trimmedValue.includes(value);
+		}
+
+		if (autocompleteType === 'starts-with') {
+			return trimmedValue.startsWith(value);
+		}
 	});
 };
