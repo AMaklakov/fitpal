@@ -15,7 +15,7 @@ interface IProps {}
 const SpinnerComponent: FC<IProps & IState> = props => {
 	const { isLoading } = props;
 
-	const [showModal, setShowModal] = useState();
+	const [showModal, setShowModal] = useState<boolean>(false);
 	const isLoadingDebounced = useDebounce(isLoading, 500);
 
 	useEffect(() => {
@@ -59,11 +59,7 @@ const mapStateToProps = (state: StoreModel): IState => ({
 export const SpinnerModal = connect(mapStateToProps)(SpinnerComponent);
 
 const isStateLoading = (state: StoreModel): boolean => {
-	const {
-		exercise,
-		user: { weightData, auth },
-		training,
-	} = state;
+	const { exercise } = state;
 
-	return [exercise, weightData, auth, training].some(s => s.loading);
+	return [exercise].some(s => s.loading);
 };
