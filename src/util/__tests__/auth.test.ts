@@ -1,11 +1,11 @@
-import { validateLogin } from '@util/auth.util';
+import { getLoginInvalidMessage } from '@util/auth.util';
 import faker from 'faker';
 import { AUTH_VALID } from '@const/validation-const';
 
 describe('util/auth/authValidate', () => {
 
 	[0, '', NaN, null, undefined, {}, [], 1, true].forEach(data => it(`should return false if data: ${data}`, () => {
-			expect(typeof validateLogin(data as any)).toBe('string');
+			expect(typeof getLoginInvalidMessage(data as any)).toBe('string');
 		}),
 	);
 
@@ -16,8 +16,8 @@ describe('util/auth/authValidate', () => {
 				password: faker.internet.password(12),
 			};
 
-			const value = validateLogin(data);
-			expect(value).toBe(true);
+			const value = getLoginInvalidMessage(data);
+			expect(value).toBe('');
 		});
 	}
 
@@ -27,8 +27,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('string');
+		const value = getLoginInvalidMessage(data);
+		expect(value.length).toBeGreaterThan(0);
 	});
 
 	it('should be valid if login length >=' + AUTH_VALID.LOGIN.minLength, () => {
@@ -37,18 +37,19 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
-		const value = validateLogin(data);
-		expect(value).toBe(true);
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be invalid if login length > ' + AUTH_VALID.PASSWORD.maxLength, () => {
 		const data = {
-			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.PASSWORD.maxLength + 1, max:AUTH_VALID.PASSWORD.maxLength + 30})) + '@mail.ru',
+			login: 'A'.repeat(faker.random.number({min: AUTH_VALID.LOGIN.maxLength + 1, max:AUTH_VALID.LOGIN.maxLength + 30})) + '@mail.ru',
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('boolean');
+		const value = getLoginInvalidMessage(data);
+
+		expect(value.length).toBeGreaterThan(0);
 	});
 
 	it('should be valid if login length equal ' + AUTH_VALID.LOGIN.maxLength, () => {
@@ -57,8 +58,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
-		const value = validateLogin(data);
-		expect(value).toBe(true);
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be valid if login length < ' + AUTH_VALID.LOGIN.maxLength, () => {
@@ -67,8 +68,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength + 1),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('boolean');
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be invalid if password length < ' + AUTH_VALID.PASSWORD.minLength, () => {
@@ -77,8 +78,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(faker.random.number({min: 0, max:AUTH_VALID.PASSWORD.minLength - 1})),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('string');
+		const value = getLoginInvalidMessage(data);
+		expect(value.length).toBeGreaterThan(0);
 	});
 
 	it('should be valid if password length = ' + AUTH_VALID.PASSWORD.minLength, () => {
@@ -87,8 +88,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.minLength),
 		};
 
-		const value = validateLogin(data);
-		expect(value).toBe(true);
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be valid if password length > ' + AUTH_VALID.PASSWORD.minLength + ' and <= ' + AUTH_VALID.PASSWORD.maxLength, () => {
@@ -97,8 +98,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(faker.random.number({min: AUTH_VALID.PASSWORD.minLength, max:AUTH_VALID.PASSWORD.maxLength})),
 		};
 
-		const value = validateLogin(data);
-		expect(value).toBe(true);
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be valid if password length = ' + AUTH_VALID.PASSWORD.maxLength, () => {
@@ -107,8 +108,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.maxLength),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('boolean');
+		const value = getLoginInvalidMessage(data);
+		expect(value).toBe('');
 	});
 
 	it('should be invalid if password length > ' + AUTH_VALID.PASSWORD.maxLength, () => {
@@ -117,8 +118,8 @@ describe('util/auth/authValidate', () => {
 			password: faker.internet.password(AUTH_VALID.PASSWORD.maxLength + 1),
 		};
 
-		const value = validateLogin(data);
-		expect(typeof value).toBe('string');
+		const value = getLoginInvalidMessage(data);
+		expect(value.length).toBeGreaterThan(0);
 	});
 
 });

@@ -12,6 +12,7 @@ import { loginStart } from '@redux/action/user.action';
 import { Button } from '@components/button/button';
 import { FontSizes } from '@css/fonts';
 import { H1 } from '@components/heading/h1';
+import { getLoginInvalidMessage } from '@util/auth.util';
 
 interface IState {}
 
@@ -26,11 +27,20 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 	const { t } = useTranslation();
 
 	const [email, setEmail] = useState('');
+	const [errorMessage, setError] = useState('');
 	const [password, setPassword] = useState('');
 
 	const handleRegister = useCallback(() => navigation.navigate(Routes.Registration), [navigation]);
 
-	const handleLogin = useCallback(() => onLogin({ email, password }), [email, onLogin, password]);
+	const handleLogin = useCallback(() => {
+		const errorMsg = getLoginInvalidMessage({login: email, password: password});
+		setError(errorMsg);
+		if (errorMsg.length > 0) {
+			return;
+		}
+		onLogin({ email, password });
+
+		}, [email, onLogin, password]);
 
 	return (
 		<View style={styles.wrapper}>
@@ -39,6 +49,8 @@ const Login: FC<IProps & IState & IDispatch> = props => {
 			<StringInput label={t('Enter email')} value={email} onChange={setEmail} autoCapitalize="none" />
 			<StringInput label={t('Enter password')} value={password} onChange={setPassword} isPassword={true} />
 
+			<View style={styles.errorMessageWrap}>
+				{errorMessage.length > 0 &&<Text style={styles.errorMessage}>{errorMessage}</Text>}</View>
 			<View style={styles.buttonWrapper}>
 				<View style={styles.registrationWrapper}>
 					<Text>{t('Have no account?')} </Text>
@@ -75,6 +87,13 @@ const styles = StyleSheet.create({
 	loginButtonText: {
 		fontSize: FontSizes.Big,
 	},
+	errorMessageWrap: {
+		marginBottom: 20
+	},
+	errorMessage: {
+		color: Colors.Red,
+		fontSize: FontSizes.Regular,
+	}
 });
 
 const mapStateToProps = (): IState => ({});

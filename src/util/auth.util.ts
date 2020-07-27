@@ -11,17 +11,13 @@ interface ILogin {
 	password: string;
 }
 
-export const validateLogin = (obj: ILogin): true | string => {
-	if (!obj || typeof obj !== 'object') {
-		return 'Invalid data';
-	}
-
-	if (!isPresent(obj.login) && !isPresent(obj.password)) {
-		return 'Fill in the data';
+export const getLoginInvalidMessage = (obj: ILogin): string => {
+	if (!obj || typeof obj !== 'object' || (!isPresent(obj.login) && !isPresent(obj.password))) {
+		return 'Passed data is invalid. Should be an obj and contain \'login\' and \'password\' fields';
 	}
 
 	if (!isEmail(obj.login)) {
-		return 'Invalid login data';
+		return 'Login is not an email';
 	}
 
 	if (!isValidEmailLength(obj.login)) {
@@ -29,8 +25,8 @@ export const validateLogin = (obj: ILogin): true | string => {
 	}
 
 	if (!isPassword(obj.password)) {
-		return 'Invalid password length';
+		return `Password length should be between ${AUTH_VALID.PASSWORD.minLength} and ${AUTH_VALID.PASSWORD.maxLength} characters`;
 	}
 
-	return true;
+	return '';
 };
