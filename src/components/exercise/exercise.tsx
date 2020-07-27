@@ -155,6 +155,7 @@ const Cell: FC<ICellProps> = ({ data, textStyle, afterElement }) => {
 
 const styles = StyleSheet.create({
 	wrapper: {
+		marginBottom: 10,
 		backgroundColor: Colors.White,
 		borderBottomWidth: 0.3,
 		borderBottomColor: Colors.Grey,
@@ -272,7 +273,7 @@ const cellStyles = StyleSheet.create({
 	wrapper: {
 		backgroundColor: '#F1F1F1',
 		borderRadius: 5,
-		width: 40,
+		width: 55,
 		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
