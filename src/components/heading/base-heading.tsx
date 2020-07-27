@@ -34,7 +34,7 @@ export const BaseHeading = (props: IBaseHeadingProps) => {
 const styles = StyleSheet.create({
 	wrapper: {},
 	text: {
-		fontFamily: Fonts.Kelson,
+		fontFamily: Fonts.OswaldRegular,
 		paddingVertical: 5,
 	},
 	textCenter: {
