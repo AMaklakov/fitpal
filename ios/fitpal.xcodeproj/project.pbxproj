@@ -20,6 +20,7 @@
 		99495E9B24A7A32800F7E4D2 /* KelsonSansRU-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99495E9824A7A32800F7E4D2 /* KelsonSansRU-Light.ttf */; };
 		99495E9C24A7A32800F7E4D2 /* KelsonSansRU-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99495E9924A7A32800F7E4D2 /* KelsonSansRU-Bold.ttf */; };
 		99495E9D24A7A32800F7E4D2 /* KelsonSansRU-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99495E9A24A7A32800F7E4D2 /* KelsonSansRU-Normal.ttf */; };
+		995F2D6C24CCD85E00534A7A /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995F2D6B24CCD84A00534A7A /* Oswald-Light.ttf */; };
 		99DB781524C376BB00DDAFF4 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99DB781324C376B000DDAFF4 /* RobotoCondensed-Bold.ttf */; };
 		99DB781624C376BB00DDAFF4 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99DB781124C376B000DDAFF4 /* RobotoCondensed-BoldItalic.ttf */; };
 		99DB781724C376BB00DDAFF4 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99DB781424C376B000DDAFF4 /* RobotoCondensed-Italic.ttf */; };
@@ -76,6 +77,7 @@
 		99495E9824A7A32800F7E4D2 /* KelsonSansRU-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KelsonSansRU-Light.ttf"; path = "../assets/fonts/KelsonSansRU-Light.ttf"; sourceTree = "<group>"; };
 		99495E9924A7A32800F7E4D2 /* KelsonSansRU-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KelsonSansRU-Bold.ttf"; path = "../assets/fonts/KelsonSansRU-Bold.ttf"; sourceTree = "<group>"; };
 		99495E9A24A7A32800F7E4D2 /* KelsonSansRU-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KelsonSansRU-Normal.ttf"; path = "../assets/fonts/KelsonSansRU-Normal.ttf"; sourceTree = "<group>"; };
+		995F2D6B24CCD84A00534A7A /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Light.ttf"; path = "../assets/fonts/Oswald-Light.ttf"; sourceTree = "<group>"; };
 		99DB780F24C376B000DDAFF4 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Regular.ttf"; path = "../assets/fonts/RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		99DB781024C376B000DDAFF4 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Light.ttf"; path = "../assets/fonts/RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		99DB781124C376B000DDAFF4 /* RobotoCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-BoldItalic.ttf"; path = "../assets/fonts/RobotoCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		FE2640EA7EAA4417B5C2A585 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				995F2D6B24CCD84A00534A7A /* Oswald-Light.ttf */,
 				99DB781B24C37A8500DDAFF4 /* Oswald-Regular.ttf */,
 				99DB781D24C37C1E00DDAFF4 /* Oswald-Medium.ttf */,
 				99DB781324C376B000DDAFF4 /* RobotoCondensed-Bold.ttf */,
@@ -390,6 +393,7 @@
 				99DB781624C376BB00DDAFF4 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				99DB781724C376BB00DDAFF4 /* RobotoCondensed-Italic.ttf in Resources */,
 				99DB781824C376BB00DDAFF4 /* RobotoCondensed-Light.ttf in Resources */,
+				995F2D6C24CCD85E00534A7A /* Oswald-Light.ttf in Resources */,
 				99DB781924C376BB00DDAFF4 /* RobotoCondensed-LightItalic.ttf in Resources */,
 				99DB781A24C376BB00DDAFF4 /* RobotoCondensed-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

@@ -1,52 +1,48 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { IntegerNumberInputWithValidation } from '@components/inputs/integer-number-input/integer-number-input';
-import { RepeatOnceIcon } from '@icons/repeat-one.icon';
-import { ISeries } from '@model/training-exercise';
+import { ISet } from '@model/training-exercise';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components/button/button';
 import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS } from '@const/validation-const';
-import { Text } from 'react-native-elements';
+import { Icon, Text } from 'react-native-elements';
+import { Colors } from '@css/colors.style';
+import { Fonts, FontSizes } from '@css/fonts';
 
 interface IProps {
 	index: number;
-	onChange: (s: Partial<ISeries>) => void;
-
-	series?: ISeries;
+	set: ISet;
+	onChange: (s: ISet) => void;
 	onRepeatIconPress?: () => void;
 	weightMin?: number;
 	weightMax?: number;
 	maxSequenceNumber?: number;
 }
 
-export const CreateSeries = (props: IProps) => {
-	const {
-		index,
-		onChange,
-		series,
-		onRepeatIconPress,
-		weightMax = MAX_WEIGHT,
-		weightMin = 1,
-		maxSequenceNumber,
-	} = props;
+export const CreateSet = (props: IProps) => {
+	const { index, onChange, set, onRepeatIconPress, weightMax = MAX_WEIGHT, weightMin = 1, maxSequenceNumber } = props;
 	const { t } = useTranslation();
 
-	const [sequenceNumber] = useState(index + 1);
-	const [repeats, setRepeats] = useState<string | undefined>(series?.repeats?.toString() ?? '1');
-	const [weight, setWeight] = useState<string | undefined>(series?.weight?.toString() ?? '0');
+	const sequenceNumber = useMemo(() => index + 1, [index]);
 
-	const showRepeatButton = useMemo(() => !maxSequenceNumber || index + 1 < maxSequenceNumber, [
-		index,
+	const [repeats, setRepeats] = useState<string>(set?.repeats?.toString() ?? '1');
+	const [weight, setWeight] = useState<string>(set?.weight?.toString() ?? '0');
+
+	const showRepeatButton = useMemo(() => !maxSequenceNumber || sequenceNumber < maxSequenceNumber, [
+		sequenceNumber,
 		maxSequenceNumber,
 	]);
 
 	useEffect(() => {
-		onChange({
-			repeats: Number(repeats),
-			weight: Number(weight),
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [sequenceNumber, repeats, weight]);
+		setRepeats(set.repeats.toString());
+		setWeight(set.weight.toString());
+	}, [set]);
+
+	useEffect(() => {
+		if (set.weight.toString() !== weight || set.repeats.toString() !== repeats) {
+			onChange({ ...set, weight, repeats });
+		}
+	}, [onChange, set, repeats, weight]);
 
 	const handleSetRepeats = useCallback((v: string) => setRepeats(v), []);
 	const handleSetWeight = useCallback((v: string) => setWeight(v), []);
@@ -54,7 +50,7 @@ export const CreateSeries = (props: IProps) => {
 	return (
 		<View style={styles.wrapper}>
 			<View style={styles.sequenceNumber}>
-				<Text>{sequenceNumber}</Text>
+				<Text style={styles.sequenceNumberText}>{sequenceNumber}</Text>
 			</View>
 
 			<View style={styles.repeats}>
@@ -64,7 +60,12 @@ export const CreateSeries = (props: IProps) => {
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
 					value={repeats}
 					onChange={handleSetRepeats}
+					keyboardType="decimal-pad"
 				/>
+			</View>
+
+			<View style={styles.multiply}>
+				<Icon name="close" type="ionicon" iconStyle={styles.multiplyText} />
 			</View>
 
 			<View style={styles.weight}>
@@ -74,8 +75,9 @@ export const CreateSeries = (props: IProps) => {
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
 					value={weight}
 					onChange={handleSetWeight}
-					rightIcon={<Text>{t('Kg')}</Text>}
+					rightIcon={<Text style={styles.kg}>{t('Kg')}</Text>}
 					rightIconContainerStyle={styles.iconContainer}
+					keyboardType="decimal-pad"
 				/>
 			</View>
 
@@ -83,7 +85,7 @@ export const CreateSeries = (props: IProps) => {
 				{!!onRepeatIconPress && showRepeatButton && (
 					<Button
 						type="clear"
-						icon={<RepeatOnceIcon />}
+						icon={{ name: 'copy-outline', type: 'ionicon', size: FontSizes.Big, color: Colors.Darkgray }}
 						onPress={onRepeatIconPress}
 						containerStyle={styles.buttonWrapper}
 						buttonStyle={styles.button}
@@ -94,32 +96,42 @@ export const CreateSeries = (props: IProps) => {
 	);
 };
 
-const WINDOW = Dimensions.get('window');
 const INPUT_HEIGHT = 42;
 
 const styles = StyleSheet.create({
 	wrapper: {
-		marginVertical: 5,
+		paddingVertical: 5,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+		backgroundColor: Colors.WhiteMilk,
 	},
 	sequenceNumber: {
+		flex: 1,
 		height: INPUT_HEIGHT,
 		justifyContent: 'center',
 		alignItems: 'center',
-		width: WINDOW.width / 10,
 	},
 	repeats: {
-		width: WINDOW.width / 3,
+		flex: 4,
 	},
-	weight: {
-		width: WINDOW.width / 3,
-	},
-	actions: {
-		width: WINDOW.width / 8,
+	multiply: {
+		height: INPUT_HEIGHT,
+		flex: 1,
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	iconContainer: { marginVertical: 0 },
+	weight: {
+		flex: 4,
+	},
+	actions: {
+		height: INPUT_HEIGHT,
+		flex: 2,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	iconContainer: {
+		marginVertical: 0,
+	},
 	buttonWrapper: {
 		width: '100%',
 	},
@@ -127,5 +139,16 @@ const styles = StyleSheet.create({
 		height: INPUT_HEIGHT,
 		paddingVertical: 0,
 		paddingHorizontal: 0,
+	},
+	multiplyText: {
+		color: Colors.Darkgray,
+		fontSize: FontSizes.Big,
+	},
+	sequenceNumberText: {
+		fontFamily: Fonts.RobotoCondensedLight,
+		fontSize: FontSizes.Regular,
+	},
+	kg: {
+		fontFamily: Fonts.RobotoCondensedLight,
 	},
 });

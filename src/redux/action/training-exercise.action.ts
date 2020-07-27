@@ -1,6 +1,6 @@
-import { IBaseTrainingExercise } from '@model/training-exercise';
+import { ICreateTrainingExercise } from '@model/training-exercise';
 import { dataActionCreator, progressActions, progressTypes } from '@util/redux.util';
-import { ICreateTraining, TrainingModel } from '@model/training.model';
+import { ICreateTraining, ITraining } from '@model/training.model';
 import { MomentInput } from 'moment';
 
 export const TRAINING_ACTIONS = {
@@ -20,23 +20,21 @@ export const TRAINING_ACTIONS = {
 };
 
 export type IFetchByDateRange = { startDate: MomentInput; endDate: MomentInput };
-export type IAddExerciseStart = { trainingId: string; exercise: IBaseTrainingExercise };
+export type IAddExerciseStart = { trainingId: string; exercise: ICreateTrainingExercise };
 export type IEditExerciseStart = IAddExerciseStart;
 export type IRemoveExerciseStart = { trainingId: string; exerciseId: string };
 export const TRAINING_ACTION_CREATORS = {
-	FETCH_BY_DATE_RANGE: progressActions<IFetchByDateRange, TrainingModel[], object>(
-		TRAINING_ACTIONS.FETCH_BY_DATE_RANGE
-	),
-	FETCH_BY_DATE: progressActions<MomentInput, TrainingModel[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
-	FETCH_BY_ID: progressActions<string | undefined, TrainingModel | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
-	CREATE: progressActions<ICreateTraining, TrainingModel | undefined, object>(TRAINING_ACTIONS.CREATE),
+	FETCH_BY_DATE_RANGE: progressActions<IFetchByDateRange, ITraining[], object>(TRAINING_ACTIONS.FETCH_BY_DATE_RANGE),
+	FETCH_BY_DATE: progressActions<MomentInput, ITraining[], object>(TRAINING_ACTIONS.FETCH_BY_DATE),
+	FETCH_BY_ID: progressActions<string | undefined, ITraining | undefined, object>(TRAINING_ACTIONS.FETCH_BY_ID),
+	CREATE: progressActions<ICreateTraining, ITraining | undefined, object>(TRAINING_ACTIONS.CREATE),
 	DELETE: progressActions<string, string, object>(TRAINING_ACTIONS.DELETE),
 	SET_TO_UPDATE: dataActionCreator<string | null>(TRAINING_ACTIONS.SET_TO_UPDATE),
-	UPDATE: progressActions<TrainingModel, TrainingModel, object>(TRAINING_ACTIONS.UPDATE),
+	UPDATE: progressActions<ITraining, ITraining, object>(TRAINING_ACTIONS.UPDATE),
 
 	EXERCISE: {
-		ADD: progressActions<IAddExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.ADD),
-		EDIT: progressActions<IEditExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.EDIT),
-		REMOVE: progressActions<IRemoveExerciseStart, TrainingModel, object>(TRAINING_ACTIONS.EXERCISE.REMOVE),
+		ADD: progressActions<IAddExerciseStart, ITraining, object>(TRAINING_ACTIONS.EXERCISE.ADD),
+		EDIT: progressActions<IEditExerciseStart, ITraining, object>(TRAINING_ACTIONS.EXERCISE.EDIT),
+		REMOVE: progressActions<IRemoveExerciseStart, ITraining, object>(TRAINING_ACTIONS.EXERCISE.REMOVE),
 	},
 };

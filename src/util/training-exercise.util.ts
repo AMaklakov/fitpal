@@ -1,8 +1,9 @@
 import { Big, BigSource } from 'big.js';
-import { cloneSeriesList } from './series.util';
+import { cloneSetList } from './set.util';
 import {
 	IAdditionalWeightTrainingExercise,
 	IBaseTrainingExercise,
+	ICreateTrainingExercise,
 	IDefaultTrainingExercise,
 	INegativeWeightTrainingExercise,
 	ISeries,
@@ -11,6 +12,7 @@ import { TrainingModel } from '@model/training.model';
 import { assertUnreachable } from '@util/assert-unreachable';
 import { ExerciseTypes } from '@model/exercise.model';
 import { MAX_REPEATS, MAX_WEIGHT, MIN_REPEATS, MIN_WEIGHT } from '@const/validation-const';
+import { isPresent } from '@util/type.util';
 
 type ICloneTrainingExercise = {
 	(ex: IBaseTrainingExercise): IBaseTrainingExercise;
@@ -20,7 +22,7 @@ type ICloneTrainingExercise = {
 export const cloneTrainingExercise: ICloneTrainingExercise = ex => {
 	return {
 		...ex,
-		seriesList: cloneSeriesList(ex?.seriesList),
+		seriesList: cloneSetList(ex?.seriesList),
 	};
 };
 
@@ -28,9 +30,12 @@ export const cloneTrainingExerciseList = (list?: IBaseTrainingExercise[]): IBase
 	return list ? list.map(ex => cloneTrainingExercise(ex)) : [];
 };
 
-export const createEmptyTrainingExercise = (userWeight?: BigSource): Partial<IBaseTrainingExercise> => ({
+export const createEmptyTrainingExercise = (userWeight: BigSource): ICreateTrainingExercise => ({
 	seriesList: [],
 	userWeight,
+	exerciseId: '',
+	type: ExerciseTypes.Default,
+	sequenceNumber: 0, // ? why do we need this ?
 });
 
 const calcWithNegativeWeightTotal = ({ seriesList, userWeight = 0 }: INegativeWeightTrainingExercise): Big => {
@@ -89,20 +94,33 @@ const isValidSeries = (
 	minRepeats: BigSource,
 	maxRepeats: BigSource
 ): boolean => {
-	const repeats = new Big(series.repeats);
-	const weight = new Big(series.weight);
+	try {
+		const repeats = new Big(series.repeats);
+		const weight = new Big(series.weight);
 
-	if (!repeats.round().eq(repeats)) {
+		if (!repeats.round().eq(repeats)) {
+			return false;
+		}
+
+		const isRepeatsValid = repeats.gte(minRepeats) && repeats.lte(maxRepeats);
+		const isWeightValid = weight.gte(minWeight) && weight.lte(maxWeight);
+
+		return isRepeatsValid && isWeightValid;
+	} catch (error) {
+		if (error.message.includes('Invalid number')) {
+			// here either `repeats` or `weight` are invalid numbers, e.g. containing letters
+			return false;
+		}
+
+		throw error;
+	}
+};
+
+export const validateTrainingExercise = (ex: IBaseTrainingExercise | ICreateTrainingExercise): boolean => {
+	if (!ex.exerciseId || !isPresent(ex.type)) {
 		return false;
 	}
 
-	const isRepeatsValid = repeats.gte(minRepeats) && repeats.lte(maxRepeats);
-	const isWeightValid = weight.gte(minWeight) && weight.lte(maxWeight);
-
-	return isRepeatsValid && isWeightValid;
-};
-
-export const validateTrainingExercise = (ex: IBaseTrainingExercise, userWeight?: BigSource): boolean => {
 	switch (ex.type) {
 		case ExerciseTypes.Default:
 			return ex.seriesList.every(series => isValidSeries(series, MIN_WEIGHT, MAX_WEIGHT, MIN_REPEATS, MAX_REPEATS));
@@ -111,16 +129,13 @@ export const validateTrainingExercise = (ex: IBaseTrainingExercise, userWeight?:
 			return ex.seriesList.every(series => isValidSeries(series, 0, MAX_WEIGHT, MIN_REPEATS, MAX_REPEATS));
 
 		case ExerciseTypes.WithNegativeWeight:
-			if (!userWeight) {
+			if (!ex.userWeight) {
 				throw new Error(`User weight is not passed as argument`);
 			}
 
 			return ex.seriesList.every(series =>
-				isValidSeries(series, 0, new Big(userWeight).minus(1), MIN_REPEATS, MAX_REPEATS)
+				isValidSeries(series, 0, new Big(ex.userWeight).minus(1), MIN_REPEATS, MAX_REPEATS)
 			);
-
-		default:
-			assertUnreachable(ex.type);
 	}
 
 	throw new Error(`Not implemented exercise type`);

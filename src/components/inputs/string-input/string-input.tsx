@@ -10,22 +10,40 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	isPassword?: boolean;
 	hasShadow?: boolean;
+	onFocus?: () => void;
+	onBlur?: () => void;
 }
 
 export const StringInput: FC<IProps> = (props: IProps) => {
-	const { onChange, value, isPassword = false, hasShadow = true, inputContainerStyle, ...rest } = props;
+	const {
+		onChange,
+		value,
+		isPassword = false,
+		hasShadow = true,
+		inputContainerStyle,
+		onFocus,
+		onBlur,
+		...rest
+	} = props;
 
 	const [isFocused, setFocused] = useState(false);
 	const onTextChangeHandler = useCallback((v: string) => onChange(v), [onChange]);
 
-	const handleFocus = useCallback(() => setFocused(true), []);
-	const handleBlur = useCallback(() => setFocused(false), []);
+	const handleFocus = useCallback(() => {
+		setFocused(true);
+		onFocus?.();
+	}, [onFocus]);
+	const handleBlur = useCallback(() => {
+		setFocused(false);
+		onBlur?.();
+	}, [onBlur]);
 
 	return (
 		<Input
 			value={value}
 			onChangeText={onTextChangeHandler}
 			labelStyle={[styles.labelStyle]}
+			inputStyle={styles.input}
 			onFocus={handleFocus}
 			onBlur={handleBlur}
 			secureTextEntry={isPassword}
@@ -48,11 +66,12 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: 'transparent',
 		borderRadius: 5,
-		backgroundColor: Colors.White,
+		backgroundColor: Colors.WhiteSandy,
 	},
 	input: {
 		color: Colors.Black,
 		fontSize: FontSizes.Medium,
+		fontFamily: Fonts.RobotoCondensed,
 	},
 	focused: {
 		borderColor: Colors.Accent,
@@ -71,8 +90,8 @@ const styles = StyleSheet.create({
 	labelStyle: {
 		marginBottom: 2,
 		fontSize: FontSizes.Small,
-		fontFamily: Fonts.Kelson,
-		fontWeight: 'normal',
+		fontFamily: Fonts.RobotoCondensed,
+		fontWeight: '200',
 		color: Colors.Primary,
 	},
 });

@@ -1,9 +1,10 @@
-import { IBaseTrainingExercise, ISeries } from '@model/training-exercise';
-import { cloneSeries, cloneSeriesList, createEmptySeries } from '@util/series.util';
+import { IBaseTrainingExercise, ISet } from '@model/training-exercise';
+import { cloneSet, cloneSetList, createEmptySet } from '@util/set.util';
+import { generateId } from '@util/uuid.util';
 
 export const addEmptySeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
-	const series = cloneSeriesList(ex.seriesList);
-	series.push(createEmptySeries(series.length + 1));
+	const series = cloneSetList(ex.seriesList);
+	series.push(createEmptySet());
 
 	return {
 		...ex,
@@ -11,18 +12,14 @@ export const addEmptySeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise
 	};
 };
 
-export const editSeriesBySequenceNumber = (
-	ex: IBaseTrainingExercise,
-	series: ISeries,
-	sequenceNumber: number
-): IBaseTrainingExercise => {
-	const seriesList = ex.seriesList.reduce((buff: ISeries[], s: ISeries, i: number) => {
-		if (i + 1 !== sequenceNumber) {
-			return [...buff, cloneSeries(s)];
+export const editSet = (set: ISet, ex: IBaseTrainingExercise): IBaseTrainingExercise => {
+	const seriesList = ex.seriesList.reduce((buff: ISet[], s: ISet) => {
+		if (s._id !== set._id) {
+			return [...buff, cloneSet(s)];
 		}
 
-		return [...buff, cloneSeries(series)];
-	}, [] as ISeries[]);
+		return [...buff, cloneSet(set)];
+	}, [] as ISet[]);
 
 	return {
 		...ex,
@@ -30,18 +27,14 @@ export const editSeriesBySequenceNumber = (
 	};
 };
 
-export const popSeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
-	ex.seriesList.pop();
+export const deleteSet = ({ _id: id }: ISet, ex: IBaseTrainingExercise): IBaseTrainingExercise => ({
+	...ex,
+	seriesList: ex.seriesList.filter(set => set._id !== id),
+});
 
-	return {
-		...ex,
-		seriesList: cloneSeriesList(ex.seriesList),
-	};
-};
-
-export const repeatLastSeries = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
-	const lastRepeat = cloneSeries(ex.seriesList[ex.seriesList.length - 1]);
-	lastRepeat.sequenceNumber += 1;
+export const repeatLastSet = (ex: IBaseTrainingExercise): IBaseTrainingExercise => {
+	const lastRepeat = cloneSet(ex.seriesList[ex.seriesList.length - 1]);
+	lastRepeat._id = generateId();
 
 	return {
 		...ex,
