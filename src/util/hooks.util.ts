@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import throttle from 'lodash/throttle';
 
 export function useDebounce<T>(value: T, delay: number) {
 	const [debouncedValue, setDebouncedValue] = useState(value);
@@ -51,4 +52,8 @@ export const useAsyncStorage = (key: string = 'token') => {
 	}, [getStorageItem]);
 
 	return [storageItem, updateStorageItem, clearStorageItem];
+};
+
+export const useThrottled = (fn: Function, time?: number = 100) => {
+	return useMemo(() => throttle(fn, time), [fn, time]);
 };

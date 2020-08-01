@@ -10,6 +10,17 @@ import { useAddFirstSet } from '@screen/create-training-exercise/components/hook
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { SwipeHiddenButton } from '@components/swipe-list/button';
 import { Colors } from '@css/colors.style';
+import { useThrottled } from '@util/hooks.util';
+
+const SWIPE_LIST_OPEN_VALUE = -120;
+const SWIPE_LIST_STOP_VALUE = -140;
+
+interface ISwipeData {
+	key: string;
+	value: number;
+	direction: 'left' | 'right';
+	isOpen: boolean;
+}
 
 interface IProps {
 	trainingExercise: IDefaultTrainingExercise;
@@ -18,17 +29,29 @@ interface IProps {
 
 export const DefaultSets = (props: IProps) => {
 	const { trainingExercise, onChange } = props;
-	const { seriesList } = trainingExercise;
+	const { seriesList: sets } = trainingExercise;
 	const { t } = useTranslation();
 
 	useAddFirstSet(trainingExercise, onChange);
 
 	const handleRepeatLast = useCallback(() => onChange(repeatLastSet(trainingExercise)), [trainingExercise, onChange]);
 	const handleUpdate = useCallback((s: ISet) => onChange(editSet(s, trainingExercise)), [trainingExercise, onChange]);
-	const handleDelete = useCallback((s: ISet) => () => onChange(deleteSet(s, trainingExercise)), [
-		trainingExercise,
-		onChange,
-	]);
+	const handleDelete = useCallback((s: ISet) => onChange(deleteSet(s, trainingExercise)), [trainingExercise, onChange]);
+	const handleDeleteCarried = useCallback((s: ISet) => () => handleDelete(s), [handleDelete]);
+	const handleDeleteThrottled = useThrottled(handleDelete);
+
+	const handleDeleteOnSwipe = useCallback(
+		(swipeData: ISwipeData) => {
+			const { key, value } = swipeData;
+			if (value < SWIPE_LIST_OPEN_VALUE) {
+				const currentSet = sets.find(set => set._id === key);
+				if (currentSet) {
+					handleDeleteThrottled(currentSet);
+				}
+			}
+		},
+		[handleDeleteThrottled, sets]
+	);
 
 	return (
 		<View style={styles.wrapper}>
@@ -41,11 +64,12 @@ export const DefaultSets = (props: IProps) => {
 			</View>
 
 			<SwipeListView<ISet>
-				data={seriesList}
-				keyExtractor={s => `series_${s._id}`}
+				data={sets}
+				keyExtractor={s => s._id}
 				disableRightSwipe={true}
-				rightOpenValue={-120}
-				stopRightSwipe={-140}
+				rightOpenValue={SWIPE_LIST_OPEN_VALUE}
+				stopRightSwipe={SWIPE_LIST_STOP_VALUE}
+				onSwipeValueChange={handleDeleteOnSwipe}
 				closeOnScroll={true}
 				closeOnRowBeginSwipe={true}
 				renderItem={({ index, item }) => (
@@ -54,7 +78,7 @@ export const DefaultSets = (props: IProps) => {
 						set={item}
 						maxSequenceNumber={TRAINING_EXERCISES.MAX}
 						onChange={handleUpdate}
-						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
+						onRepeatIconPress={index + 1 === sets?.length ? handleRepeatLast : undefined}
 					/>
 				)}
 				renderHiddenItem={data => (
@@ -63,7 +87,7 @@ export const DefaultSets = (props: IProps) => {
 							style={styles.button}
 							title={t('Delete')}
 							item={data.item}
-							onTouch={handleDelete(data.item)}
+							onTouch={handleDeleteCarried(data.item)}
 							backgroundColor={Colors.LightRed}
 							textColor={Colors.White}
 						/>
