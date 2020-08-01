@@ -57,10 +57,10 @@ export function* register(action: DataAction<IRegisterRequestBody>) {
 export function* logout() {
 	try {
 		const token = yield getToken();
+		navigate(Routes.Login);
 
 		const { data } = yield axios.post(`logout`, { token });
 		yield removeToken();
-		navigate(Routes.Login);
 
 		yield put(logoutSuccess(data));
 	} catch (e) {
