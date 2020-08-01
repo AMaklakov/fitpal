@@ -99,6 +99,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 			...prevTrainingExercise,
 			exerciseId: exercise?._id ?? '',
 			type: exercise?.type ?? ExerciseTypes.Default,
+			seriesList: [],
 		}));
 	}, []);
 
