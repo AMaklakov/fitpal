@@ -32,6 +32,8 @@ import { View } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { goBack } from '@util/navigation.util';
 import omit from 'lodash/omit';
+import { Overlay } from 'react-native-elements';
+import { ExerciseDetails } from '@components/exercise-details/exercise-details';
 
 interface IState {
 	exerciseList: ExerciseModel[];
@@ -61,6 +63,7 @@ const Screen = (props: IProps & IState & IDispatch) => {
 	);
 	const [selectedExercise, setSelectedExercise] = useState<ExerciseModel | null>(null);
 	const [isValid, setIsValid] = useState(true);
+	const [isOpenExerciseOverlay, setIsOpenExerciseOverlay] = useState(false);
 
 	// get training exercise from navigation
 	useEffect(() => {
@@ -110,13 +113,16 @@ const Screen = (props: IProps & IState & IDispatch) => {
 		}));
 	}, []);
 
+	const handleOpenExerciseOverlay = useCallback(() => setIsOpenExerciseOverlay(true), []);
+	const handleCloseExerciseOverlay = useCallback(() => setIsOpenExerciseOverlay(false), []);
+
 	const tooltip = useCallback(
 		({ onCancelAutocompletion }: ISelectedItemIconActions) => (
 			<TooltipMenu
 				items={[
 					{
 						title: t('About exercise'),
-						onPress: () => {},
+						onPress: handleOpenExerciseOverlay,
 						key: 'about',
 						isShown: true,
 					},
@@ -128,9 +134,10 @@ const Screen = (props: IProps & IState & IDispatch) => {
 					},
 				]}
 				iconStyle={commonStyles.selectedExerciseAutocompleteIcon}
+				closeOnAction={true}
 			/>
 		),
-		[t]
+		[t, handleOpenExerciseOverlay]
 	);
 
 	return (
@@ -190,6 +197,12 @@ const Screen = (props: IProps & IState & IDispatch) => {
 					userWeight={userWeight}
 				/>
 			)}
+
+			<Overlay isVisible={isOpenExerciseOverlay} onBackdropPress={handleCloseExerciseOverlay}>
+				<View>
+					{selectedExercise && <ExerciseDetails exercise={selectedExercise} onClose={handleCloseExerciseOverlay} />}
+				</View>
+			</Overlay>
 		</KeyboardAwareScrollView>
 	);
 };

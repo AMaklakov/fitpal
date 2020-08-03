@@ -1,6 +1,6 @@
-import React, { FC, Ref, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useRef } from 'react';
 import { Icon, IconProps, ListItem, ListItemProps, Tooltip } from 'react-native-elements';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { GestureResponderEvent, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors } from '@css/colors.style';
 import { Fonts, FontSizes } from '@css/fonts';
 
@@ -11,23 +11,35 @@ export interface ITooltipMenuItem extends ListItemProps {
 
 interface IProps {
 	items: ITooltipMenuItem[];
-	tooltipRef?: Ref<Tooltip>;
 	icon?: IconProps;
 	tooltipContainerStyle?: StyleProp<ViewStyle>;
 	tooltipInnerContainerStyle?: StyleProp<ViewStyle>;
 	tooltipIconStyle?: StyleProp<ViewStyle>;
 	iconStyle?: StyleProp<ViewStyle>;
+	closeOnAction?: boolean;
 }
 
 export const TooltipMenu: FC<IProps> = props => {
-	const { items, tooltipRef, tooltipContainerStyle, tooltipInnerContainerStyle, icon = { name: 'more-vert' } } = props;
-	const { tooltipIconStyle, iconStyle } = props;
+	const { items, tooltipContainerStyle, tooltipInnerContainerStyle, icon = { name: 'more-vert' } } = props;
+	const { tooltipIconStyle, iconStyle, closeOnAction } = props;
+
+	const tooltipRefInner = useRef<Tooltip>(null);
 
 	const currentIcon = useMemo(() => icon ?? { name: 'more-vert' }, [icon]);
 
+	const handleItemPress = useCallback(
+		(item: ITooltipMenuItem) => (e: GestureResponderEvent) => {
+			if (closeOnAction) {
+				tooltipRefInner.current?.toggleTooltip();
+			}
+			item?.onPress?.(e);
+		},
+		[closeOnAction]
+	);
+
 	return (
 		<Tooltip
-			ref={tooltipRef}
+			ref={tooltipRefInner}
 			withPointer={false}
 			containerStyle={StyleSheet.flatten([styles.tooltip, tooltipContainerStyle])}
 			width={200}
@@ -38,6 +50,7 @@ export const TooltipMenu: FC<IProps> = props => {
 						?.map(item => (
 							<ListItem
 								{...item}
+								onPress={handleItemPress(item)}
 								titleStyle={[styles.listItemTitle, item.titleStyle]}
 								containerStyle={styles.listItemContainer}
 							/>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { ExerciseModel } from '@model/exercise.model';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -10,7 +10,6 @@ import { H2 } from '@components/heading/h2';
 import { Routes } from '@screen/routes';
 import { useTranslation } from 'react-i18next';
 import { ITooltipMenuItem, TooltipMenu } from '@components/tooltip/tooltip-menu';
-import { Tooltip } from 'react-native-elements';
 
 interface IProps extends NavigationPropsModel {}
 
@@ -24,8 +23,6 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 	const { navigation, exercise } = props;
 	const { t } = useTranslation();
 
-	const tooltipRef = useRef<Tooltip>(null);
-
 	useEffect(() => {
 		if (!exercise) {
 			navigation.goBack();
@@ -33,7 +30,6 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 	}, [exercise, navigation]);
 
 	const handleEdit = useCallback(() => {
-		tooltipRef.current?.toggleTooltip();
 		navigation.navigate(Routes.ExerciseCreate, { exerciseId: exercise?._id });
 	}, [exercise?._id, navigation]);
 
@@ -67,7 +63,7 @@ const Exercise = (props: IProps & IDispatch & IState) => {
 				<View style={styles.headingWrapper}>
 					<H1 text={exercise.name} wrapperStyle={styles.h1} />
 					{showTooltip && (
-						<TooltipMenu items={tooltipItems} tooltipRef={tooltipRef} tooltipIconStyle={styles.tooltipIcon} />
+						<TooltipMenu items={tooltipItems} closeOnAction={true} tooltipIconStyle={styles.tooltipIcon} />
 					)}
 				</View>
 				<View style={styles.description}>
