@@ -12,6 +12,7 @@ export enum Fonts {
 
 	OswaldRegular = 'Oswald-Regular',
 	OswaldMedium = 'Oswald-Medium',
+	OswaldLight = 'Oswald-Light',
 }
 
 export enum FontSizes {

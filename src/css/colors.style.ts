@@ -1,5 +1,7 @@
 export enum Colors {
 	Default = '#F2F2F2',
+	WhiteMilk = '#FFFEF9',
+	WhiteSandy = '#f8f1e8',
 
 	LightBlue = '#83AEC8',
 	DarkBlue = '#29657A',
@@ -12,7 +14,8 @@ export enum Colors {
 	SaturatedRed = '#DE5D6C',
 	// TODO rename to `Pink`
 	Red = '#DF737F',
-	LightRed = '#EE8782',
+	LightRed = '#BE5156',
+	LightPink = '#D3857B',
 	Yellow = '#EBBB99',
 
 	LightGrey = '#D0D0D0',
@@ -21,7 +24,7 @@ export enum Colors {
 
 	Purple = '#b02c74',
 	Lightgray = '#EAEAEA',
-	Darkgray = '#62676A',
+	Darkgray = '#666666',
 
 	LightGreen = '#5eaca7',
 	Green = '#5DDE79',
@@ -29,7 +32,7 @@ export enum Colors {
 
 	Primary = '#292929',
 	Secondary = Lightgray,
-	Accent = Purple,
+	Accent = LightRed,
 }
 
 export const PALETTE_COLORS = [

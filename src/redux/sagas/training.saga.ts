@@ -2,7 +2,7 @@ import { put, select } from 'redux-saga/effects';
 import { axios } from '@util/axios';
 import { Moment } from 'moment';
 import { DataAction } from '@model/data-action.model';
-import { ICreateTraining, isCreateTrainingValid, isTrainingValid, TrainingModel } from '@model/training.model';
+import { ICreateTraining, isCreateTrainingValid, isTrainingValid, ITraining } from '@model/training.model';
 import { cleanUpAction } from '@redux/action/calendar-training-modal.action';
 import {
 	IAddExerciseStart,
@@ -12,11 +12,12 @@ import {
 	TRAINING_ACTION_CREATORS,
 } from '@redux/action/training-exercise.action';
 import { validateTrainingExercise } from '@util/training-exercise.util';
-import { getTrainingById as getTrainingByIdSlector } from '@redux/selector/training.selector';
-import { StoreModel } from '@redux/store';
+import { selectTrainingById } from '@redux/selector/training.selector';
+import { IStore } from '@redux/store';
 import { navigate } from '@util/navigation.util';
 import { Routes } from '@screen/routes';
 import { toIsoString } from '@util/date.util';
+import { IBaseTrainingExercise } from '@model/training-exercise';
 
 export function* getTrainingsByDate(action: DataAction<Moment>) {
 	try {
@@ -79,7 +80,7 @@ export function* deleteTrainingById(action: DataAction<string>) {
 	}
 }
 
-export function* updateTrainingById(action: DataAction<TrainingModel>) {
+export function* updateTrainingById(action: DataAction<ITraining>) {
 	try {
 		if (!isTrainingValid(action.payload)) {
 			throw `Training is not valid`;
@@ -108,17 +109,21 @@ export function* addTrainingExercise(action: DataAction<IAddExerciseStart>) {
 		const trainingId = action.payload.trainingId;
 		const newExercise = action.payload.exercise;
 
-		if (!trainingId || !validateTrainingExercise(newExercise)) {
-			throw `Not valid action payload`;
+		if (!trainingId) {
+			throw `No training passed`;
 		}
 
-		const training: TrainingModel = yield select((state: StoreModel) => getTrainingByIdSlector(state, trainingId));
+		const training: ITraining = yield select((state: IStore) => selectTrainingById(state, trainingId));
 
 		if (!training) {
 			throw `Not existing trainingId`;
 		}
 
-		training.exerciseList = [...training.exerciseList, newExercise];
+		if (!validateTrainingExercise(newExercise)) {
+			throw 'training exercise invalid';
+		}
+
+		training.exerciseList = [...training.exerciseList, newExercise] as IBaseTrainingExercise[];
 
 		const res = yield axios.put(`/trainings/${trainingId}`, { training });
 
@@ -140,14 +145,18 @@ export function* editTrainingExercise(action: DataAction<IEditExerciseStart>) {
 		const trainingId = action.payload.trainingId;
 		const newExercise = action.payload.exercise;
 
-		if (!trainingId || !validateTrainingExercise(newExercise)) {
-			throw `Not valid action payload`;
+		if (!trainingId) {
+			throw `No training passed`;
 		}
 
-		const training: TrainingModel = yield select((state: StoreModel) => getTrainingByIdSlector(state, trainingId));
+		const training: ITraining = yield select((state: IStore) => selectTrainingById(state, trainingId));
 
 		if (!training) {
 			throw `Not existing trainingId`;
+		}
+
+		if (!validateTrainingExercise(newExercise)) {
+			throw 'training exercise invalid';
 		}
 
 		training.exerciseList = training.exerciseList.map(e => {
@@ -156,7 +165,7 @@ export function* editTrainingExercise(action: DataAction<IEditExerciseStart>) {
 			}
 
 			return e;
-		});
+		}) as IBaseTrainingExercise[];
 
 		const res = yield axios.put(`/trainings/${trainingId}`, { training });
 
@@ -178,11 +187,11 @@ export function* removeTrainingExercise(action: DataAction<IRemoveExerciseStart>
 		const trainingId = action.payload.trainingId;
 		const exerciseId = action.payload.exerciseId;
 
-		if (!trainingId || !exerciseId) {
-			throw `Not valid action payload`;
+		if (!trainingId) {
+			throw `No training passed`;
 		}
 
-		const training: TrainingModel = yield select((state: StoreModel) => getTrainingByIdSlector(state, trainingId));
+		const training: ITraining = yield select((state: IStore) => selectTrainingById(state, trainingId));
 
 		if (!training) {
 			throw `Not existing trainingId`;

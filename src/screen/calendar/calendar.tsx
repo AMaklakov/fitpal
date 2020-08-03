@@ -43,6 +43,7 @@ interface IState {
 	selectTrainingListByDate: (date: Moment) => TrainingModel[];
 	selectTrainingListByDateRange: (startDate: Moment, endDate: Moment) => TrainingModel[];
 	isFetching: boolean;
+	isFetchingTrainings: boolean;
 	hasErrors: boolean;
 }
 
@@ -55,7 +56,7 @@ type ICalendarTypes = 'strip' | 'month';
 const Calendar = (props: IProps & IState & IDispatch) => {
 	const { navigation, fetchTrainingListByDateRange, deleteTrainingById, openTrainingModal } = props;
 	const { selectTrainingListByDate, onFetchExercises, exercises, isFetching, hasErrors } = props;
-	const { selectTrainingListByDateRange, onSetTrainingPlayId, onEditTraining } = props;
+	const { selectTrainingListByDateRange, onSetTrainingPlayId, onEditTraining, isFetchingTrainings } = props;
 	const { t } = useTranslation();
 
 	const [selectedDate, setSelectedDate] = useState(getToday());
@@ -85,9 +86,13 @@ const Calendar = (props: IProps & IState & IDispatch) => {
 	}, [markedDates, trainingsInDateRange]);
 
 	useEffect(() => {
+		if (isFetchingTrainings) {
+			return;
+		}
 		const unit = calendarType === 'strip' ? 'week' : 'month';
 		const [startDate, endDate] = [viewedStartDate.clone().startOf(unit), viewedStartDate.clone().endOf(unit)];
 		fetchTrainingListByDateRange(startDate, endDate);
+		/* eslint-disable react-hooks/exhaustive-deps */
 	}, [calendarType, fetchTrainingListByDateRange, viewedStartDate]);
 
 	useEffect(() => {
@@ -242,6 +247,7 @@ const mapStateToProps: MapStateToPropsParam<IState, IProps, StoreModel> = state 
 		selectTrainingListByDateRange: (startDate: Moment, endDate: Moment) => selectByDates(state, startDate, endDate),
 		exercises: getExerciseList(state),
 		isFetching: state.exercise.loading,
+		isFetchingTrainings: state.training.loading,
 		hasErrors: !!state.exercise.error,
 	};
 };

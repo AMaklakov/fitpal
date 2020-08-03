@@ -2,23 +2,20 @@ import React, { FC, useCallback } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { CreateSet } from '@screen/create-training-exercise/components/create-set';
 import { useTranslation } from 'react-i18next';
-import { IBaseTrainingExercise, INegativeWeightTrainingExercise, ISet } from '@model/training-exercise';
+import { IAdditionalWeightTrainingExercise, IBaseTrainingExercise, ISet } from '@model/training-exercise';
 import { editSet, repeatLastSet } from '@screen/create-training-exercise/helpers';
-import { BigSource } from 'big.js';
 import { TooltipText } from '@components/tooltip/tooltip-text';
 import { TRAINING_EXERCISES } from '@const/validation-const';
 import { useAddFirstSet } from '@screen/create-training-exercise/components/hooks';
 import { Fonts, FontSizes } from '@css/fonts';
 
 interface IProps {
-	userWeight: BigSource;
-	trainingExercise: INegativeWeightTrainingExercise;
-
+	trainingExercise: IAdditionalWeightTrainingExercise;
 	onChange: (trainingExercise: IBaseTrainingExercise) => void;
 }
 
-export const WithNegativeWeightSets: FC<IProps> = props => {
-	const { trainingExercise, onChange, userWeight } = props;
+export const WithAdditionalWeightSets: FC<IProps> = props => {
+	const { trainingExercise, onChange } = props;
 	const { seriesList } = trainingExercise;
 	const { t } = useTranslation();
 
@@ -33,10 +30,10 @@ export const WithNegativeWeightSets: FC<IProps> = props => {
 				<View style={styles.sequenceNumber} />
 				<Text style={styles.repeats}>{t('Repeats')}</Text>
 				<View style={styles.multiply} />
-				<Text style={styles.weight}>{t('Support weight')}</Text>
+				<Text style={styles.weight}>{t('Additional weight')}</Text>
 				<View style={styles.actions}>
 					<TooltipText
-						text={t('Support weight description')}
+						text={t('Additional weight description')}
 						icon={{ name: 'info-outline', size: FontSizes.Big }}
 						iconTooltipStyle={styles.infoIcon}
 					/>
@@ -50,10 +47,9 @@ export const WithNegativeWeightSets: FC<IProps> = props => {
 					<CreateSet
 						index={index}
 						set={item}
-						onChange={handleUpdate}
-						weightMax={+userWeight}
 						weightMin={0}
 						maxSequenceNumber={TRAINING_EXERCISES.MAX}
+						onChange={handleUpdate}
 						onRepeatIconPress={index + 1 === seriesList?.length ? handleRepeatLast : undefined}
 					/>
 				)}

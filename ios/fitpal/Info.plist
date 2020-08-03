@@ -72,6 +72,9 @@
 		<string>RobotoCondensed-LightItalic.ttf</string>
 		<string>Oswald-Regular.ttf</string>
 		<string>Oswald-Medium.ttf</string>
+		<string>Oswald-Light.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>Octicons.ttf</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>

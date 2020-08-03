@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { KeyboardTypeOptions, StyleSheet } from 'react-native';
 import { removeLeadingZeros } from '@util/string.util';
 import { Colors } from '@css/colors.style';
 import { withValidation } from '@components/with-validation/with-validation';
@@ -11,10 +11,11 @@ interface IProps extends Omit<InputProps, 'onChange'> {
 	value?: string;
 	onChange: (v: string) => void;
 	hasShadow?: boolean;
+	keyboardType?: KeyboardTypeOptions;
 }
 
 export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
-	const { value = '', onChange, hasShadow = true, ...rest } = props;
+	const { value = '', onChange, hasShadow = true, keyboardType = 'number-pad', ...rest } = props;
 	const { t } = useTranslation();
 
 	const [isFocused, setFocused] = useState(false);
@@ -31,10 +32,11 @@ export const IntegerNumberInput: FC<IProps> = (props: IProps) => {
 			onBlur={handleBlur}
 			value={value}
 			placeholderTextColor={Colors.Darkgray}
-			keyboardType="number-pad"
+			keyboardType={keyboardType}
 			returnKeyType="done"
 			returnKeyLabel={t('Done')}
 			labelStyle={[styles.labelStyle]}
+			inputStyle={styles.input}
 			inputContainerStyle={[
 				styles.inputWrapper,
 				isFocused && styles.focused,
@@ -54,11 +56,11 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: 'transparent',
 		borderRadius: 5,
-		backgroundColor: Colors.White,
+		backgroundColor: Colors.WhiteSandy,
 	},
 	input: {
-		color: Colors.Black,
-		fontSize: FontSizes.Medium,
+		fontSize: FontSizes.Big,
+		fontFamily: Fonts.RobotoCondensedLight,
 	},
 	focused: {
 		borderColor: Colors.Accent,
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.2,
 		shadowRadius: 1.41,
-
 		elevation: 2,
 	},
 	labelStyle: {

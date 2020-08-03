@@ -20,7 +20,7 @@ export enum ExerciseTypes {
 	WithNegativeWeight,
 }
 
-export interface ExerciseModel {
+export interface IExercise {
 	_id: string;
 	userId?: string;
 
@@ -29,7 +29,12 @@ export interface ExerciseModel {
 	description?: string;
 }
 
-export type ICreateExercise = Omit<ExerciseModel, '_id'>;
+/**
+ * @deprecated use IExercise instead
+ */
+export type ExerciseModel = IExercise;
+
+export type ICreateExercise = Omit<IExercise, '_id'>;
 
 const isTypeValid = (type?: ExerciseTypes): boolean => {
 	if (!isPresent(type)) {
@@ -47,7 +52,7 @@ const isTypeValid = (type?: ExerciseTypes): boolean => {
 	}
 };
 
-export const isExerciseValid = (exercise?: Partial<ExerciseModel>): boolean => {
+export const isExerciseValid = (exercise?: Partial<IExercise>): boolean => {
 	if (!isPresent(exercise)) {
 		return false;
 	}
