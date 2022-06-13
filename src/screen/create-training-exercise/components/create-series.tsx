@@ -62,6 +62,7 @@ export const CreateSeries = (props: IProps) => {
 					isNumber={[true, t('Not a number')]}
 					min={[MIN_REPEATS, t('Min value is |min|', { min: MIN_REPEATS })]}
 					max={[MAX_REPEATS, t('Max value is |max|', { max: MAX_REPEATS })]}
+					useOneLineErrors={true}
 					value={repeats}
 					onChange={handleSetRepeats}
 				/>
@@ -72,6 +73,7 @@ export const CreateSeries = (props: IProps) => {
 					isNumber={[true, t('Not a number')]}
 					min={[weightMin, t('Min value is |min|', { min: weightMin })]}
 					max={[weightMax, t('Must be less than |userWeight|', { userWeight: weightMax })]}
+					useOneLineErrors={true}
 					value={weight}
 					onChange={handleSetWeight}
 					rightIcon={<Text>{t('Kg')}</Text>}
